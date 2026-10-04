@@ -14,9 +14,9 @@ public record PatchInfo(string Name, nint Address, List<byte> OriginalBytes);
 
 public static class BotOffsets
 {
-    // Differs by platform: Windows = 0x5128, Linux  = 0x5100.
+    // Differs by platform: Windows = 0x5120, Linux  = 0x50F8.
     public static readonly int m_gameState =
-        RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 0x5100 : 0x5128;
+        RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? 0x50F8 : 0x5120;
     // Offsets inside CSGameState
     public const int m_isRoundOver = 0x08;
     public const int m_bombState = 0x0C;
@@ -27,9 +27,9 @@ public static class BotOffsets
 [MinimumApiVersion(304)]
 public class BotAI : BasePlugin
 {
-    public override string ModuleName => "Patches - Bot AI";
-    public override string ModuleVersion => "1.8.9";
-    public override string ModuleAuthor => "K4ryuu & Austin (updated by ed0ard & Misaka17032 & XBribo & AmagiReina)";
+    public override string ModuleName => "Bot AI - Patches";
+    public override string ModuleVersion => "1.8.12-fairplay.1";
+    public override string ModuleAuthor => "K4ryuu & Austin (updated by ed0ard & XBribo & unicbm & Misaka17032 & AmagiReina)";
     public override string ModuleDescription =>
         "Improve and fix bots' behavior comprehensively";
 
@@ -41,7 +41,14 @@ public class BotAI : BasePlugin
     public override void Load(bool hotReload)
     {
         Logger.LogInformation("Bot AI Patches loading...");
-        var patchDefinitions = _isLinux ? LinuxPatchDefinitions.All : WindowsPatchDefinitions.All;
+        // Keep native CT bomb visibility, local beep range and T-only plant knowledge.
+        // This does not disable T bomb defense, radio commands or the upstream FOV fixes.
+        var bypasses = new HashSet<string>
+        {
+            "DefuseBomb_SkipIsVisibleCheck", "BombBeep_CT_GlobalHearRange", "OnBombPlanted_AllBotsLearnSite"
+        };
+        var patchDefinitions = (_isLinux ? LinuxPatchDefinitions.All : WindowsPatchDefinitions.All)
+            .Where(pair => !bypasses.Contains(pair.Key)).ToDictionary(pair => pair.Key, pair => pair.Value);
 
         // "<name>_Cave" entries build a code cave that their "<name>" partner then
         // jumps into. The pair must be applied atomically: if the cave is missing

@@ -1,0 +1,28 @@
+using BotAimImprover;
+void Check(string name, bool actual) { if (!actual) throw new Exception(name); Console.WriteLine("PASS " + name); }
+Check("clear native sample permits normal aim", !SmokeAimPolicy.Concealed(0,0));
+Check("observed 0.3649 smoke hit blocks tracking", SmokeAimPolicy.Concealed(0.3649f,0.3649f));
+Check("observed 0.1346 smoke hit blocks tracking", SmokeAimPolicy.Concealed(0.1346f,0.1346f));
+Check("head concealed while chest clear blocks precision aim", SmokeAimPolicy.Concealed(0.2f,0));
+Check("chest concealed while head clear blocks precision aim", SmokeAimPolicy.Concealed(0,0.2f));
+Check("threshold boundary blocks", SmokeAimPolicy.Concealed(0.1f,0.1f));
+Check("below threshold permits", !SmokeAimPolicy.Concealed(0.099f,0.099f));
+Check("unavailable samples do not masquerade as dense smoke", !SmokeAimPolicy.Concealed(float.NaN,0));
+var lastSeen=new AimLocation(10,20,300);
+var eye=new AimLocation(100,200,300);
+var forward=new AimLocation(1,0,0);
+var fallback=new AimLocation(612,200,300);
+Check("same enemy keeps observed point", SmokeAimPolicy.Hold(42,42,lastSeen,eye,forward)==lastSeen);
+Check("new hidden enemy does not inherit another target", SmokeAimPolicy.Hold(43,42,lastSeen,eye,forward)==fallback);
+Check("unseen enemy aims ahead at eye height", SmokeAimPolicy.Hold(42,-1,null,eye,forward)==fallback);
+Check("invalid remembered point is discarded", SmokeAimPolicy.Hold(42,42,new(float.NaN,20,30),eye,forward)==fallback);
+Check("nearby old point does not cause foot shots", SmokeAimPolicy.Hold(42,42,new(110,200,0),eye,forward)==fallback);
+var raised=SmokeAimPolicy.Hold(42,42,new(300,200,0),eye,forward);
+Check("far low point keeps direction but limits downward pitch", raised.X==300 && raised.Y==200 && raised.Z>250 && raised.Z<300);
+var moving=SmokeAimPolicy.Direction(0,100,0);
+Check("movement supplies approach direction", Math.Abs(moving.X)<0.0001f && Math.Abs(moving.Y-1)<0.0001f);
+var stationary=SmokeAimPolicy.Direction(0,0,90);
+Check("stationary bot uses remembered facing", Math.Abs(stationary.X)<0.0001f && Math.Abs(stationary.Y-1)<0.0001f);
+Check("clear forward corridor wins equal side opening", SmokeAimPolicy.CorridorScore(1,0)>SmokeAimPolicy.CorridorScore(1,90));
+Check("open side corridor wins blocked forward direction", SmokeAimPolicy.CorridorScore(1,90)>SmokeAimPolicy.CorridorScore(0.1f,0));
+Check("invalid direction remains finite and horizontal", SmokeAimPolicy.Hold(42,-1,null,eye,new(float.NaN,0,0))==fallback);

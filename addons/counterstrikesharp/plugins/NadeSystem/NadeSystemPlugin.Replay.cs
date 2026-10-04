@@ -100,6 +100,7 @@ public partial class NadeSystemPlugin : BasePlugin
         if (!_roundSpendPerBot.TryGetValue(botIdx, out int alreadySpent))
             alreadySpent = 0;
         // Expensure Limit
+        if (!TrySafeReplay(bot, g, out _)) return;
         bool deductMoney = alreadySpent < spendCap;
 
         // ── All checks passed — commit ─────────────────────────────────
@@ -170,6 +171,10 @@ public partial class NadeSystemPlugin : BasePlugin
                     Server.PrintToConsole("[NadeSystem] bot pawn invalid, skipping replay");
                     return;
                 }
+
+                // Recheck after NextFrame and anchor the release to the actual throwing bot.
+                if (!TrySafeReplay(bot, g, out var liveRelease)) return;
+                origin = liveRelease;
 
                 // ── FLASH — CreateEntityByName is sufficient ───────────
                 // No native factory needed.

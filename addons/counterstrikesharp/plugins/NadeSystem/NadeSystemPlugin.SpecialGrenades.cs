@@ -38,6 +38,14 @@ public partial class NadeSystemPlugin : BasePlugin
                 && (int)p.TeamNum != bot.TeamNum);
         if (!hasLiveEnemy) return;
 
+        if (!TryReleasePoint(bot, gtype, out var checkedRelease, out var eye)) return;
+        if (ReplaySafety.DistanceSquared(eye, new Vec3 { X = spawnPos.X, Y = spawnPos.Y, Z = spawnPos.Z }) > 96f * 96f) return;
+        var checkedVelocity = velocity ?? new Vector();
+        var velocityValue = new Vec3 { X = checkedVelocity.X, Y = checkedVelocity.Y, Z = checkedVelocity.Z };
+        if (!ReplaySafety.Finite(velocityValue)
+            || ReplaySafety.DistanceSquared(velocityValue, new Vec3()) > ReplaySafety.MaxSpeed * ReplaySafety.MaxSpeed) return;
+        spawnPos = checkedRelease;
+
         var money = bot.InGameMoneyServices;
         if (money == null) return;
 
@@ -69,6 +77,8 @@ public partial class NadeSystemPlugin : BasePlugin
             {
                 var botPawn = bot.PlayerPawn?.Value;
                 if (botPawn == null || !botPawn.IsValid) return;
+                if (!TryReleasePoint(bot, gtype, out var liveRelease, out _)) return;
+                spawnPos = liveRelease;
 
                 int teamNum = bot.TeamNum;
 
@@ -341,6 +351,7 @@ public partial class NadeSystemPlugin : BasePlugin
             if (_botNadesMode == "less" && !LessModeAllows(gt, botIdx)) continue;
 
             if (!_roundSpendPerBot.TryGetValue(botIdx, out int alreadySpent)) alreadySpent = 0;
+            if (!TrySafeReplay(victim, g, out _)) continue;
             bool deduct = alreadySpent < spendCap;
             if (deduct)
             {

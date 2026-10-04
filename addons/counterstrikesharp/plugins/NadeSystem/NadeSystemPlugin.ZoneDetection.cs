@@ -84,6 +84,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     if (IsOnCooldown(g.Id)) continue;
                     if (dx * dx + dy * dy > 200f * 200f) continue;
                     if (MathF.Abs(dz) > 85f) continue;
+                    if (!TrySafeReplay(bot, g, out _)) continue;
                     RegisterCooldown(g.Id, "decoy");
                     SpawnProjectile(bot, g);
                     // No _replayBots, no IncrementCount, no money deduction

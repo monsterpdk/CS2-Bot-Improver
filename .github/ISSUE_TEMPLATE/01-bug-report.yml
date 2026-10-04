@@ -2,6 +2,14 @@ name: Bug report
 description: Report a problem with the plugin or bot behavior
 title: "[Bug] "
 body:
+  - type: textarea
+    id: tested-versions
+    attributes:
+      label: Game and maintenance versions
+      description: Include CS2 ClientVersion from game/csgo/steam.inf, maintenance release, CounterStrikeSharp version, map, bot count, and selected Low/Medium/High profile. This edition is validated for Windows local games only.
+      placeholder: "ClientVersion: 2000924; maintenance: 1.4.5-fairplay.1; CSS: 376; map: de_dust2; bots: 10; profile: Low"
+    validations:
+      required: true
   - type: markdown
     attributes:
       value: |
@@ -63,7 +71,7 @@ body:
     id: log
     attributes:
       label: CounterStrikeSharp log
-      description: Optional. Paste the relevant log output here. Log files are in `game\csgo\addons\counterstrikesharp\logs`. If the log is too long, attach the complete log file and paste the relevant section.
+      description: Optional. Paste relevant output from game/csgo/addons/counterstrikesharp/logs. Remove private paths, account IDs, and network addresses before posting.
       placeholder: Paste the relevant CounterStrikeSharp log output here.
     validations:
       required: false

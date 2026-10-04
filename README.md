@@ -1,269 +1,45 @@
-<div align="center">
+# CS2 Bot Improver — Windows Fairplay Edition
 
-# CS2-Bot-Improver
+A community maintenance update for [CS2-Bot-Improver v1.4.5](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.5), adding safer grenade throws and fairer smoke aiming for local Windows bot matches. Independent project; not an official upstream or Valve release.
 
-[![Latest release](https://img.shields.io/github/v/release/ed0ard/CS2-Bot-Improver?display_name=tag&sort=semver)](https://github.com/ed0ard/CS2-Bot-Improver/releases/latest)
-[![Release downloads](https://img.shields.io/github/downloads/ed0ard/CS2-Bot-Improver/total)](https://github.com/ed0ard/CS2-Bot-Improver/releases)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
-![Platforms: Windows and Linux](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-5c6bc0)
+**Release: `1.4.5-fairplay.1` — 2026-10-04.** Tested with Windows x64, CS2 `ClientVersion 2000924` / patch `1.41.8.8`, and the original v1.4.5 Windows pack's bundled CounterStrikeSharp `1.0.376`. Future CS2 updates require another compatibility review.
 
-**English** · [简体中文](docs/README.zh-CN.md) · [Русский](docs/README.ru.md)
+## Our additions to v1.4.5
 
-[Features](#features) · [Installation](#installation) · [Commands](#commands) · [Panel Guide](#panel-guide-windows-only) · [FAQ](#faq)
-
-</div>
-
-CS2-Bot-Improver enhances Counter-Strike 2 bots for offline matches and private games with friends. It improves their aim, movement, nade throwing, personalities, strategies, and can be installed on either a client or a dedicated server.
-
-## **Your stars⭐ are my motivation to keep updating**
-
-## Features
-
-| Field | Improvements |
+| Area | What this update changes |
 | --- | --- |
-| **Aim and combat** | More accurate, human-like aim; spraying, flicking, smoke spamming, and anti-flash |
-| **Grenades** | Situational Smoke, Flashbang, HE grenade, and Molotov throwing |
-| **Movement** | Better movement and fixes for most bot-stuck situations |
-| **Strategy** | Smarter, more organized bots with improved awareness and decision-making |
-| **Economy** | Expanded weapon purchases and overhauled economy management |
-| **Personalities** | Pro and random player names, with pro characteristics based on [HLTV](https://www.hltv.org/) stats |
-| **Customization** | Per-bot knives, gloves, weapon skins, stickers, charms, agents, music kits, avatars, and profiles |
-| **Game experience** | Bot names without prefixes, bot-friendly rules, and extra console commands for fun |
+| Grenades | Anchors launches to the throwing bot's current eye position; checks finite values, release offset, speed, range, heading, pitch and launch obstruction. Revalidates delayed spawns before applying the throw. |
+| Smoke aiming | Concealed opponents' current positions do not drive the managed aim override. Bots use a previously observed point or a fixed blind-fire direction instead. |
+| Blind fire | Favors open travel directions at eye height when no remembered point is available; limits downward/upward pitch for remembered points. |
+| Smoke visibility | Corrects the Windows branch that otherwise treats two positions inside smoke as visible. Keeps `bv_smoke_mode 1` for this tested setup, using upstream's new native BotVision. |
+| Bomb information | Disables three visibility/global-information bypasses that could give CT bots unrealistic bomb knowledge; keeps upstream's T defense code. This is not a complete human-like bomb-search simulation. |
+| Startup and deployment | Regenerates panel gameinfo templates from the installed game's own file. Adds version/dependency/hash checks, backups, rollback and explicit restore. |
 
-## Installation
+Detailed grenade/smoke diagnostic sampling is not enabled in this release. The four modified plugins are BotAI `1.8.12-fairplay.1`, BotAimImprover `2.1.5-fairplay.1`, NadeSystem `1.2.2-fairplay.1`, and BotVisionCompatibility `0.1.4-fairplay.1`.
 
-Download the package for your operating system from the **[latest release](https://github.com/ed0ard/CS2-Bot-Improver/releases/latest)**.
+## Upstream improvements retained
 
-### Windows
+The v1.4.5 base supplies repaired functions, Rush behavior trees/configurations, human-aligned bot FOV, new sticker/music-kit content, post-plant T bomb defense, player radio commands, revised `bot_aim body` priorities, and its redesigned panel with the Rules menu. These are upstream features, credited to their authors. This update preserves the untouched feature DLLs and new aim priorities; it does not restore our old v1.4.4 compatibility patches or the removed FOV bypasses.
 
-1. Download and extract **CS2BotImprover.zip**.
-> [!NOTE]
-> Running a dedicated server that is not only for bot matches?  
-On Windows, please download **CS2BotImprover_rules_unchanged.zip** to preserve the standard game rules.
-2. Move **Panel v1.4.4.exe** somewhere convenient.
+Upstream also advertises Linux support. **This maintenance update is validated for Windows local games only**; its additional smoke correction is Windows-specific.
 
-   <img width="128" height="128" alt="CS2 Bot Improver Panel application icon" src="https://github.com/user-attachments/assets/7271dc7d-2436-484b-8359-6531f4abd710" />
+## Download and install
 
-3. Open your CS2 installation folder and navigate to `game/csgo`.
+Download **`CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-10-04.zip`** from this repository's Releases. GitHub's automatic Source code downloads are not installers.
 
-   <img width="405" height="256" alt="The game/csgo directory inside a CS2 installation" src="https://github.com/user-attachments/assets/ae2be90e-6742-4f1f-8e0c-096b728d5dbd" />
+This public asset is an **update**: obtain the original v1.4.5 Windows pack from its author first, then apply our update. The panel, runtimes, native/shared binaries and VPKs are not redistributed here. The original pack already contains the tested CSS 376 runtime; do not replace it with the old CSS 373 setup.
 
-4. Copy all remaining files from the extracted package folder into `game/csgo`.
+Follow [INSTALLATION.md](docs/INSTALLATION.md), then launch `game/csgo/Start-CompatiblePanel.cmd`. Use Bot Mode for private/local bot matches; the panel uses `-insecure`. Use the wrapper and Online mode before ordinary online play.
 
-   <img width="540" height="181" alt="Copying the Windows package files into game/csgo" src="https://github.com/user-attachments/assets/6a8645fc-78e7-4f3a-92d3-5d1b6d913918" />
+## Validation and limits
 
-5. Open `Panel v1.4.4.exe`, select **Bot Mode**, then click **Launch CS2**.
+The merged v1.4.5 setup was accepted after the user's local Windows playtest. The earlier grenade/smoke behavior had also been tested in Dust II/Cache matches. Four Release builds, 19 smoke-policy checks, 11 grenade-policy checks, gameinfo tests, native signature/instruction audits and disposable installer/restore tests accompany this release. This does not certify every upstream mode or behavior in every situation.
 
-   <img width="339" height="129" alt="Selecting Bot Mode and launching CS2 from the Panel" src="https://github.com/user-attachments/assets/dc806991-c940-43cf-a614-f49012fae4a7" />
+- Future game builds, Linux, dedicated/public servers, every map and a second PC are not validated.
+- Blind fire can still hit players through smoke. The guard limits targeted aiming, not bullet penetration or every native AI advantage.
+- Grenade safeguards do not fully simulate inventory, throwing animations or legal per-round purchases. Spend-cap/inventory behavior still needs work; decoy use depends on available map data.
+- CT bomb search/defuse in smoke, Rush, radio and T post-plant defense still need focused regression tests beyond the accepted combined playtest.
+- Mode 1 is the tested setting, not a claim that the new upstream mode 0 still has the previous version's performance problem.
+- The installer refuses unexpected extra managed plugins and mismatched pinned dependencies. It backs up its own transaction, not unrelated changes made beforehand.
 
-### Linux
-
-1. Download and extract **CS2BotImprover_for_Linux.zip**.
-2. Move `Commands.txt` somewhere convenient.
-3. Open your CS2 installation folder and navigate to `game/csgo`.
-
-   <img width="405" height="256" alt="The game/csgo directory inside a CS2 installation" src="https://github.com/user-attachments/assets/ae2be90e-6742-4f1f-8e0c-096b728d5dbd" />
-
-4. Copy all remaining files from the extracted package folder into `game/csgo`.
-
-   <img width="535" height="180" alt="Copying the Linux package files into game/csgo" src="https://github.com/user-attachments/assets/9bda7b1d-43d3-49cf-a283-27b124b894e0" />
-
-5. Add `-insecure` to your CS2 launch options.
-
-   <img width="130" height="153" alt="Opening CS2 properties in Steam" src="https://github.com/user-attachments/assets/4c775e36-3fc3-4a19-9cb1-4f0c9327838c" /><br>
-   <img width="625" height="423" alt="Adding -insecure to the CS2 launch options" src="https://github.com/user-attachments/assets/ac0b0c57-ee67-4e33-96fb-146d14714fc8" />
-
-## Commands
-
-### Aim
-
-| Command | Description |
-| --- | --- |
-| `bot_aim mixed` | Select aiming spots dynamically based on situations. **(Default)** |
-| `bot_aim head` | Prioritize aiming at the head. |
-| `bot_aim body` | Prioritize aiming at the torso. |
-| `bot_aim` | Show the current aim mode. |
-
-### Nades
-
-| Command | Description |
-| --- | --- |
-| `bot_nades off` | Disable bot nade usage. |
-| `bot_nades less` | Use the same decision logic as normal mode with lower count limits. |
-| `bot_nades normal` | Use count limits close to those of human players. **(Default)** |
-| `bot_nades more` | Use the same decision logic as normal mode with higher count limits. |
-| `bot_nades max` | Bots have minimal limitations and think less before throwing nades. |
-| `bot_nades` | Show the current nade mode. |
-
-### Skins
-
-| Command | Description |
-| --- | --- |
-| `br_reroll` | Reroll every bot's skins on their next spawn. |
-
-### Buying
-
-Enter a weapon name in the game console to give every bot this weapon from the next round.  
-Enter `bot_buy` to restore normal purchase behavior.
-
-<details>
-<summary><strong>Show supported weapon names</strong></summary>
-
-```text
-elite     p250      fn57      deagle    cz75a     r8
-bizon     p90       mp5sd     mp9       mp7       mac10     ump45
-mag7      sawedoff  nova      xm1014
-famas     galilar   m4a1      m4a1s     ak47      aug       sg556
-ssg08     awp       scar20    g3sg1
-negev     m249
-```
-
-</details>
-
-### Pro teams
-
-Copy a block of team commands from [Commands.txt](Commands.txt) and paste it into the game console. You can also add your own teams using the same format.
-
-For example, the following block in `Commands.txt` adds Team Vitality to the CT side:
-
-<img width="301" height="237" alt="Team Vitality commands in Commands.txt" src="https://github.com/user-attachments/assets/a895f3a6-58f8-47dc-b6f5-b60c1b32fecd" />
-
-### Knives
-
-Point at the ground and press `\` on your keyboard to generate all kinds of knives there.
-
-### Flying Scoutsman
-
-After a match begins, use the command `scouts_on` or `scouts_off` to enable or disable Flying Scoutsman mode.
-
-## Panel Guide (Windows Only)
-
-### Status lights
-
-| Indicator | Meaning |
-| --- | --- |
-| 🟢 Green | No issues detected. Click the green light near Directory to open it. |
-| 🟡 Yellow | Restart CS2 to apply changes. |
-| 🔴 Red | Files missing. Click the red light to view the list of missing files. |
-
-<img width="481" height="82" alt="Green, yellow, and red Panel status indicators" src="https://github.com/user-attachments/assets/26a947e2-4e0e-423f-bce8-f220d88509a2" />
-
-### Matchmaking & Bot Mode Toggle
-
-Select your desired mode, then click **Launch CS2**.
-
-<img width="472" height="179" alt="Online Mode and Bot Mode selector in the Panel" src="https://github.com/user-attachments/assets/3f9254fa-4cbe-4854-8fd1-0f35228fff77" />
-
-### Settings
-
-Click the <img width="31" height="32" alt="Settings" src="https://github.com/user-attachments/assets/7f94176b-79f1-4e22-9495-4589c4dea9eb" /> icon in the top-right corner to open **Settings**.
-
-### Command browser
-
-Click **Commands**, **left-click** a block to copy it automatically, **right-click** blocks to copy them consecutively, or type keywords to search.
-
-<img width="350" height="420" alt="Searchable command browser in the Panel" src="https://github.com/user-attachments/assets/957cfafb-900d-4450-b985-13d3e8efc375" />
-
-## FAQ
-
-<details>
-<summary><strong>How to play bot matches with friends?</strong></summary>
-
-1. Start a bot match, enter any required commands, and then run `status` in the console.
-
-   <img width="597" height="141" alt="The steamid value shown by the status command" src="https://github.com/user-attachments/assets/792c4b4f-1d56-4a39-9186-b301cbff1846" />
-
-2. Copy the text after `steamid:`, add `connect ` before it (don't forget the space between them) 
-3. Send the full command to your friends and have them paste it into their consoles.
-
-</details>
-
-<details>
-<summary><strong>How to manually change the difficulty level?</strong></summary>
-
-1. Navigate to `game/csgo/overrides` in your CS2 installation folder.
-2. Open `Low` for easy difficulty, `Medium` for mixed difficulty based on HLTV stats (**default**), or `High` for extreme difficulty.
-3. Copy the selected `botprofile.vpk` into `game/csgo/overrides` before launching the game.
-
-</details>
-
-<details>
-<summary><strong>How to manually switch back to normal online matchmaking mode?</strong></summary>
-
-1. Navigate to `game/csgo/backup/Online` in your CS2 installation folder.
-2. Copy `gameinfo.gi` into `game/csgo` (Replace the file in the destination).
-3. Remove `-insecure` from your launch options.
-
-To play with bots again, copy `gameinfo.gi` from `game/csgo/backup/WithBots` into `game/csgo`, and restore the launch option.
-
-</details>
-
-<details>
-<summary><strong>How to manually disable bot weapon skins, agents, music kits, knives, and gloves?</strong></summary>
-
-1. Navigate to `game/csgo/addons/counterstrikesharp/plugins` in your CS2 installation folder.
-2. Rename `BotRandomizer` folder to `BotRandomizer_disabled`.
-3. Open `addons/counterstrikesharp/configs/core.json` and set `FollowCS2ServerGuidelines` to `true`.
-
-</details>
-
-<details>
-<summary><strong>How to manually disable bot Steam profiles?</strong></summary>
-
-Navigate to `game/csgo/addons` in your CS2 installation folder and rename `BotHider` folder to `BotHider_disabled`.
-
-</details>
-
-<details>
-<summary><strong>How to use the plugin normally on Workshop maps?</strong></summary>
-
-Add `-disable_workshop_command_filtering` to your launch options.
-
-</details>
-
-<details>
-<summary><strong>Panel not working properly?</strong></summary>
-   
-1. Install **WebView2 Runtime** if you are on Windows 10.
-2. Try right-clicking and selecting `Run as administrator`.
-
-</details>
-
-<details>
-<summary><strong>How to surf normally?</strong></summary>
-
-Run `sv_standable_normal 0.7` in the game console.
-
-</details>
-
-### What are the supported-use and responsibility boundaries?
-
-> [!WARNING]
-> This project is intended for offline bot matches, self-hosted private games with friends, and private dedicated servers used for bot play. `BotRandomizer` applies cosmetics **only to bots**; it does not grant, falsify, or alter the Steam inventory, skins, or profile of a human player. **This boundary is designed to follow [Valve's CS2 community-server and GSLT rules](https://help.steampowered.com/en/faqs/view/07AF-502E-A104-BD4B).**
->
-> The project is not intended or supported for Valve official matchmaking, [FACEIT](https://support.faceit.com/hc/en-us/articles/360015788779-What-is-deemed-to-be-a-cheat), or other third-party public community servers.
->
-> The [AGPL-3.0 license](LICENSE) does not grant access to third-party services or authorize violations of their rules. To the maximum extent permitted by applicable law, anyone who uses or deploys the project outside the scope described above, modifies it to evade security controls, or otherwise violates third-party terms assumes all resulting risks and responsibilities, including GSLT or server sanctions, FACEIT or community-server bans, VAC or game bans. The maintainers and contributors disclaim liability for those consequences.
-
-## Credits
-
-- [Metamod:Source](https://github.com/alliedmodders/metamod-source)
-- [CounterStrikeSharp](https://github.com/roflmuffin/CounterStrikeSharp)
-- [CS2-Bullseye-Bot](https://github.com/ed0ard/CS2-Bullseye-Bot)
-- [CS2-Bot-NadeSystem](https://github.com/ed0ard/CS2-Bot-NadeSystem)
-- [CS2_ExecAfter_No_Admin](https://github.com/ed0ard/CS2_ExecAfter_No_Admin), forked from [kus](https://github.com/kus)
-- [CS2-Bot-Randomizer](https://github.com/ed0ard/CS2-Bot-Randomizer)
-- [CS2-Lib](https://github.com/ianlucas/cs2-lib) by [Lucas](https://github.com/ianlucas)
-- [CS2-Bot-Hider](https://github.com/XBribo/CS2-Bot-Hider) by [XBribo](https://github.com/XBribo)
-- [CS2-Bot-Controller](https://github.com/XBribo/CS2-Bot-Controller) by [XBribo](https://github.com/XBribo)
-- [CS2-Bot-Vision](https://github.com/XBribo/CS2-Bot-Vision) by [XBribo](https://github.com/XBribo)
-- [CSGOBetterBots](https://github.com/manicogaming/CSGOBetterBots/blob/master/addons/sourcemod/data/bot_info.json) by [manico](https://github.com/manicogaming)
-- [CS2-Smarter-Bot](https://github.com/ed0ard/CS2-Smarter-Bot)
-- [CS2-BotAI](https://github.com/ed0ard/CS2-BotAI), forked from [Austin](https://github.com/Austinbots)
-- [CS2-Bot-Buy](https://github.com/ed0ard/CS2-Bot-Buy)
-- [RoundDamageRecap](https://github.com/YuGeYu/LBTV-CS2-Bot-Enhancer/tree/main/addons/counterstrikesharp/plugins/RoundDamageRecap) by [YuGeYu](https://github.com/YuGeYu)
-- [Apple-Style-GUI](https://github.com/ed0ard/Apple-Style-GUI)
-
-## License
-
-[GNU Affero General Public License v3.0](LICENSE), except `Panel/`, which is [PolyForm Strict 1.0.0](Panel/LICENSE)
+See [CHANGELOG.md](CHANGELOG.md), [PORT-NOTES.md](PORT-NOTES.md), [NOTICE.md](NOTICE.md), and [build instructions](docs/BUILDING.md). Source is provided with the public binaries; preserve the applicable licenses and authors' notices.

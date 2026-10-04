@@ -1,0 +1,20 @@
+﻿[
+    {
+        "Name":  "BotAI",
+        "Repository":  "ed0ard/CS2-BotAI",
+        "Commit":  "a23f7e24bd485cc23e0d9340ba74e8d8aa3ba6e0",
+        "Date":  "2026-10-02T19:06:49Z"
+    },
+    {
+        "Name":  "BotAimImprover",
+        "Repository":  "ed0ard/CS2-Bullseye-Bot",
+        "Commit":  "17e895b68e0c5c365d5c6fea12f1f74342724ce8",
+        "Date":  "2026-10-02T18:41:56Z"
+    },
+    {
+        "Name":  "NadeSystem",
+        "Repository":  "ed0ard/CS2-Bot-NadeSystem",
+        "Commit":  "009ce03005af68ba68dae62967bddc8e92ad172c",
+        "Date":  "2026-10-01T09:05:47Z"
+    }
+]
