@@ -1,8 +1,10 @@
-# CS2 Bot Improver — Windows Fairplay Edition
+Current release: **v1.4.5-fairplay.2**. [Reaction profiles and 8v8 defaults](docs/REACTION-PROFILES.md).
+
+# CS2 Bot Improver â€” Windows Fairplay Edition
 
 A community maintenance update for [CS2-Bot-Improver v1.4.5](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.5), adding safer grenade throws and fairer smoke aiming for local Windows bot matches. Independent project; not an official upstream or Valve release.
 
-**Release: `1.4.5-fairplay.1` — 2026-10-04.** Tested with Windows x64, CS2 `ClientVersion 2000924` / patch `1.41.8.8`, and the original v1.4.5 Windows pack's bundled CounterStrikeSharp `1.0.376`. Future CS2 updates require another compatibility review.
+**Release: `1.4.5-fairplay.2` â€” 2026-10-07.** Tested with Windows x64, CS2 `ClientVersion 2000927` / patch `1.41.8.9`, and the original v1.4.5 Windows pack's bundled CounterStrikeSharp `1.0.376`. Future CS2 updates require another compatibility review.
 
 ## Our additions to v1.4.5
 
@@ -25,7 +27,7 @@ Upstream also advertises Linux support. **This maintenance update is validated f
 
 ## Download and install
 
-Download **`CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-10-04.zip`** from this repository's Releases. GitHub's automatic Source code downloads are not installers.
+Download **`CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-10-07.zip`** from this repository's Releases. GitHub's automatic Source code downloads are not installers.
 
 This public asset is an **update**: obtain the original v1.4.5 Windows pack from its author first, then apply our update. The panel, runtimes, native/shared binaries and VPKs are not redistributed here. The original pack already contains the tested CSS 376 runtime; do not replace it with the old CSS 373 setup.
 

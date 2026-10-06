@@ -1,4 +1,4 @@
-param([Parameter(Mandatory)][string]$Package, [string]$Baseline)
+param([Parameter(Mandatory)][string]$Package, [string]$Baseline, [switch]$NoPanelSettings)
 $ErrorActionPreference = 'Stop'
 $testRoot = Join-Path $PSScriptRoot ('test-output\' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
 $fixture = Join-Path $testRoot 'game\csgo'
@@ -47,6 +47,17 @@ if ($manifest.MergeCoreSettings) {
     $core | Add-Member -NotePropertyName FutureOption -NotePropertyValue 'preserve'
     $core | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $corePath -Encoding UTF8
 }
+if ($manifest.GenerateReactionProfiles) {
+    $activePath = Join-Path $fixture 'overrides\botprofile.vpk'
+    Copy-Item -LiteralPath (Join-Path $fixture 'overrides\Medium\botprofile.vpk') -Destination $activePath
+    $settings = Get-Content -LiteralPath (Join-Path $Package 'payload\ReactionSettings.json') -Raw | ConvertFrom-Json
+    $lowBefore = (Get-FileHash -LiteralPath (Join-Path $fixture 'overrides\Low\botprofile.vpk')).Hash
+    $vdf = Join-Path $fixture 'ServerConfig.vdf'
+    if (!$NoPanelSettings) { [IO.File]::WriteAllText($vdf, '"ServerConfig" { "bot_quota" "10" "future_setting" "preserve" }') }
+    $originalProfile = [IO.File]::ReadAllBytes($activePath)
+    try { [IO.File]::WriteAllBytes($activePath,[byte[]](1,2,3)); Expect-Rejection 'Unknown active profile' }
+    finally { [IO.File]::WriteAllBytes($activePath,$originalProfile) }
+}
 $before = Snapshot
 & (Join-Path $Package 'Install.ps1') -VerifyOnly
 $payloadPath = Join-Path $Package ('payload\' + $manifest.Files[0].Path)
@@ -62,6 +73,18 @@ function Copy-Item {
 try { Expect-Rejection 'Injected copy failure' } finally { Remove-Item Function:\Copy-Item }
 Assert-Snapshot $before
 & (Join-Path $Package 'Install.ps1') -Csgo $fixture
+if ($manifest.GenerateReactionProfiles) {
+    foreach ($level in @('Medium','High')) { Assert ((Get-FileHash -LiteralPath (Join-Path $fixture ('overrides\' + $level + '\botprofile.vpk'))).Hash -eq $settings.$level.OutputSHA256) ('Reaction profile mismatch: ' + $level) }
+    Assert ((Get-FileHash -LiteralPath $activePath).Hash -eq $settings.Medium.OutputSHA256) 'Selected Medium profile not retained.'
+    Assert ((Get-FileHash -LiteralPath (Join-Path $fixture 'overrides\Low\botprofile.vpk')).Hash -eq $lowBefore) 'Low changed.'
+    $text = [IO.File]::ReadAllText($vdf)
+    Assert ($text -match '"bot_quota"\s+"16"') 'Panel quota mismatch.'
+    if (!$NoPanelSettings) { Assert ($text -match '"future_setting" "preserve"') 'Panel preferences lost.' }
+}
+foreach ($name in @('normal','ffa','rush')) {
+    $text = Get-Content -LiteralPath (Join-Path $fixture ('cfg\my_bot_' + $name + '_config.cfg')) -Raw
+    Assert ($text -match '(?m)^bot_quota_mode fill' -and $text -match '(?m)^bot_quota 16') 'Population config mismatch.'
+}
 $successfulBackup = Get-ChildItem -LiteralPath (Join-Path $fixture '_botimprover_backups') -Directory | Sort-Object Name | Select-Object -Last 1
 foreach ($entry in $manifest.Files) { Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $entry.Path)).Hash -eq $entry.SHA256) ('Installed mismatch: ' + $entry.Path) }
 Assert ([IO.File]::ReadAllText((Join-Path $fixture 'backup\Online\gameinfo.gi')) -ceq $stock) 'Online template did not preserve target gameinfo.'

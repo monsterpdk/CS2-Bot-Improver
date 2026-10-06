@@ -1,3 +1,7 @@
+# 1.4.5-fairplay.2 — 2026-10-07
+
+Humanized Medium/High reaction times; default 16-player fill population (8v8 including humans); public updater transforms installed profiles locally and preserves the active preset and other panel preferences. Tested CS2 ClientVersion 2000927 / patch 1.41.8.9. See [profile details](docs/REACTION-PROFILES.md).
+
 # Changelog
 
 ## 1.4.5-fairplay.1 — 2026-10-04

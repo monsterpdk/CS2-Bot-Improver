@@ -1,0 +1,35 @@
+{
+  "LowSHA256": "AFA17219A572C5182778F856E2558D61B383BB4A58AA3C22DA74682E9D5D85D3",
+  "Medium": {
+    "OriginalSHA256": "AF84EA2A4B06D3A4CEEBE1B7A7B49A924806CCC4D9F06A236FE533277B7302CD",
+    "OutputSHA256": "5F1D9923AD317FBED7928A29F9694BD704E1C57032A85B1F3C8ABCC08C11DD61",
+    "Templates": {
+      "Default": "0.35",
+      "ProTop": "0.30",
+      "ProFast": "0.32",
+      "ProPrecise": "0.34",
+      "ProSlow": "0.40",
+      "ProSteady": "0.36",
+      "RankRifler": "0.42",
+      "RankDuelist": "0.38",
+      "RankOthers": "0.45"
+    },
+    "Rush": "0.35"
+  },
+  "High": {
+    "OriginalSHA256": "FE47C9292B21D5C58910A14748208D7D6EA3476DB8C4C6EB8AB79D6B13966B2C",
+    "OutputSHA256": "FCF917A26BC9A6B81EF0E34E65E7783F9E64F43139CFD99F8CE7D1221C5FCDA7",
+    "Templates": {
+      "Default": "0.28",
+      "ProTop": "0.22",
+      "ProFast": "0.24",
+      "ProPrecise": "0.26",
+      "ProSlow": "0.32",
+      "ProSteady": "0.28",
+      "RankRifler": "0.34",
+      "RankDuelist": "0.30",
+      "RankOthers": "0.35"
+    },
+    "Rush": "0.26"
+  }
+}

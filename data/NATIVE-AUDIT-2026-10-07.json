@@ -1,0 +1,390 @@
+{
+  "gameClientVersion": "2000927",
+  "activeWindowsPatches": 38,
+  "disabledBombBypasses": [
+    "BombBeep_CT_GlobalHearRange",
+    "DefuseBomb_SkipIsVisibleCheck",
+    "OnBombPlanted_AllBotsLearnSite"
+  ],
+  "patches": {
+    "HasVisitedEnemySpawn": {
+      "active": true,
+      "signatureMatches": [
+        "0x2db419"
+      ],
+      "site": "0x2db428",
+      "original": "44 88 b7 fd 05 00 00",
+      "patch": "C6 87 FD 05 00 00 01"
+    },
+    "GameState_Reset": {
+      "active": true,
+      "signatureMatches": [
+        "0x2da82b"
+      ],
+      "site": "0x2da833",
+      "original": "44 89 77 0c",
+      "patch": "90 90 90 90"
+    },
+    "Idle_IsSafeAlwaysFalse": {
+      "active": true,
+      "signatureMatches": [
+        "0x32f19d"
+      ],
+      "site": "0x32f19d",
+      "original": "74 28",
+      "patch": "EB 28"
+    },
+    "EscapeFromBomb_OnEnter_NoEquipKnife": {
+      "active": true,
+      "signatureMatches": [
+        "0x329d3d"
+      ],
+      "site": "0x329d50",
+      "original": "e9 eb 42 f9 ff",
+      "patch": "C3 90 90 90 90"
+    },
+    "EscapeFromBomb_OnUpdate_NoEquipKnife": {
+      "active": true,
+      "signatureMatches": [
+        "0x32ca62"
+      ],
+      "site": "0x32ca73",
+      "original": "e8 c8 15 f9 ff",
+      "patch": "90 90 90 90 90"
+    },
+    "EscapeFromFlames_OnEnter_NoEquipKnife": {
+      "active": true,
+      "signatureMatches": [
+        "0x329e25"
+      ],
+      "site": "0x329e36",
+      "original": "e8 05 42 f9 ff",
+      "patch": "90 90 90 90 90"
+    },
+    "PlantBombLookAtPriorityLow": {
+      "active": true,
+      "signatureMatches": [
+        "0x32a8ac"
+      ],
+      "site": "0x32a8ac",
+      "original": "41 b9 02 00 00 00",
+      "patch": "41 B9 00 00 00 00"
+    },
+    "DefuseBombLookAtPriorityLow": {
+      "active": true,
+      "signatureMatches": [
+        "0x32c8d6"
+      ],
+      "site": "0x32c8d6",
+      "original": "41 b9 02 00 00 00",
+      "patch": "41 B9 00 00 00 00"
+    },
+    "DefuseBomb_SkipIsVisibleCheck": {
+      "active": false,
+      "signatureMatches": [
+        "0x33183f"
+      ]
+    },
+    "AttackState_SkipFireRateCheck": {
+      "active": true,
+      "signatureMatches": [
+        "0x300360"
+      ],
+      "site": "0x300367",
+      "original": "0f 82 87 00 00 00",
+      "patch": "90 90 90 90 90 90"
+    },
+    "SprayAllDistances_ForceHoldTrigger": {
+      "active": true,
+      "signatureMatches": [
+        "0x2febd3"
+      ],
+      "site": "0x2febe2",
+      "original": "40 b5 01",
+      "patch": "40 32 ED"
+    },
+    "AttackState_SkipSteadyFireShortcut": {
+      "active": true,
+      "signatureMatches": [
+        "0x2ffb90"
+      ],
+      "site": "0x2ffb95",
+      "original": "74 3c",
+      "patch": "90 90"
+    },
+    "AttackState_SkipZoomFireShortcut": {
+      "active": true,
+      "signatureMatches": [
+        "0x2ffbb4"
+      ],
+      "site": "0x2ffbbc",
+      "original": "74 15",
+      "patch": "90 90"
+    },
+    "AttackState_SkipSniperSpreadCheck": {
+      "active": true,
+      "signatureMatches": [
+        "0x2c1d1d"
+      ],
+      "site": "0x2c1d37",
+      "original": "0f 87 34 02 00 00",
+      "patch": "90 90 90 90 90 90"
+    },
+    "AttackState_DodgeDuringReload": {
+      "active": true,
+      "signatureMatches": [
+        "0x3003ef"
+      ],
+      "site": "0x3003fb",
+      "original": "76 74",
+      "patch": "EB 74"
+    },
+    "SniperCrouchDodge_jb": {
+      "active": true,
+      "signatureMatches": [
+        "0x3004db"
+      ],
+      "site": "0x3004e7",
+      "original": "76 74",
+      "patch": "90 90"
+    },
+    "LowSKill_JumpChance0": {
+      "active": true,
+      "signatureMatches": [
+        "0x328912"
+      ],
+      "site": "0x32891d",
+      "original": "ba 03 00 00 00",
+      "patch": "BA 02 00 00 00"
+    },
+    "AttackState_DodgeChance100_Always": {
+      "active": true,
+      "signatureMatches": [
+        "0x3298c0"
+      ],
+      "site": "0x3298cb",
+      "original": "76 14",
+      "patch": "EB 11"
+    },
+    "AttackState_RetreatOnSniper_Disable": {
+      "active": true,
+      "signatureMatches": [
+        "0x32afd8"
+      ],
+      "site": "0x32afd8",
+      "original": "74",
+      "patch": "EB"
+    },
+    "AllSkill_KeepMoving_WhenSeeSniper": {
+      "active": true,
+      "signatureMatches": [
+        "0x2d952f"
+      ],
+      "site": "0x2d9536",
+      "original": "76 0d",
+      "patch": "90 90"
+    },
+    "AttackState_CanStrafe_jne": {
+      "active": true,
+      "signatureMatches": [
+        "0x300360"
+      ],
+      "site": "0x300377",
+      "original": "74 7b",
+      "patch": "90 90"
+    },
+    "SniperDodge_SkipIsSniper_DodgeA": {
+      "active": true,
+      "signatureMatches": [
+        "0x30046d"
+      ],
+      "site": "0x30046f",
+      "original": "75 6a",
+      "patch": "90 90"
+    },
+    "Vision_AlwaysWatchApproachPoints": {
+      "active": true,
+      "signatureMatches": [
+        "0x32884d"
+      ],
+      "site": "0x328854",
+      "original": "75 25",
+      "patch": "EB 25"
+    },
+    "Vision_ApproachBody_SkipSkillCheck": {
+      "active": true,
+      "signatureMatches": [
+        "0x32889d"
+      ],
+      "site": "0x3288a5",
+      "original": "76 33",
+      "patch": "90 90"
+    },
+    "Vision_ApproachBody_SkipHidingSpotCheck": {
+      "active": true,
+      "signatureMatches": [
+        "0x3288a7"
+      ],
+      "site": "0x3288ae",
+      "original": "74 2a",
+      "patch": "90 90"
+    },
+    "Vision_SkipIsMovingGate": {
+      "active": true,
+      "signatureMatches": [
+        "0x328856"
+      ],
+      "site": "0x32885d",
+      "original": "77 0f",
+      "patch": "90 90"
+    },
+    "Vision_AlwaysEnterApproachBody": {
+      "active": true,
+      "signatureMatches": [
+        "0x32886a"
+      ],
+      "site": "0x32886c",
+      "original": "75",
+      "patch": "EB"
+    },
+    "IsNoticable_AlwaysTrue": {
+      "active": true,
+      "signatureMatches": [
+        "0x2cc000"
+      ],
+      "site": "0x2cc000",
+      "original": "48 89 5c",
+      "patch": "B0 01 C3"
+    },
+    "Upkeep_BotCOS_ZeroDrift": {
+      "active": true,
+      "signatureMatches": [
+        "0x2e727f"
+      ],
+      "site": "0x2e729b",
+      "original": "e8 30 84 03 00",
+      "patch": "0F 57 C0 90 90"
+    },
+    "Upkeep_BotSIN_ZeroDrift": {
+      "active": true,
+      "signatureMatches": [
+        "0x2e72ac"
+      ],
+      "site": "0x2e72c8",
+      "original": "e8 43 84 03 00",
+      "patch": "0F 57 C0 90 90"
+    },
+    "InvestigateNoise_SkipSelfDefenseCheck": {
+      "active": true,
+      "signatureMatches": [
+        "0x32853f"
+      ],
+      "site": "0x328546",
+      "original": "74 1e",
+      "patch": "90 90"
+    },
+    "TBot_BombsiteSearch_UseKnownPlantedSite": {
+      "active": true,
+      "signatureMatches": [
+        "0x33017c"
+      ],
+      "site": "0x33018b",
+      "original": "e8 40 51 f9 ff",
+      "patch": "E8 30 57 F9 FF"
+    },
+    "BombBeep_CT_GlobalHearRange": {
+      "active": false,
+      "signatureMatches": [
+        "0x2d1837"
+      ]
+    },
+    "BombPickup_CT_GlobalHearRange": {
+      "active": true,
+      "signatureMatches": [
+        "0x2d21f3"
+      ],
+      "site": "0x2d21f6",
+      "original": "76 23",
+      "patch": "90 90"
+    },
+    "OnAudibleEvent_GlobalHearRange": {
+      "active": true,
+      "signatureMatches": [
+        "0x2d0ec3"
+      ],
+      "site": "0x2d0eda",
+      "original": "0f 86 65 03 00 00",
+      "patch": "90 90 90 90 90 90"
+    },
+    "OnBombPlanted_AllBotsLearnSite": {
+      "active": false,
+      "signatureMatches": [
+        "0x2d2406"
+      ]
+    },
+    "CT_Defuse_EngageAndInvestigate": {
+      "active": true,
+      "signatureMatches": [
+        "0x3304f8"
+      ],
+      "site": "0x330502",
+      "original": "ba 02 00 00 00",
+      "patch": "BA 00 00 00 00"
+    },
+    "DefuseBombState_OnUpdate_EngageAndInvestigate": {
+      "active": true,
+      "signatureMatches": [
+        "0x32c87a"
+      ],
+      "site": "0x32c889",
+      "original": "ba 02 00 00 00",
+      "patch": "BA 00 00 00 00"
+    },
+    "DefuseBombState_OnEnter_EngageAndInvestigate": {
+      "active": true,
+      "signatureMatches": [
+        "0x329c70"
+      ],
+      "site": "0x329c7d",
+      "original": "ba 02 00 00 00",
+      "patch": "BA 00 00 00 00"
+    },
+    "FlashbangAvoidance_Disable": {
+      "active": true,
+      "signatureMatches": [
+        "0x2b35c1"
+      ],
+      "site": "0x2b35c1",
+      "original": "e8 7a a4 02 00 49 8b 06 c6 80 74 5c 00 00 00",
+      "patch": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90"
+    },
+    "Smoke_BothInsideNotVisible": {
+      "active": true,
+      "signatureMatches": [
+        "0x32404e"
+      ],
+      "site": "0x324055",
+      "original": "40 b7 01",
+      "patch": "40 30 FF"
+    }
+  },
+  "aimRva": "0x2d8380",
+  "smokeDensityRva": "0x9b9410",
+  "grenadeFactories": {
+    "smoke": {
+      "signature": "48 8B C4 48 89 58 ? 48 89 68 ? 48 89 70 ? 57 41 56 41 57 48 81 EC ? ? ? ? 48 8B B4 24",
+      "rva": "0x9b0b70"
+    },
+    "he": {
+      "signature": "48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC ? 48 8B AC 24 ? ? ? ? 49 8B F8",
+      "rva": "0x39dc30"
+    },
+    "molotov": {
+      "signature": "48 8B C4 48 89 58 ? 48 89 70 ? 48 89 78 ? 4C 89 40 ? 55 41 54 41 55 41 56 41 57 48 8D 6C 24",
+      "rva": "0x9b02a0"
+    }
+  },
+  "bodyAndTrunkPrioritiesPreserved": true,
+  "nonSmokeAiDefinitionsPreserved": true,
+  "legacyFovBypassesAbsent": true
+}

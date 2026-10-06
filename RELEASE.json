@@ -1,9 +1,12 @@
 {
-  "Version": "1.4.5-fairplay.1",
-  "Date": "2026-10-04",
+  "Version": "1.4.5-fairplay.2",
+  "Date": "2026-10-07",
   "Upstream": "v1.4.5",
-  "ClientVersion": "2000924",
+  "ClientVersion": "2000927",
   "CounterStrikeSharp": "1.0.376",
   "UserAcceptedLocalPlaytest": true,
-  "SecondPcTested": false
+  "SecondPcTested": false,
+  "PatchVersion": "1.41.8.9",
+  "DefaultPopulation": 16,
+  "LowProfileUnchanged": true
 }

@@ -1,4 +1,4 @@
-# v1.4.5 fair-play port — 2026-10-04
+# v1.4.5 fair-play port — 2026-10-07
 
 Windows integration of the user-accepted grenade and smoke changes into the original v1.4.5 Windows release. This source tree is the maintained source for the new candidate; the older top-level plugin sources and previous publication archives remain historical snapshots.
 
@@ -6,7 +6,7 @@ Windows integration of the user-accepted grenade and smoke changes into the orig
 
 - Original release: [ed0ard/CS2-Bot-Improver v1.4.5](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.5), root commit `d9914454d8691b509bae4cd671a7a8bd9dcb174f`.
 - Actual packaged versions: BotAI 1.8.12, BotAimImprover 2.1.5, NadeSystem 1.2.2, CounterStrikeSharp API 376. Several submodule pointers in the root release tag referenced older sources; this port uses the release-matching newer component commits recorded in `UPSTREAM-SOURCES.json`.
-- Game audited: CS2 ClientVersion 2000924, patch 1.41.8.8, Windows x64. The port's own smoke guard is Windows-only. No claim is made that its additions have been tested on Linux or dedicated servers.
+- Game audited: CS2 ClientVersion 2000927, patch 1.41.8.9, Windows x64. The port's own smoke guard is Windows-only. No claim is made that its additions have been tested on Linux or dedicated servers.
 
 ## Added on top of the new release
 
@@ -19,7 +19,7 @@ All four maintained projects target .NET 10 / CounterStrikeSharp API 1.0.376. Th
 
 ## Preserved upstream features
 
-The new BotState, BotRandomizer, BotBuy, managed bridges, RoundDamageRecap, native plugins, new panel, profile VPKs and Rush configurations come from the original v1.4.5 package. The untouched feature-plugin DLLs and Rush cfg files were checked byte-for-byte against the download. This preserves their new content and behavior paths; gameplay still needs to verify the combined result.
+The new BotState, BotRandomizer, BotBuy, managed bridges, RoundDamageRecap, native plugins, new panel, profile contents and Rush behavior trees originate in v1.4.5. Fairplay.2 changes only Medium/High reaction settings in the profiles, and appends the 16-player fill defaults to the Normal/FFA/Rush cfgs. Untouched feature-plugin DLLs remain byte-identical to the download. This preserves their new content and behavior paths; gameplay still needs to verify the combined result.
 
 The explicit `bot_aim body` priority order and the body/trunk choices for Head/Mixed modes match upstream 2.1.5. Upstream's removal of the old BotAI outer/inner FOV bypasses remains intact. Disabling global CT bomb information does not remove T-only bombsite knowledge or the separate new T defense/radio code. The current game's stock gameinfo and the new pack's stock gameinfo have no line differences after managed mounts/whitespace are normalized.
 

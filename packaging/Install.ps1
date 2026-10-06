@@ -46,8 +46,20 @@ if ($manifest.MergeCoreSettings) {
     $core | Add-Member -NotePropertyName FollowCS2ServerGuidelines -NotePropertyValue $false -Force
     $merged[$corePath] = $core | ConvertTo-Json -Depth 20
 }
+$binaryMerged = @{}
+if ($manifest.GenerateReactionProfiles) {
+    Import-Module (Join-Path $payload 'ProfileCompatibility.psm1') -Force
+    $binaryMerged = Get-ProfileUpdates -Csgo $Csgo -SettingsPath (Join-Path $payload 'ReactionSettings.json')
+}
+if ($manifest.MergePopulationSettings) {
+    $path = 'ServerConfig.vdf'
+    $text = if (Test-Path -LiteralPath (Join-Path $Csgo $path)) { [IO.File]::ReadAllText((Join-Path $Csgo $path)) } else { [IO.File]::ReadAllText((Join-Path $payload 'DefaultServerConfig.vdf')) }
+    $pattern = '"bot_quota"\s+"[0-9]+"'
+    if ([regex]::Matches($text,$pattern).Count -ne 1) { throw 'Expected exactly one panel bot_quota setting.' }
+    $merged[$path] = [regex]::Replace($text,$pattern,'"bot_quota" "16"')
+}
 $backup = Join-Path $Csgo ('_botimprover_backups\v1.4.5-fairplay-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
-$paths = @($manifest.Files.Path) + @($merged.Keys) + @('gameinfo.gi','backup\Online\gameinfo.gi','backup\WithBots\gameinfo.gi')
+$paths = @($manifest.Files.Path) + @($merged.Keys) + @($binaryMerged.Keys) + @('gameinfo.gi','backup\Online\gameinfo.gi','backup\WithBots\gameinfo.gi')
 if (@($paths | Select-Object -Unique).Count -ne $paths.Count) { throw 'Duplicate installer destination.' }
 $records = @()
 foreach ($relative in $paths) {
@@ -89,6 +101,7 @@ try {
         Copy-Item -LiteralPath (Join-Path $payload $entry.Path) -Destination $target
         if ((Get-FileHash -LiteralPath $target).Hash -ne $entry.SHA256) { throw ('Copy mismatch: ' + $entry.Path) }
     }
+    foreach ($path in $binaryMerged.Keys) { [IO.File]::WriteAllBytes((Join-Path $Csgo $path), $binaryMerged[$path]) }
     foreach ($path in $merged.Keys) { [IO.File]::WriteAllText((Join-Path $Csgo $path), $merged[$path], [Text.UTF8Encoding]::new($false)) }
     foreach ($mode in @('Online','WithBots')) { New-Item -ItemType Directory -Path (Join-Path $Csgo ('backup\' + $mode)) -Force | Out-Null }
     [IO.File]::WriteAllText((Join-Path $Csgo 'backup\Online\gameinfo.gi'), $templates.Online, $encoding)
@@ -103,5 +116,5 @@ try {
     foreach ($record in $moved) { Move-Item -LiteralPath (Join-Path $backup ('parked\' + $record.Path)) -Destination (Join-Path $Csgo $record.Path) }
     throw
 }
-Write-Output ('Installed v1.4.5 Fairplay successfully. Backup: ' + $backup)
+Write-Output ('Installed v1.4.5-fairplay.2 successfully. Backup: ' + $backup)
 Write-Output ('Start the panel with: ' + (Join-Path $Csgo 'Start-CompatiblePanel.cmd'))
