@@ -1,4 +1,4 @@
-# Reaction times and match population — Fairplay 1.4.5-fairplay.2
+# Reaction times and match population — Fairplay 1.4.5-fairplay.3
 
 Medium reaction templates now range from 0.30 to 0.45 seconds (default 0.35); High ranges from 0.22 to 0.35 seconds (default 0.28). Rush uses 0.35 / 0.26 seconds respectively. Low is unchanged. Accuracy, aim speed, focus, skill, attack delay and behavior trees are unchanged. These are engine profile settings, not a guaranteed minimum time between seeing a target and the first shot.
 
@@ -20,4 +20,4 @@ The public updater transforms the installed original v1.4.5 Medium/High VPKs loc
 
 The private full installer includes the accepted presets and starts with Low. Original panel/runtime/profile assets remain excluded from the public release. Existing smoke and grenade fairness changes are retained.
 
-Validated on Windows x64, CS2 ClientVersion 2000927 / patch 1.41.8.9. The user accepted local gameplay. A native audit passed for 38 active patch sites, aim instructions, smoke density and grenade factories on this build. No unchanged plugin binaries were rebuilt solely to change the release number. This is not a second-PC or all-map validation.
+Validated on Windows x64, CS2 ClientVersion 2000935 / patch 1.41.9.2. The user accepted local gameplay. A native audit passed for 36 active patch sites, aim instructions, smoke density and grenade factories on this build. No unchanged plugin binaries were rebuilt solely to change the release number. This is not a second-PC or all-map validation.

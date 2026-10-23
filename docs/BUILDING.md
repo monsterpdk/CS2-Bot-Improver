@@ -1,19 +1,9 @@
-# Build the four maintained plugins
+# Build and package
 
-Use Windows and .NET SDK 10 with NuGet access (tested SDK 10.0.401). From this repository's root:
+Use Windows x64 and .NET SDK 10. The four maintained projects pin CounterStrikeSharp.API 1.0.376. In PowerShell run `powershell -NoProfile -ExecutionPolicy Bypass -File packaging/Build-Plugins.ps1`. Outputs go to build/<plugin>. Public release binaries are the exact accepted local test builds, with source supplied here.
 
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File packaging\Build-Plugins.ps1
-```
+To stage an update from an already installed, audited build: `powershell -NoProfile -ExecutionPolicy Bypass -File packaging/Build-Update.ps1 -Csgo "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo" -Output "D:\new-output"`. This copies managed binaries from that installation, so install your newly built DLLs there first when intentionally producing a new build. Never substitute unreviewed game/runtime versions. NativeCompatibility.psm1 transforms the user-provided native DLL using PE RVA mapping, exact instruction bytes and input/output SHA-256 checks; no C++ toolchain or native dependency redistribution is needed for that adapter.
 
-The script builds BotAI, BotAimImprover, NadeSystem and BotVisionCompatibility against pinned CounterStrikeSharp.API 1.0.376 into `build/<name>/`. It does not install anything. Corridor traces use CSS's built-in API, so no RayTrace API reference DLL is needed. BotRandomizer and the panel are obtained unchanged from upstream and are not rebuilt here.
+Run the SmokeAimTests, ReplaySafetyTests, AwarenessTests and NativeGrenadeTests console projects with dotnet run. StartupTests accepts the CSS api directory and built BotAimImprover.dll as arguments. ContractTests accepts CounterStrikeSharp.API.dll and shared/BotControllerApi/BotControllerApi.dll. These tests do not launch the game.
 
-Distribute only the four named plugin DLL/deps pairs, not NuGet/runtime dependency DLLs from the build output. The maintained corresponding source, notices, data and build tools accompany the public binaries. Bit-identical binaries from a different source path/SDK are not promised.
-
-To stage a new update from a matching tested installation:
-
-```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File packaging\Build-Update.ps1 -Csgo "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo" -Output "D:\Releases\fairplay-stage"
-```
-
-This checks the pinned dependency hashes in `data/UPSTREAM-DEPENDENCIES.json`, selects the maintained plugin binaries/data, repository cfg files, source, docs and wrapper, and creates a manifest. Review version metadata and dependencies before releasing another game build. No original panel/runtime/native binaries or VPKs are selected.
+packaging/Test-Package.ps1 accepts -Package <staged-update> -Baseline <original-v1.4.5-csgo-payload>. It uses a disposable package/game copy and synthetic game-binary hash fixtures; it never changes the real game. Tests cover version/game/dependency/payload guards, profiles, settings preservation, injected-copy rollback, installation, reinstall and explicit restore. Keep the fixture outside the real game. A separate in-game playtest is still needed after behavioral changes.

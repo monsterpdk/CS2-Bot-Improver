@@ -1,6 +1,10 @@
-param([Parameter(Mandatory)][string]$Package, [string]$Baseline, [switch]$NoPanelSettings)
+﻿param([Parameter(Mandatory)][string]$Package, [string]$Baseline, [switch]$NoPanelSettings)
 $ErrorActionPreference = 'Stop'
 $testRoot = Join-Path $PSScriptRoot ('test-output\' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
+$originalPackage=$Package
+$Package=Join-Path $testRoot 'package'
+New-Item -ItemType Directory -Path $Package -Force | Out-Null
+foreach($item in Get-ChildItem -LiteralPath $originalPackage -Force | Where-Object { $_.Name -ne 'source' }) { Copy-Item -LiteralPath $item.FullName -Destination $Package -Recurse }
 $fixture = Join-Path $testRoot 'game\csgo'
 New-Item -ItemType Directory -Path $fixture -Force | Out-Null
 if ($Baseline) { foreach ($item in Get-ChildItem -LiteralPath $Baseline -Force) { Copy-Item -LiteralPath $item.FullName -Destination $fixture -Recurse } }
@@ -25,12 +29,27 @@ function Assert-Snapshot($Expected) {
     foreach ($path in $Expected.Keys) { Assert ($actual[$path] -eq $Expected[$path]) ('Snapshot mismatch: ' + $path) }
 }
 $manifest = Get-Content -LiteralPath (Join-Path $Package 'manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
+# Synthetic bytes in this disposable fixture exercise exact game hash guards.
+$nativeSettingsPath=Join-Path $Package 'payload\NativeCompatibilitySettings.json'
+$nativeSettings=Get-Content -LiteralPath $nativeSettingsPath -Raw | ConvertFrom-Json
+foreach($pair in @(@('bin\win64\server.dll','ServerSHA256'),@('..\bin\win64\engine2.dll','EngineSHA256'))) {
+    $binary=Join-Path $fixture $pair[0]
+    New-Item -ItemType Directory -Path (Split-Path $binary -Parent) -Force | Out-Null
+    [IO.File]::WriteAllText($binary,'synthetic audited '+$pair[0])
+    $nativeSettings.($pair[1])=(Get-FileHash -LiteralPath $binary).Hash
+}
+$nativeSettings | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $nativeSettingsPath -Encoding UTF8
+($manifest.Files | Where-Object { $_.Path -eq 'NativeCompatibilitySettings.json' }).SHA256=(Get-FileHash -LiteralPath $nativeSettingsPath).Hash
+$manifest | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $Package 'manifest.json') -Encoding UTF8
 $stock = "GameInfo`r`n{`r`n FutureSetting preserve`r`n FileSystem`r`n {`r`n SearchPaths`r`n {`r`n Game csgo`r`n Game core`r`n }`r`n }`r`n}`r`n"
 [IO.File]::WriteAllText((Join-Path $fixture 'gameinfo.gi'), $stock)
 Set-Content -LiteralPath (Join-Path $fixture 'steam.inf') -Value 'ClientVersion=9999999' -Encoding ASCII
 Expect-Rejection 'Target version differs'
 Assert (!(Test-Path -LiteralPath (Join-Path $fixture '_botimprover_backups'))) 'Version guard wrote a backup.'
 Set-Content -LiteralPath (Join-Path $fixture 'steam.inf') -Value ('ClientVersion=' + $manifest.ClientVersion) -Encoding ASCII
+$serverFixture=Join-Path $fixture 'bin\win64\server.dll'
+$serverBytes=[IO.File]::ReadAllBytes($serverFixture)
+try { [IO.File]::WriteAllBytes($serverFixture,[byte[]](1,2,3)); Expect-Rejection 'Audited game binary changed' } finally { [IO.File]::WriteAllBytes($serverFixture,$serverBytes) }
 if ($manifest.Dependencies.Count) {
     $dependency = Join-Path $fixture $manifest.Dependencies[0].Path
     $bytes = [IO.File]::ReadAllBytes($dependency)
@@ -93,6 +112,11 @@ foreach ($relative in $manifest.ParkPaths) { Assert (!(Test-Path -LiteralPath (J
 if ($manifest.MergeCoreSettings) {
     $core = Get-Content -LiteralPath $corePath -Raw | ConvertFrom-Json
     Assert ($core.FutureOption -eq 'preserve' -and !$core.AutoUpdateEnabled -and !$core.FollowCS2ServerGuidelines) 'Core merge incorrect.'
+}
+if($manifest.ApplyNativeCompatibility) {
+    Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $nativeSettings.Path)).Hash -eq $nativeSettings.SHA256) 'Native adapter output mismatch.'
+    $vision=Get-Content -LiteralPath (Join-Path $fixture 'addons\BotVision\gamedata.json') -Raw | ConvertFrom-Json
+    Assert ($vision.GetSmokeDensityInLine.signatures.windows -eq $nativeSettings.SmokeSignatureAfter) 'BotVision signature mismatch.'
 }
 $installed = Snapshot
 & (Join-Path $Package 'Install.ps1') -Csgo $fixture

@@ -27,6 +27,8 @@ public partial class NadeSystemPlugin : BasePlugin
     // * Initializes data, event handlers, listeners, and commands
     public override void Load(bool hotReload)
     {
+        if (!ValidateGrenadeBuild()) return;
+        InitGrenadeDiagnostics();
         Directory.CreateDirectory(DataDir);
         LoadDb();
 

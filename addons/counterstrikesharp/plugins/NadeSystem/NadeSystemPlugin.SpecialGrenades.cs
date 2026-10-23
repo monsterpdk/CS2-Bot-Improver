@@ -28,6 +28,8 @@ public partial class NadeSystemPlugin : BasePlugin
     private void TrySpawnInstantGrenade(CCSPlayerController bot, Vector spawnPos, string gtype, Vector? velocity = null)
     {
         if (_botNadesMode == "off") return;
+        NadeStats(gtype).Considered++;
+        if (!ReadyGrenade(gtype)) { NadeStats(gtype).Unavailable++; return; }
         // In case the bot has been taken over
         bool isTakenOver = bot.HasBeenControlledByPlayerThisRound;
         if (isTakenOver) return;
@@ -69,6 +71,7 @@ public partial class NadeSystemPlugin : BasePlugin
             _roundSpendPerBot[botIdx] = alreadySpent + cost;
         }
         SpendLockedNadeMoney(botIdx, cost);
+        NadeStats(gtype).Planned++;
 
         var vel = velocity ?? new Vector(0f, 0f, 0f);
         Server.NextFrame(() =>
@@ -88,11 +91,12 @@ public partial class NadeSystemPlugin : BasePlugin
                         spawnPos.Handle, spawnPos.Handle,
                         vel.Handle, vel.Handle,
                         botPawn.Handle, 45, teamNum);
-                    if (smoke == null || !smoke.IsValid) return;
+                    if (smoke == null || !smoke.IsValid) { NadeStats(gtype).Failed++; return; }
                     smoke.TeamNum             = (byte)teamNum;
                     smoke.Thrower.Raw         = botPawn.EntityHandle.Raw;
                     smoke.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
                     smoke.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                 }
                 else if (gtype == "flash")
@@ -115,11 +119,13 @@ public partial class NadeSystemPlugin : BasePlugin
                     flash.Teleport(spawnPos, ang, vel);
                     flash.DispatchSpawn();
                     flash.Teleport(spawnPos, ang, vel);
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                 }
             }
             catch (Exception ex)
             {
+                NadeStats(gtype).Failed++;
                 Server.PrintToConsole($"[NadeSystem] TrySpawnInstantGrenade error: {ex.Message}");
             }
         });

@@ -15,7 +15,7 @@ namespace BotAimImprover;
 public partial class BotAimImprover : BasePlugin
 {
     public override string ModuleName => "BotAimImprover";
-    public override string ModuleVersion => "2.1.5-fairplay.1";
+    public override string ModuleVersion => "2.1.5-awareness.2";
     public override string ModuleAuthor => "ed0ard & htfy96 & XBribo";
     public override string ModuleDescription => "Restores intelligent aim part selection for CS2 bots.";
 
@@ -163,6 +163,13 @@ public partial class BotAimImprover : BasePlugin
 
     public override void Load(bool hotReload)
     {
+        // This local trial is validated against one Windows binary only.
+        var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(line=>line.Trim()=="ClientVersion=2000935"))
+        {
+            Logger.LogError("[AwarenessTrial] Untested game build/platform: plugin left inactive. Re-audit after a game update.");
+            return;
+        }
         bool win = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         _off = win ? WindowsOffsets : LinuxOffsets;
 
@@ -200,6 +207,7 @@ public partial class BotAimImprover : BasePlugin
         });
 
         LoadSmokeFairAim();
+        LoadAwareness();
 
         RegisterEventHandler<EventPlayerDisconnect>((ev, _) =>
         {
@@ -246,6 +254,7 @@ public partial class BotAimImprover : BasePlugin
 
     public override void Unload(bool hotReload)
     {
+        _awarenessEnabled=false; ResetAwareness();
         try { _pickNewAimSpot?.Unhook(OnPickNewAimSpotPost, HookMode.Post); }
         catch { /* ignore */ }
     }

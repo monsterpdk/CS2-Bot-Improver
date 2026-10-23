@@ -28,7 +28,7 @@ public static class BotOffsets
 public class BotAI : BasePlugin
 {
     public override string ModuleName => "Bot AI - Patches";
-    public override string ModuleVersion => "1.8.12-fairplay.1";
+    public override string ModuleVersion => "1.8.12-awareness.1";
     public override string ModuleAuthor => "K4ryuu & Austin (updated by ed0ard & XBribo & unicbm & Misaka17032 & AmagiReina)";
     public override string ModuleDescription =>
         "Improve and fix bots' behavior comprehensively";
@@ -40,12 +40,20 @@ public class BotAI : BasePlugin
 
     public override void Load(bool hotReload)
     {
+        // This local trial is validated against one Windows binary only.
+        var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(line=>line.Trim()=="ClientVersion=2000935"))
+        {
+            Logger.LogError("[AwarenessTrial] Untested game build/platform: plugin left inactive. Re-audit after a game update.");
+            return;
+        }
         Logger.LogInformation("Bot AI Patches loading...");
         // Keep native CT bomb visibility, local beep range and T-only plant knowledge.
         // This does not disable T bomb defense, radio commands or the upstream FOV fixes.
         var bypasses = new HashSet<string>
         {
-            "DefuseBomb_SkipIsVisibleCheck", "BombBeep_CT_GlobalHearRange", "OnBombPlanted_AllBotsLearnSite"
+            "DefuseBomb_SkipIsVisibleCheck", "BombBeep_CT_GlobalHearRange", "OnBombPlanted_AllBotsLearnSite",
+            "OnAudibleEvent_GlobalHearRange", "BombPickup_CT_GlobalHearRange"
         };
         var patchDefinitions = (_isLinux ? LinuxPatchDefinitions.All : WindowsPatchDefinitions.All)
             .Where(pair => !bypasses.Contains(pair.Key)).ToDictionary(pair => pair.Key, pair => pair.Value);

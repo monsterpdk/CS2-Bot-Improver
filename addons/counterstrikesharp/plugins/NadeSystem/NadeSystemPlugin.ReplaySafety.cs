@@ -40,10 +40,19 @@ public partial class NadeSystemPlugin
 
     private bool TrySafeReplay(CCSPlayerController bot, GrenadeData grenade, out Vector release)
     {
-        if (!TryReleasePoint(bot, grenade.GrenadeType, out release, out var eye)) return false;
+        if (!TryReleasePoint(bot, grenade.GrenadeType, out release, out var eye))
+        {
+            RecordCandidateRejection(grenade.GrenadeType, "blockedOrInvalidRelease", false);
+            return false;
+        }
         var angles = bot.PlayerPawn.Value?.EyeAngles;
-        if (angles is null) return false;
+        if (angles is null)
+        {
+            RecordCandidateRejection(grenade.GrenadeType, "invalidAngles", false);
+            return false;
+        }
         string? reason = ReplaySafety.Reject(eye, angles.Y, angles.X, grenade);
+        if (reason is not null) RecordCandidateRejection(grenade.GrenadeType, reason, false);
         if (reason is null) return true;
 
         return false;

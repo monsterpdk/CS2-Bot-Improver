@@ -12,7 +12,7 @@ public partial class BotAimImprover
     private MemoryFunctionWithReturn<IntPtr, IntPtr, IntPtr, float>? _smokeDensity;
     private readonly HashSet<int> _activeSmoke = new();
     private readonly Dictionary<IntPtr, (int Enemy, float Time, bool Blocked)> _smokeSamples = new();
-    private readonly Dictionary<IntPtr, (int Enemy, AimLocation Location)> _clearAim = new();
+    private readonly Dictionary<IntPtr, (int Enemy, AimLocation Location, float Time)> _clearAim = new();
     private readonly Dictionary<IntPtr, AimLocation> _blindDirections = new();
     private readonly Dictionary<IntPtr, AimLocation> _clearDirections = new();
     private bool _reportedSmokeError;
@@ -20,7 +20,7 @@ public partial class BotAimImprover
     private void LoadSmokeFairAim()
     {
         if (!OperatingSystem.IsWindows()) return; // Windows offsets verified only.
-        _smokeDensity = new("40 55 53 56 41 55 41 57 48 8D 6C 24");
+        _smokeDensity = new("40 55 53 56 41 55 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 0F 29 BC 24 ? ? ? ? 0F 57 FF 49 8B F0 4C 8B EA 4C 8B F9");
         RegisterEventHandler<EventSmokegrenadeDetonate>((ev, _) =>
         {
             _activeSmoke.Add(ev.Entityid);
@@ -66,7 +66,7 @@ public partial class BotAimImprover
                 _smokeSamples[bot] = (enemy, now, blocked);
             }
             if (!blocked) { _blindDirections.Remove(bot); return false; }
-            var hasMemory = _clearAim.TryGetValue(bot, out var last);
+            var hasMemory = _clearAim.TryGetValue(bot, out var last) && now>=last.Time && now-last.Time<=2.5f;
             if (!_blindDirections.TryGetValue(bot, out var direction))
             {
                 var pawn = controller.PlayerPawn.Value;
@@ -78,8 +78,8 @@ public partial class BotAimImprover
                 direction = OpenBlindDirection(eye, direction);
                 _blindDirections[bot] = direction;
             }
-            var held = SmokeAimPolicy.Hold(enemy, hasMemory ? last.Enemy : -1, hasMemory ? last.Location : null, new(eye.X, eye.Y, eye.Z), direction);
-            // Instruction-validated Windows CS2 ClientVersion 2000924 fields. Clear native
+            var held = HeardBlindAim(controller,eye,out var heardAim) ? heardAim : SmokeAimPolicy.Hold(enemy, hasMemory ? last.Enemy : -1, hasMemory ? last.Location : null, new(eye.X, eye.Y, eye.Z), direction);
+            // Instruction-validated Windows CS2 ClientVersion 2000935 fields. Clear native
             // visibility and undo the just-computed live enemy aim point. Native
             // blind fire toward the last clearly observed point can still occur.
             Marshal.WriteByte(bot + _off.IsVisible, 0);
@@ -112,7 +112,7 @@ public partial class BotAimImprover
         var location = new AimLocation(spot[0], spot[1], spot[2]);
         if (location.Finite)
         {
-            _clearAim[bot] = (enemy, location);
+            _clearAim[bot] = (enemy, location, Server.CurrentTime);
             var yaw = controller?.PlayerPawn.Value?.EyeAngles.Y;
             if (yaw.HasValue) _clearDirections[bot] = SmokeAimPolicy.Direction(0, 0, yaw.Value);
         }

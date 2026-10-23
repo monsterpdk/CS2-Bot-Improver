@@ -1,47 +1,28 @@
-Current release: **v1.4.5-fairplay.2**. [Reaction profiles and 8v8 defaults](docs/REACTION-PROFILES.md).
+# CS2 Bot Improver — Windows Fairplay Edition
 
-# CS2 Bot Improver - Windows Fairplay Edition
+Current release: **v1.4.5-fairplay.3**, 2026-10-23. Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.5](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.5) for local Windows bot matches.
 
-A community maintenance update for [CS2-Bot-Improver v1.4.5](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.5), adding safer grenade throws and fairer smoke aiming for local Windows bot matches. Independent project; not an official upstream or Valve release.
+This edition adds fairer smoke aiming and human-scale grenade safeguards, delayed reactions to audible enemies, assistance for idle bots in smoke, and teammate spacing. It retains upstream's Rush support, FOV alignment, radio commands, post-plant defense, cosmetics and panel features. Medium/High reaction profiles remain humanized; default population is **8v8 including the human player**.
 
-**Release: `1.4.5-fairplay.2` - 2026-10-07.** Tested with Windows x64, CS2 `ClientVersion 2000927` / patch `1.41.8.9`, and the original v1.4.5 Windows pack's bundled CounterStrikeSharp `1.0.376`. Future CS2 updates require another compatibility review.
-
-## Our additions to v1.4.5
-
-| Area | What this update changes |
-| --- | --- |
-| Grenades | Anchors launches to the throwing bot's current eye position; checks finite values, release offset, speed, range, heading, pitch and launch obstruction. Revalidates delayed spawns before applying the throw. |
-| Smoke aiming | Concealed opponents' current positions do not drive the managed aim override. Bots use a previously observed point or a fixed blind-fire direction instead. |
-| Blind fire | Favors open travel directions at eye height when no remembered point is available; limits downward/upward pitch for remembered points. |
-| Smoke visibility | Corrects the Windows branch that otherwise treats two positions inside smoke as visible. Keeps `bv_smoke_mode 1` for this tested setup, using upstream's new native BotVision. |
-| Bomb information | Disables three visibility/global-information bypasses that could give CT bots unrealistic bomb knowledge; keeps upstream's T defense code. This is not a complete human-like bomb-search simulation. |
-| Startup and deployment | Regenerates panel gameinfo templates from the installed game's own file. Adds version/dependency/hash checks, backups, rollback and explicit restore. |
-
-Detailed grenade/smoke diagnostic sampling is not enabled in this release. The four modified plugins are BotAI `1.8.12-fairplay.1`, BotAimImprover `2.1.5-fairplay.1`, NadeSystem `1.2.2-fairplay.1`, and BotVisionCompatibility `0.1.4-fairplay.1`.
-
-## Upstream improvements retained
-
-The v1.4.5 base supplies repaired functions, Rush behavior trees/configurations, human-aligned bot FOV, new sticker/music-kit content, post-plant T bomb defense, player radio commands, revised `bot_aim body` priorities, and its redesigned panel with the Rules menu. These are upstream features, credited to their authors. This update preserves the untouched feature DLLs and new aim priorities; it does not restore our old v1.4.4 compatibility patches or the removed FOV bypasses.
-
-Upstream also advertises Linux support. **This maintenance update is validated for Windows local games only**; its additional smoke correction is Windows-specific.
+Tested with **Windows x64, CS2 ClientVersion 2000935 / patch 1.41.9.2, CounterStrikeSharp 376**. Exact game binary/dependency checks prevent applying these native assumptions to a different build.
 
 ## Download and install
 
-Download **`CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-10-07.zip`** from this repository's Releases. GitHub's automatic Source code downloads are not installers.
+Install the author's original v1.4.5 Windows pack first. From this fork's Releases download **CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-10-23.zip**, extract it outside the game folder, close CS2 and the panel, then run **Install.cmd** and select the target **game\csgo** folder. Launch the installed **Start-CompatiblePanel.cmd** and choose Bot Mode. Existing fairplay.1/.2 installations can use the same update if the required dependencies are unchanged. GitHub's Source code downloads are for developers.
 
-This public asset is an **update**: obtain the original v1.4.5 Windows pack from its author first, then apply our update. The panel, runtimes, native/shared binaries and VPKs are not redistributed here. The original pack already contains the tested CSS 376 runtime; do not replace it with the old CSS 373 setup.
+The updater includes our four maintained managed plugins, map data, match cfgs, independent compatibility tools and corresponding source. It generates reaction profiles locally, preserves the target game's gameinfo/layer paths, merges settings, and applies a three-byte CSS 376 engine-interface adapter to the author's locally installed DLL. It also updates the BotVision smoke signature. The panel, runtimes, native/shared binaries and VPK assets are obtained from their authors. The full personal-use bundle is **not** a public release asset.
 
-Follow [INSTALLATION.md](docs/INSTALLATION.md), then launch `game/csgo/Start-CompatiblePanel.cmd`. Use Bot Mode for private/local bot matches; the panel uses `-insecure`. Use the wrapper and Online mode before ordinary online play.
+See [installation and restore](docs/INSTALLATION.md), [changes](CHANGELOG.md), [behavior and limits](docs/FAIR-AWARENESS.md), [reaction profiles](docs/REACTION-PROFILES.md), [build instructions](docs/BUILDING.md), and [attribution](NOTICE.md).
 
 ## Validation and limits
 
-The merged v1.4.5 setup was accepted after the user's local Windows playtest. The earlier grenade/smoke behavior had also been tested in Dust II/Cache matches. Four Release builds, 19 smoke-policy checks, 11 grenade-policy checks, gameinfo tests, native signature/instruction audits and disposable installer/restore tests accompany this release. This does not certify every upstream mode or behavior in every situation.
+The user accepted the combined local playtest as stable. The last test recorded 44 detonated smokes, 3 HE grenades, 10 flashes and 8 created Molotovs. Source builds, policy/startup/contract checks, native signature audits and disposable install/rollback/restore checks accompany the release. The behavior uses approximate, expiring sound memories rather than a hidden-enemy position feed; it does not implement human-equivalent hearing or full autonomous path planning.
 
-- Future game builds, Linux, dedicated/public servers, every map and a second PC are not validated.
-- Blind fire can still hit players through smoke. The guard limits targeted aiming, not bullet penetration or every native AI advantage.
-- Grenade safeguards do not fully simulate inventory, throwing animations or legal per-round purchases. Spend-cap/inventory behavior still needs work; decoy use depends on available map data.
-- CT bomb search/defuse in smoke, Rush, radio and T post-plant defense still need focused regression tests beyond the accepted combined playtest.
-- Mode 1 is the tested setting, not a claim that the new upstream mode 0 still has the previous version's performance problem.
-- The installer refuses unexpected extra managed plugins and mismatched pinned dependencies. It backs up its own transaction, not unrelated changes made beforehand.
+- Windows local matches only; Linux, dedicated/public servers, every map/mode and a second PC are not validated.
+- Blind fire can still hit through smoke; visibility safeguards do not remove bullet penetration or every native AI advantage.
+- Grenade usage depends on map lineups, opportunities, budget and limits. The system does not fully simulate inventory or throw animations.
+- Native navigation can still stall in unusual geometry. Bomb recollection and nearby audible bomb hints are bounded assistance, not a complete search simulation.
+- Bot Mode uses `-insecure`; switch through the wrapper to Online mode before ordinary online play.
+- Installers back up their transaction and refuse unknown extra managed plugins/dependencies. A future Steam update needs another compatibility review.
 
-See [CHANGELOG.md](CHANGELOG.md), [PORT-NOTES.md](PORT-NOTES.md), [NOTICE.md](NOTICE.md), and [build instructions](docs/BUILDING.md). Source is provided with the public binaries; preserve the applicable licenses and authors' notices.
+Preserve all applicable licenses and authors' notices. This project is not affiliated with Valve or endorsed by upstream maintainers.

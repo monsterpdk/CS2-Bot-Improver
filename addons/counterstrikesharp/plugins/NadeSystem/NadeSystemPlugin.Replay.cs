@@ -33,6 +33,8 @@ public partial class NadeSystemPlugin : BasePlugin
         if (isTakenOver) return;
 
         var gtype = g.GrenadeType; // lowercase since LoadDb
+        NadeStats(gtype).Considered++;
+        if (!ReadyGrenade(gtype)) { NadeStats(gtype).Unavailable++; return; }
 
         // ── Round limit checks ─────────────────────────────────
         // Less mode: per-bot limits (1 smoke, 1 molotov, 1 HE,
@@ -90,17 +92,17 @@ public partial class NadeSystemPlugin : BasePlugin
         bool isCT     = bot.TeamNum == (int)CsTeam.CounterTerrorist;
         var costTable = isCT ? CostCT : CostT;
         if (!costTable.TryGetValue(gtype, out int cost)) return;
-        if (money.Account < cost) return;
+        if (money.Account < cost) { NadeStats(gtype).MoneyRejected++; return; }
 
         // ── Round spend cap check ──────────────────────────────────────
         uint botIdx   = (uint)bot.Index;
-        if (!HasLockedNadeMoney(botIdx, cost)) return;
+        if (!HasLockedNadeMoney(botIdx, cost)) { NadeStats(gtype).MoneyRejected++; return; }
         bool isPoor   = _poorBots.Contains((uint)bot.Index);
         int  spendCap = GetRoundSpendCap(isCT, isPoor);
         if (!_roundSpendPerBot.TryGetValue(botIdx, out int alreadySpent))
             alreadySpent = 0;
         // Expensure Limit
-        if (!TrySafeReplay(bot, g, out _)) return;
+        if (!TrySafeReplay(bot, g, out _)) { NadeStats(gtype).SafetyRejected++; return; }
         bool deductMoney = alreadySpent < spendCap;
 
         // ── All checks passed — commit ─────────────────────────────────
@@ -125,6 +127,7 @@ public partial class NadeSystemPlugin : BasePlugin
             _earlySmokeCountByTeam.TryGetValue(bot.TeamNum, out int cnt);
             _earlySmokeCountByTeam[bot.TeamNum] = cnt + 1;
         }
+        NadeStats(gtype).Planned++;
         SpawnProjectile(bot, g);
 
         // Allow bot to throw another grenade after this window
@@ -173,7 +176,7 @@ public partial class NadeSystemPlugin : BasePlugin
                 }
 
                 // Recheck after NextFrame and anchor the release to the actual throwing bot.
-                if (!TrySafeReplay(bot, g, out var liveRelease)) return;
+                if (!TrySafeReplay(bot, g, out var liveRelease)) { NadeStats(gtype).SafetyRejected++; return; }
                 origin = liveRelease;
 
                 // ── FLASH — CreateEntityByName is sufficient ───────────
@@ -184,6 +187,7 @@ public partial class NadeSystemPlugin : BasePlugin
                         "flashbang_projectile");
                     if (flash == null)
                     {
+                        NadeStats(gtype).Failed++;
                         Server.PrintToConsole("[NadeSystem] flash CreateEntityByName null");
                         return;
                     }
@@ -201,6 +205,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     flash.Teleport(origin, angles, velocity);
                     flash.DispatchSpawn();
                     flash.Teleport(origin, angles, velocity);
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                     // Flash Immunity
                     float immuneUntil = Server.CurrentTime + 2f;
@@ -244,6 +249,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     decoy.Teleport(origin, angles, velocity);
                     // Don't detonate
                     StartDecoyFlashLoop(bot, g, decoy, teamNum, angles);
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                     Server.PrintToConsole(
                         $"[NadeSystem] Replayed [decoy] id={g.Id[..8]}... " +
@@ -265,6 +271,7 @@ public partial class NadeSystemPlugin : BasePlugin
                         teamNum);
                     if (smoke == null || !smoke.IsValid)
                     {
+                        NadeStats(gtype).Failed++;
                         Server.PrintToConsole("[NadeSystem] smoke native Create returned null");
                         return;
                     }
@@ -272,6 +279,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     smoke.Thrower.Raw         = botPawn.EntityHandle.Raw;
                     smoke.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
                     smoke.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                     Server.PrintToConsole(
                         $"[NadeSystem] Replayed [smoke] id={g.Id[..8]}... " +
@@ -293,6 +301,7 @@ public partial class NadeSystemPlugin : BasePlugin
                         itemDef);
                     if (he == null || !he.IsValid)
                     {
+                        NadeStats(gtype).Failed++;
                         Server.PrintToConsole("[NadeSystem] HE native Create returned null");
                         return;
                     }
@@ -300,6 +309,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     he.Thrower.Raw         = botPawn.EntityHandle.Raw;
                     he.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
                     he.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                     Server.PrintToConsole(
                         $"[NadeSystem] Replayed [he] id={g.Id[..8]}... " +
@@ -323,6 +333,7 @@ public partial class NadeSystemPlugin : BasePlugin
                         molotovItemDef);
                     if (molotov == null || !molotov.IsValid)
                     {
+                        NadeStats(gtype).Failed++;
                         Server.PrintToConsole("[NadeSystem] molotov native Create returned null");
                         return;
                     }
@@ -330,6 +341,7 @@ public partial class NadeSystemPlugin : BasePlugin
                     molotov.Thrower.Raw         = botPawn.EntityHandle.Raw;
                     molotov.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
                     molotov.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
+                    NadeStats(gtype).Created++;
                     AnnounceGrenadeThrow(bot, gtype);
                     Server.PrintToConsole(
                         $"[NadeSystem] Replayed [molotov] id={g.Id[..8]}... " +
@@ -344,6 +356,7 @@ public partial class NadeSystemPlugin : BasePlugin
             }
             catch (Exception ex)
             {
+                NadeStats(gtype).Failed++;
                 Server.PrintToConsole($"[NadeSystem] SpawnProjectile error: {ex.Message}");
             }
         });

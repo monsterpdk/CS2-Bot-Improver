@@ -94,8 +94,20 @@ public partial class NadeSystemPlugin : BasePlugin
                 if (dx * dx + dy * dy > g.ZoneRadius * g.ZoneRadius) continue;
                 // Vertical distance check
                 if (MathF.Abs(dz) > 85f) continue;
+                NadeStats(gtype).Zones++;
                 if (IsOnCooldown(g.Id)) continue;
                 if (gtype is "he" or "molotov" or "flash" && IsOnProbFailCooldown(g.Id)) continue;
+                // An unsafe first record must not hide another valid nearby lineup.
+                // Only arithmetic here: retain collision trace at the actual release.
+                var eyeAngles = pawn.EyeAngles;
+                if (eyeAngles is null) continue;
+                var eye = new Vec3 { X = pos.X, Y = pos.Y, Z = pos.Z + pawn.ViewOffset.Z };
+                var rejection = ReplaySafety.Reject(eye, eyeAngles.Y, eyeAngles.X, g);
+                if (rejection is not null)
+                {
+                    RecordCandidateRejection(gtype, rejection, true);
+                    continue;
+                }
                 // Probability attempt cooldown
                 if (gtype == "smoke" && _smokeCooldownBots.Contains((uint)bot.Index)) continue;
                 // Smoke Overlap Check
