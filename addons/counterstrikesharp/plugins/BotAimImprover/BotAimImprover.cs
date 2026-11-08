@@ -15,7 +15,7 @@ namespace BotAimImprover;
 public partial class BotAimImprover : BasePlugin
 {
     public override string ModuleName => "BotAimImprover";
-    public override string ModuleVersion => "2.1.5-awareness.2";
+    public override string ModuleVersion => "2.1.5-fairplay.4";
     public override string ModuleAuthor => "ed0ard & htfy96 & XBribo";
     public override string ModuleDescription => "Restores intelligent aim part selection for CS2 bots.";
 
@@ -165,7 +165,7 @@ public partial class BotAimImprover : BasePlugin
     {
         // This local trial is validated against one Windows binary only.
         var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(line=>line.Trim()=="ClientVersion=2000935"))
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(line=>line.Trim()=="ClientVersion=2000942"))
         {
             Logger.LogError("[AwarenessTrial] Untested game build/platform: plugin left inactive. Re-audit after a game update.");
             return;
@@ -206,6 +206,13 @@ public partial class BotAimImprover : BasePlugin
             return HookResult.Continue;
         });
 
+        try { LoadFlashFairness(); }
+        catch
+        {
+            try { _pickNewAimSpot?.Unhook(OnPickNewAimSpotPost,HookMode.Post); } catch { }
+            try { UnloadFlashFairness(); } catch { }
+            throw;
+        }
         LoadSmokeFairAim();
         LoadAwareness();
 
@@ -254,6 +261,7 @@ public partial class BotAimImprover : BasePlugin
 
     public override void Unload(bool hotReload)
     {
+        try { UnloadFlashFairness(); } catch { /* native hook may not have loaded */ }
         _awarenessEnabled=false; ResetAwareness();
         try { _pickNewAimSpot?.Unhook(OnPickNewAimSpotPost, HookMode.Post); }
         catch { /* ignore */ }
@@ -274,6 +282,16 @@ public partial class BotAimImprover : BasePlugin
             if (pCCSBot == IntPtr.Zero)
                 return HookResult.Continue;
 
+            var botController = ResolveBotController(pCCSBot);
+            if (botController is null) return HookResult.Continue;
+            if (IsFlashBlind(botController))
+            {
+                _flashAimSkipped++;
+                _clearAim.Remove(pCCSBot); _clearDirections.Remove(pCCSBot);
+                _blindDirections.Remove(pCCSBot); _smokeSamples.Remove(pCCSBot);
+                HoldFlashAim(pCCSBot,botController);
+                return HookResult.Continue;
+            }
             // 1) Gate: enemy must be generally visible before we
             //    spend any raytraces. Otherwise the native used last-known position.
 
@@ -291,8 +309,7 @@ public partial class BotAimImprover : BasePlugin
                 return HookResult.Continue;
 
             // 3) Resolve the bot's controller (for weapon + eye position).
-            var botController = ResolveBotController(pCCSBot);
-            if (botController == null || !TryGetBotEyePosition(botController, out var botEye))
+            if (!TryGetBotEyePosition(botController, out var botEye))
                 return HookResult.Continue;
 
             if (ConcealedAim(pCCSBot, enemyHandleRaw, enemyPawn, botEye, botController))

@@ -7,6 +7,10 @@ dotnet run --project tests/SmokeAimTests/SmokeAimTests.csproj -c Release
 dotnet run --project tests/ReplaySafetyTests/ReplaySafetyTests.csproj -c Release
 dotnet run --project tests/AwarenessTests/AwarenessTests.csproj -c Release
 dotnet run --project tests/NativeGrenadeTests/NativeGrenadeTests.csproj -c Release
+dotnet run --project tests/DiagnosticsTests/DiagnosticsTests.csproj -c Release
+dotnet run --project tests/InventoryTests/Tests.csproj -c Release
+dotnet run --project tests/FlashPolicyTests/FlashPolicyTests.csproj -c Release
+dotnet run --project tests/IdleTrackerTests/IdleTrackerTests.csproj -c Release
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File compatibility\Test-GameInfoCompatibility.ps1
 ```
 
@@ -18,8 +22,8 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File packaging\Test-Package.p
 
 Baseline is an extracted original v1.4.5 Windows pack, not the actual game folder. The test creates its own fixture and synthetic stock gameinfo/steam.inf and audited game-binary hash fixtures in a disposable package copy, checks dependency/version/extra-plugin guards, corrupt payload rejection, injected copy-failure rollback, all installed hashes, core setting preservation, gameinfo, reinstall, corrupt backup rejection and complete restore. It mocks process enumeration only in the test scope.
 
-Before installation, the integration audited 36 active Windows BotAI patch signatures/original bytes, aim fields, native smoke density and grenade factories against CS2 2000935. Untouched feature DLLs/Rush cfgs and upstream aim priorities were preserved. Those audits do not ship the inspected game binaries.
+Before installation, the integration audited 36 active Windows BotAI patch signatures/original bytes, aim fields, native smoke density and grenade factories against CS2 2000942. Untouched feature DLLs/Rush cfgs and upstream aim priorities were preserved. Those audits do not ship the inspected game binaries.
 
-The user accepted the merged local Windows playtest before this release. A new native/aim/grenade change still requires gameplay checks for team selection, round transitions, smoke and affected throws. Dedicated, Linux, every map, Rush/radio/T-defense and bomb-search edge cases are not covered by that acceptance.
+The gameplay baseline has accepted local Windows tests; the public logging/defaults variant is automated-test validated without a separate live playtest. Stuck recovery has only initial positive feedback, and the original team-wide stall cause remains unproven. A new native/aim/grenade change still requires gameplay checks for team selection, round transitions, smoke and affected throws. Dedicated, Linux, every map, Rush/radio/T-defense and bomb-search edge cases are not covered by that acceptance.
 
 Profile checks: `powershell.exe -NoProfile -ExecutionPolicy Bypass -File packaging\Test-ReactionProfiles.ps1 -Baseline "D:\Fixtures\original-v1.4.5"`. These compare the full outputs with accepted SHA-256 values, exercise Low/Medium/High active selection, unchanged Low, idempotent reapplication and rejection of custom/corrupted profiles. The installer test checks quota 16, fill mode, profile hashes, current selection and preservation of other panel preferences. Use `-NoPanelSettings` to cover a never-started upstream panel.

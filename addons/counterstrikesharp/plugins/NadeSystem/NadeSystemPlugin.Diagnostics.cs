@@ -12,6 +12,7 @@ public partial class NadeSystemPlugin
 {
     private sealed class NadeCounters
     {
+        public long InventoryRejected,Purchased,Consumed;
         public long Zones,Considered,Unavailable,MoneyRejected,SafetyRejected,Planned,Created,Failed,Detonated;
         public long SkippedCandidates;
         public readonly Dictionary<string,long> CandidateReasons = new(StringComparer.Ordinal);
@@ -32,12 +33,12 @@ public partial class NadeSystemPlugin
     }
     private static string RejectionSummary(Dictionary<string,long> reasons)
         => reasons.Count==0 ? "none" : string.Join(",",reasons.OrderBy(p=>p.Key).Select(p=>$"{p.Key}:{p.Value}"));
-    private bool ReadyGrenade(string type) => NativeGrenadePolicy.Available(type,_smokeCreate.Handle!=IntPtr.Zero,_heCreate.Handle!=IntPtr.Zero,_molotovCreate.Handle!=IntPtr.Zero);
+    private bool ReadyGrenade(string type) => type switch { "flash"=>_inventoryFlashCreate.Handle!=IntPtr.Zero,"decoy"=>_inventoryDecoyCreate.Handle!=IntPtr.Zero,_=>NativeGrenadePolicy.Available(type,_smokeCreate.Handle!=IntPtr.Zero,_heCreate.Handle!=IntPtr.Zero,_molotovCreate.Handle!=IntPtr.Zero) };
     private bool ValidateGrenadeBuild()
     {
         var path=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(OperatingSystem.IsWindows() && File.Exists(path) && File.ReadLines(path).Any(line=>line.Trim()=="ClientVersion=2000935")) return true;
-        Logger.LogError("[NadeSystem] This local compatibility trial requires the audited Windows ClientVersion 2000935; inactive on this build.");
+        if(OperatingSystem.IsWindows() && File.Exists(path) && File.ReadLines(path).Any(line=>line.Trim()=="ClientVersion=2000942")) return true;
+        Logger.LogError("[NadeSystem] This local compatibility trial requires the audited Windows ClientVersion 2000942; inactive on this build.");
         return false;
     }
     private void InitGrenadeDiagnostics()
@@ -50,10 +51,10 @@ public partial class NadeSystemPlugin
         AddCommand("bot_nades_status","Show grenade creation and decision counters for the current map",(_,info)=>
         {
             info.ReplyToCommand($"[NadeSystem] version={ModuleVersion} mode={_botNadesMode}");
-            foreach(var type in new[]{"smoke","he","flash","molotov"})
+            foreach(var type in new[]{"smoke","he","flash","molotov","decoy"})
             {
                 var c=NadeStats(type);var entries=_mapNades.Count(n=>n.GrenadeType==type);
-                info.ReplyToCommand($"[NadeSystem] {type}: ready={ReadyGrenade(type)} entries={entries} zones={c.Zones} considered={c.Considered} unavailable={c.Unavailable} money={c.MoneyRejected} safety={c.SafetyRejected} planned={c.Planned} created={c.Created} failed={c.Failed} detonated={c.Detonated}");
+                info.ReplyToCommand($"[NadeSystem] {type}: ready={ReadyGrenade(type)} entries={entries} zones={c.Zones} considered={c.Considered} unavailable={c.Unavailable} money={c.MoneyRejected} safety={c.SafetyRejected} planned={c.Planned} created={c.Created} failed={c.Failed} detonated={c.Detonated} bought={c.Purchased} consumed={c.Consumed} noStock={c.InventoryRejected}");
                 info.ReplyToCommand($"[NadeSystem] {type} selection: skipped={c.SkippedCandidates} reasons={RejectionSummary(c.CandidateReasons)} releaseReasons={RejectionSummary(c.ReleaseReasons)}");
             }
         });

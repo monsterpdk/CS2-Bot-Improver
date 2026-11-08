@@ -1,0 +1,9 @@
+# Tested Windows native assumptions
+
+CS2 ClientVersion 2000942 / patch 1.41.9.6; exact SHA256 values are in NativeCompatibilitySettings.json. Static audits found 36 expected BotAI patch sites (including the updated T bombsite-search relative call), the expected aim-field loads and smoke-density signature, 22 unique BotVision/BotController server signatures, five grenade factory entries and their owner/item argument ABI, and the weapon-services receiver used for empty grenade removal. Engine2.dll is unchanged from the preceding tested update; its RTTI-derived CEngineServer table is at RVA 0x5dd1c0 and the adapted call slots remain 70/75/77.
+
+Pawn Blind resolves uniquely to RVA 0x1fef10 and the CCSPlayerPawn RTTI vtable at 0x1794998 has slot 410 pointing to it. Float hold/fade/alpha forwarding to the native bot reaction at 0x2d7a70 and common pawn Blind at 0x1fef80 was checked. Grenade factory RVAs: flash 0x3a4760, decoy 0x9b6c50, smoke 0x9b79e0, HE 0x3a4810 and molotov 0x9b7110. The empty-item removal signature at 0xb04a10 expects WeaponServices, whose MyWeapons/ActiveWeapon fields are +0x48/+0x60. Ammo state notifications use the base m_iAmmo schema field plus a separate array index.
+
+The installer derives the CSS engine adapter and BotState transformation locally, with exact accepted input and resulting output hashes. It does not copy server.dll, engine2.dll, the CSS native DLL, or BotState.dll into the release payload. Metadata and all unrelated BotState method bodies remain unchanged. The retained native auth/Steam-ID checks are not bypassed.
+
+These checks describe the pinned build only. They are not live gameplay proof and must be repeated after a game/runtime update. The included JSON reports record selected signature/slot findings; all transformation bytes and hashes are in the compatibility settings. No private dumps or game binaries are included.

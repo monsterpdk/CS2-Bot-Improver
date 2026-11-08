@@ -298,7 +298,7 @@ internal static class WindowsPatchDefinitions
         ["TBot_BombsiteSearch_UseKnownPlantedSite"] = (
             signature: "48 8B 8E ? ? 00 00 E8 ? ? ? ? 48 8B CB E8 ? ? ? ? 4C 8B 05 ? ? ? ? 85 C0",
             patch: "8B 41 68 90 90",
-            expectedOriginal: "E8 30 51 F9 FF",
+            expectedOriginal: "E8 20 51 F9 FF",
             patchOffset: 15
         ),
 

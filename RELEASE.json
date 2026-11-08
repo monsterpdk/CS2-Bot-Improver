@@ -1,19 +1,27 @@
 {
-  "Version": "1.4.5-fairplay.3",
-  "Date": "2026-10-23",
+  "Version": "1.4.5-fairplay.4",
+  "Date": "2026-11-08",
   "Upstream": "v1.4.5",
-  "ClientVersion": "2000935",
-  "PatchVersion": "1.41.9.2",
+  "ClientVersion": "2000942",
+  "PatchVersion": "1.41.9.6",
   "CounterStrikeSharp": "1.0.376",
-  "UserAcceptedLocalPlaytest": true,
   "SecondPcTested": false,
   "DefaultPopulation": 16,
   "LowProfileUnchanged": true,
   "NativeEngineAdapter": "3 audited displacement bytes; no auth bypass",
   "Plugins": {
-    "BotAI": "1.8.12-awareness.1",
-    "BotAimImprover": "2.1.5-awareness.2",
-    "NadeSystem": "1.2.2-compat.2",
-    "BotVisionCompatibility": "0.1.4-fairplay.1"
-  }
+    "BotAI": "1.8.12-fairplay.4",
+    "BotAimImprover": "2.1.5-fairplay.4",
+    "NadeSystem": "1.2.2-fairplay.4",
+    "BotStuckDiagnostics": "0.1.0-fairplay.4",
+    "BotVisionCompatibility": "0.1.4-fairplay.1",
+    "BotState": "local adapter; 1.9.4 version label retained"
+  },
+  "DiagnosticLoggingDefault": false,
+  "DiagnosticDetailLimitBytes": 6291456,
+  "DiagnosticErrorLimitBytes": 786432,
+  "PublicLoggingDefaultsLiveTested": false,
+  "StuckRecoveryValidation": "Initial positive local playtest; broader validation pending",
+  "GameplayBaselineAccepted": true,
+  "PublicVariantLiveTested": false
 }

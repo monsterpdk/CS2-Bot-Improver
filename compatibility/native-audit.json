@@ -1,0 +1,226 @@
+{
+  "ClientVersion": "2000942",
+  "Patches": {
+    "HasVisitedEnemySpawn": {
+      "matches": [
+        "0x2e1be9"
+      ],
+      "valid": true
+    },
+    "GameState_Reset": {
+      "matches": [
+        "0x2e0ffb"
+      ],
+      "valid": true
+    },
+    "Idle_IsSafeAlwaysFalse": {
+      "matches": [
+        "0x33598d"
+      ],
+      "valid": true
+    },
+    "EscapeFromBomb_OnEnter_NoEquipKnife": {
+      "matches": [
+        "0x33052d"
+      ],
+      "valid": true
+    },
+    "EscapeFromBomb_OnUpdate_NoEquipKnife": {
+      "matches": [
+        "0x333252"
+      ],
+      "valid": true
+    },
+    "EscapeFromFlames_OnEnter_NoEquipKnife": {
+      "matches": [
+        "0x330615"
+      ],
+      "valid": true
+    },
+    "PlantBombLookAtPriorityLow": {
+      "matches": [
+        "0x33109c"
+      ],
+      "valid": true
+    },
+    "DefuseBombLookAtPriorityLow": {
+      "matches": [
+        "0x3330c6"
+      ],
+      "valid": true
+    },
+    "AttackState_SkipFireRateCheck": {
+      "matches": [
+        "0x306c10"
+      ],
+      "valid": true
+    },
+    "SprayAllDistances_ForceHoldTrigger": {
+      "matches": [
+        "0x305483"
+      ],
+      "valid": true
+    },
+    "AttackState_SkipSteadyFireShortcut": {
+      "matches": [
+        "0x306440"
+      ],
+      "valid": true
+    },
+    "AttackState_SkipZoomFireShortcut": {
+      "matches": [
+        "0x306464"
+      ],
+      "valid": true
+    },
+    "AttackState_SkipSniperSpreadCheck": {
+      "matches": [
+        "0x2c84ed"
+      ],
+      "valid": true
+    },
+    "AttackState_DodgeDuringReload": {
+      "matches": [
+        "0x306c9f"
+      ],
+      "valid": true
+    },
+    "SniperCrouchDodge_jb": {
+      "matches": [
+        "0x306d8b"
+      ],
+      "valid": true
+    },
+    "LowSKill_JumpChance0": {
+      "matches": [
+        "0x32f102"
+      ],
+      "valid": true
+    },
+    "AttackState_DodgeChance100_Always": {
+      "matches": [
+        "0x3300b0"
+      ],
+      "valid": true
+    },
+    "AttackState_RetreatOnSniper_Disable": {
+      "matches": [
+        "0x3317c8"
+      ],
+      "valid": true
+    },
+    "AllSkill_KeepMoving_WhenSeeSniper": {
+      "matches": [
+        "0x2dfcff"
+      ],
+      "valid": true
+    },
+    "AttackState_CanStrafe_jne": {
+      "matches": [
+        "0x306c10"
+      ],
+      "valid": true
+    },
+    "SniperDodge_SkipIsSniper_DodgeA": {
+      "matches": [
+        "0x306d1d"
+      ],
+      "valid": true
+    },
+    "Vision_AlwaysWatchApproachPoints": {
+      "matches": [
+        "0x32f03d"
+      ],
+      "valid": true
+    },
+    "Vision_ApproachBody_SkipSkillCheck": {
+      "matches": [
+        "0x32f08d"
+      ],
+      "valid": true
+    },
+    "Vision_ApproachBody_SkipHidingSpotCheck": {
+      "matches": [
+        "0x32f097"
+      ],
+      "valid": true
+    },
+    "Vision_SkipIsMovingGate": {
+      "matches": [
+        "0x32f046"
+      ],
+      "valid": true
+    },
+    "Vision_AlwaysEnterApproachBody": {
+      "matches": [
+        "0x32f05a"
+      ],
+      "valid": true
+    },
+    "IsNoticable_AlwaysTrue": {
+      "matches": [
+        "0x2d27d0"
+      ],
+      "valid": true
+    },
+    "Upkeep_BotCOS_ZeroDrift": {
+      "matches": [
+        "0x2eda4f"
+      ],
+      "valid": true
+    },
+    "Upkeep_BotSIN_ZeroDrift": {
+      "matches": [
+        "0x2eda7c"
+      ],
+      "valid": true
+    },
+    "InvestigateNoise_SkipSelfDefenseCheck": {
+      "matches": [
+        "0x32ed2f"
+      ],
+      "valid": true
+    },
+    "TBot_BombsiteSearch_UseKnownPlantedSite": {
+      "matches": [
+        "0x33696c"
+      ],
+      "valid": true
+    },
+    "CT_Defuse_EngageAndInvestigate": {
+      "matches": [
+        "0x336ce8"
+      ],
+      "valid": true
+    },
+    "DefuseBombState_OnUpdate_EngageAndInvestigate": {
+      "matches": [
+        "0x33306a"
+      ],
+      "valid": true
+    },
+    "DefuseBombState_OnEnter_EngageAndInvestigate": {
+      "matches": [
+        "0x330460"
+      ],
+      "valid": true
+    },
+    "FlashbangAvoidance_Disable": {
+      "matches": [
+        "0x2b9d91"
+      ],
+      "valid": true
+    },
+    "Smoke_BothInsideNotVisible": {
+      "matches": [
+        "0x32a83e"
+      ],
+      "valid": true
+    }
+  },
+  "Checks": {
+    "aim": true,
+    "density": true
+  },
+  "Passed": true
+}

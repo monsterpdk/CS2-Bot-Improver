@@ -1,3 +1,25 @@
+# v1.4.5-fairplay.4 ? 2026-11-08
+
+Compatibility and fairness update for Windows local bot matches on **CS2 ClientVersion 2000942 / patch 1.41.9.6**, original Bot Improver v1.4.5 and CounterStrikeSharp 376.
+
+- Scripted grenade throws now consume actual carried grenades. Bots buy real inventory using their money at the round boundary and may use picked-up grenades. No team-wide allowance or throw-time payment can create another grenade. Carry caps are one smoke/HE/fire/decoy, at most two flashes and four grenades total, subject to the game's configured limits. Molotov/incendiary items retain their real identity.
+- All regular, plant/defuse and emergency grenade paths share inventory consumption. Existing launch position, range, speed, heading, pitch and obstruction checks remain. Fixes the empty-item removal receiver and the ammo-array network notification that produced unresolved offset messages.
+- Bots retain native flash blindness. A local BotState adapter removes artificial immunity that could cancel native blind calls or erase flash events. BotAimImprover holds a fixed pre-blind aim point during its blindness guard instead of allowing live target tracking. Blind fire and chance hits remain possible.
+- Updates the audited native hooks/patch checks for the tested game. The installer validates exact game/runtime files and derives CSS/BotState compatibility changes from the user's own original DLLs; those dependencies are not redistributed.
+- Repairs two BotState recovery faults: continuous jump-timer rearming and a one-attempt-only recovery latch. Existing sidestep/repath recovery may retry after 3?5 seconds without progress, while combat/visible enemies and defusing suppress intervention. This is an **initially tested recovery improvement**, not a guarantee against every navigation stall or team-wide deadlock.
+- Adds an opt-in stationary observer, including repeated in-place jumping. It records evidence without changing bot behavior.
+- Detailed inventory, flash and observer logging is **off by default**. Each module can keep two 1 MiB detail files and two 128 KiB error files. Across all three modules: at most **6 MiB detail + 768 KiB own error logs**, with fixed filenames across sessions. No personal trial logs are distributed. Engine, CounterStrikeSharp and other upstream logs have their own retention policies.
+
+Retains fair smoke aiming, delayed/approximate sound awareness, smoke movement assistance, teammate spacing, humanized Medium/High reaction profiles and 8v8 defaults from fairplay.3. Decoy use still depends on recorded map lineups; owning a decoy does not create a useful lineup automatically.
+
+## Validation
+
+Local gameplay verified inventory consumption, positive flash durations, absence of the prior unresolved ammo offsets and an initial recovery after about 4?5 seconds. The original mass Mirage stall's initiating cause remains unproven. Release sources differ from the accepted local gameplay sources only in logging/defaults and version labels; these release logging defaults have automated tests but have not had a separate live playtest. Policy/build tests and clean install, reinstall, injected failure rollback and restore checks pass. Another PC, Linux and public/dedicated servers are not validated.
+
+Install the original v1.4.5 Windows pack first, then extract **CS2-Bot-Improver-Fairplay-Update-v1.4.5-2026-11-08.zip** outside the game and run Install.cmd with CS2/panel closed. Launch Start-CompatiblePanel.cmd. Earlier Fairplay installs can use the same updater if all dependency checks pass. A future game update requires a compatibility review; do not bypass hash/version guards.
+
+---
+
 # v1.4.5-fairplay.3 — 2026-10-23
 
 Adds sound-aware behavior, help moving out of smoke, and spacing between teammates while preserving the earlier fair grenade/smoke changes, humanized Medium/High reaction profiles and 8v8 defaults.

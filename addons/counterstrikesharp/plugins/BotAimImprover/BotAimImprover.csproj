@@ -14,4 +14,5 @@
     <PackageReference Include="CounterStrikeSharp.API" Version="1.0.376" />
   </ItemGroup>
 
+<ItemGroup><Compile Include="../../../../common/DiagnosticLog.cs" Link="DiagnosticLog.cs" /></ItemGroup>
 </Project>

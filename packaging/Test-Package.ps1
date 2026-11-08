@@ -118,6 +118,10 @@ if($manifest.ApplyNativeCompatibility) {
     $vision=Get-Content -LiteralPath (Join-Path $fixture 'addons\BotVision\gamedata.json') -Raw | ConvertFrom-Json
     Assert ($vision.GetSmokeDensityInLine.signatures.windows -eq $nativeSettings.SmokeSignatureAfter) 'BotVision signature mismatch.'
 }
+if($manifest.ApplyBotStateCompatibility) {
+    $botStateSettings=Get-Content -LiteralPath (Join-Path $Package 'payload\BotStateCompatibilitySettings.json') -Raw | ConvertFrom-Json
+    Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $botStateSettings.Path)).Hash -eq $botStateSettings.SHA256) 'BotState adapter output mismatch.'
+}
 $installed = Snapshot
 & (Join-Path $Package 'Install.ps1') -Csgo $fixture
 $reinstallBackup = Get-ChildItem -LiteralPath (Join-Path $fixture '_botimprover_backups') -Directory | Sort-Object Name | Select-Object -Last 1

@@ -29,6 +29,7 @@ public partial class NadeSystemPlugin : BasePlugin
     {
         if (!ValidateGrenadeBuild()) return;
         InitGrenadeDiagnostics();
+        InitInventory();
         Directory.CreateDirectory(DataDir);
         LoadDb();
 
@@ -40,7 +41,6 @@ public partial class NadeSystemPlugin : BasePlugin
         RegisterEventHandler<EventBombBegindefuse>(OnBombBeginDefuse);
         RegisterEventHandler<EventBombBeginplant>(OnBombBeginPlant);
         RegisterEventHandler<EventPlayerHurt>(OnPlayerHurt);
-        RegisterEventHandler<EventPlayerBlind>(OnPlayerBlind);
         RegisterEventHandler<EventWeaponFire>(OnWeaponFire);
         RegisterEventHandler<EventPlayerSound>(OnPlayerSound);
         RegisterListener<Listeners.OnMapStart>(_ =>
@@ -63,6 +63,7 @@ public partial class NadeSystemPlugin : BasePlugin
     private HookResult OnRoundStart(EventRoundStart @event, GameEventInfo info)
     {
         _roundOver  = false;
+        ResetInventoryRound();
         _freezeEndTime = 0f;
         _roundCountByTeam.Clear();
         _roundCountByBot.Clear();
@@ -78,7 +79,6 @@ public partial class NadeSystemPlugin : BasePlugin
         _earlySmokeCountByTeam.Clear();
         _botInFlashZone.Clear();
         _botFlashRatioWindow.Clear();
-        _botFlashImmunityUntil.Clear();
         _molotovEscapeSmokeCooldown.Clear();
         _retaliationCooldown.Clear();
         // Information System
@@ -105,14 +105,8 @@ public partial class NadeSystemPlugin : BasePlugin
     private HookResult OnFreezeEnd(EventRoundFreezeEnd @event, GameEventInfo info)
     {
         _freezeEndTime = Server.CurrentTime;
-        _roundNadeMoneyPerBot.Clear();
-        foreach (var bot in Utilities.FindAllEntitiesByDesignerName<CCSPlayerController>("cs_player_controller"))
-        {
-            if (!bot.IsValid || !bot.IsBot) continue;
-            var money = bot.InGameMoneyServices;
-            if (money == null) continue;
-            _roundNadeMoneyPerBot[(uint)bot.Index] = Math.Max(0, money.Account);
-        }
+        foreach (var bot in Utilities.GetPlayers()) BuyRoundInventory(bot);
+        FlushInventoryLog();
         return HookResult.Continue;
     }
 
@@ -181,42 +175,7 @@ public partial class NadeSystemPlugin : BasePlugin
                 + costTable["molotov"];
         return cap;
     }
-    // Don't blind ourselves and our teammates
-    // * Cancels friendly flashes covered by temporary bot immunity
-    private HookResult OnPlayerBlind(EventPlayerBlind @event, GameEventInfo info)
-    {
-        var victim   = @event.Userid;
-
-        if (victim is null || !victim.IsValid || !victim.IsBot)
-            return HookResult.Continue;
-        // In case the bot has been taken over
-        bool isTakenOver = victim.HasBeenControlledByPlayerThisRound;
-        if (isTakenOver)
-            return HookResult.Continue;
-
-        var pawn = victim.PlayerPawn?.Value;
-        if (_botFlashImmunityUntil.TryGetValue((uint)victim.Index, out float immuneUntil)
-            && Server.CurrentTime <= immuneUntil)
-        {
-            if (pawn != null && pawn.IsValid)
-            {
-                @event.BlindDuration = 0f;
-
-                ref float blindStartTime = ref pawn.BlindStartTime;
-                blindStartTime = 0f;
-
-                ref float blindUntilTime = ref pawn.BlindUntilTime;
-                blindUntilTime = 0f;
-
-                ref float flashDuration = ref pawn.FlashDuration;
-                flashDuration = 0f;
-
-                ref float flashMaxAlpha = ref pawn.FlashMaxAlpha;
-                flashMaxAlpha = 0f;
-            }
-        }
-        return HookResult.Continue;
-    }
+    // Preserve native player_blind events and pawn blind/flash fields.
     // ═══════════════════════════════════════════════════════════
     //  Tick
     // ═══════════════════════════════════════════════════════════

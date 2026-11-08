@@ -1,10 +1,10 @@
-# Release validation — 2026-10-23
+# v1.4.5-fairplay.4 validation
 
-- Four maintained public plugin projects built successfully from the supplied source with CSS API 376: zero warnings/errors. Release payload retains the exact installed/accepted DLLs, rather than substituting these verification builds. BUILD-PROVENANCE.json records their hashes and corresponding source hashes.
-- Passed 19 smoke aim, 11 grenade geometry, 33 awareness and 9 native-factory availability checks (72 pure policy checks). Actual-DLL startup tests confirmed no premature entity lookup and safe returns before a live round; actual CSS/shared API capability contract test passed.
-- Native audits established 36 active BotAI patch sites, unique smoke-density/factory signatures and current aim fields. Exact installed native adapter hash matches the accepted three-byte engine interface adaptation. These are the same accepted game binaries, not a future-build compatibility claim.
-- Both full personal-use and public update installers passed disposable fixtures: version and game-binary hash rejection, applicable dependency/extra-plugin checks, payload integrity rejection, injected copy failure rollback, installed hashes, target gameinfo preservation, profile/quota/settings checks where applicable, reinstall, corrupt-backup rejection and full hash-matching restore. Public tests transformed the original CSS DLL to the accepted native output and merged the smoke signature; reinstallation accepted the already-adapted DLL.
-- Public source contains no original panel code/binary, runtime/native/shared binaries or VPKs. Public update contains only the four maintained managed plugin pairs and permitted data/tools. ZIP validation checks payload hashes and publication exclusions. SHA-256 sidecars accompany all archives.
-- User accepted combined behavior and stable local gameplay. Last counters: 44 smoke / 3 HE / 10 flash created and detonated, 8 Molotov created. Molotov detonation is not tracked. Sound/smoke movement/spacing counters were active; user subsequently accepted the overall behavior.
-
-Not tested on a second PC, Linux, dedicated/public servers or every map/mode/objective edge case. No commit, push or release publication was performed. Full personal-use bundle is excluded from public assets.
+- Five public source projects compiled against API 376 with zero warnings/errors.
+- Passed detailed logging defaults, runtime off/on, rotation, session reuse, size bounds, error bounds, malformed config and unrelated-file preservation tests.
+- Passed inventory/transaction, flash, stationary-jump/progress, smoke aim, replay geometry, awareness and compatibility policy console tests.
+- Passed actual compiled startup early-return checks and the installed API/capability contract checks.
+- Disposable original-v1.4.5 fixture passed exact version/game/dependency/extra-plugin/payload guards, native CSS and local BotState transformation output, profiles, population, settings/gameinfo preservation, injected-copy rollback, reinstall, corrupt-backup refusal and full restore.
+- Accepted local playtests cover native flash durations, real grenade consumption and the corrected network notification. BotState recovery has an initial positive observation after 4?5 seconds; broader and team-wide recovery are not proven.
+- The public binaries differ from the private tested builds in logging/defaults and version labels. That public variant is build/policy/install tested but has not had a separate live playtest. No second-PC/Linux/public-server validation.
+- The local installed game and its diagnostics remain unchanged by publication preparation.

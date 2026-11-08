@@ -56,10 +56,6 @@
     "SHA256": "96FDB406FC156F9CEDC565553DAC951581527F54C0BD725D8D2FB86A596E862E"
   },
   {
-    "Path": "addons\\counterstrikesharp\\plugins\\BotState\\BotState.dll",
-    "SHA256": "7C794E8A99178B52D4659A03349E699BAF277401C937012E7873FC1C6513A1E2"
-  },
-  {
     "Path": "addons\\counterstrikesharp\\plugins\\RoundDamageRecap\\RoundDamageRecap.dll",
     "SHA256": "CD4AA4311E4B9182CD39B90B715E9D5D02FC044F59AB12BBE8B874A424B424D3"
   }

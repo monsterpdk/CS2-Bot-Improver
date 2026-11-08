@@ -11,3 +11,9 @@ downloads/
 .idea/
 .DS_Store
 Thumbs.db
+
+**/logs/
+*.jsonl
+*.dmp
+*.exe
+*.dll

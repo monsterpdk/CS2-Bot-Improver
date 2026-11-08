@@ -1,0 +1,23 @@
+using BotAimImprover;
+void Check(bool ok,string name){if(!ok)throw new Exception(name);Console.WriteLine("PASS "+name);}
+Check(!FlashPolicy.Active(100,0,0),"unflashed bot remains eligible");
+Check(FlashPolicy.Active(100,103,0),"native flash timer suspends managed aim");
+Check(FlashPolicy.Active(100,0,103),"native flash event suspends managed aim");
+Check(FlashPolicy.Active(101,105,103),"overlapping native flash lasts to native expiry");
+Check(!FlashPolicy.Active(105,105,103),"aim assistance resumes at expiry");
+Check(!FlashPolicy.Active(105,103,104),"old flash cannot disable aim forever");
+Check(!FlashPolicy.Active(float.NaN,103,104),"invalid time is ignored");
+Check(!FlashPolicy.Active(100,float.NaN,float.PositiveInfinity),"invalid deadlines ignored");
+Check(FlashPolicy.Deadline(100,3)==103,"native event duration retained");
+Check(FlashPolicy.Deadline(100,0)==0,"zero event does not create a fake flash");
+Check(FlashPolicy.Deadline(100,-1)==0,"negative duration rejected");
+Check(FlashPolicy.Deadline(100,float.NaN)==0,"invalid duration rejected");
+Check(FlashPolicy.Deadline(100,100000)==110,"abnormal event duration bounded");
+Check(FlashPolicy.NativeDeadline(100,2,255,0)==102,"native hold works with zero event and absent pawn timer");
+Check(FlashPolicy.NativeDeadline(100,2,255,103)==103,"native pawn timer can outlast the hold");
+Check(FlashPolicy.NativeDeadline(100,0,0,0)==0,"ineffective flash does not gain an invented duration");
+Check(FlashPolicy.NativeDeadline(100,2,0,0)==0,"zero alpha cannot invent a hold window");
+Check(FlashPolicy.NativeDeadline(100,2,float.NaN,0)==0,"invalid alpha cannot invent a hold window");
+Check(FlashPolicy.NativeDeadline(100,0,255,99)==0,"expired native timer does not restart");
+Check(FlashPolicy.NativeDeadline(100,2,255,float.NaN)==102,"valid call survives an invalid pawn timer");
+Check(FlashPolicy.NativeDeadline(100,2,255,10000)==102,"out of range native deadline rejected");

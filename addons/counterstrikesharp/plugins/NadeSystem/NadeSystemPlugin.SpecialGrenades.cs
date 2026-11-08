@@ -48,86 +48,10 @@ public partial class NadeSystemPlugin : BasePlugin
             || ReplaySafety.DistanceSquared(velocityValue, new Vec3()) > ReplaySafety.MaxSpeed * ReplaySafety.MaxSpeed) return;
         spawnPos = checkedRelease;
 
-        var money = bot.InGameMoneyServices;
-        if (money == null) return;
-
-        bool isCT     = bot.TeamNum == (int)CsTeam.CounterTerrorist;
-        var costTable = isCT ? CostCT : CostT;
-        if (!costTable.TryGetValue(gtype, out int cost)) return;
-        if (money.Account < cost) return;
-
-        uint botIdx  = (uint)bot.Index;
-        if (!HasLockedNadeMoney(botIdx, cost)) return;
-        bool isPoor   = _poorBots.Contains((uint)bot.Index);
-        int  spendCap = GetRoundSpendCap(isCT, isPoor);
-        if (!_roundSpendPerBot.TryGetValue(botIdx, out int alreadySpent))
-            alreadySpent = 0;
-        bool deduct = alreadySpent < spendCap;
-
-        if (deduct)
+        QueueInventoryThrow(bot,gtype,()=>
         {
-            money.Account -= cost;
-            Utilities.SetStateChanged(bot, "CCSPlayerController", "m_pInGameMoneyServices");
-            _roundSpendPerBot[botIdx] = alreadySpent + cost;
-        }
-        SpendLockedNadeMoney(botIdx, cost);
-        NadeStats(gtype).Planned++;
-
-        var vel = velocity ?? new Vector(0f, 0f, 0f);
-        Server.NextFrame(() =>
-        {
-            try
-            {
-                var botPawn = bot.PlayerPawn?.Value;
-                if (botPawn == null || !botPawn.IsValid) return;
-                if (!TryReleasePoint(bot, gtype, out var liveRelease, out _)) return;
-                spawnPos = liveRelease;
-
-                int teamNum = bot.TeamNum;
-
-                if (gtype == "smoke")
-                {
-                    var smoke = _smokeCreate.Invoke(
-                        spawnPos.Handle, spawnPos.Handle,
-                        vel.Handle, vel.Handle,
-                        botPawn.Handle, 45, teamNum);
-                    if (smoke == null || !smoke.IsValid) { NadeStats(gtype).Failed++; return; }
-                    smoke.TeamNum             = (byte)teamNum;
-                    smoke.Thrower.Raw         = botPawn.EntityHandle.Raw;
-                    smoke.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
-                    smoke.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
-                    NadeStats(gtype).Created++;
-                    AnnounceGrenadeThrow(bot, gtype);
-                }
-                else if (gtype == "flash")
-                {
-                    var flash = Utilities.CreateEntityByName<CFlashbangProjectile>(
-                        "flashbang_projectile");
-                    if (flash == null) return;
-                    flash.TeamNum             = (byte)teamNum;
-                    flash.Thrower.Raw         = botPawn.EntityHandle.Raw;
-                    flash.OriginalThrower.Raw = botPawn.EntityHandle.Raw;
-                    flash.OwnerEntity.Raw     = botPawn.EntityHandle.Raw;
-                    flash.InitialPosition.X   = spawnPos.X;
-                    flash.InitialPosition.Y   = spawnPos.Y;
-                    flash.InitialPosition.Z   = spawnPos.Z;
-                    flash.InitialVelocity.X   = vel.X;
-                    flash.InitialVelocity.Y   = vel.Y;
-                    flash.InitialVelocity.Z   = vel.Z;
-                    flash.Elasticity          = 0.33f;
-                    var ang = new QAngle(-90f, 0f, 0f);
-                    flash.Teleport(spawnPos, ang, vel);
-                    flash.DispatchSpawn();
-                    flash.Teleport(spawnPos, ang, vel);
-                    NadeStats(gtype).Created++;
-                    AnnounceGrenadeThrow(bot, gtype);
-                }
-            }
-            catch (Exception ex)
-            {
-                NadeStats(gtype).Failed++;
-                Server.PrintToConsole($"[NadeSystem] TrySpawnInstantGrenade error: {ex.Message}");
-            }
+            if(!TryReleasePoint(bot,gtype,out var liveRelease,out _))return null;
+            return (liveRelease,velocity ?? new Vector(0,0,0));
         });
     }
 
@@ -169,8 +93,7 @@ public partial class NadeSystemPlugin : BasePlugin
             if (Random.Shared.NextDouble() < 0.20)
             {
                 _defuseFlashUsed = true;
-                // Don't flash yourself
-                _botFlashImmunityUntil[(uint)bot.Index] = Server.CurrentTime + 2f;
+                // Defuse support does not grant flash immunity.
                 var flashVel = new Vector(0f, 0f, -800f);
                 TrySpawnInstantGrenade(bot, spawnPos, "flash", flashVel);
             }

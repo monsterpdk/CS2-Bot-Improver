@@ -25,7 +25,7 @@ namespace NadeSystem;
 public partial class NadeSystemPlugin : BasePlugin
 {
     public override string ModuleName    => "NadeSystem";
-    public override string ModuleVersion => "1.2.2-compat.2";
+    public override string ModuleVersion => "1.2.2-fairplay.4";
     public override string ModuleAuthor  => "ed0ard & XBribo";
 
     // grenades folder lives inside the plugin directory
@@ -49,8 +49,7 @@ public partial class NadeSystemPlugin : BasePlugin
     private HashSet<uint>         _poorBots          = new();
     // Information System
     private Dictionary<string, float> _probFailCooldown = new();
-    // flash immunity
-    private Dictionary<uint, float> _botFlashImmunityUntil = new();
+    // Flash effects are owned by the engine; no bot immunity window.
     // Special Nades
     private bool _defuseSmokeUsed    = false;
     private bool _defuseFlashUsed    = false;

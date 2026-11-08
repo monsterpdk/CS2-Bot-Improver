@@ -69,15 +69,17 @@ public partial class NadeSystemPlugin : BasePlugin
                 ? indexedNades
                 : Array.Empty<GrenadeData>();
 
+            var carried=Owned(bot).Select(s=>s.Kind).ToHashSet();
             foreach (var g in nearbyNades)
             {
                 var gtype = g.GrenadeType; // lowercase since LoadDb
+                if(!carried.Contains(gtype))continue;
                 float viewOffsetZ = 64f;
                 // 2D distance check (XY plane only)
                 float dx = pos.X - g.ZoneX;
                 float dy = pos.Y - g.ZoneY;
                 float dz = pos.Z+ viewOffsetZ - g.ProjectilePosition.Z;
-                // DECOY: handled entirely here, bypasses all other checks
+                // Decoy opportunity: still requires safe geometry and real owned stock.
                 if (gtype == "decoy")
                 {
                     if (_botNadesMode == "off") continue;
@@ -85,9 +87,8 @@ public partial class NadeSystemPlugin : BasePlugin
                     if (dx * dx + dy * dy > 200f * 200f) continue;
                     if (MathF.Abs(dz) > 85f) continue;
                     if (!TrySafeReplay(bot, g, out _)) continue;
-                    RegisterCooldown(g.Id, "decoy");
-                    SpawnProjectile(bot, g);
-                    // No _replayBots, no IncrementCount, no money deduction
+                    TryReplay(bot,g,allControllers);
+                    // Inventory consumption and cooldown commit are shared with all grenade types.
                     break;
                 }
                 // Not DECOY

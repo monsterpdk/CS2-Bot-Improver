@@ -93,7 +93,7 @@ public partial class BotAimImprover
     }
     private bool Busy(CCSPlayerController p,CCSPlayerPawn pawn)
     {
-        if(pawn.IsDefusing || (pawn.Flags&1)==0 || pawn.MoveType==MoveType_t.MOVETYPE_LADDER) return true;
+        if(IsFlashBlind(p) || pawn.IsDefusing || (pawn.Flags&1)==0 || pawn.MoveType==MoveType_t.MOVETYPE_LADDER) return true;
         var weapon=pawn.WeaponServices?.ActiveWeapon.Value?.DesignerName ?? "";
         if(weapon is "weapon_c4" or "weapon_hegrenade" or "weapon_smokegrenade" or "weapon_flashbang" or "weapon_molotov" or "weapon_incgrenade" or "weapon_decoy") return true;
         // Respect grenade/replay locks through the existing provider; no new native hook.
@@ -201,6 +201,9 @@ public partial class BotAimImprover
             {
                 if(!Eligible(p,out var pawn)) continue;
                 var a=GetAwareness(p,pawn,now); var bot=pawn.Bot!; var pos=Loc(pawn.AbsOrigin!);
+                // Do not learn visual bomb/enemy information or steer/look for a blinded bot.
+                // Sound snapshots can still arrive independently through event handlers.
+                if(IsFlashBlind(p)) { a.Steer=null; continue; }
                 if(AwarenessPolicy.Distance(pos,a.Position)>12) { a.LastProgress=now; a.Position=pos; }
                 if(pawn.AbsVelocity.Length2D()>40)
                 {
