@@ -192,7 +192,7 @@ public partial class BotAimImprover
             var rules=Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").FirstOrDefault()?.GameRules;
             if(!_roundLive || rules is null || rules.FreezePeriod) { foreach(var a in _awareness.Values) a.Steer=null; return; }
             ResolveAwarenessApi(); _freeForAll=ConVar.Find("mp_teammates_are_enemies")?.GetPrimitiveValue<bool>()==true;
-            _awarenessPlayers=Utilities.GetPlayers().Where(Alive).ToList();
+            _awarenessPlayers=Fairplay.Runtime.LivePlayers.Get().Where(Alive).ToList();
             var now=Server.CurrentTime; _reservations.RemoveAll(r=>r.Until<now); _audioTraceBudget=32;
             var plans=0; var bombChecks=0;
             foreach(var key in _awareness.Keys.Where(k=>!_awarenessPlayers.Any(p=>p.Slot==k)).ToList()) _awareness.Remove(key);

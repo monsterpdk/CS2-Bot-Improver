@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory)][string]$Package, [string]$Baseline, [switch]$NoPanelSettings)
+param([Parameter(Mandatory)][string]$Package, [string]$Baseline, [switch]$NoPanelSettings)
 $ErrorActionPreference = 'Stop'
 $testRoot = Join-Path $PSScriptRoot ('test-output\' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
 $originalPackage=$Package

@@ -15,8 +15,8 @@ namespace BotAimImprover;
 public partial class BotAimImprover : BasePlugin
 {
     public override string ModuleName => "BotAimImprover";
-    public override string ModuleVersion => "2.1.5-fairplay.4";
-    public override string ModuleAuthor => "ed0ard & htfy96 & XBribo";
+    public override string ModuleVersion => "2.1.8-fairplay.1";
+    public override string ModuleAuthor => "ed0ard & htfy96 & XBribo & unicbm";
     public override string ModuleDescription => "Restores intelligent aim part selection for CS2 bots.";
 
     // ============================================================
@@ -102,38 +102,12 @@ public partial class BotAimImprover : BasePlugin
     };
     // ============================================================
     // PickNewAimSpot signatures
-    // CCSPlayerPawn.m_pBot: Windows 0x1510 , Linux 0x17D8
     // ============================================================
-    private readonly struct Offsets
-    {
-        public readonly int TargetSpot;   // Vector(3) m_targetSpot
-        public readonly int Enemy;        // CHandle m_enemy
-        public readonly int IsVisible;    // bool m_isEnemyVisible
-        public readonly int PBot;         // CCSPlayerPawn->m_pBot
-        public readonly string Sig;
-        public Offsets(int ts, int en, int vis, int pbot, string sig)
-        {
-            TargetSpot = ts;
-            Enemy = en;
-            IsVisible = vis;
-            PBot = pbot;
-            Sig = sig;
-        }
-    }
+    private const string LinuxSignature =
+        "55 48 89 E5 41 55 41 54 53 48 89 FB 48 83 EC 58 8B 8F ? ? 00 00 83 F9 FF";
 
-    private static readonly Offsets LinuxOffsets = new(
-        ts: 0x596C, en: 0x59D8, vis: 0x59DC, pbot: 0x17D8,
-        sig: "55 48 89 E5 41 55 41 54 53 48 89 FB 48 83 EC 58 8B 8F ? ? 00 00 83 F9 FF");
-
-    private static readonly Offsets WindowsOffsets = new(
-        ts: 0x5994,
-        en: 0x5A00,
-        vis: 0x5A04,
-        pbot: 0x1510,
-        sig: "48 8B C4 55 57 48 8D 68 ? 48 81 EC ? ? ? ? 48 8B F9 0F 29 70 ? 8B 89 ? ? ? ? 83 F9 FF"
-    );
-
-    private Offsets _off;
+    private const string WindowsSignature =
+        "48 8B C4 55 57 48 8D 68 ? 48 81 EC ? ? ? ? 48 8B F9 0F 29 70 ? 8B 89 ? ? ? ? 83 F9 FF";
 
     private MemoryFunctionVoid<IntPtr>? _pickNewAimSpot;
     // Cache: CCSBot* -> bot's UserId .
@@ -163,27 +137,20 @@ public partial class BotAimImprover : BasePlugin
 
     public override void Load(bool hotReload)
     {
-        // This local trial is validated against one Windows binary only.
         var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(line=>line.Trim()=="ClientVersion=2000942"))
-        {
-            Logger.LogError("[AwarenessTrial] Untested game build/platform: plugin left inactive. Re-audit after a game update.");
-            return;
-        }
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000942")) { Logger.LogError("[Fairplay] Unsupported build; aim inactive");return; }
         bool win = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-        _off = win ? WindowsOffsets : LinuxOffsets;
 
         try
         {
-            if (win)
-            {
-                var entry = NativeAPI.FindSignature(Addresses.ServerPath, _off.Sig);
-                if (entry == IntPtr.Zero || ReadInt32(entry + 0x19) != _off.Enemy
-                    || ReadInt32(entry + 0xE5) != _off.IsVisible
-                    || ReadInt32(entry + 0x20C) != _off.TargetSpot)
-                    throw new InvalidOperationException("Windows bot fields differ from verified PickNewAimSpot instructions; refusing hook.");
-            }
-            _pickNewAimSpot = new MemoryFunctionVoid<IntPtr>(_off.Sig);
+            // Reject missing fields before installing a hook that can write native memory.
+            if (Schema.GetSchemaOffset("CCSPlayerPawn", "m_pBot") <= 0
+                || Schema.GetSchemaOffset("CCSBot", "m_targetSpot") <= 0
+                || Schema.GetSchemaOffset("CCSBot", "m_enemy") <= 0
+                || Schema.GetSchemaOffset("CCSBot", "m_isEnemyVisible") <= 0)
+                throw new InvalidOperationException("Required bot Schema fields are missing.");
+
+            _pickNewAimSpot = new MemoryFunctionVoid<IntPtr>(win ? WindowsSignature : LinuxSignature);
 
             long pnaRuntime = _pickNewAimSpot.Handle.ToInt64();
             if (pnaRuntime == 0)
@@ -196,25 +163,19 @@ public partial class BotAimImprover : BasePlugin
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "[BotAimImprover] Fatal error during Load() (signature broken?). Plugin inactive.");
+            Logger.LogError(ex, "[BotAimImprover] Fatal error during Load() (signature or Schema unavailable). Plugin inactive.");
             return;
         }
+
+        LoadSmokeFairAim();
+        LoadAwareness();
+        LoadFlashFairness();
 
         RegisterEventHandler<EventRoundStart>((_, _) =>
         {
             _botToControllerUserId.Clear();
             return HookResult.Continue;
         });
-
-        try { LoadFlashFairness(); }
-        catch
-        {
-            try { _pickNewAimSpot?.Unhook(OnPickNewAimSpotPost,HookMode.Post); } catch { }
-            try { UnloadFlashFairness(); } catch { }
-            throw;
-        }
-        LoadSmokeFairAim();
-        LoadAwareness();
 
         RegisterEventHandler<EventPlayerDisconnect>((ev, _) =>
         {
@@ -261,8 +222,7 @@ public partial class BotAimImprover : BasePlugin
 
     public override void Unload(bool hotReload)
     {
-        try { UnloadFlashFairness(); } catch { /* native hook may not have loaded */ }
-        _awarenessEnabled=false; ResetAwareness();
+        UnloadFlashFairness();
         try { _pickNewAimSpot?.Unhook(OnPickNewAimSpotPost, HookMode.Post); }
         catch { /* ignore */ }
     }
@@ -282,29 +242,29 @@ public partial class BotAimImprover : BasePlugin
             if (pCCSBot == IntPtr.Zero)
                 return HookResult.Continue;
 
-            var botController = ResolveBotController(pCCSBot);
-            if (botController is null) return HookResult.Continue;
-            if (IsFlashBlind(botController))
-            {
-                _flashAimSkipped++;
-                _clearAim.Remove(pCCSBot); _clearDirections.Remove(pCCSBot);
-                _blindDirections.Remove(pCCSBot); _smokeSamples.Remove(pCCSBot);
-                HoldFlashAim(pCCSBot,botController);
-                return HookResult.Continue;
+            if(!_roundLive)return HookResult.Continue;
+            var bot = new CCSBot(pCCSBot);
+            var botController=ResolveBotController(pCCSBot);
+            if(botController is null)return HookResult.Continue;
+            if(IsFlashBlind(botController)) {
+                _flashAimSkipped++;_clearAim.Remove(pCCSBot);_clearDirections.Remove(pCCSBot);_blindDirections.Remove(pCCSBot);_smokeSamples.Remove(pCCSBot);
+                HoldFlashAim(pCCSBot,botController);return HookResult.Continue;
             }
+
             // 1) Gate: enemy must be generally visible before we
             //    spend any raytraces. Otherwise the native used last-known position.
 
+
             // 2) Resolve enemy pawn from m_enemy CHandle.
-            int enemyHandleRaw = ReadInt32(pCCSBot + _off.Enemy);
-            if (enemyHandleRaw == -1)
+            var enemy = bot.Enemy;
+            if (!enemy.IsValid)
                 return HookResult.Continue;
 
-            int enemyIdx = enemyHandleRaw & 0x7FFF;
+            uint enemyIdx = enemy.Index;
             if (enemyIdx <= 0 || enemyIdx >= 4096)
                 return HookResult.Continue;
 
-            CCSPlayerPawn? enemyPawn = Utilities.GetEntityFromIndex<CCSPlayerPawn>(enemyIdx);
+            CCSPlayerPawn? enemyPawn = enemy.Value;
             if (enemyPawn == null || !enemyPawn.IsValid || enemyPawn.Handle == IntPtr.Zero)
                 return HookResult.Continue;
 
@@ -312,12 +272,9 @@ public partial class BotAimImprover : BasePlugin
             if (!TryGetBotEyePosition(botController, out var botEye))
                 return HookResult.Continue;
 
-            if (ConcealedAim(pCCSBot, enemyHandleRaw, enemyPawn, botEye, botController))
-                return HookResult.Continue;
-            if (ReadByte(pCCSBot + _off.IsVisible) == 0)
-                return HookResult.Continue;
-            RememberClearAim(pCCSBot, enemyHandleRaw, botController);
-
+            if(ConcealedAim(pCCSBot,unchecked((int)enemy.Raw),enemyPawn,botEye,botController))return HookResult.Continue;
+            if(!bot.IsEnemyVisible)return HookResult.Continue;
+            RememberClearAim(pCCSBot,unchecked((int)enemy.Raw),botController);
             string? wpn = botController.PlayerPawn?.Value?.WeaponServices?.ActiveWeapon?.Value?.DesignerName;
 
             // 4) Select the priority order based on aim mode and weapon.
@@ -349,13 +306,9 @@ public partial class BotAimImprover : BasePlugin
                 return HookResult.Continue;
 
             // 6) Overwrite only m_targetSpot.xyz.
-            unsafe
-            {
-                float* dst = (float*)(pCCSBot + _off.TargetSpot).ToPointer();
-                dst[0] = rx; dst[1] = ry; dst[2] = rz;
-            }
-
-            RememberClearAim(pCCSBot, enemyHandleRaw, botController);
+            var targetSpot = bot.TargetSpot;
+            targetSpot.X = rx; targetSpot.Y = ry; targetSpot.Z = rz;
+            RememberClearAim(pCCSBot,unchecked((int)enemy.Raw),botController);
 
             // One-time confirmation that the override path actually runs end-to-end.
             if (!_firstOverrideLogged)
@@ -381,14 +334,14 @@ public partial class BotAimImprover : BasePlugin
         // Cache hit -> look up by UserId.
         if (_botToControllerUserId.TryGetValue(pCCSBot, out int cachedUserId))
         {
-            foreach (var ctrl in Utilities.GetPlayers())
+            foreach (var ctrl in Fairplay.Runtime.LivePlayers.Get())
                 if (ctrl != null && ctrl.IsValid && ctrl.UserId.HasValue && ctrl.UserId.Value == cachedUserId)
                     return ctrl;
             _botToControllerUserId.TryRemove(pCCSBot, out int _); // stale
         }
 
         // Slow path: find which bot pawn's m_pBot points to pCCSBot.
-        foreach (var ctrl in Utilities.GetPlayers())
+        foreach (var ctrl in Fairplay.Runtime.LivePlayers.Get())
         {
             if (ctrl == null || !ctrl.IsValid || !ctrl.IsBot || !ctrl.UserId.HasValue)
                 continue;
@@ -467,10 +420,4 @@ public partial class BotAimImprover : BasePlugin
         catch { return true; }
     }
 
-    // ============================================================
-    // Raw memory readers
-    // ============================================================
-    private static unsafe byte ReadByte(IntPtr addr) => *(byte*)addr.ToPointer();
-    private static unsafe int ReadInt32(IntPtr addr) => *(int*)addr.ToPointer();
-    private static unsafe IntPtr ReadIntPtr(IntPtr addr) => *(IntPtr*)addr.ToPointer();
 }

@@ -25,13 +25,14 @@ namespace NadeSystem;
 public partial class NadeSystemPlugin : BasePlugin
 {
     public override string ModuleName    => "NadeSystem";
-    public override string ModuleVersion => "1.2.2-fairplay.4";
-    public override string ModuleAuthor  => "ed0ard & XBribo";
+    public override string ModuleVersion => "1.2.3-fairplay.1";
+    public override string ModuleAuthor  => "ed0ard & XBribo & unicbm";
 
     // grenades folder lives inside the plugin directory
     private string DataDir => Path.Combine(ModuleDirectory, "grenades");
     // precache all the nades on this map
     private List<GrenadeData> _mapNades = new();
+    private readonly Dictionary<(string Id, string? Type), GrenadeData> _mapNadesById = new();
     // Static trigger-zone index rebuilt whenever the active map data is loaded
     private const float GrenadeZoneGridSize = 256f;
     private Dictionary<(int X, int Y), List<GrenadeData>> _grenadeZoneGrid = new();
@@ -358,8 +359,8 @@ public partial class NadeSystemPlugin : BasePlugin
         IntPtr, IntPtr, IntPtr, IntPtr, IntPtr, int, int, CSmokeGrenadeProjectile>
         _smokeCreate = new(
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
-                ? @"55 4C 89 C1 48 89 E5 41 57 49 89 FF 41 56 45 89 CE"
-                : @"48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 41 56 41 57 48 83 EC ? 48 8B B4 24 ? ? ? ? 4D 8B F8 4C 8B C2");
+                ? @"55 4C 89 C1 48 89 E5 41 57 41 56 49 89 FE 41 55 45 89 CD 41 54 4D 89 C4"
+                : @"48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 41 56 41 57 48 83 EC ? 48 8B B4 24 ? ? ? ? 4D 8B F8");
 
     // CHEGrenadeProjectile::Create(pos, ang, vel, vel, owner, itemDef)
     private static readonly MemoryFunctionWithReturn<

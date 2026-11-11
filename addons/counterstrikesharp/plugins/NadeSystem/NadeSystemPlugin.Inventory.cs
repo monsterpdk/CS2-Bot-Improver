@@ -47,7 +47,7 @@ public partial class NadeSystemPlugin
         {
             info.ReplyToCommand($"[NadeInventory] version={ModuleVersion} diagnostics={_inventoryDiagnostics.Enabled} fault={_inventoryFault} bought={_boughtUnits} consumed={_consumedUnits} noStock={_noStock} purchaseRejected={_purchaseRejected} log={_inventoryLog}");
             if(_freezeEndTime<=0 || _roundOver)return;
-            foreach(var p in Utilities.GetPlayers().Where(p=>p.IsValid && p.IsBot && p.PawnIsAlive))
+            foreach(var p in Fairplay.Runtime.LivePlayers.Get().Where(p=>p.IsValid && p.IsBot && p.PawnIsAlive))
                 info.ReplyToCommand($"[NadeInventory] {p.Slot} {p.PlayerName}: "+string.Join(" ",Owned(p).GroupBy(s=>s.Kind).Select(g=>$"{g.Key}={g.Sum(s=>s.Count)}")));
         });
     }

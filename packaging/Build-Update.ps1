@@ -1,4 +1,4 @@
-﻿param([Parameter(Mandatory)][string]$Csgo, [Parameter(Mandatory)][string]$Output, [switch]$UseBuiltPlugins)
+param([Parameter(Mandatory)][string]$Csgo, [Parameter(Mandatory)][string]$Output, [switch]$UseBuiltPlugins)
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $Output = [IO.Path]::GetFullPath($Output)
@@ -9,7 +9,7 @@ $dependencies = @($dependencies | ForEach-Object { [PSCustomObject]@{ Path=$_.Pa
 foreach ($entry in $dependencies) {
     if ((Get-FileHash -LiteralPath (Join-Path $Csgo $entry.Path)).Hash -ne $entry.SHA256) { throw ('Pinned dependency changed: ' + $entry.Path) }
 }
-if(!$UseBuiltPlugins) { & (Join-Path $PSScriptRoot 'Build-Plugins.ps1') }
+if(!$UseBuiltPlugins) { & (Join-Path $PSScriptRoot 'Build-Plugins.ps1') -Csgo $Csgo }
 $payload = Join-Path $Output 'payload'
 New-Item -ItemType Directory -Path $payload -Force | Out-Null
 function Copy-Payload([string]$Source, [string]$Relative) {
@@ -17,7 +17,7 @@ function Copy-Payload([string]$Source, [string]$Relative) {
     New-Item -ItemType Directory -Path (Split-Path $target -Parent) -Force | Out-Null
     Copy-Item -LiteralPath $Source -Destination $target
 }
-foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics')) {
+foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics','BotState')) {
     foreach ($suffix in @('.dll','.deps.json')) {
         $relative = 'addons\counterstrikesharp\plugins\' + $name + '\' + $name + $suffix
         Copy-Payload (Join-Path $root ('build\'+$name+'\'+$name+$suffix)) $relative
@@ -30,7 +30,7 @@ foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibilit
     }
 }
 foreach ($file in Get-ChildItem -LiteralPath (Join-Path $root 'cfg') -File) { Copy-Payload $file.FullName ('cfg\' + $file.Name) }
-foreach ($name in @('Start-CompatiblePanel.cmd','Start-CompatiblePanel.ps1','Sync-PanelGameInfo.ps1','GameInfoCompatibility.psm1','CompatibilitySettings.json','ProfileCompatibility.psm1','ReactionSettings.json','DefaultServerConfig.vdf','NativeCompatibility.psm1','NativeCompatibilitySettings.json','BotStateCompatibility.psm1','BotStateCompatibilitySettings.json')) { Copy-Payload (Join-Path $root ('compatibility\' + $name)) $name }
+foreach ($name in @('Start-CompatiblePanel.cmd','Start-CompatiblePanel.ps1','Sync-PanelGameInfo.ps1','GameInfoCompatibility.psm1','CompatibilitySettings.json','ProfileCompatibility.psm1','ReactionSettings.json','DefaultServerConfig.vdf','NativeCompatibility.psm1','NativeCompatibilitySettings.json')) { Copy-Payload (Join-Path $root ('compatibility\' + $name)) $name }
 foreach ($name in @('Install.ps1','Install.cmd','Restore.ps1')) { Copy-Item -LiteralPath (Join-Path $PSScriptRoot $name) -Destination (Join-Path $Output $name) }
 foreach ($name in @('README.md','CHANGELOG.md','NOTICE.md','LICENSE')) { Copy-Item -LiteralPath (Join-Path $root $name) -Destination (Join-Path $Output $name) }
 Copy-Item -LiteralPath (Join-Path $root 'docs') -Destination $Output -Recurse
@@ -44,8 +44,8 @@ foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -File -Force) {
 }
 $files = @(Get-ChildItem -LiteralPath $payload -Recurse -File | ForEach-Object { [PSCustomObject]@{ Path=$_.FullName.Substring($payload.Length + 1); SHA256=(Get-FileHash -LiteralPath $_.FullName).Hash } })
 [PSCustomObject]@{
-    Version='1.4.5-fairplay.4'; ReleaseDate='2026-11-08'; ClientVersion='2000942'; PatchVersion='1.41.9.6'; Platform='Windows x64'; UpstreamBaseline='v1.4.5'; CounterStrikeSharp='1.0.376'
+    Version='1.4.8-fairplay.1'; ReleaseDate='2026-11-11'; ClientVersion='2000942'; PatchVersion='1.41.9.6'; Platform='Windows x64'; UpstreamBaseline='v1.4.8'; CounterStrikeSharp='1.0.379'
     Plugins=@('BotAI','BotAimImprover','BotBuy','BotControllerImpl','BotHiderImpl','BotRandomizer','BotState','BotStuckDiagnostics','BotVisionCompatibility','NadeSystem','RoundDamageRecap')
-    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$true; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
+    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf'); ApplyNativeCompatibility=$false; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $Output 'manifest.json') -Encoding UTF8
-Write-Output ('Public v1.4.5 update staged: ' + $files.Count + ' payload files.')
+Write-Output ('Public v1.4.8 update staged: ' + $files.Count + ' payload files.')

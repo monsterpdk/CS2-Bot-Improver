@@ -1,20 +1,15 @@
 # Installation and restore
 
-Requires Windows x64, CS2 ClientVersion 2000942 / patch 1.41.9.6 and the author's original v1.4.5 Windows bot pack with bundled CSS 376. The updater checks exact server/engine binaries and pinned dependencies; it does not install on another build. Obtain upstream dependencies from the projects credited in NOTICE.md.
+Use original v1.4.8 Windows with CSS 379 on ClientVersion 2000942. Older Fairplay releases based on v1.4.5 are not an alternative runtime baseline. First install the new original pack, then apply this update. Existing humanized Low/Medium/High files are accepted and the active selection is preserved; unknown custom profiles are rejected before writing.
 
-1. Extract the entire public update outside the game folder. Close CS2 and the panel.
-2. Run Install.cmd. Enter the full target path ending in `game\csgo`.
-3. The installer verifies payload hashes, dependencies and game binaries; backs up every changed file; applies managed plugins, gameinfo/profile/config updates, the local CSS engine adapter, BotState flash/recovery adapter and BotVision signature. It rolls back copied/merged files on failure.
-4. Start `game\csgo\Start-CompatiblePanel.cmd` and select Bot Mode. Test a few rounds. Keep `bv_smoke_mode 1`.
+Extract the release ZIP outside game\csgo. With game/panel closed, run Install.cmd and enter the folder containing gameinfo.gi and steam.inf. Exact game binary and upstream dependency hashes are checked. Extra unknown CSS plugin directories are rejected. Keep your existing installation backed up independently when switching upstream versions.
 
-The original panel executable is not in the public update; obtain it from upstream. Do not upload the separate complete personal-use bundle as a public release asset. Detailed diagnostics default to off; see [diagnostic switches and storage limits](DIAGNOSTICS.md).
+The updater includes six maintained managed plugins, data/configs and independent tools. It merges target gameinfo without replacing Steam's layered paths, creates Bot/Online templates, sets fill quota 16, and disables automatic runtime overwrites for the custom pack. Obsolete RayTrace.vdf is parked in the backup when present. Original runtime/shared/native modules remain unchanged.
 
-Population defaults to 16 total (8v8 including a human); Medium/High retain their reaction settings. The public updater preserves unrelated panel preferences and active difficulty. It merges a specific native smoke signature while preserving other BotVision data. The native adapter accepts only the exact original or already-adapted CSS binary and verifies its resulting hash.
-
-Backups are under `game\csgo\_botimprover_backups\v1.4.5-fairplay.4-<timestamp>`. Close CS2/panel, then run:
+All replaced files are saved to game\csgo\_botimprover_backups\v1.4.8-fairplay.1-TIMESTAMP. The installer rolls back copy failures. To restore this update with game and panel closed:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Restore.ps1 -Backup "D:\...\game\csgo\_botimprover_backups\v1.4.5-fairplay.4-<timestamp>"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Restore.ps1 -Backup "FULL_BACKUP_FOLDER"
 ```
 
-Use the exact backup folder printed by installation. Restore validates saved hashes before changing files. It restores only that transaction, not unrelated prior changes. The installer refuses unexpected managed plugin folders. Bot Mode uses -insecure; use the wrapper and Online mode before normal online play. Future CS2 updates require compatibility review. A second PC has not yet been playtested.
+Use the Restore.ps1 from this extracted update. This restores the state just before this update; it does not roll back Steam or an earlier manual upstream upgrade. Reinstalling is supported. Future game updates need review; do not edit hash guards to force compatibility. No second-PC gameplay claim is made.

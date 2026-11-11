@@ -1,4 +1,4 @@
-﻿param([string]$Csgo, [switch]$VerifyOnly)
+param([string]$Csgo, [switch]$VerifyOnly)
 $ErrorActionPreference = 'Stop'
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $payload = Join-Path $PSScriptRoot 'payload'
@@ -16,13 +16,13 @@ if ($VerifyOnly) { Write-Output ('Package verified: ' + $manifest.Files.Count + 
 if (!$Csgo) { $Csgo = Read-Host 'CS2 game\csgo folder (full path)' }
 $Csgo = (Resolve-Path -LiteralPath $Csgo.Trim('"')).Path.TrimEnd('\')
 if ([IO.Path]::GetFileName($Csgo) -ne 'csgo' -or !(Test-Path -LiteralPath (Join-Path $Csgo 'gameinfo.gi'))) { throw 'Select the CS2 game\csgo folder.' }
-if (Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -eq 'cs2' -or $_.ProcessName -like 'Panel v*' }) { throw 'Close CS2 and the panel first.' }
+if (Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -eq 'cs2' -or $_.ProcessName -eq 'Panel' -or $_.ProcessName -like 'Panel v*' }) { throw 'Close CS2 and the panel first.' }
 if ((Get-Content -LiteralPath (Join-Path $Csgo 'steam.inf') -Raw) -notmatch ('(?m)^ClientVersion=' + [regex]::Escape($manifest.ClientVersion) + '\s*$')) { throw ('Target version differs. Required CS2 ClientVersion ' + $manifest.ClientVersion) }
 Import-Module (Join-Path $payload 'NativeCompatibility.psm1') -Force
 Assert-TestedGame -Csgo $Csgo -SettingsPath (Join-Path $payload 'NativeCompatibilitySettings.json')
 foreach ($entry in $manifest.Dependencies) {
     $target = Join-Path $Csgo $entry.Path
-    if (!(Test-Path -LiteralPath $target -PathType Leaf) -or (Get-FileHash -LiteralPath $target).Hash -ne $entry.SHA256) { throw ('Dependency missing or different: ' + $entry.Path + '. Install the original v1.4.5 Windows pack first; use its bundled CounterStrikeSharp 376.') }
+    if (!(Test-Path -LiteralPath $target -PathType Leaf) -or (Get-FileHash -LiteralPath $target).Hash -ne $entry.SHA256) { throw ('Dependency missing or different: ' + $entry.Path + '. Install the original v1.4.8 Windows pack first; use its bundled CounterStrikeSharp 379.') }
 }
 $pluginRoot = Join-Path $Csgo 'addons\counterstrikesharp\plugins'
 if (Test-Path -LiteralPath $pluginRoot) {
@@ -67,7 +67,7 @@ if ($manifest.MergePopulationSettings) {
     if ([regex]::Matches($text,$pattern).Count -ne 1) { throw 'Expected exactly one panel bot_quota setting.' }
     $merged[$path] = [regex]::Replace($text,$pattern,'"bot_quota" "16"')
 }
-$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.5-fairplay.4-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
+$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.8-fairplay.1-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
 $paths = @($manifest.Files.Path) + @($merged.Keys) + @($binaryMerged.Keys) + @('gameinfo.gi','backup\Online\gameinfo.gi','backup\WithBots\gameinfo.gi')
 if (@($paths | Select-Object -Unique).Count -ne $paths.Count) { throw 'Duplicate installer destination.' }
 $records = @()
@@ -125,5 +125,5 @@ try {
     foreach ($record in $moved) { Move-Item -LiteralPath (Join-Path $backup ('parked\' + $record.Path)) -Destination (Join-Path $Csgo $record.Path) }
     throw
 }
-Write-Output ('Installed v1.4.5-fairplay.4 successfully. Backup: ' + $backup)
+Write-Output ('Installed v1.4.8-fairplay.1 successfully. Backup: ' + $backup)
 Write-Output ('Start the panel with: ' + (Join-Path $Csgo 'Start-CompatiblePanel.cmd'))

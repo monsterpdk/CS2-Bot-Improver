@@ -12,7 +12,7 @@ namespace BotStuckDiagnostics;
 public sealed class Plugin:BasePlugin
 {
     public override string ModuleName=>"Bot Stuck Diagnostics";
-    public override string ModuleVersion=>"0.1.0-fairplay.4";
+    public override string ModuleVersion=>"0.1.0-fairplay.5";
     public override string ModuleAuthor=>"Fairplay maintenance";
     public override string ModuleDescription=>"Read-only, bounded cross-map stationary bot observation";
     private sealed class Entry
@@ -20,6 +20,7 @@ public sealed class Plugin:BasePlugin
         public required nint Pawn;
         public required IdleTracker Tracker;
         public string Name="";
+        public float NextSurvivorSample;
     }
     private readonly Dictionary<int,Entry> _entries=new();
     private readonly Dictionary<int,float> _fired=new();
@@ -41,7 +42,7 @@ public sealed class Plugin:BasePlugin
         if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(s=>s.Trim()=="ClientVersion=2000942"))
         {Logger.LogError("[StuckObserver] Inactive on unaudited build/platform");return;}
         _log=new(ModuleDirectory,"stuck");_active=_log.Enabled;
-        AddCommand("bot_stuck_diagnostics","Detailed stationary observation: on/off (default off)",(_,info)=>
+        AddCommand("bot_stuck_diagnostics","Detailed observation: on/off (default off)",(_,info)=>
         {
             var value=info.ArgCount>1?info.GetArg(1):"";
             if(value is not ("on" or "off")){info.ReplyToCommand("Usage: bot_stuck_diagnostics on|off");return;}
@@ -75,14 +76,14 @@ public sealed class Plugin:BasePlugin
             if(!_live || !_active || _failed){info.ReplyToCommand("[StuckObserver] Waiting for a live round");return;}
             try
             {
-                var players=Utilities.GetPlayers();var filter=info.ArgCount>1?info.GetArg(1):"";int count=0;
+                var players=Fairplay.Runtime.LivePlayers.Get();var filter=info.ArgCount>1?info.GetArg(1):"";int count=0;
                 var rules=Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").FirstOrDefault()?.GameRules;
                 foreach(var p in players.Where(Eligible).Where(p=>filter=="" || p.Slot.ToString()==filter || p.PlayerName.Contains(filter,StringComparison.OrdinalIgnoreCase)))
                 {Snapshot("manual_mark",p,players,rules,Server.CurrentTime,0);count++;}
                 info.ReplyToCommand($"[StuckObserver] Saved {count} bot snapshots");
             }catch(Exception ex){Fail(ex);}
         });
-        Logger.LogInformation("[StuckObserver] Detailed diagnostics enabled={Enabled}; observation only",_active);
+        Logger.LogInformation("[StuckObserver] Observation only; continuous cross-map log: {Path}",_log.Path);
         // Deliberately no entity lookup or live-round activation at load/hot reload.
     }
     public override void Unload(bool hotReload){_live=false;EndEntries("unload",null);Write("session_end",null,new {samples=_samples,candidates=_candidates});_active=false;}
@@ -96,7 +97,8 @@ public sealed class Plugin:BasePlugin
             var now=Server.CurrentTime;
             var rules=Utilities.FindAllEntitiesByDesignerName<CCSGameRulesProxy>("cs_gamerules").FirstOrDefault()?.GameRules;
             if(rules is null || rules.FreezePeriod){EndEntries("freeze_or_missing_rules",now);return;}
-            var players=Utilities.GetPlayers();var bots=players.Where(Eligible).ToList();var slots=bots.Select(p=>p.Slot).ToHashSet();
+            var players=Fairplay.Runtime.LivePlayers.Get();var bots=players.Where(Eligible).ToList();var slots=bots.Select(p=>p.Slot).ToHashSet();
+            int aliveT=players.Count(p=>p.IsValid&&p.PawnIsAlive&&p.TeamNum==2),aliveCT=players.Count(p=>p.IsValid&&p.PawnIsAlive&&p.TeamNum==3);
             foreach(var slot in _entries.Keys.Where(s=>!slots.Contains(s)).ToArray())EndSlot(slot,"not_eligible",now);
             _samples++;
             foreach(var p in bots)
@@ -108,6 +110,10 @@ public sealed class Plugin:BasePlugin
                     _entries[p.Slot]=new(){Pawn=pawn.Handle,Name=p.PlayerName,Tracker=new(now,point)};continue;
                 }
                 var observation=e.Tracker.Observe(now,point);
+                // This is context observation, not a claim that the survivor is stuck.
+                // Jumping/backtracking can prevent stationary detection entirely.
+                if((p.TeamNum==2?aliveT:aliveCT)==1&&now>=e.NextSurvivorSample)
+                {e.NextSurvivorSample=now+5;Snapshot("last_survivor_sample",p,players,rules,now,0);}
                 if(observation.Notice is Notice.First or Notice.Repeat)
                 {if(observation.Notice==Notice.First)_candidates++;Snapshot(observation.Notice==Notice.First?"stationary_candidate":"stationary_repeat",p,players,rules,now,observation.Seconds);}
                 else if(observation.Notice is Notice.Resumed or Notice.Gap)
@@ -147,6 +153,7 @@ public sealed class Plugin:BasePlugin
             native["goalEntity"]=R("goalEntity",()=>bot.GoalEntity.Raw);
             native["taskEntity"]=R("taskEntity",()=>bot.TaskEntity.Raw);
             native["pathIndex"]=R("pathIndex",()=>bot.PathIndex);
+            native["pathLadderEnd"]=R("pathLadderEnd",()=>bot.PathLadderEnd);
             native["stateAge"]=R("stateAge",()=>now-bot.StateTimestamp);
             native["isStopping"]=R("isStopping",()=>bot.IsStopping);
             native["enemyVisible"]=R("enemyVisible",()=>bot.IsEnemyVisible);
@@ -172,6 +179,8 @@ public sealed class Plugin:BasePlugin
             ["position"]=R("position",()=>Pos(pawn.AbsOrigin!)),["velocity"]=R("velocity",()=>Pos(pawn.AbsVelocity)),
             ["eyeAngles"]=R("eyeAngles",()=>new {pitch=pawn.EyeAngles.X,yaw=pawn.EyeAngles.Y}),
             ["grounded"]=R("grounded",()=>(pawn.Flags&1)!=0),["moveType"]=R("moveType",()=>pawn.MoveType.ToString()),
+            ["actualMoveType"]=R("actualMoveType",()=>pawn.ActualMoveType.ToString()),
+            ["ladderNormal"]=R("ladderNormal",()=>pawn.MovementServices is {} movement&&movement.Handle!=0?Pos(new CCSPlayer_MovementServices(movement.Handle).LadderNormal):null),
             ["weapon"]=R("weapon",()=>pawn.WeaponServices?.ActiveWeapon.Value?.DesignerName),
             ["hasBomb"]=R("hasBomb",()=>pawn.WeaponServices?.MyWeapons.Any(w=>w.Value?.DesignerName=="weapon_c4")),
             ["defusing"]=R("defusing",()=>pawn.IsDefusing),["flashRemaining"]=R("flashRemaining",()=>MathF.Max(0,pawn.BlindUntilTime-now)),

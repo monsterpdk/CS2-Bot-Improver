@@ -1,15 +1,14 @@
-# Build and package
+# Build and reproduce
 
-Use Windows x64 and .NET SDK 10. Five source projects pin CounterStrikeSharp.API 1.0.376. Run `powershell -NoProfile -ExecutionPolicy Bypass -File packaging/Build-Plugins.ps1` from the repository root. Outputs are build/<plugin>. The source includes the shared common/DiagnosticLog.cs file at compile time; no extra runtime logging DLL is needed.
+Requirements: Windows PowerShell, .NET 10 SDK, NuGet access, and a separately installed exact original v1.4.8/CSS 379 pack. The six projects target CounterStrikeSharp.API 1.0.379. BotState also needs the original pinned BotControllerApi shared DLL. Build-Plugins verifies and copies that local reference into ignored libs; it is not a public release asset.
 
-Run `packaging/Build-Update.ps1 -Csgo <tested-game/csgo> -Output <new-folder>` through PowerShell with ExecutionPolicy Bypass. This compiles the maintained sources and packages build outputs, never copies your trial plugin DLLs or private logs into the release. `-UseBuiltPlugins` uses existing build outputs after an intentional prior build. Game/dependency hashes still must match the pinned tested installation. The public installer locally adapts user-provided CSS/BotState files; it does not redistribute them or download executable patches.
+```powershell
+.\packaging\Build-Plugins.ps1 -Csgo "FULL_GAME_CSGO_FOLDER"
+.\packaging\Build-Update.ps1 -Csgo "FULL_GAME_CSGO_FOLDER" -Output "NEW_OUTPUT_FOLDER" -UseBuiltPlugins
+```
 
-Run the console tests under tests/: DiagnosticsTests, InventoryTests, FlashPolicyTests, IdleTrackerTests, SmokeAimTests, ReplaySafetyTests, AwarenessTests and NativeGrenadeTests. Each links the production policy/logger source. StartupTests and ContractTests take paths to locally installed CSS/shared API assemblies; see their Program.cs arguments. None launch CS2.
+The scripts build/package only, without installing into the game. Output source excludes build/bin/obj/libs/logs, executables, PDBs and private dumps. The update manifest records all payload hashes and required upstream dependency hashes. Source ZIPs are developer artifacts, not installers.
 
-`packaging/Test-Package.ps1 -Package <staged-update> -Baseline <original-v1.4.5-payload>` uses a separate disposable game/package tree and synthetic game binary hash fixtures. It verifies version/dependency/extra-plugin/payload guards, CSS/BotState transforms, profiles/settings, injected-copy rollback, installation, reinstall, corrupt-backup refusal and full restore. It never changes the real game. Native ABI evidence is summarized in compatibility/AUDIT.md. Live testing is still necessary after gameplay changes.
+Run policy/diagnostic tests from tests/*/*.csproj. CompiledChecks additionally takes the SDK api directory, original BotControllerApi.dll, built BotState.dll and built BotAI.dll as four arguments. Run packaging/Test-Package.ps1 -Package <staged-update> -Baseline <original-v1.4.8-folder> for isolated version/hash guards, rollback, install, reinstall and restore checks. The fixture replaces game binary hashes only inside its disposable copy. Original source/data provenance and exact upstream commits are recorded in data/ and UPSTREAM-SOURCES.json.
 
-## Reproduce the BotState adaptation
-
-Use tools/FlashAdapter with the exact original BotState DLL to produce the flash-corrected DLL, then tools/StuckAdapter with that intermediate file to reproduce the final DLL. Each project is a standalone .NET 10 console tool with explicit input and output path arguments. compatibility/BotStateCompatibilitySettings.json lists supported input hashes, every changed byte and the final output hash. The public PowerShell updater performs the same pinned transformation directly and accepts the original, flash-corrected, or final supported file. Headers, metadata and unrelated method bodies are preserved; the existing module version label remains 1.9.4. This is not a claim that the repository contains a source-matching rebuild of the upstream BotState DLL.
-
-StuckRecoveryTests takes three paths: the CSS api directory, the flash-corrected BotState intermediate DLL, and the final adapted DLL. It re-emits actual method IL with managed SDK-state fixtures, reproduces the original one-shot fault and tests retry timing, progress and combat/defuse guards. It also invokes the actual final method on its safe early-return path. It does not simulate live collision or navigation.
+Full builds retain upstream obsolete ConVar warnings; passing automated tests does not prove collision geometry or stability on every map. Public opt-in logging differs from the private trial defaults, so separate live acceptance remains outstanding.

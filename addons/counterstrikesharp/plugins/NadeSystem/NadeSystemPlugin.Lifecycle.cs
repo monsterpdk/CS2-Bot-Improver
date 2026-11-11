@@ -105,7 +105,7 @@ public partial class NadeSystemPlugin : BasePlugin
     private HookResult OnFreezeEnd(EventRoundFreezeEnd @event, GameEventInfo info)
     {
         _freezeEndTime = Server.CurrentTime;
-        foreach (var bot in Utilities.GetPlayers()) BuyRoundInventory(bot);
+        foreach (var bot in Fairplay.Runtime.LivePlayers.Get()) BuyRoundInventory(bot);
         FlushInventoryLog();
         return HookResult.Continue;
     }

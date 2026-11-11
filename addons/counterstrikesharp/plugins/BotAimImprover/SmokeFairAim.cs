@@ -82,9 +82,8 @@ public partial class BotAimImprover
             // Instruction-validated Windows CS2 ClientVersion 2000935 fields. Clear native
             // visibility and undo the just-computed live enemy aim point. Native
             // blind fire toward the last clearly observed point can still occur.
-            Marshal.WriteByte(bot + _off.IsVisible, 0);
-            float* spot = (float*)(bot + _off.TargetSpot).ToPointer();
-            spot[0] = held.X; spot[1] = held.Y; spot[2] = held.Z;
+            var native=new CCSBot(bot);native.IsEnemyVisible=false;
+            var spot=native.TargetSpot;spot.X=held.X;spot.Y=held.Y;spot.Z=held.Z;
             return true;
         }
         catch (Exception ex)
@@ -108,8 +107,8 @@ public partial class BotAimImprover
     private unsafe void RememberClearAim(IntPtr bot, int enemy, CCSPlayerController? controller = null)
     {
         if (_smokeDensity is null) return;
-        float* spot = (float*)(bot + _off.TargetSpot).ToPointer();
-        var location = new AimLocation(spot[0], spot[1], spot[2]);
+        var spot = new CCSBot(bot).TargetSpot;
+        var location = new AimLocation(spot.X,spot.Y,spot.Z);
         if (location.Finite)
         {
             _clearAim[bot] = (enemy, location, Server.CurrentTime);

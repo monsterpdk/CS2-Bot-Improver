@@ -211,8 +211,9 @@ internal static class WindowsPatchDefinitions
 
         // wildcard the comiss register byte (xmm6/xmm7 varies by build) 
         // and the jbe displacement. Anchored on movss xmm0,[rax+0xc]; comiss; jbe.
+        // Include the following CanSeeSniper check to exclude unrelated float comparisons.
         ["Vision_ApproachBody_SkipSkillCheck"] = (
-            signature: "F3 0F 10 40 0C 0F 2F C6 76 ? 80 BF ? 5C 00 00 00 74 ?",
+            signature: "F3 0F 10 40 0C 0F 2F ? 76 ? 80 BF ? 5C 00 00 00 74 ?",
             patch: "90 90",
             expectedOriginal: "76 ?",
             patchOffset: 8
@@ -297,7 +298,7 @@ internal static class WindowsPatchDefinitions
         //  directly to the planted site instead of random searching.
         ["TBot_BombsiteSearch_UseKnownPlantedSite"] = (
             signature: "48 8B 8E ? ? 00 00 E8 ? ? ? ? 48 8B CB E8 ? ? ? ? 4C 8B 05 ? ? ? ? 85 C0",
-            patch: "8B 41 68 90 90",
+            patch: "E8 20 57 F9 FF",
             expectedOriginal: "E8 20 51 F9 FF",
             patchOffset: 15
         ),
@@ -401,13 +402,6 @@ internal static class WindowsPatchDefinitions
             patch: "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90",
             expectedOriginal: "E8 ? ? ? ? 49 8B 06 C6 80 ? 5C 00 00 00",
             patchOffset: 0
-        ),
-        // A vanilla helper must not mark both endpoints inside one smoke as visible.
-        ["Smoke_BothInsideNotVisible"] = (
-        signature: "41 5F 41 5E 41 5C C3 40 B7 01 EB C9 CC CC CC CC",
-        patch: "40 30 FF",
-        expectedOriginal: "40 B7 01",
-        patchOffset: 7
         ),
     };
 }

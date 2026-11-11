@@ -111,7 +111,7 @@ public partial class BotAimImprover
         try
         {
             var ptr=hook.GetParam<IntPtr>(0);
-            var p=Utilities.GetPlayers().FirstOrDefault(p=>p.IsValid && p.IsBot && !p.HasBeenControlledByPlayerThisRound && p.PawnIsAlive && p.PlayerPawn.Value?.Handle==ptr);
+            var p=Fairplay.Runtime.LivePlayers.Get().FirstOrDefault(p=>p.IsValid && p.IsBot && !p.HasBeenControlledByPlayerThisRound && p.PawnIsAlive && p.PlayerPawn.Value?.Handle==ptr);
             if(p?.PlayerPawn.Value is not {} pawn) return HookResult.Continue;
             var now=Server.CurrentTime;var hold=hook.GetParam<float>(1);var fade=hook.GetParam<float>(2);var alpha=hook.GetParam<float>(3);
             var until=FlashPolicy.NativeDeadline(now,hold,alpha,pawn.BlindUntilTime);
@@ -143,8 +143,8 @@ public partial class BotAimImprover
             if(!_flashHeldAim.TryGetValue(pawn.Handle,out held))return;
         }
         // Undo the native function's newly computed live target point as well.
-        Marshal.WriteByte(bot+_off.IsVisible,0);
-        float* point=(float*)(bot+_off.TargetSpot).ToPointer();point[0]=held.X;point[1]=held.Y;point[2]=held.Z;
+        var native=new CCSBot(bot);native.IsEnemyVisible=false;
+        var point=native.TargetSpot;point.X=held.X;point.Y=held.Y;point.Z=held.Z;
     }
     private void LogFlash(object row)
     {

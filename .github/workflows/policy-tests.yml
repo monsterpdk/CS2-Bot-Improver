@@ -1,0 +1,17 @@
+name: Policy tests
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  policies:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - shell: pwsh
+        run: |
+          foreach ($name in @('InventoryTests','FlashPolicyTests','SmokeAimTests','ReplaySafetyTests','AwarenessTests','IdleTrackerTests','DiagnosticsTests','CrouchPolicy')) {
+            $p = Get-ChildItem "tests/$name" -Filter *.csproj | Select-Object -First 1
+            dotnet run --project $p.FullName
+            if ($LASTEXITCODE -ne 0) { throw "Failed: $name" }
+          }

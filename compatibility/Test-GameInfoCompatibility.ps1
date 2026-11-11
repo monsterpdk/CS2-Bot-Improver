@@ -1,4 +1,3 @@
-param([string]$Csgo)
 $ErrorActionPreference = 'Stop'
 Import-Module (Join-Path $PSScriptRoot 'GameInfoCompatibility.psm1') -Force
 function Assert-True($condition, $message) { if (!$condition) { throw $message } }
@@ -35,8 +34,8 @@ try { New-PanelGameInfoTemplates -Text $fresh.Substring(0, $fresh.Length - 3) | 
 Assert-True $failed 'Unbalanced braces were accepted.'
 $layered = New-PanelGameInfoTemplates -Text ($fresh.Replace('FutureSetting', 'LayeredOnMod csgo_imported' + "`nFutureSetting"))
 Assert-True ($layered.Layers -contains 'csgo_imported') 'Layer dependency was not detected.'
-$currentPath = if ($Csgo) { Join-Path $Csgo 'gameinfo.gi' } else { $null }
-if ($currentPath -and (Test-Path -LiteralPath $currentPath)) {
+$currentPath = 'F:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\gameinfo.gi'
+if (Test-Path -LiteralPath $currentPath) {
     $current = [IO.File]::ReadAllText($currentPath)
     $actual = New-PanelGameInfoTemplates -Text $current
     $actualAgain = New-PanelGameInfoTemplates -Text $actual.Bots

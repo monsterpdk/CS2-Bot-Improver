@@ -128,7 +128,7 @@ public partial class NadeSystemPlugin : BasePlugin
             return recipients;
 
         float rangeSquared = GrenadeThrowSoundRange * GrenadeThrowSoundRange;
-        foreach (var listener in Utilities.GetPlayers())
+        foreach (var listener in Fairplay.Runtime.LivePlayers.Get())
         {
             if (!listener.IsValid || listener.IsHLTV)
                 continue;
@@ -271,7 +271,7 @@ public partial class NadeSystemPlugin : BasePlugin
         var recipients = new RecipientFilter();
         bool relayRadio = ConVar.Find("tv_relayradio")?.GetPrimitiveValue<bool>() ?? false;
 
-        foreach (var listener in Utilities.GetPlayers())
+        foreach (var listener in Fairplay.Runtime.LivePlayers.Get())
         {
             if (!listener.IsValid)
                 continue;

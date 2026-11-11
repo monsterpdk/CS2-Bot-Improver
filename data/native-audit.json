@@ -1,0 +1,445 @@
+{
+  "ClientVersion": "2000942",
+  "ServerSHA256": "70C66E850B2CE72C8C7CA026DE6989EF4DE7F12DAD64EC503645FBD2A7F06D9F",
+  "Checks": {
+    "BotAI/HasVisitedEnemySpawn": {
+      "matches": [
+        "0x2e1be9"
+      ],
+      "valid": true
+    },
+    "BotAI/GameState_Reset": {
+      "matches": [
+        "0x2e0ffb"
+      ],
+      "valid": true
+    },
+    "BotAI/Idle_IsSafeAlwaysFalse": {
+      "matches": [
+        "0x33598d"
+      ],
+      "valid": true
+    },
+    "BotAI/EscapeFromBomb_OnEnter_NoEquipKnife": {
+      "matches": [
+        "0x33052d"
+      ],
+      "valid": true
+    },
+    "BotAI/EscapeFromBomb_OnUpdate_NoEquipKnife": {
+      "matches": [
+        "0x333252"
+      ],
+      "valid": true
+    },
+    "BotAI/EscapeFromFlames_OnEnter_NoEquipKnife": {
+      "matches": [
+        "0x330615"
+      ],
+      "valid": true
+    },
+    "BotAI/PlantBombLookAtPriorityLow": {
+      "matches": [
+        "0x33109c"
+      ],
+      "valid": true
+    },
+    "BotAI/DefuseBombLookAtPriorityLow": {
+      "matches": [
+        "0x3330c6"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_SkipFireRateCheck": {
+      "matches": [
+        "0x306c10"
+      ],
+      "valid": true
+    },
+    "BotAI/SprayAllDistances_ForceHoldTrigger": {
+      "matches": [
+        "0x305483"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_SkipSteadyFireShortcut": {
+      "matches": [
+        "0x306440"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_SkipZoomFireShortcut": {
+      "matches": [
+        "0x306464"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_SkipSniperSpreadCheck": {
+      "matches": [
+        "0x2c84ed"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_DodgeDuringReload": {
+      "matches": [
+        "0x306c9f"
+      ],
+      "valid": true
+    },
+    "BotAI/SniperCrouchDodge_jb": {
+      "matches": [
+        "0x306d8b"
+      ],
+      "valid": true
+    },
+    "BotAI/LowSKill_JumpChance0": {
+      "matches": [
+        "0x32f102"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_DodgeChance100_Always": {
+      "matches": [
+        "0x3300b0"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_RetreatOnSniper_Disable": {
+      "matches": [
+        "0x3317c8"
+      ],
+      "valid": true
+    },
+    "BotAI/AllSkill_KeepMoving_WhenSeeSniper": {
+      "matches": [
+        "0x2dfcff"
+      ],
+      "valid": true
+    },
+    "BotAI/AttackState_CanStrafe_jne": {
+      "matches": [
+        "0x306c10"
+      ],
+      "valid": true
+    },
+    "BotAI/SniperDodge_SkipIsSniper_DodgeA": {
+      "matches": [
+        "0x306d1d"
+      ],
+      "valid": true
+    },
+    "BotAI/Vision_AlwaysWatchApproachPoints": {
+      "matches": [
+        "0x32f03d"
+      ],
+      "valid": true
+    },
+    "BotAI/Vision_ApproachBody_SkipSkillCheck": {
+      "matches": [
+        "0x32f08d"
+      ],
+      "valid": true
+    },
+    "BotAI/Vision_ApproachBody_SkipHidingSpotCheck": {
+      "matches": [
+        "0x32f097"
+      ],
+      "valid": true
+    },
+    "BotAI/Vision_SkipIsMovingGate": {
+      "matches": [
+        "0x32f046"
+      ],
+      "valid": true
+    },
+    "BotAI/Vision_AlwaysEnterApproachBody": {
+      "matches": [
+        "0x32f05a"
+      ],
+      "valid": true
+    },
+    "BotAI/IsNoticable_AlwaysTrue": {
+      "matches": [
+        "0x2d27d0"
+      ],
+      "valid": true
+    },
+    "BotAI/Upkeep_BotCOS_ZeroDrift": {
+      "matches": [
+        "0x2eda4f"
+      ],
+      "valid": true
+    },
+    "BotAI/Upkeep_BotSIN_ZeroDrift": {
+      "matches": [
+        "0x2eda7c"
+      ],
+      "valid": true
+    },
+    "BotAI/InvestigateNoise_SkipSelfDefenseCheck": {
+      "matches": [
+        "0x32ed2f"
+      ],
+      "valid": true
+    },
+    "BotAI/TBot_BombsiteSearch_UseKnownPlantedSite": {
+      "matches": [
+        "0x33696c"
+      ],
+      "valid": true
+    },
+    "BotAI/CT_Defuse_EngageAndInvestigate": {
+      "matches": [
+        "0x336ce8"
+      ],
+      "valid": true
+    },
+    "BotAI/DefuseBombState_OnUpdate_EngageAndInvestigate": {
+      "matches": [
+        "0x33306a"
+      ],
+      "valid": true
+    },
+    "BotAI/DefuseBombState_OnEnter_EngageAndInvestigate": {
+      "matches": [
+        "0x330460"
+      ],
+      "valid": true
+    },
+    "BotAI/FlashbangAvoidance_Disable": {
+      "matches": [
+        "0x2b9d91"
+      ],
+      "valid": true
+    },
+    "BotVision/CBotManager::IsVisibleThroughSmoke": {
+      "matches": [
+        "0x32a6b0"
+      ],
+      "valid": true
+    },
+    "BotVision/g_AutoList_SmokeProj_Head_Server": {
+      "matches": [
+        "0x34cc44"
+      ],
+      "valid": true
+    },
+    "BotVision/GetSmokeDensityInLine": {
+      "matches": [
+        "0x9bff80"
+      ],
+      "valid": true
+    },
+    "BotVision/CHEGrenadeProjectile::Detonate": {
+      "matches": [
+        "0x3a4f10"
+      ],
+      "valid": true
+    },
+    "BotVision/BulletPelletTrace": {
+      "matches": [
+        "0xa78120"
+      ],
+      "valid": true
+    },
+    "BotVision/BulletPelletTraceResult": {
+      "matches": [
+        "0xa74a20"
+      ],
+      "valid": true
+    },
+    "BotVision/CCSPlayer_WeaponServices::GetSlot": {
+      "matches": [
+        "0xc86620"
+      ],
+      "valid": true
+    },
+    "BotVision/CCSBot::IsVisiblePos": {
+      "matches": [
+        "0x2d3ba0"
+      ],
+      "valid": true
+    },
+    "BotVision/CCSBot::IsVisiblePlayer": {
+      "matches": [
+        "0x2d3e70"
+      ],
+      "valid": true
+    },
+    "BotController/CCSBot::EquipBestWeapon": {
+      "matches": [
+        "0x2c4430"
+      ],
+      "valid": true
+    },
+    "BotController/CCSBot::EquipPistol": {
+      "matches": [
+        "0x2c4930"
+      ],
+      "valid": true
+    },
+    "BotController/CCSPlayer_WeaponServices::SelectItem": {
+      "matches": [
+        "0xb23d70"
+      ],
+      "valid": true
+    },
+    "BotController/CCSPlayer_WeaponServices::GetSlot": {
+      "matches": [
+        "0xc86620"
+      ],
+      "valid": true
+    },
+    "BotController/CCSBot::Update": {
+      "matches": [
+        "0x2e8c20"
+      ],
+      "valid": true
+    },
+    "BotController/CCSBot::Upkeep": {
+      "matches": [
+        "0x2ed500"
+      ],
+      "valid": true
+    },
+    "BotController/BuyState::OnUpdate": {
+      "matches": [
+        "0x332110"
+      ],
+      "valid": true
+    },
+    "BotController/CCSBot::UpdateLookAngles": {
+      "matches": [
+        "0x2eaad0"
+      ],
+      "valid": true
+    },
+    "BotController/CCSPlayerPawn::SetEyeAngles": {
+      "matches": [
+        "0xd11ff0"
+      ],
+      "valid": true
+    },
+    "BotController/CCSPlayer_MovementServices::ProcessMovement": {
+      "matches": [
+        "0xadf830"
+      ],
+      "valid": true
+    },
+    "BotController/CBasePlayerController::OnSimulateUserCommands": {
+      "matches": [
+        "0xb66860"
+      ],
+      "valid": true
+    },
+    "BotController/DropReleasePose::OuterDrop": {
+      "matches": [
+        "0xb01b60"
+      ],
+      "valid": true
+    },
+    "BotController/DropReleasePose::BuildTransform": {
+      "matches": [
+        "0xa25c80"
+      ],
+      "valid": true
+    },
+    "BotHider/UTIL_Remove": {
+      "matches": [
+        "0xc30c10"
+      ],
+      "valid": true
+    },
+    "BotHider/CCSBotManager::MaintainBotQuota": {
+      "matches": [
+        "0x2d5940"
+      ],
+      "valid": true
+    },
+    "BotHider/CBaseIssue::CountPotentialVoters": {
+      "matches": [
+        "0x2688b0"
+      ],
+      "valid": true
+    },
+    "BotHider/CCSPlayerController::HandleCommand_JoinTeam": {
+      "matches": [
+        "0xa7d7d0"
+      ],
+      "valid": true
+    },
+    "BotHider/MpHumanTeam_ApplyRestriction": {
+      "matches": [
+        "0x944090"
+      ],
+      "valid": true
+    },
+    "BotHider/CCSGameRules::EndMatchState": {
+      "matches": [
+        "0x914b60"
+      ],
+      "valid": true
+    },
+    "BotHider/CSPlayerController::ScriptIsBot": {
+      "matches": [
+        "0x221e20"
+      ],
+      "valid": true
+    },
+    "Aim/PickNewAimSpot": {
+      "matches": [
+        "0x2deb50"
+      ],
+      "valid": true
+    },
+    "Flash/PawnBlind": {
+      "matches": [
+        "0x1fef10"
+      ],
+      "valid": true
+    },
+    "BotState/FovPlayer": {
+      "matches": [
+        "0x2d3e70"
+      ],
+      "valid": true
+    },
+    "BotState/FovPosition": {
+      "matches": [
+        "0x2d3ba0"
+      ],
+      "valid": true
+    },
+    "BotState/Defuse": {
+      "matches": [
+        "0x2c3590"
+      ],
+      "valid": true,
+      "LeafThunk": true,
+      "Target": "0x2e47e0"
+    },
+    "Export/BotController_InjectUsercmd": {
+      "valid": true
+    },
+    "Export/BotController_CancelUsercmdInjection": {
+      "valid": true
+    },
+    "Export/BotController_StartUsercmdMovement": {
+      "valid": true
+    },
+    "Export/BotController_UpdateUsercmdMovement": {
+      "valid": true
+    },
+    "Export/BotController_CancelUsercmdMovement": {
+      "valid": true
+    }
+  },
+  "Errors": [],
+  "Passed": true,
+  "CSS379EngineSlots": {
+    "Auth": 75,
+    "SteamID": 70,
+    "FakeConVar": 77,
+    "NativeAdapterRequired": false
+  }
+}

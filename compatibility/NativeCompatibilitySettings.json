@@ -1,42 +1,4 @@
 {
-  "ClientVersion": "2000942",
-  "Path": "addons\\counterstrikesharp\\bin\\win64\\counterstrikesharp.dll",
-  "ExpectedCurrent": "1353CBBF1B92E2A12F1DD36CB37FCDD34D31BC7DA40ECE47A873F8D7EB1E9C9C",
-  "SHA256": "F4AB36EBC9C4A250FCCEB6290F6259300707FC6C96F8F44D7ABA5F5D597E3224",
   "ServerSHA256": "70C66E850B2CE72C8C7CA026DE6989EF4DE7F12DAD64EC503645FBD2A7F06D9F",
-  "EngineSHA256": "A1B682ACB5CEDF11BED4784B0191A5452E93EE8F3023F95FA11AB3C3676B0FBC",
-  "API_SHA256": "E81F05D960C37EE623D552733FC919E206C8C1D16157886342D06A2F4D0DAB17",
-  "Patches": [
-    {
-      "Name": "IsClientFullyAuthenticated",
-      "RVA": "0x7e30b",
-      "OldSlot": 74,
-      "NewSlot": 75,
-      "Before": "ff 90 50 02 00 00",
-      "After": "ff 90 58 02 00 00",
-      "EngineTargetRVA": "0xa2b20"
-    },
-    {
-      "Name": "GetClientSteamID",
-      "RVA": "0x7e332",
-      "OldSlot": 69,
-      "NewSlot": 70,
-      "Before": "ff 90 28 02 00 00",
-      "After": "ff 90 30 02 00 00",
-      "EngineTargetRVA": "0xa2dd0"
-    },
-    {
-      "Name": "SetFakeClientConVarValue",
-      "RVA": "0x8a887",
-      "OldSlot": 76,
-      "NewSlot": 77,
-      "Before": "48 ff a0 60 02 00 00",
-      "After": "48 ff a0 68 02 00 00",
-      "EngineTargetRVA": "0xa1f60"
-    }
-  ],
-  "ChangedBytes": 3,
-  "Version": "1.4.5-fairplay.4",
-  "SmokeSignatureBefore": "40 55 53 56 41 55 41 57 48 8D 6C 24",
-  "SmokeSignatureAfter": "40 55 53 56 41 55 41 57 48 8D 6C 24 ? 48 81 EC ? ? ? ? 0F 29 BC 24 ? ? ? ? 0F 57 FF 49 8B F0 4C 8B EA 4C 8B F9"
+  "EngineSHA256": "A1B682ACB5CEDF11BED4784B0191A5452E93EE8F3023F95FA11AB3C3676B0FBC"
 }
