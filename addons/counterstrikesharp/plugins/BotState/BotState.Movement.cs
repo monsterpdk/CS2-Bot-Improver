@@ -190,22 +190,10 @@ public partial class BotState
 
             if ((condA || condB) && !_stuckJumpDone.GetValueOrDefault(idx))
             {
-                ref bool isCrouching = ref bot.IsCrouching;
-                isCrouching = false;
-
                 _stuckJumpDone[idx] = false;
-
-                int jumpCount = _stuckJumpCount.GetValueOrDefault(idx);
-                _stuckJumpCount[idx] = jumpCount + 1;
-
-                float sideSign = (jumpCount % 2 == 0) ? 1f : -1f;
-                float offsetRad = 30f * MathF.PI / 180f * sideSign;
-                float baseYaw = pawn.EyeAngles.Y * MathF.PI / 180f;
-                float backYaw = baseYaw + MathF.PI + offsetRad;
-
-                pawn.AbsVelocity.X = MathF.Cos(backYaw) * 100f;
-                pawn.AbsVelocity.Y = MathF.Sin(backYaw) * 100f;
-
+                // Repath only. Physical recovery uses checked, owned input leases.
+                // Repeated backwards velocity writes can move a stalled bot away
+                // from an otherwise reachable goal without fixing its navigation.
                 CountdownTimer repathTimer = bot.RepathTimer;
 
                 ref float repathduration = ref repathTimer.Duration;

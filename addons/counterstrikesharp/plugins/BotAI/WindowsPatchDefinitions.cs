@@ -296,6 +296,7 @@ internal static class WindowsPatchDefinitions
         //   bombSite = GetGameState()->GetPlantedBombsite();
         // With the patch active: [gameState+0x68] is set at plant time for all bots.
         //  directly to the planted site instead of random searching.
+        // LEGACY: target is wrong on build 2000942; excluded by FairplayPatchPolicy.
         ["TBot_BombsiteSearch_UseKnownPlantedSite"] = (
             signature: "48 8B 8E ? ? 00 00 E8 ? ? ? ? 48 8B CB E8 ? ? ? ? 4C 8B 05 ? ? ? ? 85 C0",
             patch: "E8 20 57 F9 FF",

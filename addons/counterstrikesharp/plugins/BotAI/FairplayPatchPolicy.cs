@@ -8,7 +8,9 @@ internal static class FairplayPatchPolicy
         "OnBombPlanted_AllBotsLearnSite", "OnAudibleEvent_GlobalHearRange",
         "BombPickup_CT_GlobalHearRange",
         // Respect native shooting delay and target-notice decisions.
-        "AttackState_SkipFireRateCheck", "IsNoticable_AlwaysTrue"
+        "AttackState_SkipFireRateCheck", "IsNoticable_AlwaysTrue",
+        // Legacy rel32 points at an unrelated two-argument function on build 2000942.
+        "TBot_BombsiteSearch_UseKnownPlantedSite"
     };
     internal static bool IsEnabled(string name)=>!Disabled.Contains(name);
 }

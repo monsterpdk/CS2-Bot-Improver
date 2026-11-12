@@ -32,7 +32,7 @@ $manifest = Get-Content -LiteralPath (Join-Path $Package 'manifest.json') -Raw -
 # Synthetic bytes in this disposable fixture exercise exact game hash guards.
 $nativeSettingsPath=Join-Path $Package 'payload\NativeCompatibilitySettings.json'
 $nativeSettings=Get-Content -LiteralPath $nativeSettingsPath -Raw | ConvertFrom-Json
-foreach($pair in @(@('bin\win64\server.dll','ServerSHA256'),@('..\bin\win64\engine2.dll','EngineSHA256'))) {
+foreach($pair in @(@('bin\win64\server.dll','ServerSHA256'),@('..\bin\win64\engine2.dll','EngineSHA256'),@('..\bin\win64\networksystem.dll','NetworkSHA256'))) {
     $binary=Join-Path $fixture $pair[0]
     New-Item -ItemType Directory -Path (Split-Path $binary -Parent) -Force | Out-Null
     [IO.File]::WriteAllText($binary,'synthetic audited '+$pair[0])
@@ -114,9 +114,7 @@ if ($manifest.MergeCoreSettings) {
     Assert ($core.FutureOption -eq 'preserve' -and !$core.AutoUpdateEnabled -and !$core.FollowCS2ServerGuidelines) 'Core merge incorrect.'
 }
 if($manifest.ApplyNativeCompatibility) {
-    Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $nativeSettings.Path)).Hash -eq $nativeSettings.SHA256) 'Native adapter output mismatch.'
-    $vision=Get-Content -LiteralPath (Join-Path $fixture 'addons\BotVision\gamedata.json') -Raw | ConvertFrom-Json
-    Assert ($vision.GetSmokeDensityInLine.signatures.windows -eq $nativeSettings.SmokeSignatureAfter) 'BotVision signature mismatch.'
+    foreach($native in $nativeSettings.Files){Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $native.Path)).Hash -eq $native.OutputSHA256) ('Native adapter output mismatch: '+$native.Path)}
 }
 if($manifest.ApplyBotStateCompatibility) {
     $botStateSettings=Get-Content -LiteralPath (Join-Path $Package 'payload\BotStateCompatibilitySettings.json') -Raw | ConvertFrom-Json

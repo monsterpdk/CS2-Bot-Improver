@@ -1,0 +1,11 @@
+# Native network-message compatibility
+
+CS2 2000943 changed INetworkMessageInternal from the old virtual-object access path used by CSS 379 to a direct descriptor. The observed startup dump faults at CSS RVA 0xbe0ab while retrieving the user-message ID. The current descriptor's name storage is at +0, allocation callback at +8 and message ID at +0x18. Those uses are validated against the new networksystem registration/lookup functions and the engine's actual use, with the protobuf subobject still at +0x30.
+
+`compatibility/NativeCompatibilitySettings.json` lists every exact input/output hash, file offset, original byte sequence and replacement. `NativeCompatibility.psm1` performs the transformation in memory, rejects unknown/overlapping edits and checks the full output hash before the installer writes it. The transactional installer backs up both native modules with the other changed files and restores on failure. Reinstall accepts the exact original or exact transformed DLL; other revisions are rejected.
+
+CSS changes cover ID/name access, five lookup sites and four allocation sites. BotController changes cover voice lookup/allocation and release through the real message destructor. Dispatch, authentication and send outcomes are preserved. There are no added sections, imports, code caves or jump redirections, and stack/unwind information is unchanged. This is distinct from the historical CSS 376 engine-slot adapter, which is not used.
+
+Native DLLs and private dumps are excluded from the source/update ZIPs. Obtain the pinned originals from the original v1.4.8 package/CSS 379. The transformation is reproducible from the included settings and PowerShell module. See data/NATIVE-ABI-AUDIT.json and data/NATIVE-FIXTURE-RESULTS.json for static/native-fixture evidence. These checks cannot establish all live interfaces or general crash-free gameplay. Reassess compatibility after future game updates; do not edit guards to force a different version.
+
+Upstream source: https://github.com/roflmuffin/CounterStrikeSharp/tree/v1.0.379 (GPL-3.0); BotController pinned source/author and license are listed in UPSTREAM-SOURCES.json and NOTICE.md. This locally applied compatibility adapter is not an official upstream build.

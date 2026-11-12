@@ -57,5 +57,16 @@ public static void Run(){
  }
  Check(CrouchJumpPolicy.FindDetour(new(0,0,0),new(140,0,0),0,MidGap) is null,"supported endpoints do not hide unsupported route interior");
  Check(CrouchJumpPolicy.FindDetour(new(float.NaN,0,0),new(140,0,0),0,(_,_,_)=>new(1,false,0,false)) is null,"invalid position cannot initiate detour");
+ var advance=CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),(a,b,h)=>Sweep(new(){floor},a,b,h));
+ Check(advance is {} step&&step.Target.X==48&&step.Rise==0,"stalled bot can advance along a verified clear supported route");
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),(a,b,h)=>Sweep(wall,a,b,h)) is null,"forward recovery never walks through a wall");
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),(_,_,_)=>new(0,true,0,false)) is null,"embedded start cannot authorize forward motion");
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),(_,_,_)=>new(1,false,0,false)) is null,"clear air without supporting ground cannot authorize forward motion");
+ RecoveryHit ForwardGap(RecoveryPoint a,RecoveryPoint b,float h)=>b.Z<a.Z&&a.X>10&&a.X<40?new(1,false,0,false):Sweep(new(){floor},a,b,h);
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),ForwardGap) is null,"forward support checks include the route interior");
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,40),(a,b,h)=>Sweep(new(){floor},a,b,h)) is null,"raised objective does not masquerade as flat walking recovery");
+ Check(CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(140,0,0),(a,b,h)=>Sweep(new(){floor},a,b,h),new[]{advance!.Value}) is null,"previously ineffective forward direction is not forced repeatedly");
+ var shortAdvance=CrouchJumpPolicy.FindClearAdvance(new(0,0,0),new(36,0,0),(a,b,h)=>Sweep(new(){floor},a,b,h));
+ Check(shortAdvance is {} shortStep&&shortStep.Target.X==28,"forward recovery leaves an arrival margin instead of overshooting a nearby goal");
 }
 }

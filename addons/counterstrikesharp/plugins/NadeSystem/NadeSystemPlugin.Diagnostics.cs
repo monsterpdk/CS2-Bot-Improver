@@ -37,8 +37,8 @@ public partial class NadeSystemPlugin
     private bool ValidateGrenadeBuild()
     {
         var path=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(OperatingSystem.IsWindows() && File.Exists(path) && File.ReadLines(path).Any(line=>line.Trim()=="ClientVersion=2000942")) return true;
-        Logger.LogError("[NadeSystem] This local compatibility trial requires the audited Windows ClientVersion 2000942; inactive on this build.");
+        if(OperatingSystem.IsWindows() && File.Exists(path) && File.ReadLines(path).Any(line=>line.Trim()=="ClientVersion=2000943")) return true;
+        Logger.LogError("[NadeSystem] This local compatibility trial requires the audited Windows ClientVersion 2000943; inactive on this build.");
         return false;
     }
     private void InitGrenadeDiagnostics()

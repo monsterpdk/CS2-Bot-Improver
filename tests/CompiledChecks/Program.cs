@@ -9,6 +9,8 @@ static void Run(string[] args){
  if(Calls("Load").Any(x=>x is "InstallBotBlindHook" or "OnPlayerBlind")||Calls("OnTick").Contains("ProcessFlashbangAvoidance"))throw new Exception("Artificial immunity remains active");Console.WriteLine("PASS compiled Load/Tick do not install/call artificial flash immunity");
  if(Calls("RecoverStuckBot").Any(x=>x is "get_JumpTimestamp" or "get_StuckJumpTimer"))throw new Exception("Per-tick jump rearming returned");Console.WriteLine("PASS legacy recovery leaves native jump timers alone");
  var protectedTimers=new[]{"get_IsRapidFiring","get_PeripheralTimestamp","get_FireWeaponTimestamp","get_AlertTimer","get_IgnoreEnemiesTimer","get_PanicTimer","get_SurpriseTimer","get_IsEnemySniperVisible","get_SawEnemySniperTimer"};
+ if(Calls("RecoverStuckBot").Any(x=>x is "Cos" or "Sin" or "get_EyeAngles"))throw new Exception("Unchecked backwards-push recovery returned");
+ Console.WriteLine("PASS legacy recovery no longer computes unchecked backwards velocity");
  if(Calls("UpdateBotBehavior").Intersect(protectedTimers).Any())throw new Exception("Combat timing/readiness override remains");
  var combat=Calls("UpdateBotCombat");
  if(combat.Contains("get_IsAimingAtEnemy")||combat.Contains("set_IsAttacking")||combat.Count(x=>x=="get_IsAttacking")!=1)throw new Exception("Aim-to-attack shortcut remains");
@@ -44,7 +46,7 @@ static void Run(string[] args){
   var enabled=policy.GetMethod("IsEnabled",BindingFlags.NonPublic|BindingFlags.Static)!;
   var defs=(System.Collections.IEnumerable)ai.GetType("BotAI.WindowsPatchDefinitions",true)!.GetProperty("All",BindingFlags.NonPublic|BindingFlags.Static)!.GetValue(null)!;
   var keys=defs.Cast<object>().Select(x=>(string)x.GetType().GetProperty("Key")!.GetValue(x)!).ToHashSet();
-  foreach(string key in new[]{"AttackState_SkipFireRateCheck","IsNoticable_AlwaysTrue","DefuseBomb_SkipIsVisibleCheck","BombBeep_CT_GlobalHearRange","OnBombPlanted_AllBotsLearnSite","OnAudibleEvent_GlobalHearRange","BombPickup_CT_GlobalHearRange"})
+  foreach(string key in new[]{"AttackState_SkipFireRateCheck","IsNoticable_AlwaysTrue","DefuseBomb_SkipIsVisibleCheck","BombBeep_CT_GlobalHearRange","OnBombPlanted_AllBotsLearnSite","OnAudibleEvent_GlobalHearRange","BombPickup_CT_GlobalHearRange","TBot_BombsiteSearch_UseKnownPlantedSite"})
    if(!keys.Contains(key)||(bool)enabled.Invoke(null,new object[]{key})!)throw new Exception("Unfair patch enabled/missing: "+key);
   if(!(bool)enabled.Invoke(null,new object[]{"GameState_Reset"})!)throw new Exception("Unrelated compatibility patch disabled");
   Console.WriteLine("PASS actual BotAI disables native fire-rate/notice bypasses and retains existing fairness exclusions plus compatibility patch");

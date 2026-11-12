@@ -1,0 +1,32 @@
+{
+  "passed": 26,
+  "checks": [
+    "actual GetMessageID descriptor 0",
+    "actual GetMessageID descriptor 47",
+    "actual GetMessageID descriptor 124",
+    "actual GetMessageID descriptor 2920",
+    "actual GetMessageID descriptor -1",
+    "allocation 0x7b369 result 305418240",
+    "allocation 0x7b369 result None",
+    "allocation 0x8e311 result 305418240",
+    "allocation 0x8e311 result None",
+    "allocation 0xb77ff result 305418240",
+    "allocation 0xb77ff result None",
+    "allocation 0xb7907 result 305418240",
+    "allocation 0xb7907 result None",
+    "FindId descriptor identity",
+    "GetMessageName data",
+    "lookup 0x7b360 slot 10",
+    "lookup 0x8e30b slot 10",
+    "lookup 0xb77f3 slot 10",
+    "lookup 0xb78f8 slot 27",
+    "lookup 0xb7a50 slot 10",
+    "lookup 0x20cd9 slot 27",
+    "lookup 0x20cfc slot 9",
+    "lookup 0x20d1c slot 9",
+    "voice allocator",
+    "voice destructor / send outcome 0",
+    "voice destructor / send outcome 1"
+  ],
+  "note": "Executes exact patched instruction spans on allocated fixture descriptors/vtables; no CS2 loaded."
+}

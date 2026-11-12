@@ -15,7 +15,7 @@ namespace BotAimImprover;
 public partial class BotAimImprover : BasePlugin
 {
     public override string ModuleName => "BotAimImprover";
-    public override string ModuleVersion => "2.1.8-fairplay.1";
+    public override string ModuleVersion => "2.1.8-fairplay.2";
     public override string ModuleAuthor => "ed0ard & htfy96 & XBribo & unicbm";
     public override string ModuleDescription => "Restores intelligent aim part selection for CS2 bots.";
 
@@ -138,7 +138,7 @@ public partial class BotAimImprover : BasePlugin
     public override void Load(bool hotReload)
     {
         var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000942")) { Logger.LogError("[Fairplay] Unsupported build; aim inactive");return; }
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000943")) { Logger.LogError("[Fairplay] Unsupported build; aim inactive");return; }
         bool win = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
         try

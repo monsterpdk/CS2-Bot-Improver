@@ -28,7 +28,7 @@ public static class BotOffsets
 public class BotAI : BasePlugin
 {
     public override string ModuleName => "Bot AI - Patches";
-    public override string ModuleVersion => "1.8.14-fairplay.1";
+    public override string ModuleVersion => "1.8.14-fairplay.3";
     public override string ModuleAuthor => "K4ryuu & Austin (updated by ed0ard & XBribo & unicbm & Misaka17032 & AmagiReina)";
     public override string ModuleDescription =>
         "Improve and fix bots' behavior comprehensively";
@@ -41,7 +41,7 @@ public class BotAI : BasePlugin
     public override void Load(bool hotReload)
     {
         var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000942")) { Logger.LogError("[Fairplay] Unsupported build; native patches inactive");return; }
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000943")) { Logger.LogError("[Fairplay] Unsupported build; native patches inactive");return; }
         Logger.LogInformation("Bot AI Patches loading...");
         var patchDefinitions=(_isLinux?LinuxPatchDefinitions.All:WindowsPatchDefinitions.All).Where(x=>FairplayPatchPolicy.IsEnabled(x.Key)).ToDictionary(x=>x.Key,x=>x.Value);
 
@@ -53,7 +53,7 @@ public class BotAI : BasePlugin
         var caveNames = patchDefinitions.Keys.Where(n => n.EndsWith("_Cave")).ToHashSet();
         var appliedCaves = new HashSet<string>();
 
-        // Phase 1 — resolve every signature BEFORE any write. A cave's signature is
+        // Phase 1 â€” resolve every signature BEFORE any write. A cave's signature is
         // the CC padding the cave patch itself overwrites, so it cannot be re-resolved
         // once written, and the displacement math below needs both pair addresses.
         var sites = new Dictionary<string, nint>();
@@ -64,7 +64,7 @@ public class BotAI : BasePlugin
             sites[name] = sigAddr + def.patchOffset;
         }
 
-        // Phase 2 — compute rel32 fields from the resolved addresses (Linux cave
+        // Phase 2 â€” compute rel32 fields from the resolved addresses (Linux cave
         // pairs; no-op elsewhere). A failed fixup marks the entry unappliable so the
         // pair dies atomically instead of writing a jump with a wrong displacement.
         var patchBytes = new Dictionary<string, List<byte>>();
@@ -80,7 +80,7 @@ public class BotAI : BasePlugin
             patchBytes[name] = bytes;
         }
 
-        // Phase 3 — write caves first, then partners (1.8.8 atomic ordering).
+        // Phase 3 â€” write caves first, then partners (1.8.8 atomic ordering).
         foreach (var name in caveNames)
         {
             if (sites.TryGetValue(name, out nint addr) && WritePatch(name, addr, patchBytes[name], patchDefinitions[name].expectedOriginal))
@@ -152,10 +152,10 @@ public class BotAI : BasePlugin
         Logger.LogInformation("All patches restored.");
     }
 
-    // ── Patch machinery ───────────────────────────────────────────────────────
+    // â”€â”€ Patch machinery â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
     // Write-only: the address is resolved (and displacement fields computed) before
-    // any patch is written — see the phased Load above.
+    // any patch is written â€” see the phased Load above.
     private bool WritePatch(string name, nint addr, List<byte> patchBytes, string expectedOriginal)
     {
         try

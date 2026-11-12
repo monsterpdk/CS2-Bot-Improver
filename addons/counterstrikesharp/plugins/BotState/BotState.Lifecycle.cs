@@ -16,7 +16,7 @@ public partial class BotState
     public override void Load(bool hotReload)
     {
         var steam=System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !System.IO.File.Exists(steam) || !System.IO.File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000942")) { Logger.LogError("[Fairplay] Unsupported game build; BotState inactive");return; }
+        if(!OperatingSystem.IsWindows() || !System.IO.File.Exists(steam) || !System.IO.File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000943")) { Logger.LogError("[Fairplay] Unsupported game build; BotState inactive");return; }
         InitFairCrouchRecovery();
         RegisterEventHandler<EventRoundEnd>((_,_)=>{ResetFairCrouchRecovery();return HookResult.Continue;});
         RegisterListener<Listeners.OnMapStart>(_=>ResetFairCrouchRecovery());

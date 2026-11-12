@@ -7,7 +7,7 @@ body:
     attributes:
       label: Game and maintenance versions
       description: Include CS2 ClientVersion from game/csgo/steam.inf, maintenance release, CounterStrikeSharp version, map, bot count, and selected Low/Medium/High profile. This edition is validated for Windows local games only.
-      placeholder: "ClientVersion: 2000942; maintenance: 1.4.8-fairplay.1; CSS: 379; map: de_dust2; population: 16; profile: Low"
+      placeholder: "ClientVersion: 2000943; maintenance: 1.4.8-fairplay.3; CSS: 379; map: de_dust2; population: 16; profile: Low"
     validations:
       required: true
   - type: markdown

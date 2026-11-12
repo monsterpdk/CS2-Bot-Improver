@@ -216,7 +216,9 @@ public partial class BotState
             var goal=bot.GoalPosition;
             var destination=new RecoveryPoint(goal.X,goal.Y,goal.Z);
             int side=CrouchJumpPolicy.PreferredSide(pos,destination,entry.Attempts,entry.PreviousDetour);
-            var plan=now-entry.Since>=8?CrouchJumpPolicy.FindDetour(pos,destination,side,(a,b,height)=>RecoverySweep(pawn,a,b,height),entry.PreviousDetour,entry.FailedDetours):null;
+            var plan=now-entry.Since>=8?CrouchJumpPolicy.FindClearAdvance(pos,destination,(a,b,height)=>RecoverySweep(pawn,a,b,height),entry.FailedDetours):null;
+            bool clearAdvance=plan is not null;
+            if(plan is null&&now-entry.Since>=8)plan=CrouchJumpPolicy.FindDetour(pos,destination,side,(a,b,height)=>RecoverySweep(pawn,a,b,height),entry.PreviousDetour,entry.FailedDetours);
             plan??=CrouchJumpPolicy.Find(pos,destination,(a,b,height)=>RecoverySweep(pawn,a,b,height));
             if(plan is null){if(_recoveryTraceRemaining<=0)entry.NextTry=now+0.2f;else RecoveryLog("no_safe_route",slot,entry);return false;}
             entry.Attempts++;entry.Plan=plan;entry.StartPosition=pos;entry.Started=now;entry.NextSample=now+0.2f;entry.Jumped=false;entry.Owner=(IBotControllerApi)_botController!;
@@ -225,7 +227,7 @@ public partial class BotState
                 var move=RecoveryMovement(pawn,plan.Value);
                 entry.MovementToken=entry.Owner.StartUsercmdMovement(slot,move.Forward,move.Left);
                 if(entry.MovementToken<=0){CancelRecovery(slot,entry);_crouchAborted++;return false;}
-                entry.Jumped=true;_crouchPlans++;RecoveryLog("detour",slot,entry);return true;
+                entry.Jumped=true;_crouchPlans++;RecoveryLog(clearAdvance?"advance":"detour",slot,entry);return true;
             }
             entry.DuckToken=entry.Owner.InjectUsercmd(slot,(ulong)PlayerButtons.Duck,950);
             if(entry.DuckToken<=0){CancelRecovery(slot,entry);_crouchAborted++;return false;}

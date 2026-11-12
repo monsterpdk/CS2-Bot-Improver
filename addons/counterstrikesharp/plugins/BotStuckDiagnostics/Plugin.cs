@@ -12,7 +12,7 @@ namespace BotStuckDiagnostics;
 public sealed class Plugin:BasePlugin
 {
     public override string ModuleName=>"Bot Stuck Diagnostics";
-    public override string ModuleVersion=>"0.1.0-fairplay.5";
+    public override string ModuleVersion=>"0.1.0-fairplay.6";
     public override string ModuleAuthor=>"Fairplay maintenance";
     public override string ModuleDescription=>"Read-only, bounded cross-map stationary bot observation";
     private sealed class Entry
@@ -39,7 +39,7 @@ public sealed class Plugin:BasePlugin
         AddCommand("bot_stuck_status","Show the persistent read-only stuck observer status",(_,info)=>
             info.ReplyToCommand($"[StuckObserver] version={ModuleVersion} active={_active} live={_live} failed={_failed} maps={_mapInstance} samples={_samples} candidates={_candidates} rows={_rows} snapshotErrors={_snapshotErrors} log={_log?.Path}"));
         var steam=System.IO.Path.GetFullPath(System.IO.Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(s=>s.Trim()=="ClientVersion=2000942"))
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(s=>s.Trim()=="ClientVersion=2000943"))
         {Logger.LogError("[StuckObserver] Inactive on unaudited build/platform");return;}
         _log=new(ModuleDirectory,"stuck");_active=_log.Enabled;
         AddCommand("bot_stuck_diagnostics","Detailed observation: on/off (default off)",(_,info)=>

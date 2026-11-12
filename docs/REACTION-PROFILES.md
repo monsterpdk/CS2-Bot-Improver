@@ -1,4 +1,4 @@
-# Reaction times and match population — Fairplay 1.4.8-fairplay.1
+# Reaction times and match population — Fairplay 1.4.8-fairplay.3
 
 Medium reaction templates now range from 0.30 to 0.45 seconds (default 0.35); High ranges from 0.22 to 0.35 seconds (default 0.28). Rush uses 0.35 / 0.26 seconds respectively. Low is unchanged. Accuracy, aim speed, focus, skill, attack delay and behavior trees are unchanged. These are engine profile settings, not a guaranteed minimum time between seeing a target and the first shot.
 
@@ -20,6 +20,4 @@ The public updater transforms the installed original v1.4.8 Medium/High VPKs loc
 
 The private full installer includes the accepted presets and starts with Low. Original panel/runtime/profile assets remain excluded from the public release. Existing smoke and grenade fairness changes are retained.
 
-Validated on Windows x64, CS2 ClientVersion 2000942 / patch 1.41.9.6. The user accepted local gameplay. A native audit passed for 36 active patch sites, aim instructions, smoke density and grenade factories on this build. No unchanged plugin binaries were rebuilt solely to change the release number. This is not a second-PC or all-map validation.
-
-This release additionally restores native combat timing/notice gates by removing BotState readiness/attack overrides and excluding two BotAI bypasses. Medium playability was accepted locally; High lacks equivalent recent acceptance.
+Target: Windows x64, CS2 ClientVersion 2000943 / patch 1.41.9.7. Reaction profile transformations are unchanged; the native audit covers 32 enabled BotAI patches plus used hooks/factories, and the network descriptor adapter has separate fixture validation. All six public managed DLLs are rebuilt from the current source. The private trial has positive user feedback; this is not separate public-build, second-PC or all-map validation.

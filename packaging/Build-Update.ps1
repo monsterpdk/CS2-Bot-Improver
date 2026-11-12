@@ -3,11 +3,13 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $Output = [IO.Path]::GetFullPath($Output)
 if (Test-Path -LiteralPath $Output) { throw 'Choose a new output folder.' }
-if ((Get-Content -LiteralPath (Join-Path $Csgo 'steam.inf') -Raw) -notmatch '(?m)^ClientVersion=2000942\s*$') { throw 'Build only from the tested ClientVersion 2000942 installation.' }
+if ((Get-Content -LiteralPath (Join-Path $Csgo 'steam.inf') -Raw) -notmatch '(?m)^ClientVersion=2000943\s*$') { throw 'Build only from the tested ClientVersion 2000943 installation.' }
 $dependencies = Get-Content -LiteralPath (Join-Path $root 'data\UPSTREAM-DEPENDENCIES.json') -Raw | ConvertFrom-Json
 $dependencies = @($dependencies | ForEach-Object { [PSCustomObject]@{ Path=$_.Path; SHA256=$_.SHA256 } })
+Import-Module (Join-Path $root 'compatibility/NativeCompatibility.psm1') -Force
+Assert-TestedGame -Csgo $Csgo -SettingsPath (Join-Path $root 'compatibility/NativeCompatibilitySettings.json')
 foreach ($entry in $dependencies) {
-    if ((Get-FileHash -LiteralPath (Join-Path $Csgo $entry.Path)).Hash -ne $entry.SHA256) { throw ('Pinned dependency changed: ' + $entry.Path) }
+    if ((Get-FileHash -LiteralPath (Join-Path $Csgo $entry.Path)).Hash -ne $entry.SHA256 -and !(Test-NativeCompatibilityHash -Relative $entry.Path -Hash (Get-FileHash -LiteralPath (Join-Path $Csgo $entry.Path)).Hash -Expected $entry.SHA256 -SettingsPath (Join-Path $root 'compatibility/NativeCompatibilitySettings.json'))) { throw ('Pinned dependency changed: ' + $entry.Path) }
 }
 if(!$UseBuiltPlugins) { & (Join-Path $PSScriptRoot 'Build-Plugins.ps1') -Csgo $Csgo }
 $payload = Join-Path $Output 'payload'
@@ -44,8 +46,8 @@ foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -File -Force) {
 }
 $files = @(Get-ChildItem -LiteralPath $payload -Recurse -File | ForEach-Object { [PSCustomObject]@{ Path=$_.FullName.Substring($payload.Length + 1); SHA256=(Get-FileHash -LiteralPath $_.FullName).Hash } })
 [PSCustomObject]@{
-    Version='1.4.8-fairplay.1'; ReleaseDate='2026-11-11'; ClientVersion='2000942'; PatchVersion='1.41.9.6'; Platform='Windows x64'; UpstreamBaseline='v1.4.8'; CounterStrikeSharp='1.0.379'
+    Version='1.4.8-fairplay.3'; ReleaseDate='2026-11-12'; ClientVersion='2000943'; PatchVersion='1.41.9.7'; Platform='Windows x64'; UpstreamBaseline='v1.4.8'; CounterStrikeSharp='1.0.379'
     Plugins=@('BotAI','BotAimImprover','BotBuy','BotControllerImpl','BotHiderImpl','BotRandomizer','BotState','BotStuckDiagnostics','BotVisionCompatibility','NadeSystem','RoundDamageRecap')
-    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf'); ApplyNativeCompatibility=$false; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
+    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $Output 'manifest.json') -Encoding UTF8
 Write-Output ('Public v1.4.8 update staged: ' + $files.Count + ' payload files.')

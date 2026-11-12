@@ -1,34 +1,40 @@
 # CS2 Bot Improver - Windows Fairplay Edition
 
-**v1.4.8-fairplay.1 (preview), 2026-11-11.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.8](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.8), for local Windows bot matches.
+**v1.4.8-fairplay.3 (preview), 2026-11-12.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.8](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.8), for local Windows bot matches.
 
-The original pack supplies the bot features, panel, cosmetics, native modules and runtime. This fork adds fair smoke/flash handling, real grenade inventory, realistic scripted throws, approximate sound awareness, teammate spacing, humanized reactions and guarded stuck recovery. Upstream Rush, radio commands, FOV, post-plant behavior and updated cosmetics remain available through the separately installed original pack.
+The original pack supplies the panel, cosmetics, native modules and runtime. This fork adds fair smoke/flash handling, real grenade inventory, realistic scripted throws, approximate sound awareness, teammate spacing, humanized reactions and guarded stuck recovery. Upstream Rush, radio commands, FOV, post-plant behavior and cosmetics remain available through the separately installed original pack.
+
+## Latest update
+
+The CS2 1.41.9.7 update changed native network-message descriptors. The updater now adapts the pinned CounterStrikeSharp 379 and BotController DLLs locally, including lookup, creation and voice-message release. It addresses the observed startup access violation without disabling message dispatch. Original native DLLs are obtained from upstream; the corresponding byte transformations and evidence are included here. See [native compatibility](docs/NATIVE-COMPATIBILITY.md).
+
+Stuck recovery no longer applies an unchecked periodic backwards push. After persistent stationary movement failure, a short advance toward the goal is considered only with checked standing clearance and ground support. This does not replace map navigation or guarantee escape from every obstacle.
 
 ## Install
 
-1. Install the **original v1.4.8 Windows pack with its bundled CounterStrikeSharp 379**. An older v1.4.5 installation must first be upgraded to that baseline; this update does not contain the original runtime or panel.
-2. Download **CS2-Bot-Improver-Fairplay-Update-v1.4.8-2026-11-11.zip** from Releases and extract outside the game folder.
-3. Close CS2 and the panel. Run **Install.cmd** and enter your **game\csgo** folder.
+1. Install the **original v1.4.8 Windows pack with its bundled CounterStrikeSharp 379**. Older v1.4.5 bases must first be upgraded. Existing v1.4.8 Fairplay users can apply this update directly when their pinned dependencies match.
+2. Download **CS2-Bot-Improver-Fairplay-Update-v1.4.8-fairplay.3-2026-11-12.zip** from Releases and extract outside the game folder.
+3. Close CS2 and the panel. Run **Install.cmd** and select **game\csgo**.
 4. Start the installed **Start-CompatiblePanel.cmd**. Use Bot Mode for local matches. The default is **8v8 including human players**.
 
-Supported target: Windows x64, **ClientVersion 2000942 / patch 1.41.9.6**, SDK **1.0.379** and exact audited dependencies. The installer rejects mismatches, backs up replaced files, preserves current gameinfo/layer paths and active difficulty selection, and supports reinstall/restore. Do not bypass version/hash guards after a game update. See [installation](docs/INSTALLATION.md).
+Supported target: Windows x64, **ClientVersion 2000943 / patch 1.41.9.7**, SDK **1.0.379** and exact audited dependencies. Original and already-adapted native DLLs are accepted; unknown binaries are rejected. Replaced files are backed up, active difficulty and current gameinfo/layer paths are preserved, and reinstall/restore is supported. Do not bypass guards after a future game update. See [installation](docs/INSTALLATION.md).
 
-## What changed
+## Fairplay behavior
 
-- Medium/High profile reaction times are humanized, and native perception/fire/surprise delays are no longer erased by BotState or bypassed by selected BotAI patches. Medium playability has positive local feedback. Profile values are not a guaranteed minimum sight-to-shot interval.
-- Scripted grenades consume real purchased or picked-up inventory. Release geometry, speed, range, heading, pitch and obstruction checks limit implausible throws. Native grenade counts and ownership remain relevant.
-- Bots retain native flash blindness; blind aim no longer follows live target updates. Smoke concealment reduces precise tracking while allowing blind fire. Sound reactions use limited, delayed and approximate information.
-- Recovery checks player-width clearance and landing support before crouch-jumps or short detours, measures actual progress, avoids repeating ineffective directions, handles close raised waypoints, and yields to native ladder movement. It uses bounded input leases and cancels only its own controls.
-- Updated to the v1.4.8 component sources and typed SDK 379 fields. The old CSS 376/BotState byte adapters are not used or shipped.
+- Medium/High profile reaction times are humanized. Selected plugins no longer erase native perception/fire/surprise delays. Profile values are not a guaranteed minimum sight-to-shot interval.
+- Scripted grenades consume real purchased or picked-up inventory. Geometry, range, speed, heading, pitch and obstruction checks limit implausible throws.
+- Native flash blindness is retained. Blind aim does not follow live target updates. Smoke concealment reduces precise tracking while allowing blind fire; hearing uses limited, delayed and approximate information.
+- Recovery checks player-width clearance and ground support, measures progress, avoids repeating failed directions, handles close raised waypoints and yields to native ladder movement. Input leases are bounded and only owned controls are cancelled.
+- The wrong-target bomb-search call replacement remains disabled, retaining native bombsite search.
 
 ## Logging
 
-Detailed diagnostics are **off by default**, with status counters available. Temporarily enable `bot_nades_diagnostics on`, `bot_flash_diagnostics on`, `bot_stuck_diagnostics on`, or `bot_crouch_diagnostics on`; turn them off afterward. The observer does not sample entities while disabled. Four maintenance loggers together keep at most **8 MiB detail + 1 MiB own errors**, using fixed rotating filenames. This does not bound Valve's, Windows', CSS's or other upstream logs. No personal logs/dumps are included. See [diagnostics](docs/DIAGNOSTICS.md).
+Detailed diagnostics are **off by default**. Status counters remain available. Temporarily enable `bot_nades_diagnostics on`, `bot_flash_diagnostics on`, `bot_stuck_diagnostics on` or `bot_crouch_diagnostics on`; disable them afterward. The observer does not sample entities while disabled. Four maintenance loggers together retain at most **8 MiB detail + 1 MiB own errors**, with fixed rotating filenames. Valve/Windows/CSS/upstream logs have separate policies. No personal logs or dumps are included. See [diagnostics](docs/DIAGNOSTICS.md).
 
-## Preview status and known limitations
+## Preview status
 
-This is a **preview**, not a claim that navigation or stability is solved. Local play supports the reaction, grenade, smoke and flash changes and improved desk recovery. Bots can still stall at some windows, ladders and obstacles; overlapping bots can complicate recovery. An observed Train crash was a server.dll access violation with an invalid object reference; its root cause is unproven. No crash fix is claimed. High, Linux, dedicated/public servers and another PC have not received equivalent validation. Public logging defaults/version labels have automated checks but no separate live gameplay acceptance.
+The private trial has positive local feedback. Automated validation covers native instruction fixtures, managed policies and transactional install/restore; the clean public package has no separate live gameplay acceptance. Bots may still stall at some windows, ladders or obstacles. Unrelated crashes, chance hits and penetration remain possible. The current smoke-bomb search behavior is unchanged. Linux, dedicated/public servers and another computer have not received equivalent validation.
 
-Grenade choices depend on inventory, money, useful recorded map lineups and safety. Some maps have no decoy lineups. Blind shots/chance hits and penetration remain possible. Bot Mode uses `-insecure`; switch to Online mode for ordinary online play.
+Grenade choices depend on stock, money, useful map lineups and safety checks. Some maps have no decoy lineups. Bot Mode uses `-insecure`; switch to Online mode for ordinary online play.
 
-See [changes](CHANGELOG.md), [build instructions](docs/BUILDING.md), [reaction profiles](docs/REACTION-PROFILES.md), [behavior](docs/FAIR-AWARENESS.md), [known issues](docs/KNOWN-ISSUES.md) and [attribution](NOTICE.md). Game/runtime/native/shared DLLs, the original panel and VPK assets are obtained from their authors, not redistributed in this release. Not affiliated with Valve or endorsed by upstream maintainers.
+See [changes](CHANGELOG.md), [building](docs/BUILDING.md), [profiles](docs/REACTION-PROFILES.md), [behavior](docs/FAIR-AWARENESS.md), [known issues](docs/KNOWN-ISSUES.md) and [attribution](NOTICE.md). Game/runtime/native/shared DLLs, the original panel and VPK assets are not redistributed. This is not an official Valve or upstream release.

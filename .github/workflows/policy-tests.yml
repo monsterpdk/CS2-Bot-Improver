@@ -10,8 +10,10 @@ jobs:
           dotnet-version: '10.0.x'
       - shell: pwsh
         run: |
-          foreach ($name in @('InventoryTests','FlashPolicyTests','SmokeAimTests','ReplaySafetyTests','AwarenessTests','IdleTrackerTests','DiagnosticsTests','CrouchPolicy')) {
+          foreach ($name in @('InventoryTests','FlashPolicyTests','SmokeAimTests','ReplaySafetyTests','AwarenessTests','IdleTrackerTests','DiagnosticsTests','CrouchPolicy','PatchPolicyTests')) {
             $p = Get-ChildItem "tests/$name" -Filter *.csproj | Select-Object -First 1
             dotnet run --project $p.FullName
             if ($LASTEXITCODE -ne 0) { throw "Failed: $name" }
           }
+      - shell: pwsh
+        run: ./packaging/Test-NativeCompatibility.ps1

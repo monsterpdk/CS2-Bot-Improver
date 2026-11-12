@@ -23,6 +23,28 @@ internal static class CrouchJumpPolicy
         =>(position.X-start.X)*plan.DirX+(position.Y-start.Y)*plan.DirY;
     internal static bool IsStalled(float elapsed,RecoveryPoint start,RecoveryPoint position,CrouchJumpPlan plan)
         =>plan.Rise==0&&elapsed>=0.7f&&ForwardProgress(start,position,plan)<2;
+    internal static CrouchJumpPlan? FindClearAdvance(RecoveryPoint origin,RecoveryPoint goal,
+        Func<RecoveryPoint,RecoveryPoint,float,RecoveryHit> sweep,IReadOnlyList<CrouchJumpPlan>? failed=null)
+    {
+        if(!origin.Finite||!goal.Finite)return null;
+        float distance=origin.HorizontalDistance(goal);
+        if(distance<32||distance>2048||MathF.Abs(goal.Z-origin.Z)>16)return null;
+        float dx=(goal.X-origin.X)/distance,dy=(goal.Y-origin.Y)/distance;
+        if(failed is not null&&failed.Any(p=>p.DirX*dx+p.DirY*dy>=0.85f))return null;
+        float reach=MathF.Min(48,distance-8);
+        var start=new RecoveryPoint(origin.X,origin.Y,origin.Z+2);
+        var end=new RecoveryPoint(start.X+dx*reach,start.Y+dy*reach,start.Z);
+        if(!sweep(start,end,StandingHeight).Clear)return null;
+        float landing=origin.Z;
+        for(int sample=0;sample<=4;sample++)
+        {
+            var top=new RecoveryPoint(start.X+(end.X-start.X)*sample/4,start.Y+(end.Y-start.Y)*sample/4,start.Z);
+            var floor=sweep(top,new(top.X,top.Y,origin.Z-8),StandingHeight);
+            if(floor.StartSolid||floor.ActorOrDoor||!float.IsFinite(floor.Fraction)||floor.Fraction<0||floor.Fraction>=1||!float.IsFinite(floor.NormalZ)||floor.NormalZ<0.7f)return null;
+            landing=top.Z-10*floor.Fraction;
+        }
+        return new(new(end.X,end.Y,landing),dx,dy,0);
+    }
     internal static int PreferredSide(RecoveryPoint origin,RecoveryPoint goal,int attempt,CrouchJumpPlan? previous)
     {
         if(previous is not {} last||last.Rise!=0||!origin.Finite||!goal.Finite||origin.HorizontalDistance(last.Target)>96)return attempt;
