@@ -11,6 +11,6 @@ The scripts build/package only, without installing into the game. Output source 
 
 Run policy/diagnostic tests from tests/*/*.csproj. CompiledChecks additionally takes the SDK api directory, original BotControllerApi.dll, built BotState.dll and built BotAI.dll as four arguments. Run packaging/Test-Package.ps1 -Package <staged-update> -Baseline <original-v1.4.8-folder> for isolated version/hash guards, rollback, install, reinstall and restore checks. The fixture replaces game binary hashes only inside its disposable copy. Original source/data provenance and exact upstream commits are recorded in data/ and UPSTREAM-SOURCES.json.
 
-Full builds retain upstream obsolete ConVar warnings; passing automated tests does not prove collision geometry or stability on every map. Public opt-in logging differs from the private trial defaults, so separate live acceptance remains outstanding.
+Full builds retain upstream obsolete ConVar warnings; passing automated tests does not prove collision geometry or stability on every map. Public opt-in logging differs from the local test defaults. Stable promotion follows extended local gameplay including High (Hard); no separate live test of the clean public build is claimed.
 
 Run `packaging/Test-NativeCompatibility.ps1` for synthetic native transformation guards, or add `-Baseline <original-v1.4.8-folder>` to verify both real upstream DLLs against the published output hashes without modifying that baseline. The native DLLs are generated locally during installation, not included in the update payload.

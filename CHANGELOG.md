@@ -1,8 +1,8 @@
 # Changelog
 
-## v1.4.8-fairplay.3 - CS2 1.41.9.7 compatibility (preview)
+## v1.4.8-fairplay.3 - CS2 1.41.9.7 compatibility (stable)
 
-Restore compatibility with Windows CS2 ClientVersion **2000943 / patch 1.41.9.7**. This release includes the earlier Fairplay changes and two additions:
+Stable promotion on 2026-11-14. Restore compatibility with Windows CS2 ClientVersion **2000943 / patch 1.41.9.7**. This release includes the earlier Fairplay changes and two additions:
 
 - Adapt CounterStrikeSharp 379 and BotController to the updated native network-message descriptors. This addresses the observed startup access violation in user-message handling and also updates message lookup, allocation and voice-message release. The installer transforms exact, pinned original DLLs locally, verifies the resulting hashes and backs them up. Native DLLs are not redistributed.
 - Remove the unchecked periodic backwards push from stuck recovery. A stationary bot may instead take a short step toward its goal when standing clearance and ground support have been checked; bounded detour/crouch-jump recovery remains available.
@@ -11,8 +11,9 @@ The five version-gated maintained plugins now target 2000943. The previous wrong
 
 **Install:** obtain the original v1.4.8 Windows pack with its bundled CounterStrikeSharp 379, then extract the Fairplay Update ZIP outside the game, close CS2/panel and run Install.cmd. Existing v1.4.8 Fairplay installations can apply this update directly if their dependencies match; older v1.4.5 bases must be upgraded first. Start with the installed Start-CompatiblePanel.cmd.
 
-This preview is pinned to the listed game build and dependencies. Local feedback accepted the private trial; the clean public installation and other computers have not received equivalent live validation. Navigation stalls, chance shots and unrelated crashes remain possible. Linux/dedicated/public-server compatibility is not claimed. The remaining smoke-bomb search behavior is unchanged. Do not bypass guards after a future game update.
+Extended local Windows playtesting has now been reported successful, including the High (Hard) difficulty profile. This version is promoted to a stable release for the pinned local Windows setup. Gameplay binaries and behavior are unchanged from the November 12 preview. The clean public diagnostic defaults have automated validation; this does not establish separate live testing of that public build, every map, another PC, Linux or dedicated/public servers.
 
+Supported target remains Windows x64, CS2 2000943 / 1.41.9.7, original v1.4.8 and CSS 379 with exact pinned dependencies. Future game updates require compatibility review. Detailed logging remains off by default. Existing users of the accepted November 12 preview do not need to reinstall for gameplay changes.
 
 ## v1.4.8-fairplay.2 - bomb-search crash hotfix (2026-11-11, preview)
 
