@@ -1,4 +1,4 @@
-﻿param([string]$Baseline)
+param([string]$Baseline)
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $root 'compatibility/NativeCompatibility.psm1') -Force

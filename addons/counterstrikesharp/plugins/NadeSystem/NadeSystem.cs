@@ -25,7 +25,7 @@ namespace NadeSystem;
 public partial class NadeSystemPlugin : BasePlugin
 {
     public override string ModuleName    => "NadeSystem";
-    public override string ModuleVersion => "1.2.3-fairplay.2";
+    public override string ModuleVersion => "1.2.3-fairplay149.1";
     public override string ModuleAuthor  => "ed0ard & XBribo & unicbm";
 
     // grenades folder lives inside the plugin directory

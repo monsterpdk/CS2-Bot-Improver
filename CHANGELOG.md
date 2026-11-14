@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.4.9-fairplay.1 - upstream v1.4.9 integration (stable)
+
+Rebase the accepted Fairplay improvements onto original **CS2-Bot-Improver v1.4.9**, for Windows CS2 **2000943 / 1.41.9.7**.
+
+- Use official **CounterStrikeSharp 380**, updated Metamod, the latest panel and BotHider's demotracer/unload compatibility fixes. The former local CSS 379 network-message adapter is retired.
+- Retain only the BotController voice-message adapter: the original controller DLL and pinned source are unchanged and still need its descriptor lookup/allocation/release correction.
+- Include the new upstream retake behavior trees and reload behavior. Seven-entry profile VPKs preserve those files while keeping humanized Medium/High reactions; the same policy is applied to retake config (0.35 / 0.26 seconds). Low stays upstream.
+- Build release-pinned BotBuy 1.0.16 and BotRandomizer 1.3.5 sources/catalog with SDK 380. The original archive contains older builds; this update uses the source revisions pinned by the v1.4.9 tag.
+- Preserve real grenade inventory and throw limits, native flash blindness, smoke aim fairness, approximate hearing, spacing, protected native reaction timers and checked stuck recovery. The unsafe bomb-search replacement stays disabled because its expected bytes/target still do not fit this actual Windows binary.
+
+**Install the original v1.4.9 Windows pack with bundled CSS 380 first**, even when upgrading from a v1.4.8 Fairplay installation. Then extract the Fairplay Update ZIP outside the game, close CS2/panel and run Install.cmd. Start with Start-CompatiblePanel.cmd. The updater checks exact dependencies and game binaries, backs up changes and supports reinstall/restore.
+
+The local v1.4.9 integration received positive gameplay feedback. All eight public DLLs are rebuilt and automatically checked; the public build's disabled diagnostic defaults have no separate live acceptance. Longer High/Hard feedback applies to the preceding Fairplay base, not an equivalent extended v1.4.9 test. Navigation stalls and unrelated crashes can remain; no Linux, dedicated/public-server, every-map or second-PC validation is claimed.
+
+Detailed diagnostics remain off by default and bounded. Native/shared/runtime binaries, the original panel, VPK assets and personal logs/dumps are not redistributed. The update transforms the pinned BotController DLL locally and generates humanized profiles from the separately installed original files. Do not bypass guards after future game updates.
+
+
 ## v1.4.8-fairplay.3 - CS2 1.41.9.7 compatibility (stable)
 
 Stable promotion on 2026-11-14. Restore compatibility with Windows CS2 ClientVersion **2000943 / patch 1.41.9.7**. This release includes the earlier Fairplay changes and two additions:

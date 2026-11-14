@@ -1,72 +1,8 @@
 {
-  "Tag": "v1.4.8",
-  "PublishedUTC": "2026-11-07T11:50:28Z",
-  "ReleaseURL": "https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.8",
-  "OfficialAssetDigest": "sha256:eb8d176620578121f33a6d9df7ecab19cc43a76889a7c74152b6b9d22305cbd7",
-  "DownloadedSHA256": "EB8D176620578121F33A6D9DF7ECAB19CC43A76889A7C74152B6B9D22305CBD7",
-  "PinnedComponents": [
-    {
-      "Name": "BotHider",
-      "Path": "addons/BotHider",
-      "Repository": "XBribo/CS2-Bot-Hider",
-      "Commit": "8be8e95919abb4ab05bb82b8cbdf516b4e347aa5",
-      "URL": "https://codeload.github.com/XBribo/CS2-Bot-Hider/zip/8be8e95919abb4ab05bb82b8cbdf516b4e347aa5"
-    },
-    {
-      "Name": "BotController",
-      "Path": "addons/BotController",
-      "Repository": "XBribo/CS2-Bot-Controller",
-      "Commit": "a46b15a865c135a95f44688bd964da478f83a51a",
-      "URL": "https://codeload.github.com/XBribo/CS2-Bot-Controller/zip/a46b15a865c135a95f44688bd964da478f83a51a"
-    },
-    {
-      "Name": "BotVision",
-      "Path": "addons/BotVision",
-      "Repository": "XBribo/CS2-Bot-Vision",
-      "Commit": "df8f0707c7590cd55d9ffb8f6824ec9f3c959f5f",
-      "URL": "https://codeload.github.com/XBribo/CS2-Bot-Vision/zip/df8f0707c7590cd55d9ffb8f6824ec9f3c959f5f"
-    },
-    {
-      "Name": "BotState",
-      "Path": "addons/counterstrikesharp/plugins/BotState",
-      "Repository": "ed0ard/CS2-Smarter-Bot",
-      "Commit": "ae672d36ab3ba0717bc921187d0aa44786b8a864",
-      "URL": "https://codeload.github.com/ed0ard/CS2-Smarter-Bot/zip/ae672d36ab3ba0717bc921187d0aa44786b8a864"
-    },
-    {
-      "Name": "BotAimImprover",
-      "Path": "addons/counterstrikesharp/plugins/BotAimImprover",
-      "Repository": "ed0ard/CS2-Bullseye-Bot",
-      "Commit": "c5a2e0f402f151336c820b7efc1b895aa087a953",
-      "URL": "https://codeload.github.com/ed0ard/CS2-Bullseye-Bot/zip/c5a2e0f402f151336c820b7efc1b895aa087a953"
-    },
-    {
-      "Name": "BotAI",
-      "Path": "addons/counterstrikesharp/plugins/BotAI",
-      "Repository": "ed0ard/CS2-BotAI",
-      "Commit": "7d6997e11b952abb899d71abefa959c6e49cdfef",
-      "URL": "https://codeload.github.com/ed0ard/CS2-BotAI/zip/7d6997e11b952abb899d71abefa959c6e49cdfef"
-    },
-    {
-      "Name": "BotRandomizer",
-      "Path": "addons/counterstrikesharp/plugins/BotRandomizer",
-      "Repository": "ed0ard/CS2-Bot-Randomizer",
-      "Commit": "cc96fafbf53c653b8c2cac170b052a46666335cf",
-      "URL": "https://codeload.github.com/ed0ard/CS2-Bot-Randomizer/zip/cc96fafbf53c653b8c2cac170b052a46666335cf"
-    },
-    {
-      "Name": "NadeSystem",
-      "Path": "addons/counterstrikesharp/plugins/NadeSystem",
-      "Repository": "ed0ard/CS2-Bot-NadeSystem",
-      "Commit": "7605f272d0500a7bad5b6294555485c7721a40da",
-      "URL": "https://codeload.github.com/ed0ard/CS2-Bot-NadeSystem/zip/7605f272d0500a7bad5b6294555485c7721a40da"
-    },
-    {
-      "Name": "BotBuy",
-      "Path": "addons/counterstrikesharp/plugins/BotBuy",
-      "Repository": "ed0ard/CS2-Bot-Buy",
-      "Commit": "11884e0564b8b57bee5f4729a5fca781bd5e6749",
-      "URL": "https://codeload.github.com/ed0ard/CS2-Bot-Buy/zip/11884e0564b8b57bee5f4729a5fca781bd5e6749"
-    }
-  ]
+  "Release": "v1.4.9",
+  "URL": "https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.9",
+  "WindowsAsset": "https://github.com/ed0ard/CS2-Bot-Improver/releases/download/v1.4.9/CS2BotImprover.zip",
+  "SHA256": "sha256:ebef45e8e3a3012f5c4bb131bbd6e4cc8351d2c9c0fb059a11c1790048f639f4",
+  "Bytes": 74273452,
+  "RootTree": "3d9318a542d0883225ae1dcd3b8f0ad0b22103a0"
 }

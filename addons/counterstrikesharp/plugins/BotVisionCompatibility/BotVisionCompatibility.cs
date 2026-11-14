@@ -7,7 +7,7 @@ namespace BotVisionCompatibility;
 public sealed partial class BotVisionCompatibilityPlugin : BasePlugin
 {
     public override string ModuleName => "BotVision Compatibility";
-    public override string ModuleVersion => "0.1.4-fairplay.1";
+    public override string ModuleVersion => "0.1.4-fairplay149.1";
     public override string ModuleAuthor => "CS2-Bot-Improver";
     public override string ModuleDescription => "Selects BotVision's tested fast smoke mode";
 

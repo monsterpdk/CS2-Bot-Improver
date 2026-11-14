@@ -1,0 +1,10 @@
+{
+  "Build": "2000943",
+  "CallRVA": "0x33350b",
+  "Expected": "E8 20 51 F9 FF",
+  "Actual": "e8 70 51 f9 ff",
+  "Matches": false,
+  "ReplacementTarget": "0x2c8c20",
+  "TargetIsUnwindEntry": false,
+  "Decision": "Keep the local exclusion; upstream replacement is not valid for this pinned Windows binary."
+}

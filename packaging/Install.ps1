@@ -22,7 +22,7 @@ Import-Module (Join-Path $payload 'NativeCompatibility.psm1') -Force
 Assert-TestedGame -Csgo $Csgo -SettingsPath (Join-Path $payload 'NativeCompatibilitySettings.json')
 foreach ($entry in $manifest.Dependencies) {
     $target = Join-Path $Csgo $entry.Path
-    if (!(Test-Path -LiteralPath $target -PathType Leaf) -or ((Get-FileHash -LiteralPath $target).Hash -ne $entry.SHA256 -and !(Test-NativeCompatibilityHash -Relative $entry.Path -Hash (Get-FileHash -LiteralPath $target).Hash -Expected $entry.SHA256 -SettingsPath (Join-Path $payload 'NativeCompatibilitySettings.json')))) { throw ('Dependency missing or different: ' + $entry.Path + '. Install the original v1.4.8 Windows pack first; use its bundled CounterStrikeSharp 379.') }
+    if (!(Test-Path -LiteralPath $target -PathType Leaf) -or ((Get-FileHash -LiteralPath $target).Hash -ne $entry.SHA256 -and !(Test-NativeCompatibilityHash -Relative $entry.Path -Hash (Get-FileHash -LiteralPath $target).Hash -Expected $entry.SHA256 -SettingsPath (Join-Path $payload 'NativeCompatibilitySettings.json')))) { throw ('Dependency missing or different: ' + $entry.Path + '. Install the original v1.4.9 Windows pack first; use its bundled CounterStrikeSharp 380.') }
 }
 $pluginRoot = Join-Path $Csgo 'addons\counterstrikesharp\plugins'
 if (Test-Path -LiteralPath $pluginRoot) {
@@ -67,7 +67,7 @@ if ($manifest.MergePopulationSettings) {
     if ([regex]::Matches($text,$pattern).Count -ne 1) { throw 'Expected exactly one panel bot_quota setting.' }
     $merged[$path] = [regex]::Replace($text,$pattern,'"bot_quota" "16"')
 }
-$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.8-fairplay.3-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
+$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.9-fairplay.1-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
 $paths = @($manifest.Files.Path) + @($merged.Keys) + @($binaryMerged.Keys) + @('gameinfo.gi','backup\Online\gameinfo.gi','backup\WithBots\gameinfo.gi')
 if (@($paths | Select-Object -Unique).Count -ne $paths.Count) { throw 'Duplicate installer destination.' }
 $records = @()
@@ -130,5 +130,5 @@ try {
     foreach ($record in $moved) { Move-Item -LiteralPath (Join-Path $backup ('parked\' + $record.Path)) -Destination (Join-Path $Csgo $record.Path) }
     throw
 }
-Write-Output ('Installed v1.4.8-fairplay.3 successfully. Backup: ' + $backup)
+Write-Output ('Installed v1.4.9-fairplay.1 successfully. Backup: ' + $backup)
 Write-Output ('Start the panel with: ' + (Join-Path $Csgo 'Start-CompatiblePanel.cmd'))

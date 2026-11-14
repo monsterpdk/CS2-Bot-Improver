@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 if (Get-Process -ErrorAction SilentlyContinue | Where-Object { $_.ProcessName -eq 'cs2' -or $_.ProcessName -eq 'Panel' -or $_.ProcessName -like 'Panel v*' }) { throw 'Close the game and panel first.' }
 $Backup = (Resolve-Path -LiteralPath $Backup).Path.TrimEnd('\')
 $backupRoot = Split-Path $Backup -Parent
-if ([IO.Path]::GetFileName($backupRoot) -ne '_botimprover_backups') { throw 'Select the v1.4.8 backup timestamp folder.' }
+if ([IO.Path]::GetFileName($backupRoot) -ne '_botimprover_backups') { throw 'Select the v1.4.9 backup timestamp folder.' }
 $Csgo = Split-Path $backupRoot -Parent
 if ([IO.Path]::GetFileName($Csgo) -ne 'csgo') { throw 'Invalid game backup folder.' }
 $manifest = Get-Content -LiteralPath (Join-Path $Backup 'restore-manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json

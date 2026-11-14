@@ -30,7 +30,7 @@ public static class FairplayProfiles {
    byte[] content=Slice(original,end+offset,length); if(Crc(content)!=crc) throw new Exception("Profile CRC mismatch");
    string path=(dir==" "?"":dir+"/")+name+"."+ext;
    if(path=="botprofile.db") {
-    string text=new UTF8Encoding(false,true).GetString(content).TrimStart('\ufeff'), section=null;
+    string text=new UTF8Encoding(false,true).GetString(content), section=null;
     var found=new HashSet<string>(); var lines=Regex.Split(text,"(?<=\\n)");
     for(int i=0;i<lines.Length;i++) {
      string clean=lines[i].Split(new string[]{"//"},StringSplitOptions.None)[0].Trim();
@@ -41,15 +41,15 @@ public static class FairplayProfiles {
     }
     if(found.Count!=sections.Length) throw new Exception("Missing reaction template");
     content=Encoding.UTF8.GetBytes(string.Join("",lines));
-   } else if(path=="scripts/ai/rush/bt_config.kv3") {
+   } else if(path=="scripts/ai/rush/bt_config.kv3" || path=="scripts/ai/retakes/bt_config.kv3") {
     string text=new UTF8Encoding(false,true).GetString(content); var rx=new Regex(@"^(\s*reaction_time\s*=\s*)([0-9.]+)",RegexOptions.Multiline);
     if(rx.Matches(text).Count!=1) throw new Exception("Missing Rush reaction time");
     content=Encoding.UTF8.GetBytes(rx.Replace(text,m=>m.Groups[1].Value+rush));
-   } else if(path!="scripts/ai/rush/bt_default.kv3") throw new Exception("Unexpected profile file");
+   } else if(path!="scripts/ai/rush/bt_default.kv3" && path!="scripts/ai/retakes/bt_default.kv3" && path!="scripts/ai/retakes/modules/bt_defuse_planted_bomb.kv3" && path!="scripts/ai/retakes/modules/bt_defend_bomb_during_defuse.kv3") throw new Exception("Unexpected profile file");
    tw.BaseStream.Position=entry-28; tw.Write(Crc(content)); tw.Write((ushort)0); tw.Write((ushort)0x7fff); tw.Write((uint)data.Length); tw.Write((uint)content.Length); tw.Write((ushort)0xffff);
    data.Write(content,0,content.Length); files++;
   } } }
-  if(r.BaseStream.Position!=end || files!=3) throw new Exception("Unexpected profile tree");
+  if(r.BaseStream.Position!=end || files!=7) throw new Exception("Unexpected profile tree");
   var output=new MemoryStream(); var w=new BinaryWriter(output);
   w.Write(0x55aa1234u); w.Write(2u); w.Write((uint)ts); w.Write((uint)data.Length); w.Write(0u); w.Write(48u); w.Write(0u);
   w.Write(tree); w.Write(data.ToArray()); w.Write(hash.ComputeHash(tree)); w.Write(hash.ComputeHash(new byte[0])); w.Flush(); w.Write(hash.ComputeHash(output.ToArray())); w.Flush(); return output.ToArray();
@@ -64,7 +64,7 @@ function Get-ProfileUpdates([string]$Csgo, [string]$SettingsPath) {
  if ($low -ne $settings.LowSHA256) { throw 'Unknown Low profile; no files changed.' }
  $updates = @{}; $recognized = $active -eq $low
  foreach ($level in @('Medium','High')) {
-  $spec = $settings.$level; $relative = 'overrides\' + $level + '\botprofile.vpk'; $path = Join-Path $Csgo $relative
+  $spec = $settings.$level; if($spec.Retake -ne $spec.Rush){throw 'Retake and Rush reaction policy must agree.'}; $relative = 'overrides\' + $level + '\botprofile.vpk'; $path = Join-Path $Csgo $relative
   $current = (Get-FileHash -LiteralPath $path).Hash
   if ($current -notin @($spec.OriginalSHA256,$spec.OutputSHA256)) { throw ('Unknown ' + $level + ' profile; no files changed.') }
   [string[]]$names = @($spec.Templates.PSObject.Properties.Name)

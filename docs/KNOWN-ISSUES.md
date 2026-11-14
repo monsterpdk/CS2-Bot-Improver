@@ -1,8 +1,8 @@
 # Known issues and validation limits
 
 - Some Office windows, ladder approaches, boxes and other obstacles can still trap bots. Two bots may overlap. Local recovery makes bounded attempts; it does not validate or rebuild the navigation mesh. No all-map navigation fix is claimed.
-- Repeated Train/Inferno server.dll crashes match a wrong-target bomb-search call replacement. The replacement remains disabled, and subsequent extended local gameplay was reported stable. The CS2 2000943 startup access violation in CSS user-message handling has a targeted native compatibility correction. A distinct earlier exit-time CSS fast-fail remains unresolved. No general crash-free guarantee is made.
-- Medium humanized reactions received positive gameplay feedback; extended recent play also confirmed the High (Hard) profile. ReactionTime is an engine parameter, not a hard minimum notice-to-shot guarantee.
+- Repeated Train/Inferno server.dll crashes match a wrong-target bomb-search call replacement. The replacement remains disabled, and subsequent extended local gameplay was reported stable. The CS2 2000943 startup ABI issue is handled by official CSS 380; our prior CSS adapter is retired. A distinct earlier exit-time CSS fast-fail remains unresolved. No general crash-free guarantee is made.
+- Medium humanized reactions received positive gameplay feedback; extended play on the preceding Fairplay base also confirmed the High (Hard) profile; the v1.4.9 integration has a shorter successful local test. ReactionTime is an engine parameter, not a hard minimum notice-to-shot guarantee.
 - Public diagnostics are off by default and differ from private trial logging; automated build/logging checks do not replace a separate live test of the exact release build.
 - Only Windows local bot matches and the pinned game/runtime build are targeted. Linux, public/dedicated servers, a second PC, all maps/modes and future game versions are not validated.
 - Grenade lineups vary by map. Inventory and a recorded lineup do not guarantee every grenade type will be used. Blind fire, chance hits and penetration remain possible.

@@ -8,9 +8,9 @@ if((Get-FileHash -LiteralPath $shared).Hash -ne $pin){throw 'Pinned shared API c
 $libs=Join-Path $root 'addons/counterstrikesharp/plugins/BotState/libs'
 New-Item -ItemType Directory -Path $libs -Force | Out-Null
 Copy-Item -LiteralPath $shared -Destination (Join-Path $libs 'BotControllerApi.dll')
-foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics','BotState')) {
+foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics','BotState','BotBuy','BotRandomizer')) {
     $project = Join-Path $root ('addons\counterstrikesharp\plugins\' + $name + '\' + $name + '.csproj')
     & dotnet build $project -c Release -o (Join-Path $root ('build\' + $name))
     if ($LASTEXITCODE -ne 0) { throw ('Build failed: ' + $name) }
 }
-Write-Output 'Six maintained plugins built for API 379. Nothing installed into the game.'
+Write-Output 'Eight managed plugins built for API 380. Nothing installed into the game.'

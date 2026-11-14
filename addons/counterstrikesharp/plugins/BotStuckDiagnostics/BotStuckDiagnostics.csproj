@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup><TargetFramework>net10.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup>
-<ItemGroup><PackageReference Include="CounterStrikeSharp.API" Version="1.0.379" /></ItemGroup>
+<ItemGroup><PackageReference Include="CounterStrikeSharp.API" Version="1.0.380" /></ItemGroup>
 <ItemGroup><Compile Include="../../../../common/LivePlayers.cs" Link="LivePlayers.cs" /></ItemGroup>
 <ItemGroup><Compile Include="../../../../common/DiagnosticLog.cs" Link="DiagnosticLog.cs" /></ItemGroup>
 </Project>

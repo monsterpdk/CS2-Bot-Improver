@@ -19,14 +19,14 @@ function Copy-Payload([string]$Source, [string]$Relative) {
     New-Item -ItemType Directory -Path (Split-Path $target -Parent) -Force | Out-Null
     Copy-Item -LiteralPath $Source -Destination $target
 }
-foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics','BotState')) {
+foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibility','BotStuckDiagnostics','BotState','BotBuy','BotRandomizer')) {
     foreach ($suffix in @('.dll','.deps.json')) {
         $relative = 'addons\counterstrikesharp\plugins\' + $name + '\' + $name + $suffix
         Copy-Payload (Join-Path $root ('build\'+$name+'\'+$name+$suffix)) $relative
     }
     $source = Join-Path $root ('addons\counterstrikesharp\plugins\' + $name)
     foreach ($file in Get-ChildItem -LiteralPath $source -Recurse -File -Filter '*.json') {
-        if ($file.FullName -match '[\\/](bin|obj|libs)[\\/]') { continue }
+        if ($file.FullName -match '[\\/](bin|obj|libs|tools|dist|node_modules)[\\/]') { continue }
         $relative = $file.FullName.Substring($root.Length + 1)
         Copy-Payload $file.FullName $relative
     }
@@ -46,8 +46,8 @@ foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -File -Force) {
 }
 $files = @(Get-ChildItem -LiteralPath $payload -Recurse -File | ForEach-Object { [PSCustomObject]@{ Path=$_.FullName.Substring($payload.Length + 1); SHA256=(Get-FileHash -LiteralPath $_.FullName).Hash } })
 [PSCustomObject]@{
-    Version='1.4.8-fairplay.3'; Prerelease=$false; ReleaseDate='2026-11-14'; ClientVersion='2000943'; PatchVersion='1.41.9.7'; Platform='Windows x64'; UpstreamBaseline='v1.4.8'; CounterStrikeSharp='1.0.379'
+    Version='1.4.9-fairplay.1'; Prerelease=$false; ReleaseDate='2026-11-14'; ClientVersion='2000943'; PatchVersion='1.41.9.7'; Platform='Windows x64'; UpstreamBaseline='v1.4.9'; CounterStrikeSharp='1.0.380'
     Plugins=@('BotAI','BotAimImprover','BotBuy','BotControllerImpl','BotHiderImpl','BotRandomizer','BotState','BotStuckDiagnostics','BotVisionCompatibility','NadeSystem','RoundDamageRecap')
-    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
+    Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf','addons\BotHider\map_whitelist.json'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $Output 'manifest.json') -Encoding UTF8
-Write-Output ('Public v1.4.8 update staged: ' + $files.Count + ' payload files.')
+Write-Output ('Public v1.4.9 update staged: ' + $files.Count + ' payload files.')

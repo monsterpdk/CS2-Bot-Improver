@@ -1,15 +1,15 @@
 # Installation and restore
 
-Use original v1.4.8 Windows with CSS 379 on ClientVersion 2000943. Older Fairplay releases based on v1.4.5 are not an alternative runtime baseline. First install the new original pack, then apply this update. Existing humanized Low/Medium/High files are accepted and the active selection is preserved; unknown custom profiles are rejected before writing.
+Prerequisite: install original **v1.4.9 Windows**, including bundled CSS 380 and updated Metamod/Panel/BotHider. A v1.4.8 Fairplay installation must be upgraded to that original baseline first. Target: CS2 ClientVersion 2000943 / patch 1.41.9.7, exact pinned dependencies.
 
-Extract the release ZIP outside game\csgo. With game/panel closed, run Install.cmd and enter the folder containing gameinfo.gi and steam.inf. Exact game binary and upstream dependency hashes are checked. Extra unknown CSS plugin directories are rejected. Keep your existing installation backed up independently when switching upstream versions.
+Extract this release outside game/csgo, close CS2 and panel, run Install.cmd and select game/csgo. The updater rejects unknown binaries/profiles/plugins, merges current gameinfo/layer paths, preserves difficulty selection and preferences, generates humanized seven-entry Medium/High VPKs including retake reactions, and sets fill quota 16 (8v8 including players). Low stays original upstream. It applies only the BotController native adapter; official CSS 380 stays unmodified. Obsolete RayTrace and BotHider whitelist paths are parked when present.
 
-The updater includes six maintained managed plugins, data/configs and independent tools. It merges target gameinfo without replacing Steam's layered paths, creates Bot/Online templates, sets fill quota 16, and disables automatic runtime overwrites for the custom pack. Obsolete RayTrace.vdf is parked in the backup when present. Original shared/runtime libraries remain in place. The two pinned native modules are transformed locally as described in NATIVE-COMPATIBILITY.md.
+Eight managed plugins and their source/data/configs are included. The original runtime/native/shared libraries, panel and VPK assets are obtained separately. All changes are backed up under game/csgo/_botimprover_backups/v1.4.9-fairplay.1-TIMESTAMP. Copy failures roll back. Reinstall is supported.
 
-All replaced files are saved to game\csgo\_botimprover_backups\v1.4.8-fairplay.3-TIMESTAMP. The installer rolls back copy failures. To restore this update with game and panel closed:
+With game and panel closed, use this update's Restore.ps1:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Restore.ps1 -Backup "FULL_BACKUP_FOLDER"
 ```
 
-Use the Restore.ps1 from this extracted update. This restores the state just before this update; it does not roll back Steam or an earlier manual upstream upgrade. Reinstalling is supported. Future game updates need review; do not edit hash guards to force compatibility. No second-PC gameplay claim is made.
+Restore returns to the state immediately before this update, not before an earlier original-pack upgrade or Steam update. Future builds need review; do not bypass hash/version guards.

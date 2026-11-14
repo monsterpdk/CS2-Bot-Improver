@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference='Stop'
+$ErrorActionPreference='Stop'
 function Get-BytesSHA256 {
  param([byte[]]$Bytes)
  $algorithm=[Security.Cryptography.SHA256]::Create()

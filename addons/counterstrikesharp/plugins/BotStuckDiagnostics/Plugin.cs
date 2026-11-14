@@ -12,7 +12,7 @@ namespace BotStuckDiagnostics;
 public sealed class Plugin:BasePlugin
 {
     public override string ModuleName=>"Bot Stuck Diagnostics";
-    public override string ModuleVersion=>"0.1.0-fairplay.6";
+    public override string ModuleVersion=>"0.1.0-fairplay149.1";
     public override string ModuleAuthor=>"Fairplay maintenance";
     public override string ModuleDescription=>"Read-only, bounded cross-map stationary bot observation";
     private sealed class Entry

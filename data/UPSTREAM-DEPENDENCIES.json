@@ -1,19 +1,19 @@
 [
   {
     "Path": "Panel.exe",
-    "SHA256": "DD29FE27B4B662D0341B14677427DBD978195620B8F1A7CB4372162C5136A087"
+    "SHA256": "662686BF75779E511139206BACBC60CD888F73D9F2F7293A303BFB999964CA46"
   },
   {
     "Path": "addons\\metamod\\bin\\win64\\server.dll",
-    "SHA256": "728919BD38BA52B0E015BB8C588815CB49909A8B083C0DDF519E0D528A9CDE21"
+    "SHA256": "6D0CEE35E766AF2952072EC44FF84C40D2A5D9EB55F44D147B84B7CF4B893427"
   },
   {
     "Path": "addons\\counterstrikesharp\\api\\CounterStrikeSharp.API.dll",
-    "SHA256": "652AC51D86A963D3CF795BAD9271F821579A3BB65BC871313B900BA834F9D1EC"
+    "SHA256": "D6AAC4E7F1ED9ADB1B1E00F2DE5A1895B4CB3F686977FE417CC182C028689BDF"
   },
   {
     "Path": "addons\\counterstrikesharp\\gamedata\\gamedata.json",
-    "SHA256": "62BD8C4FBA251B5FC95834D01E6C1D92BAC9E6F79A6899F6421BE6E82170F562"
+    "SHA256": "AF0348FF2705B09906EE98A2D2C70ED83A42B1B8ACC912451695D3D97E60358F"
   },
   {
     "Path": "addons\\BotController\\bin\\win64\\BotController.dll",
@@ -25,7 +25,7 @@
   },
   {
     "Path": "addons\\BotHider\\bin\\win64\\BotHider.dll",
-    "SHA256": "66DC9B2E425E2DCB700B0F11DB9F98E0CE53D5643331D2D457B5FD05F3E0657A"
+    "SHA256": "6C84AD468706C3F7CA54643B43DD60D924BB9AFE410D8ED49F8AE8934B942E7E"
   },
   {
     "Path": "addons\\BotVision\\bin\\win64\\BotVision.dll",
@@ -37,11 +37,7 @@
   },
   {
     "Path": "addons\\counterstrikesharp\\shared\\BotHiderApi\\BotHiderApi.dll",
-    "SHA256": "DC0EBFB6099380102FD850C5919A5D44375010B6535692124F6CBAA9C0A80B35"
-  },
-  {
-    "Path": "addons\\counterstrikesharp\\plugins\\BotBuy\\BotBuy.dll",
-    "SHA256": "A778C841EE82CC7692684BCC46E04B31A5C3BF217A67DDF3585EFA8EABB361B5"
+    "SHA256": "D56EA65A887338AB0B8B0A6101EB522B9525876F8AB829B1F12782333C8EA45F"
   },
   {
     "Path": "addons\\counterstrikesharp\\plugins\\BotControllerImpl\\BotControllerImpl.dll",
@@ -49,11 +45,7 @@
   },
   {
     "Path": "addons\\counterstrikesharp\\plugins\\BotHiderImpl\\BotHiderImpl.dll",
-    "SHA256": "8921FCDAFE5EA32B81447F0BF6AE73C4C00A0FA51CE4E0E9934C12A6F55789E6"
-  },
-  {
-    "Path": "addons\\counterstrikesharp\\plugins\\BotRandomizer\\BotRandomizer.dll",
-    "SHA256": "A7FD56C2CFB8DBA190281B76FF7985D27AAD4838B7FA5690443AFE3A1F5B8959"
+    "SHA256": "3C669474828DB12CDD3966DA638A2FCC0503687F9FDE4BA6F11BF8F51CB5723C"
   },
   {
     "Path": "addons\\counterstrikesharp\\plugins\\RoundDamageRecap\\RoundDamageRecap.dll",
@@ -61,7 +53,7 @@
   },
   {
     "Path": "addons\\counterstrikesharp\\bin\\win64\\counterstrikesharp.dll",
-    "SHA256": "AD0359FDECD8A9693125E5498BF645F4413D246F839E85BB7B4387ACE8B56CF1"
+    "SHA256": "11A1ECB91458BF99ABAF8DD79A22D7B483414E1A4BE6B407E40982DE41E0D705"
   },
   {
     "Path": "addons\\BotVision\\gamedata.json",
