@@ -1,19 +1,19 @@
 {
   "Modules": {
     "server": {
-      "SHA256": "84d596644ad574ac70f427777c89f9006a8023f493c46f4c215f40bceef13cbb"
+      "SHA256": "7126c11b3c56fb3237c95238b76fec4cc6e6b433c06f5818b01f4e3dc56bc7ac"
     },
     "engine": {
-      "SHA256": "dcb5fe13f60f0db9faa365c7b48c3ca107ce56783748bf9ed9ca41fd892af63c"
+      "SHA256": "edb6ab58c84727ce6f1ec0edbffd8155c16bebeb4ec641449a7eab5d83dfea0e"
     },
     "tier0": {
       "SHA256": "0bcd160dfa72d9f97fbf85095d59baad18fca61f20d840e83a5bd9f7635d5c32"
     },
     "schemasystem": {
-      "SHA256": "f88667df86e23531813e28a0fbd3b8cd66bb9f25e4a689f810c03dd328243479"
+      "SHA256": "fddb9d8a70c752ae913da3e7e80dc2392ee4502e678e56ff3ee831e63529cd2d"
     },
     "engine2": {
-      "SHA256": "dcb5fe13f60f0db9faa365c7b48c3ca107ce56783748bf9ed9ca41fd892af63c"
+      "SHA256": "edb6ab58c84727ce6f1ec0edbffd8155c16bebeb4ec641449a7eab5d83dfea0e"
     }
   },
   "ActivePatches": [
@@ -63,1110 +63,1125 @@
   "Checks": {
     "BotController/CCSBot::EquipBestWeapon": {
       "matches": [
-        "0x2c11e0"
+        "0x2c1260"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2c11e0: mov qword ptr [rsp + 8], rbx",
-        "2c11e5: mov qword ptr [rsp + 0x20], rsi",
-        "2c11ea: push rdi",
-        "2c11eb: sub rsp, 0x20",
-        "2c11ef: mov rbx, rcx",
-        "2c11f2: test dl, dl",
-        "2c11f4: jne 0x2c1244",
-        "2c11f6: lea r8, [rcx + 0x5c80]",
-        "2c11fd: lea rcx, [rip + 0x14b03e0]",
-        "2c1204: lea rdx, [rsp + 0x38]"
+        "2c1260: mov qword ptr [rsp + 8], rbx",
+        "2c1265: mov qword ptr [rsp + 0x20], rsi",
+        "2c126a: push rdi",
+        "2c126b: sub rsp, 0x20",
+        "2c126f: mov rbx, rcx",
+        "2c1272: test dl, dl",
+        "2c1274: jne 0x2c12c4",
+        "2c1276: lea r8, [rcx + 0x5c80]",
+        "2c127d: lea rcx, [rip + 0x14b1360]",
+        "2c1284: lea rdx, [rsp + 0x38]"
       ]
     },
     "BotController/CCSBot::EquipPistol": {
       "matches": [
-        "0x2c16e0"
+        "0x2c1760"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2c16e0: mov qword ptr [rsp + 8], rbx",
-        "2c16e5: mov qword ptr [rsp + 0x20], rsi",
-        "2c16ea: push rdi",
-        "2c16eb: sub rsp, 0x20",
-        "2c16ef: mov rbx, rcx",
-        "2c16f2: test dl, dl",
-        "2c16f4: jne 0x2c1744",
-        "2c16f6: lea r8, [rcx + 0x5c80]",
-        "2c16fd: lea rcx, [rip + 0x14afee0]",
-        "2c1704: lea rdx, [rsp + 0x38]"
+        "2c1760: mov qword ptr [rsp + 8], rbx",
+        "2c1765: mov qword ptr [rsp + 0x20], rsi",
+        "2c176a: push rdi",
+        "2c176b: sub rsp, 0x20",
+        "2c176f: mov rbx, rcx",
+        "2c1772: test dl, dl",
+        "2c1774: jne 0x2c17c4",
+        "2c1776: lea r8, [rcx + 0x5c80]",
+        "2c177d: lea rcx, [rip + 0x14b0e60]",
+        "2c1784: lea rdx, [rsp + 0x38]"
       ]
     },
     "BotController/CCSPlayer_WeaponServices::SelectItem": {
       "matches": [
-        "0xb1c6b0"
+        "0xb1d920"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "b1c6b0: mov qword ptr [rsp + 8], rbx",
-        "b1c6b5: mov qword ptr [rsp + 0x10], rbp",
-        "b1c6ba: mov qword ptr [rsp + 0x18], rsi",
-        "b1c6bf: push rdi",
-        "b1c6c0: sub rsp, 0x20",
-        "b1c6c4: mov ebp, r8d",
-        "b1c6c7: mov rbx, rdx",
-        "b1c6ca: mov rdi, rcx",
-        "b1c6cd: call 0xc7e770",
-        "b1c6d2: test al, al"
+        "b1d920: mov qword ptr [rsp + 8], rbx",
+        "b1d925: mov qword ptr [rsp + 0x10], rbp",
+        "b1d92a: mov qword ptr [rsp + 0x18], rsi",
+        "b1d92f: push rdi",
+        "b1d930: sub rsp, 0x20",
+        "b1d934: mov ebp, r8d",
+        "b1d937: mov rbx, rdx",
+        "b1d93a: mov rdi, rcx",
+        "b1d93d: call 0xc7fa50",
+        "b1d942: test al, al"
       ]
     },
     "BotController/CCSPlayer_WeaponServices::GetSlot": {
       "matches": [
-        "0xc7dec0"
+        "0xc7f1a0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "c7dec0: mov qword ptr [rsp + 8], rbx",
-        "c7dec5: mov qword ptr [rsp + 0x10], rbp",
-        "c7deca: mov qword ptr [rsp + 0x18], rsi",
-        "c7decf: mov qword ptr [rsp + 0x20], rdi",
-        "c7ded4: push r12",
-        "c7ded6: push r14",
-        "c7ded8: push r15",
-        "c7deda: sub rsp, 0x20",
-        "c7dede: xor r12d, r12d",
-        "c7dee1: mov r14d, r8d"
+        "c7f1a0: mov qword ptr [rsp + 8], rbx",
+        "c7f1a5: mov qword ptr [rsp + 0x10], rbp",
+        "c7f1aa: mov qword ptr [rsp + 0x18], rsi",
+        "c7f1af: mov qword ptr [rsp + 0x20], rdi",
+        "c7f1b4: push r12",
+        "c7f1b6: push r14",
+        "c7f1b8: push r15",
+        "c7f1ba: sub rsp, 0x20",
+        "c7f1be: xor r12d, r12d",
+        "c7f1c1: mov r14d, r8d"
       ]
     },
     "BotController/CCSBot::Update": {
       "matches": [
-        "0x2e57b0"
+        "0x2e5830"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2e57b0: push rbp",
-        "2e57b2: push rsi",
-        "2e57b3: push rdi",
-        "2e57b4: push r12",
-        "2e57b6: lea rbp, [rsp - 0xf8]",
-        "2e57be: sub rsp, 0x1f8",
-        "2e57c5: lea rax, [rip + 0x14bc144]",
-        "2e57cc: mov byte ptr [rcx + 0x610], 0",
-        "2e57d3: mov qword ptr [rsp + 0x50], rax",
-        "2e57d8: lea r8, [rbp - 0x50]"
+        "2e5830: push rbp",
+        "2e5832: push rsi",
+        "2e5833: push rdi",
+        "2e5834: push r12",
+        "2e5836: lea rbp, [rsp - 0xf8]",
+        "2e583e: sub rsp, 0x1f8",
+        "2e5845: lea rax, [rip + 0x14bd104]",
+        "2e584c: mov byte ptr [rcx + 0x610], 0",
+        "2e5853: mov qword ptr [rsp + 0x50], rax",
+        "2e5858: lea r8, [rbp - 0x50]"
       ]
     },
     "BotController/CCSBot::Upkeep": {
       "matches": [
-        "0x2ea090"
+        "0x2ea110"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2ea090: mov qword ptr [rsp + 0x10], rbx",
-        "2ea095: mov qword ptr [rsp + 0x18], rsi",
-        "2ea09a: mov qword ptr [rsp + 0x20], rdi",
-        "2ea09f: push rbp",
-        "2ea0a0: lea rbp, [rsp - 0x57]",
-        "2ea0a5: sub rsp, 0xa0",
-        "2ea0ac: lea rax, [rip + 0x14b785d]",
-        "2ea0b3: mov qword ptr [rbp - 1], 0x1f",
-        "2ea0bb: mov qword ptr [rbp - 9], rax",
-        "2ea0bf: lea r8, [rbp + 0x17]"
+        "2ea110: mov qword ptr [rsp + 0x10], rbx",
+        "2ea115: mov qword ptr [rsp + 0x18], rsi",
+        "2ea11a: mov qword ptr [rsp + 0x20], rdi",
+        "2ea11f: push rbp",
+        "2ea120: lea rbp, [rsp - 0x57]",
+        "2ea125: sub rsp, 0xa0",
+        "2ea12c: lea rax, [rip + 0x14b881d]",
+        "2ea133: mov qword ptr [rbp - 1], 0x1f",
+        "2ea13b: mov qword ptr [rbp - 9], rax",
+        "2ea13f: lea r8, [rbp + 0x17]"
       ]
     },
     "BotController/BuyState::OnUpdate": {
       "matches": [
-        "0x32eca0"
+        "0x32ed20"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "32eca0: mov qword ptr [rsp + 0x10], rdx",
-        "32eca5: mov qword ptr [rsp + 8], rcx",
-        "32ecaa: push rbp",
-        "32ecab: push rbx",
-        "32ecac: push r13",
-        "32ecae: lea rbp, [rsp - 0x890]",
-        "32ecb6: sub rsp, 0x990",
-        "32ecbd: mov rax, qword ptr [rip + 0x1ffe624]",
-        "32ecc4: mov r13, rdx",
-        "32ecc7: mov rbx, rcx"
+        "32ed20: mov qword ptr [rsp + 0x10], rdx",
+        "32ed25: mov qword ptr [rsp + 8], rcx",
+        "32ed2a: push rbp",
+        "32ed2b: push rbx",
+        "32ed2c: push r13",
+        "32ed2e: lea rbp, [rsp - 0x890]",
+        "32ed36: sub rsp, 0x990",
+        "32ed3d: mov rax, qword ptr [rip + 0x2000704]",
+        "32ed44: mov r13, rdx",
+        "32ed47: mov rbx, rcx"
       ]
     },
     "BotController/CCSBot::UpdateLookAngles": {
       "matches": [
-        "0x2e7660"
+        "0x2e76e0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2e7660: push rbp",
-        "2e7662: push rbx",
-        "2e7663: push rsi",
-        "2e7664: push r14",
-        "2e7666: lea rbp, [rsp - 0x3f]",
-        "2e766b: sub rsp, 0xd8",
-        "2e7672: lea rax, [rip + 0x14ba557]",
-        "2e7679: mov qword ptr [rbp - 0x59], 0x5d",
-        "2e7681: mov qword ptr [rbp - 0x61], rax",
-        "2e7685: lea r8, [rbp - 0x49]"
+        "2e76e0: push rbp",
+        "2e76e2: push rbx",
+        "2e76e3: push rsi",
+        "2e76e4: push r14",
+        "2e76e6: lea rbp, [rsp - 0x3f]",
+        "2e76eb: sub rsp, 0xd8",
+        "2e76f2: lea rax, [rip + 0x14bb517]",
+        "2e76f9: mov qword ptr [rbp - 0x59], 0x5d",
+        "2e7701: mov qword ptr [rbp - 0x61], rax",
+        "2e7705: lea r8, [rbp - 0x49]"
       ]
     },
     "BotController/CCSPlayerPawn::SetEyeAngles": {
       "matches": [
-        "0xd04710"
+        "0xd059f0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "d04710: mov qword ptr [rsp + 0x20], rdi",
-        "d04715: push rbp",
-        "d04716: mov rbp, rsp",
-        "d04719: sub rsp, 0x80",
-        "d04720: mov rdi, rcx",
-        "d04723: lea rcx, [rbp - 0x60]",
-        "d04727: call 0xc0f410",
-        "d0472c: movsd xmm0, qword ptr [rdi + 0xbc8]",
-        "d04734: mov rcx, rdi",
-        "d04737: mov eax, dword ptr [rdi + 0xbd0]"
+        "d059f0: mov qword ptr [rsp + 0x20], rdi",
+        "d059f5: push rbp",
+        "d059f6: mov rbp, rsp",
+        "d059f9: sub rsp, 0x80",
+        "d05a00: mov rdi, rcx",
+        "d05a03: lea rcx, [rbp - 0x60]",
+        "d05a07: call 0xc106f0",
+        "d05a0c: movsd xmm0, qword ptr [rdi + 0xbc8]",
+        "d05a14: mov rcx, rdi",
+        "d05a17: mov eax, dword ptr [rdi + 0xbd0]"
       ]
     },
     "BotController/CCSPlayer_MovementServices::ProcessMovement": {
       "matches": [
-        "0xad8010"
+        "0xad9280"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "ad8010: push rdi",
-        "ad8012: push r15",
-        "ad8014: sub rsp, 0xb8",
-        "ad801b: cmp qword ptr [rcx + 0x38], 0",
-        "ad8020: mov r15, rdx",
-        "ad8023: mov rdi, rcx",
-        "ad8026: jne 0xad802d",
-        "ad8028: call 0xc7cf50",
-        "ad802d: mov r9, qword ptr [rdi + 0x38]",
-        "ad8031: mov edx, dword ptr [r9 + 0xc98]"
+        "ad9280: push rdi",
+        "ad9282: push r15",
+        "ad9284: sub rsp, 0xb8",
+        "ad928b: cmp qword ptr [rcx + 0x38], 0",
+        "ad9290: mov r15, rdx",
+        "ad9293: mov rdi, rcx",
+        "ad9296: jne 0xad929d",
+        "ad9298: call 0xc7e230",
+        "ad929d: mov r9, qword ptr [rdi + 0x38]",
+        "ad92a1: mov edx, dword ptr [r9 + 0xc98]"
       ]
     },
     "BotController/CBasePlayerController::OnSimulateUserCommands": {
       "matches": [
-        "0xb5ef60"
+        "0xb60230"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "b5ef60: push rbp",
-        "b5ef62: push rbx",
-        "b5ef63: push rsi",
-        "b5ef64: push rdi",
-        "b5ef65: push r13",
-        "b5ef67: push r14",
-        "b5ef69: lea rbp, [rsp - 0x6f8]",
-        "b5ef71: sub rsp, 0x7f8",
-        "b5ef78: mov r14, rcx",
-        "b5ef7b: mov qword ptr [rsp + 0x48], 0xf27"
+        "b60230: push rbp",
+        "b60232: push rbx",
+        "b60233: push rsi",
+        "b60234: push rdi",
+        "b60235: push r13",
+        "b60237: push r14",
+        "b60239: lea rbp, [rsp - 0x6f8]",
+        "b60241: sub rsp, 0x7f8",
+        "b60248: mov r14, rcx",
+        "b6024b: mov qword ptr [rsp + 0x48], 0xf32"
       ]
     },
     "BotController/DropReleasePose::OuterDrop": {
       "matches": [
-        "0xafa2a0"
+        "0xafb510"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "afa2a0: mov qword ptr [rsp + 8], rbx",
-        "afa2a5: mov qword ptr [rsp + 0x20], r9",
-        "afa2aa: mov dword ptr [rsp + 0x18], r8d",
-        "afa2af: push rbp",
-        "afa2b0: push rsi",
-        "afa2b1: push rdi",
-        "afa2b2: push r12",
-        "afa2b4: push r13",
-        "afa2b6: push r14",
-        "afa2b8: push r15"
+        "afb510: mov qword ptr [rsp + 8], rbx",
+        "afb515: mov qword ptr [rsp + 0x20], r9",
+        "afb51a: mov dword ptr [rsp + 0x18], r8d",
+        "afb51f: push rbp",
+        "afb520: push rsi",
+        "afb521: push rdi",
+        "afb522: push r12",
+        "afb524: push r13",
+        "afb526: push r14",
+        "afb528: push r15"
       ]
     },
     "BotController/DropReleasePose::BuildTransform": {
       "matches": [
-        "0xa1e320"
+        "0xa1f520"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "a1e320: mov qword ptr [rsp + 0x10], rsi",
-        "a1e325: push rbp",
-        "a1e326: push rdi",
-        "a1e327: push r13",
-        "a1e329: push r14",
-        "a1e32b: push r15",
-        "a1e32d: lea rbp, [rsp - 0x200]",
-        "a1e335: sub rsp, 0x300",
-        "a1e33c: mov r13, rdx",
-        "a1e33f: mov r15, rcx"
+        "a1f520: mov qword ptr [rsp + 0x10], rsi",
+        "a1f525: push rbp",
+        "a1f526: push rdi",
+        "a1f527: push r13",
+        "a1f529: push r14",
+        "a1f52b: push r15",
+        "a1f52d: lea rbp, [rsp - 0x200]",
+        "a1f535: sub rsp, 0x300",
+        "a1f53c: mov r13, rdx",
+        "a1f53f: mov r15, rcx"
       ]
     },
     "BotHider/UTIL_Remove": {
       "matches": [
-        "0xc284b0"
+        "0xc29790"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "c284b0: test rcx, rcx",
-        "c284b3: je 0xc284c4",
-        "c284b5: mov rdx, rcx",
-        "c284b8: mov rcx, qword ptr [rip + 0x16ebbb1]",
-        "c284bf: jmp 0x13799a0",
-        "c284c4: ret ",
-        "c284c5: int3 ",
-        "c284c6: int3 ",
-        "c284c7: int3 ",
-        "c284c8: int3 "
+        "c29790: test rcx, rcx",
+        "c29793: je 0xc297a4",
+        "c29795: mov rdx, rcx",
+        "c29798: mov rcx, qword ptr [rip + 0x16eca31]",
+        "c2979f: jmp 0x137ac00",
+        "c297a4: ret ",
+        "c297a5: int3 ",
+        "c297a6: int3 ",
+        "c297a7: int3 ",
+        "c297a8: int3 "
       ]
     },
     "BotHider/CCSBotManager::MaintainBotQuota": {
       "matches": [
-        "0x2d2550"
+        "0x2d25d0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2d2550: push rbp",
-        "2d2552: push r15",
-        "2d2554: lea rbp, [rsp - 0x4f]",
-        "2d2559: sub rsp, 0x88",
-        "2d2560: mov r15, rcx",
-        "2d2563: call qword ptr [rip + 0x1488ee7]",
-        "2d2569: xor r8d, r8d",
-        "2d256c: mov rcx, rax",
-        "2d256f: mov rdx, qword ptr [rax]",
-        "2d2572: mov r9, qword ptr [rdx + 0x18]"
+        "2d25d0: push rbp",
+        "2d25d2: push r15",
+        "2d25d4: lea rbp, [rsp - 0x4f]",
+        "2d25d9: sub rsp, 0x88",
+        "2d25e0: mov r15, rcx",
+        "2d25e3: call qword ptr [rip + 0x1489e67]",
+        "2d25e9: xor r8d, r8d",
+        "2d25ec: mov rcx, rax",
+        "2d25ef: mov rdx, qword ptr [rax]",
+        "2d25f2: mov r9, qword ptr [rdx + 0x18]"
       ]
     },
     "BotHider/CBaseIssue::CountPotentialVoters": {
       "matches": [
-        "0x266650"
+        "0x2666d0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "266650: mov qword ptr [rsp + 0x10], rbx",
-        "266655: mov qword ptr [rsp + 0x18], rsi",
-        "26665a: push rdi",
-        "26665b: push r14",
-        "26665d: push r15",
-        "26665f: sub rsp, 0x20",
-        "266663: mov rax, qword ptr [rip + 0x1bb1c1e]",
-        "26666a: xor r14d, r14d",
-        "26666d: xor ebx, ebx",
-        "26666f: mov r15, rcx"
+        "2666d0: mov qword ptr [rsp + 0x10], rbx",
+        "2666d5: mov qword ptr [rsp + 0x18], rsi",
+        "2666da: push rdi",
+        "2666db: push r14",
+        "2666dd: push r15",
+        "2666df: sub rsp, 0x20",
+        "2666e3: mov rax, qword ptr [rip + 0x1bb3ea6]",
+        "2666ea: xor r14d, r14d",
+        "2666ed: xor ebx, ebx",
+        "2666ef: mov r15, rcx"
       ]
     },
     "BotHider/CCSPlayerController::HandleCommand_JoinTeam": {
       "matches": [
-        "0xa75eb0"
+        "0xa770b0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "a75eb0: mov qword ptr [rsp + 8], rbx",
-        "a75eb5: mov byte ptr [rsp + 0x18], r8b",
-        "a75eba: push rbp",
-        "a75ebb: push rsi",
-        "a75ebc: push rdi",
-        "a75ebd: push r12",
-        "a75ebf: push r13",
-        "a75ec1: push r14",
-        "a75ec3: push r15",
-        "a75ec5: lea rbp, [rsp - 0x70]"
+        "a770b0: mov qword ptr [rsp + 8], rbx",
+        "a770b5: mov byte ptr [rsp + 0x18], r8b",
+        "a770ba: push rbp",
+        "a770bb: push rsi",
+        "a770bc: push rdi",
+        "a770bd: push r12",
+        "a770bf: push r13",
+        "a770c1: push r14",
+        "a770c3: push r15",
+        "a770c5: lea rbp, [rsp - 0x70]"
       ]
     },
     "BotHider/MpHumanTeam_ApplyRestriction": {
       "matches": [
-        "0x93c880"
+        "0x93da80"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "93c880: push rbp",
-        "93c882: push rdi",
-        "93c883: lea rbp, [rsp - 0x4f]",
-        "93c888: sub rsp, 0xa8",
-        "93c88f: mov rax, qword ptr [rip + 0x17bfb4a]",
-        "93c896: lea rcx, [rip + 0xe52a27]",
-        "93c89d: mov rdx, qword ptr [rax + 0x58]",
-        "93c8a1: test rdx, rdx",
-        "93c8a4: je 0x93c8ad",
-        "93c8a6: cmp rcx, rdx"
+        "93da80: push rbp",
+        "93da82: push rdi",
+        "93da83: lea rbp, [rsp - 0x4f]",
+        "93da88: sub rsp, 0xa8",
+        "93da8f: mov rax, qword ptr [rip + 0x17c0a1a]",
+        "93da96: lea rcx, [rip + 0xe52857]",
+        "93da9d: mov rdx, qword ptr [rax + 0x58]",
+        "93daa1: test rdx, rdx",
+        "93daa4: je 0x93daad",
+        "93daa6: cmp rcx, rdx"
       ]
     },
     "BotHider/CNetworkGameServer::PackEntities": {
       "matches": [
-        "0xe52c0"
+        "0xe5330"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "e52c0: mov qword ptr [rsp + 0x20], r9",
-        "e52c5: mov dword ptr [rsp + 0x18], r8d",
-        "e52ca: mov qword ptr [rsp + 0x10], rdx",
-        "e52cf: mov qword ptr [rsp + 8], rcx",
-        "e52d4: push rbp",
-        "e52d5: push rbx",
-        "e52d6: push rsi",
-        "e52d7: push rdi",
-        "e52d8: push r12",
-        "e52da: push r13"
+        "e5330: mov qword ptr [rsp + 0x20], r9",
+        "e5335: mov dword ptr [rsp + 0x18], r8d",
+        "e533a: mov qword ptr [rsp + 0x10], rdx",
+        "e533f: mov qword ptr [rsp + 8], rcx",
+        "e5344: push rbp",
+        "e5345: push rbx",
+        "e5346: push rsi",
+        "e5347: push rdi",
+        "e5348: push r12",
+        "e534a: push r13"
       ]
     },
     "BotHider/CCSGameRules::EndMatchState": {
       "matches": [
-        "0x90d830"
+        "0x90ea40"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "90d830: mov rax, rsp",
-        "90d833: push rbp",
-        "90d834: push r15",
-        "90d836: lea rbp, [rax - 0x3a8]",
-        "90d83d: sub rsp, 0x498",
-        "90d844: cmp byte ptr [rip + 0x17ebd1a], 0",
-        "90d84b: mov r15, rcx",
-        "90d84e: je 0x90f1c4",
-        "90d854: mov edx, dword ptr [rip + 0x1a81c36]",
-        "90d85a: mov qword ptr [rax - 0x18], rsi"
+        "90ea40: mov rax, rsp",
+        "90ea43: push rbp",
+        "90ea44: push r15",
+        "90ea46: lea rbp, [rax - 0x3a8]",
+        "90ea4d: sub rsp, 0x498",
+        "90ea54: cmp byte ptr [rip + 0x17ecbda], 0",
+        "90ea5b: mov r15, rcx",
+        "90ea5e: je 0x9103d4",
+        "90ea64: mov edx, dword ptr [rip + 0x1a82b86]",
+        "90ea6a: mov qword ptr [rax - 0x18], rsi"
       ]
     },
     "BotHider/CSPlayerController::ScriptIsBot": {
       "matches": [
-        "0x21fee0"
+        "0x21ff00"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "21fee0: push rbp",
-        "21fee2: push rsi",
-        "21fee3: push r14",
-        "21fee5: sub rsp, 0x50",
-        "21fee9: mov rsi, rcx",
-        "21feec: mov edx, 1",
-        "21fef1: mov ecx, dword ptr [rip + 0x1d19de5]",
-        "21fef7: call qword ptr [rip + 0x153b493]",
-        "21fefd: lea r14, [rip + 0x156aab8]",
-        "21ff04: test al, al"
+        "21ff00: push rbp",
+        "21ff02: push rsi",
+        "21ff03: push r14",
+        "21ff05: sub rsp, 0x50",
+        "21ff09: mov rsi, rcx",
+        "21ff0c: mov edx, 1",
+        "21ff11: mov ecx, dword ptr [rip + 0x1d1c025]",
+        "21ff17: call qword ptr [rip + 0x153c473]",
+        "21ff1d: lea r14, [rip + 0x156bac8]",
+        "21ff24: test al, al"
       ]
     },
     "BotVision/CBotManager::IsVisibleThroughSmoke": {
       "matches": [
-        "0x327240"
+        "0x3272c0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "327240: mov r11, rsp",
-        "327243: mov qword ptr [r11 + 8], rbx",
-        "327247: mov qword ptr [r11 + 0x10], rbp",
-        "32724b: mov qword ptr [r11 + 0x18], rsi",
-        "32724f: mov qword ptr [r11 + 0x20], rdi",
-        "327253: push r12",
-        "327255: push r14",
-        "327257: push r15",
-        "327259: sub rsp, 0xa0",
-        "327260: mov qword ptr [r11 - 0x70], 0x186"
+        "3272c0: mov r11, rsp",
+        "3272c3: mov qword ptr [r11 + 8], rbx",
+        "3272c7: mov qword ptr [r11 + 0x10], rbp",
+        "3272cb: mov qword ptr [r11 + 0x18], rsi",
+        "3272cf: mov qword ptr [r11 + 0x20], rdi",
+        "3272d3: push r12",
+        "3272d5: push r14",
+        "3272d7: push r15",
+        "3272d9: sub rsp, 0xa0",
+        "3272e0: mov qword ptr [r11 - 0x70], 0x186"
       ]
     },
     "BotVision/g_AutoList_SmokeProj_Head_Server": {
       "matches": [
-        "0x3497d4"
+        "0x349854"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "3497d4: mov rbx, qword ptr [rip + 0x1c4301d]",
-        "3497db: mov rbp, rdx",
-        "3497de: movaps xmmword ptr [rsp + 0x40], xmm6",
-        "3497e3: mov rsi, rcx",
-        "3497e6: movaps xmmword ptr [rsp + 0x30], xmm7",
-        "3497eb: movaps xmmword ptr [rsp + 0x20], xmm8",
-        "3497f1: test rbx, rbx",
-        "3497f4: je 0x349882",
-        "3497fa: movss xmm7, dword ptr [rip + 0x142b40a]",
-        "349802: xorps xmm6, xmm6"
+        "349854: mov rbx, qword ptr [rip + 0x1c4506d]",
+        "34985b: mov rbp, rdx",
+        "34985e: movaps xmmword ptr [rsp + 0x40], xmm6",
+        "349863: mov rsi, rcx",
+        "349866: movaps xmmword ptr [rsp + 0x30], xmm7",
+        "34986b: movaps xmmword ptr [rsp + 0x20], xmm8",
+        "349871: test rbx, rbx",
+        "349874: je 0x349902",
+        "34987a: movss xmm7, dword ptr [rip + 0x142c38a]",
+        "349882: xorps xmm6, xmm6"
       ]
     },
     "BotVision/GetSmokeDensityInLine": {
       "matches": [
-        "0x9b8610"
+        "0x9b9810"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "9b8610: push rbp",
-        "9b8612: push rbx",
-        "9b8613: push rsi",
-        "9b8614: push r13",
-        "9b8616: push r15",
-        "9b8618: lea rbp, [rsp - 0x20]",
-        "9b861d: sub rsp, 0x120",
-        "9b8624: movaps xmmword ptr [rsp + 0xf0], xmm7",
-        "9b862c: xorps xmm7, xmm7",
-        "9b862f: mov rsi, r8"
+        "9b9810: push rbp",
+        "9b9812: push rbx",
+        "9b9813: push rsi",
+        "9b9814: push r13",
+        "9b9816: push r15",
+        "9b9818: lea rbp, [rsp - 0x20]",
+        "9b981d: sub rsp, 0x120",
+        "9b9824: movaps xmmword ptr [rsp + 0xf0], xmm7",
+        "9b982c: xorps xmm7, xmm7",
+        "9b982f: mov rsi, r8"
       ]
     },
     "BotVision/CHEGrenadeProjectile::Detonate": {
       "matches": [
-        "0x3a1ac0"
+        "0x3a1b40"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "3a1ac0: mov rax, rsp",
-        "3a1ac3: push rbp",
-        "3a1ac4: push rdi",
-        "3a1ac5: lea rbp, [rax - 0x5f]",
-        "3a1ac9: sub rsp, 0xa8",
-        "3a1ad0: mov qword ptr [rax + 0x18], rbx",
-        "3a1ad4: mov qword ptr [rax + 0x20], rsi",
-        "3a1ad8: mov rsi, rcx",
-        "3a1adb: mov qword ptr [rax - 0x20], r14",
-        "3a1adf: movaps xmmword ptr [rax - 0x38], xmm6"
+        "3a1b40: mov rax, rsp",
+        "3a1b43: push rbp",
+        "3a1b44: push rdi",
+        "3a1b45: lea rbp, [rax - 0x5f]",
+        "3a1b49: sub rsp, 0xa8",
+        "3a1b50: mov qword ptr [rax + 0x18], rbx",
+        "3a1b54: mov qword ptr [rax + 0x20], rsi",
+        "3a1b58: mov rsi, rcx",
+        "3a1b5b: mov qword ptr [rax - 0x20], r14",
+        "3a1b5f: movaps xmmword ptr [rax - 0x38], xmm6"
       ]
     },
     "BotVision/BulletPelletTrace": {
       "matches": [
-        "0xa70800"
+        "0xa71a00"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "a70800: mov qword ptr [rsp + 0x10], rdx",
-        "a70805: push rbp",
-        "a70806: push rsi",
-        "a70807: push r15",
-        "a70809: lea rbp, [rsp - 0x28b0]",
-        "a70811: mov eax, 0x29b0",
-        "a70816: call 0x16a55a0",
-        "a7081b: sub rsp, rax",
-        "a7081e: mov qword ptr [rsp + 0x29e0], rbx",
-        "a70826: lea r9, [rbp - 0x70]"
+        "a71a00: mov qword ptr [rsp + 0x10], rdx",
+        "a71a05: push rbp",
+        "a71a06: push rsi",
+        "a71a07: push r15",
+        "a71a09: lea rbp, [rsp - 0x28b0]",
+        "a71a11: mov eax, 0x29b0",
+        "a71a16: call 0x16a6800",
+        "a71a1b: sub rsp, rax",
+        "a71a1e: mov qword ptr [rsp + 0x29e0], rbx",
+        "a71a26: lea r9, [rbp - 0x70]"
       ]
     },
     "BotVision/BulletPelletTraceResult": {
       "matches": [
-        "0xa6d100"
+        "0xa6e300"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "a6d100: mov qword ptr [rsp + 8], rbx",
-        "a6d105: mov qword ptr [rsp + 0x10], rbp",
-        "a6d10a: mov qword ptr [rsp + 0x18], rsi",
-        "a6d10f: push rdi",
-        "a6d110: sub rsp, 0x80",
-        "a6d117: mov rbp, rcx",
-        "a6d11a: movaps xmmword ptr [rsp + 0x70], xmm6",
-        "a6d11f: mov rcx, rdx",
-        "a6d122: mov rdi, r9",
-        "a6d125: movaps xmm6, xmm2"
+        "a6e300: mov qword ptr [rsp + 8], rbx",
+        "a6e305: mov qword ptr [rsp + 0x10], rbp",
+        "a6e30a: mov qword ptr [rsp + 0x18], rsi",
+        "a6e30f: push rdi",
+        "a6e310: sub rsp, 0x80",
+        "a6e317: mov rbp, rcx",
+        "a6e31a: movaps xmmword ptr [rsp + 0x70], xmm6",
+        "a6e31f: mov rcx, rdx",
+        "a6e322: mov rdi, r9",
+        "a6e325: movaps xmm6, xmm2"
       ]
     },
     "BotVision/CCSPlayer_WeaponServices::GetSlot": {
       "matches": [
-        "0xc7dec0"
+        "0xc7f1a0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "c7dec0: mov qword ptr [rsp + 8], rbx",
-        "c7dec5: mov qword ptr [rsp + 0x10], rbp",
-        "c7deca: mov qword ptr [rsp + 0x18], rsi",
-        "c7decf: mov qword ptr [rsp + 0x20], rdi",
-        "c7ded4: push r12",
-        "c7ded6: push r14",
-        "c7ded8: push r15",
-        "c7deda: sub rsp, 0x20",
-        "c7dede: xor r12d, r12d",
-        "c7dee1: mov r14d, r8d"
+        "c7f1a0: mov qword ptr [rsp + 8], rbx",
+        "c7f1a5: mov qword ptr [rsp + 0x10], rbp",
+        "c7f1aa: mov qword ptr [rsp + 0x18], rsi",
+        "c7f1af: mov qword ptr [rsp + 0x20], rdi",
+        "c7f1b4: push r12",
+        "c7f1b6: push r14",
+        "c7f1b8: push r15",
+        "c7f1ba: sub rsp, 0x20",
+        "c7f1be: xor r12d, r12d",
+        "c7f1c1: mov r14d, r8d"
       ]
     },
     "BotVision/CCSBot::IsVisiblePos": {
       "matches": [
-        "0x2d07b0"
+        "0x2d0830"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2d07b0: mov qword ptr [rsp + 0x10], rbx",
-        "2d07b5: mov qword ptr [rsp + 0x18], rsi",
-        "2d07ba: mov qword ptr [rsp + 0x20], rdi",
-        "2d07bf: push rbp",
-        "2d07c0: push r12",
-        "2d07c2: push r13",
-        "2d07c4: push r14",
-        "2d07c6: push r15",
-        "2d07c8: lea rbp, [rsp - 0xa0]",
-        "2d07d0: sub rsp, 0x1a0"
+        "2d0830: mov qword ptr [rsp + 0x10], rbx",
+        "2d0835: mov qword ptr [rsp + 0x18], rsi",
+        "2d083a: mov qword ptr [rsp + 0x20], rdi",
+        "2d083f: push rbp",
+        "2d0840: push r12",
+        "2d0842: push r13",
+        "2d0844: push r14",
+        "2d0846: push r15",
+        "2d0848: lea rbp, [rsp - 0xa0]",
+        "2d0850: sub rsp, 0x1a0"
       ]
     },
     "BotVision/CCSBot::IsVisiblePlayer": {
       "matches": [
-        "0x2d0a80"
+        "0x2d0b00"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2d0a80: mov qword ptr [rsp + 8], rbx",
-        "2d0a85: mov byte ptr [rsp + 0x18], r8b",
-        "2d0a8a: push rbp",
-        "2d0a8b: push rsi",
-        "2d0a8c: push rdi",
-        "2d0a8d: push r12",
-        "2d0a8f: push r13",
-        "2d0a91: push r14",
-        "2d0a93: push r15",
-        "2d0a95: lea rbp, [rsp - 0x27]"
+        "2d0b00: mov qword ptr [rsp + 8], rbx",
+        "2d0b05: mov byte ptr [rsp + 0x18], r8b",
+        "2d0b0a: push rbp",
+        "2d0b0b: push rsi",
+        "2d0b0c: push rdi",
+        "2d0b0d: push r12",
+        "2d0b0f: push r13",
+        "2d0b11: push r14",
+        "2d0b13: push r15",
+        "2d0b15: lea rbp, [rsp - 0x27]"
       ]
     },
     "counterstrikesharp/UTIL_ClientPrintAll": {
       "matches": [
-        "0xfdbc10"
+        "0xfdce70"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "fdbc10: mov qword ptr [rsp + 8], rbx",
-        "fdbc15: mov qword ptr [rsp + 0x10], rbp",
-        "fdbc1a: mov qword ptr [rsp + 0x18], rsi",
-        "fdbc1f: push rdi",
-        "fdbc20: sub rsp, 0x60",
-        "fdbc24: mov ebp, ecx",
-        "fdbc26: mov rbx, r9",
-        "fdbc29: lea rcx, [rsp + 0x40]",
-        "fdbc2e: mov rdi, r8",
-        "fdbc31: mov rsi, rdx"
+        "fdce70: mov qword ptr [rsp + 8], rbx",
+        "fdce75: mov qword ptr [rsp + 0x10], rbp",
+        "fdce7a: mov qword ptr [rsp + 0x18], rsi",
+        "fdce7f: push rdi",
+        "fdce80: sub rsp, 0x60",
+        "fdce84: mov ebp, ecx",
+        "fdce86: mov rbx, r9",
+        "fdce89: lea rcx, [rsp + 0x40]",
+        "fdce8e: mov rdi, r8",
+        "fdce91: mov rsi, rdx"
       ]
     },
     "counterstrikesharp/ClientPrint": {
       "matches": [
-        "0x980c10"
+        "0x981e10"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "980c10: test rcx, rcx",
-        "980c13: je 0x980d99",
-        "980c19: mov qword ptr [rsp + 0x20], rbx",
-        "980c1e: push rbp",
-        "980c1f: push rsi",
-        "980c20: push rdi",
-        "980c21: lea rbp, [rsp - 0x47]",
-        "980c26: sub rsp, 0xd0",
-        "980c2d: mov rdi, rdx",
-        "980c30: mov rbx, rcx"
+        "981e10: test rcx, rcx",
+        "981e13: je 0x981f99",
+        "981e19: mov qword ptr [rsp + 0x20], rbx",
+        "981e1e: push rbp",
+        "981e1f: push rsi",
+        "981e20: push rdi",
+        "981e21: lea rbp, [rsp - 0x47]",
+        "981e26: sub rsp, 0xd0",
+        "981e2d: mov rdi, rdx",
+        "981e30: mov rbx, rcx"
       ]
     },
     "counterstrikesharp/CCSPlayerController_SwitchTeam": {
       "matches": [
-        "0xa94ff0"
+        "0xa961f0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "a94ff0: push rbx",
-        "a94ff2: push rdi",
-        "a94ff3: sub rsp, 0x88",
-        "a94ffa: mov rbx, rcx",
-        "a94ffd: mov edi, edx",
-        "a94fff: mov ecx, edx",
-        "a95001: call 0x48ec90",
-        "a95006: test rax, rax",
-        "a95009: je 0xa95245",
-        "a9500f: lea eax, [rdi - 2]"
+        "a961f0: push rbx",
+        "a961f2: push rdi",
+        "a961f3: sub rsp, 0x88",
+        "a961fa: mov rbx, rcx",
+        "a961fd: mov edi, edx",
+        "a961ff: mov ecx, edx",
+        "a96201: call 0x48ed10",
+        "a96206: test rax, rax",
+        "a96209: je 0xa96445",
+        "a9620f: lea eax, [rdi - 2]"
       ]
     },
     "counterstrikesharp/CBasePlayerController_SetPawn": {
       "matches": [
-        "0xb6ebf0"
+        "0xb6fec0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "b6ebf0: mov byte ptr [rsp + 0x20], r9b",
-        "b6ebf5: push rbx",
-        "b6ebf6: push rdi",
-        "b6ebf7: push r12",
-        "b6ebf9: push r14",
-        "b6ebfb: push r15",
-        "b6ebfd: sub rsp, 0x30",
-        "b6ec01: mov r10, qword ptr [rip + 0x13ba670]",
-        "b6ec08: lea rbx, [rcx + 0x4e0]",
-        "b6ec0f: mov r11d, dword ptr [rbx]"
+        "b6fec0: mov byte ptr [rsp + 0x20], r9b",
+        "b6fec5: push rbx",
+        "b6fec6: push rdi",
+        "b6fec7: push r12",
+        "b6fec9: push r14",
+        "b6fecb: push r15",
+        "b6fecd: sub rsp, 0x30",
+        "b6fed1: mov r10, qword ptr [rip + 0x13bb4a0]",
+        "b6fed8: lea rbx, [rcx + 0x4e0]",
+        "b6fedf: mov r11d, dword ptr [rbx]"
       ]
     },
     "counterstrikesharp/CCSPlayerPawnBase_PostThink": {
       "matches": [
-        "0x234860"
+        "0x234880"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "234860: push rbp",
-        "234862: push rbx",
-        "234863: push rsi",
-        "234864: push rdi",
-        "234865: push r12",
-        "234867: mov rbp, rsp",
-        "23486a: sub rsp, 0x50",
-        "23486e: mov qword ptr [rsp + 0x90], r13",
-        "234876: mov rsi, rcx",
-        "234879: call 0xcf9cf0"
+        "234880: push rbp",
+        "234882: push rbx",
+        "234883: push rsi",
+        "234884: push rdi",
+        "234885: push r12",
+        "234887: mov rbp, rsp",
+        "23488a: sub rsp, 0x50",
+        "23488e: mov qword ptr [rsp + 0x90], r13",
+        "234896: mov rsi, rcx",
+        "234899: call 0xcfafd0"
       ]
     },
     "counterstrikesharp/CGameEventManager_Init": {
       "matches": [
-        "0xbfc660"
+        "0xbfd940"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "bfc660: push rbx",
-        "bfc662: sub rsp, 0x20",
-        "bfc666: mov rax, qword ptr [rcx]",
-        "bfc669: mov rbx, rcx",
-        "bfc66c: call qword ptr [rax + 0x10]",
-        "bfc66f: mov rax, qword ptr [rbx]",
-        "bfc672: lea rdx, [rip + 0xd3aecf]",
-        "bfc679: xor r8d, r8d",
-        "bfc67c: mov rcx, rbx",
-        "bfc67f: call qword ptr [rax + 8]"
+        "bfd940: push rbx",
+        "bfd942: sub rsp, 0x20",
+        "bfd946: mov rax, qword ptr [rcx]",
+        "bfd949: mov rbx, rcx",
+        "bfd94c: call qword ptr [rax + 0x10]",
+        "bfd94f: mov rax, qword ptr [rbx]",
+        "bfd952: lea rdx, [rip + 0xd3aebf]",
+        "bfd959: xor r8d, r8d",
+        "bfd95c: mov rcx, rbx",
+        "bfd95f: call qword ptr [rax + 8]"
       ]
     },
     "counterstrikesharp/GiveNamedItem": {
       "matches": [
-        "0xab0dd0"
+        "0xab1fd0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "ab0dd0: mov qword ptr [rsp + 8], rbx",
-        "ab0dd5: mov qword ptr [rsp + 0x10], rsi",
-        "ab0dda: mov qword ptr [rsp + 0x20], rdi",
-        "ab0ddf: mov dword ptr [rsp + 0x18], r8d",
-        "ab0de4: push rbp",
-        "ab0de5: push r12",
-        "ab0de7: push r13",
-        "ab0de9: push r14",
-        "ab0deb: push r15",
-        "ab0ded: lea rbp, [rsp - 0x27]"
+        "ab1fd0: mov qword ptr [rsp + 8], rbx",
+        "ab1fd5: mov qword ptr [rsp + 0x10], rsi",
+        "ab1fda: mov qword ptr [rsp + 0x20], rdi",
+        "ab1fdf: mov dword ptr [rsp + 0x18], r8d",
+        "ab1fe4: push rbp",
+        "ab1fe5: push r12",
+        "ab1fe7: push r13",
+        "ab1fe9: push r14",
+        "ab1feb: push r15",
+        "ab1fed: lea rbp, [rsp - 0x27]"
       ]
     },
     "counterstrikesharp/UTIL_Remove": {
       "matches": [
-        "0xc284b0"
+        "0xc29790"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "c284b0: test rcx, rcx",
-        "c284b3: je 0xc284c4",
-        "c284b5: mov rdx, rcx",
-        "c284b8: mov rcx, qword ptr [rip + 0x16ebbb1]",
-        "c284bf: jmp 0x13799a0",
-        "c284c4: ret ",
-        "c284c5: int3 ",
-        "c284c6: int3 ",
-        "c284c7: int3 ",
-        "c284c8: int3 "
+        "c29790: test rcx, rcx",
+        "c29793: je 0xc297a4",
+        "c29795: mov rdx, rcx",
+        "c29798: mov rcx, qword ptr [rip + 0x16eca31]",
+        "c2979f: jmp 0x137ac00",
+        "c297a4: ret ",
+        "c297a5: int3 ",
+        "c297a6: int3 ",
+        "c297a7: int3 ",
+        "c297a8: int3 "
       ]
     },
     "counterstrikesharp/CBaseModelEntity_SetModel": {
       "matches": [
-        "0xb6e4f0"
+        "0xb6f7c0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "b6e4f0: push rbx",
-        "b6e4f2: sub rsp, 0x20",
-        "b6e4f6: mov rbx, rcx",
-        "b6e4f9: mov r8, rdx",
-        "b6e4fc: mov rcx, qword ptr [rip + 0x162de1d]",
-        "b6e503: lea rdx, [rsp + 0x40]",
-        "b6e508: mov rax, qword ptr [rcx]",
-        "b6e50b: call qword ptr [rax + 0x60]",
-        "b6e50e: mov rdx, qword ptr [rsp + 0x40]",
-        "b6e513: mov rcx, rbx"
+        "b6f7c0: push rbx",
+        "b6f7c2: sub rsp, 0x20",
+        "b6f7c6: mov rbx, rcx",
+        "b6f7c9: mov r8, rdx",
+        "b6f7cc: mov rcx, qword ptr [rip + 0x162eefd]",
+        "b6f7d3: lea rdx, [rsp + 0x40]",
+        "b6f7d8: mov rax, qword ptr [rcx]",
+        "b6f7db: call qword ptr [rax + 0x60]",
+        "b6f7de: mov rdx, qword ptr [rsp + 0x40]",
+        "b6f7e3: mov rcx, rbx"
       ]
     },
     "counterstrikesharp/CCSPlayer_WeaponServices_CanUse": {
       "matches": [
-        "0xafadd0"
+        "0xafc040"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "afadd0: mov qword ptr [rsp + 0x10], rbx",
-        "afadd5: mov qword ptr [rsp + 0x18], rbp",
-        "afadda: push rsi",
-        "afaddb: push rdi",
-        "afaddc: push r12",
-        "afadde: push r14",
-        "afade0: push r15",
-        "afade2: sub rsp, 0x40",
-        "afade6: mov rax, qword ptr [rcx]",
-        "afade9: mov rdi, rdx"
+        "afc040: mov qword ptr [rsp + 0x10], rbx",
+        "afc045: mov qword ptr [rsp + 0x18], rbp",
+        "afc04a: push rsi",
+        "afc04b: push rdi",
+        "afc04c: push r12",
+        "afc04e: push r14",
+        "afc050: push r15",
+        "afc052: sub rsp, 0x40",
+        "afc056: mov rax, qword ptr [rcx]",
+        "afc059: mov rdi, rdx"
       ]
     },
     "counterstrikesharp/CCSPlayer_ItemServices_CanAcquire": {
       "matches": [
-        "0xab1e00"
+        "0xab3000"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "ab1e00: mov dword ptr [rsp + 0x18], r8d",
-        "ab1e05: mov qword ptr [rsp + 0x10], rdx",
-        "ab1e0a: mov qword ptr [rsp + 8], rcx",
-        "ab1e0f: push rbp",
-        "ab1e10: push rbx",
-        "ab1e11: push rsi",
-        "ab1e12: push rdi",
-        "ab1e13: push r12",
-        "ab1e15: push r13",
-        "ab1e17: push r14"
+        "ab3000: mov dword ptr [rsp + 0x18], r8d",
+        "ab3005: mov qword ptr [rsp + 0x10], rdx",
+        "ab300a: mov qword ptr [rsp + 8], rcx",
+        "ab300f: push rbp",
+        "ab3010: push rbx",
+        "ab3011: push rsi",
+        "ab3012: push rdi",
+        "ab3013: push r12",
+        "ab3015: push r13",
+        "ab3017: push r14"
       ]
     },
     "counterstrikesharp/GetCSWeaponDataFromKey": {
       "matches": [
-        "0x545300"
+        "0x545380"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "545300: mov qword ptr [rsp + 8], rbx",
-        "545305: push rdi",
-        "545306: sub rsp, 0x20",
-        "54530a: xor edi, edi",
-        "54530c: mov r9, rdx",
-        "54530f: mov ebx, ecx",
-        "545311: mov eax, edi",
-        "545313: test rdx, rdx",
-        "545316: je 0x54533a",
-        "545318: cmp byte ptr [rdx], al"
+        "545380: mov qword ptr [rsp + 8], rbx",
+        "545385: push rdi",
+        "545386: sub rsp, 0x20",
+        "54538a: xor edi, edi",
+        "54538c: mov r9, rdx",
+        "54538f: mov ebx, ecx",
+        "545391: mov eax, edi",
+        "545393: test rdx, rdx",
+        "545396: je 0x5453ba",
+        "545398: cmp byte ptr [rdx], al"
       ]
     },
     "counterstrikesharp/CCSGameRules_TerminateRound": {
       "matches": [
-        "0x95de60"
+        "0x95f060"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "95de60: mov rax, rsp",
-        "95de63: mov qword ptr [rax + 0x20], r9",
-        "95de67: mov qword ptr [rax + 8], rcx",
-        "95de6b: push rbp",
-        "95de6c: push r12",
-        "95de6e: push r14",
-        "95de70: push r15",
-        "95de72: lea rbp, [rax - 0x5f]",
-        "95de76: sub rsp, 0xd8",
-        "95de7d: lea r14, [rcx + 0xa44]"
+        "95f060: mov rax, rsp",
+        "95f063: mov qword ptr [rax + 0x20], r9",
+        "95f067: mov qword ptr [rax + 8], rcx",
+        "95f06b: push rbp",
+        "95f06c: push r12",
+        "95f06e: push r14",
+        "95f070: push r15",
+        "95f072: lea rbp, [rax - 0x5f]",
+        "95f076: sub rsp, 0xd8",
+        "95f07d: lea r14, [rcx + 0xa44]"
       ]
     },
     "counterstrikesharp/UTIL_CreateEntityByName": {
       "matches": [
-        "0xbe6fb0"
+        "0xbe8280"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "be6fb0: sub rsp, 0x48",
-        "be6fb4: mov byte ptr [rsp + 0x30], 0",
-        "be6fb9: mov r8, rcx",
-        "be6fbc: mov rcx, qword ptr [rip + 0x172d0ad]",
-        "be6fc3: xor r9d, r9d",
-        "be6fc6: mov dword ptr [rsp + 0x28], 0xffffffff",
-        "be6fce: mov dword ptr [rsp + 0x20], edx",
-        "be6fd2: mov edx, 0xffffffff",
-        "be6fd7: call 0x136e9e0",
-        "be6fdc: add rsp, 0x48"
+        "be8280: sub rsp, 0x48",
+        "be8284: mov byte ptr [rsp + 0x30], 0",
+        "be8289: mov r8, rcx",
+        "be828c: mov rcx, qword ptr [rip + 0x172df3d]",
+        "be8293: xor r9d, r9d",
+        "be8296: mov dword ptr [rsp + 0x28], 0xffffffff",
+        "be829e: mov dword ptr [rsp + 0x20], edx",
+        "be82a2: mov edx, 0xffffffff",
+        "be82a7: call 0x136fc40",
+        "be82ac: add rsp, 0x48"
       ]
     },
     "counterstrikesharp/CBaseEntity_DispatchSpawn": {
       "matches": [
-        "0xc9b710"
+        "0xc9c9f0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "c9b710: mov qword ptr [rsp + 0x10], rbx",
-        "c9b715: push rdi",
-        "c9b716: sub rsp, 0x30",
-        "c9b71a: mov rbx, rdx",
-        "c9b71d: mov rdi, rcx",
-        "c9b720: test rcx, rcx",
-        "c9b723: je 0xc9b7c4",
-        "c9b729: test rdx, rdx",
-        "c9b72c: jne 0xc9b7a6",
-        "c9b72e: mov ecx, 0x38"
+        "c9c9f0: mov qword ptr [rsp + 0x10], rbx",
+        "c9c9f5: push rdi",
+        "c9c9f6: sub rsp, 0x30",
+        "c9c9fa: mov rbx, rdx",
+        "c9c9fd: mov rdi, rcx",
+        "c9ca00: test rcx, rcx",
+        "c9ca03: je 0xc9caa4",
+        "c9ca09: test rdx, rdx",
+        "c9ca0c: jne 0xc9ca86",
+        "c9ca0e: mov ecx, 0x38"
       ]
     },
     "counterstrikesharp/CBaseEntity_EmitSoundFilter": {
       "matches": [
-        "0xf5b680"
+        "0xf5c8e0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "f5b680: push rbx",
-        "f5b682: sub rsp, 0x30",
-        "f5b686: mov qword ptr [rsp + 0x20], r9",
-        "f5b68b: mov rbx, rcx",
-        "f5b68e: mov r9d, r8d",
-        "f5b691: mov r8, rdx",
-        "f5b694: mov rdx, rcx",
-        "f5b697: lea rcx, [rip + 0xed883a]",
-        "f5b69e: call 0xf5b7d0",
-        "f5b6a3: mov rax, rbx"
+        "f5c8e0: push rbx",
+        "f5c8e2: sub rsp, 0x30",
+        "f5c8e6: mov qword ptr [rsp + 0x20], r9",
+        "f5c8eb: mov rbx, rcx",
+        "f5c8ee: mov r9d, r8d",
+        "f5c8f1: mov r8, rdx",
+        "f5c8f4: mov rdx, rcx",
+        "f5c8f7: lea rcx, [rip + 0xed965a]",
+        "f5c8fe: call 0xf5ca30",
+        "f5c903: mov rax, rbx"
       ]
     },
     "counterstrikesharp/CEntityInstance_AcceptInput": {
       "matches": [
-        "0x1398490"
+        "0x13996f0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "1398490: mov qword ptr [rsp + 0x10], rbx",
-        "1398495: mov qword ptr [rsp + 0x18], rbp",
-        "139849a: push rsi",
-        "139849b: push rdi",
-        "139849c: push r14",
-        "139849e: sub rsp, 0xf0",
-        "13984a5: mov r14, r8",
-        "13984a8: mov rsi, rcx",
-        "13984ab: mov rcx, qword ptr [rip + 0xf7bbbe]",
-        "13984b2: mov r8, rdx"
+        "13996f0: mov qword ptr [rsp + 0x10], rbx",
+        "13996f5: mov qword ptr [rsp + 0x18], rbp",
+        "13996fa: push rsi",
+        "13996fb: push rdi",
+        "13996fc: push r14",
+        "13996fe: sub rsp, 0xf0",
+        "1399705: mov r14, r8",
+        "1399708: mov rsi, rcx",
+        "139970b: mov rcx, qword ptr [rip + 0xf7cabe]",
+        "1399712: mov r8, rdx"
       ]
     },
     "counterstrikesharp/CEntitySystem_AddEntityIOEvent": {
       "matches": [
-        "0x136aa20"
+        "0x136bc80"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "136aa20: mov qword ptr [rsp + 8], rbx",
-        "136aa25: mov qword ptr [rsp + 0x18], rsi",
-        "136aa2a: push rdi",
-        "136aa2b: sub rsp, 0x50",
-        "136aa2f: mov rsi, r9",
-        "136aa32: mov rdi, rcx",
-        "136aa35: test rdx, rdx",
-        "136aa38: je 0x136aa69",
-        "136aa3a: mov rax, qword ptr [rdx + 0x10]",
-        "136aa3e: test rax, rax"
+        "136bc80: mov qword ptr [rsp + 8], rbx",
+        "136bc85: mov qword ptr [rsp + 0x18], rsi",
+        "136bc8a: push rdi",
+        "136bc8b: sub rsp, 0x50",
+        "136bc8f: mov rsi, r9",
+        "136bc92: mov rdi, rcx",
+        "136bc95: test rdx, rdx",
+        "136bc98: je 0x136bcc9",
+        "136bc9a: mov rax, qword ptr [rdx + 0x10]",
+        "136bc9e: test rax, rax"
       ]
     },
     "counterstrikesharp/LegacyGameEventListener": {
       "matches": [
-        "0xbfa360"
+        "0xbfb630"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "bfa360: mov rdx, qword ptr [rip + 0x1573a19]",
-        "bfa367: test rdx, rdx",
-        "bfa36a: je 0xbfa377",
-        "bfa36c: test ecx, ecx",
-        "bfa36e: je 0xbfa37a",
-        "bfa370: js 0xbfa377",
-        "bfa372: cmp ecx, 0x40",
-        "bfa375: jl 0xbfa37a",
-        "bfa377: xor eax, eax",
-        "bfa379: ret "
+        "bfb630: mov rdx, qword ptr [rip + 0x1574849]",
+        "bfb637: test rdx, rdx",
+        "bfb63a: je 0xbfb647",
+        "bfb63c: test ecx, ecx",
+        "bfb63e: je 0xbfb64a",
+        "bfb640: js 0xbfb647",
+        "bfb642: cmp ecx, 0x40",
+        "bfb645: jl 0xbfb64a",
+        "bfb647: xor eax, eax",
+        "bfb649: ret "
       ]
     },
     "counterstrikesharp/CBasePlayerPawn_RemovePlayerItem": {
       "matches": [
-        "0xafd150"
+        "0xafe3c0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "afd150: test rdx, rdx",
-        "afd153: je 0xafd1f5",
-        "afd159: mov qword ptr [rsp + 8], rbx",
-        "afd15e: push rdi",
-        "afd15f: sub rsp, 0x30",
-        "afd163: mov rbx, rdx",
-        "afd166: mov rdi, rcx",
-        "afd169: call 0xc7e170",
-        "afd16e: cmp rax, rbx",
-        "afd171: jne 0xafd1b9"
+        "afe3c0: test rdx, rdx",
+        "afe3c3: je 0xafe465",
+        "afe3c9: mov qword ptr [rsp + 8], rbx",
+        "afe3ce: push rdi",
+        "afe3cf: sub rsp, 0x30",
+        "afe3d3: mov rbx, rdx",
+        "afe3d6: mov rdi, rcx",
+        "afe3d9: call 0xc7f450",
+        "afe3de: cmp rax, rbx",
+        "afe3e1: jne 0xafe429"
       ]
     },
     "counterstrikesharp/CBaseEntity_TakeDamageOld": {
       "matches": [
-        "0x3ea1c0"
+        "0x3ea240"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "3ea1c0: push rbp",
-        "3ea1c2: push rbx",
-        "3ea1c3: push rsi",
-        "3ea1c4: push rdi",
-        "3ea1c5: push r12",
-        "3ea1c7: lea rbp, [rsp - 0x70]",
-        "3ea1cc: sub rsp, 0x170",
-        "3ea1d3: mov r12, r8",
-        "3ea1d6: mov rdi, rdx",
-        "3ea1d9: mov rsi, rcx"
+        "3ea240: push rbp",
+        "3ea242: push rbx",
+        "3ea243: push rsi",
+        "3ea244: push rdi",
+        "3ea245: push r12",
+        "3ea247: lea rbp, [rsp - 0x70]",
+        "3ea24c: sub rsp, 0x170",
+        "3ea253: mov r12, r8",
+        "3ea256: mov rdi, rdx",
+        "3ea259: mov rsi, rcx"
       ]
     },
     "counterstrikesharp/CBaseTrigger_StartTouch": {
       "matches": [
-        "0x3e9e80"
+        "0x3e9f00"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "3e9e80: push rdi",
-        "3e9e82: push r14",
-        "3e9e84: sub rsp, 0x28",
-        "3e9e88: mov rax, qword ptr [rcx]",
-        "3e9e8b: mov r14, rdx",
-        "3e9e8e: mov rdi, rcx",
-        "3e9e91: call qword ptr [rax + 0x878]",
-        "3e9e97: test al, al",
-        "3e9e99: je 0x3ea09d",
-        "3e9e9f: mov qword ptr [rsp + 0x20], r15"
+        "3e9f00: push rdi",
+        "3e9f02: push r14",
+        "3e9f04: sub rsp, 0x28",
+        "3e9f08: mov rax, qword ptr [rcx]",
+        "3e9f0b: mov r14, rdx",
+        "3e9f0e: mov rdi, rcx",
+        "3e9f11: call qword ptr [rax + 0x878]",
+        "3e9f17: test al, al",
+        "3e9f19: je 0x3ea11d",
+        "3e9f1f: mov qword ptr [rsp + 0x20], r15"
       ]
     },
     "counterstrikesharp/CBaseTrigger_EndTouch": {
       "matches": [
-        "0x149b450"
+        "0x149c6b0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "149b450: push rbx",
-        "149b452: push r13",
-        "149b454: sub rsp, 0x28",
-        "149b458: cmp dword ptr [rdx + 0xd0], 0",
-        "149b45f: mov r13, rdx",
-        "149b462: mov rbx, rcx",
-        "149b465: mov dword ptr [rsp + 0x48], 0",
-        "149b46d: jle 0x149b733",
-        "149b473: mov qword ptr [rsp + 0x40], rbp",
-        "149b478: xor ecx, ecx"
+        "149c6b0: push rbx",
+        "149c6b2: push r13",
+        "149c6b4: sub rsp, 0x28",
+        "149c6b8: cmp dword ptr [rdx + 0xd0], 0",
+        "149c6bf: mov r13, rdx",
+        "149c6c2: mov rbx, rcx",
+        "149c6c5: mov dword ptr [rsp + 0x48], 0",
+        "149c6cd: jle 0x149c993",
+        "149c6d3: mov qword ptr [rsp + 0x40], rbp",
+        "149c6d8: xor ecx, ecx"
       ]
     },
     "counterstrikesharp/CEntityIOOutput_FireOutputInternal": {
       "matches": [
-        "0x1381a00"
+        "0x1382c60"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "1381a00: mov rax, rsp",
-        "1381a03: mov qword ptr [rax + 0x18], rbx",
-        "1381a07: mov qword ptr [rax + 0x20], rsi",
-        "1381a0b: mov qword ptr [rax + 8], rcx",
-        "1381a0f: push rbp",
-        "1381a10: push rdi",
-        "1381a11: push r12",
-        "1381a13: push r13",
-        "1381a15: push r15",
-        "1381a17: lea rbp, [rax - 0x47]"
+        "1382c60: mov rax, rsp",
+        "1382c63: mov qword ptr [rax + 0x18], rbx",
+        "1382c67: mov qword ptr [rax + 0x20], rsi",
+        "1382c6b: mov qword ptr [rax + 8], rcx",
+        "1382c6f: push rbp",
+        "1382c70: push rdi",
+        "1382c71: push r12",
+        "1382c73: push r13",
+        "1382c75: push r15",
+        "1382c77: lea rbp, [rax - 0x47]"
       ]
     },
     "counterstrikesharp/IGameSystem_InitAllSystems_pFirst": {
       "matches": [
-        "0x541093"
+        "0x541113"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "541093: mov rbx, qword ptr [rip + 0x1a94b1e]",
-        "54109a: test rbx, rbx",
-        "54109d: je 0x541147",
-        "5410a3: mov ebp, 0xffff",
-        "5410a8: nop dword ptr [rax + rax]",
-        "5410b0: mov rdi, qword ptr [rbx + 0x10]",
-        "5410b4: lea rdx, [rsp + 0x68]",
-        "5410b9: mov r8, rdi",
-        "5410bc: lea rcx, [rip + 0x1861395]",
-        "5410c3: call qword ptr [rip + 0x121a12f]"
+        "541113: mov rbx, qword ptr [rip + 0x1a96b6e]",
+        "54111a: test rbx, rbx",
+        "54111d: je 0x5411c7",
+        "541123: mov ebp, 0xffff",
+        "541128: nop dword ptr [rax + rax]",
+        "541130: mov rdi, qword ptr [rbx + 0x10]",
+        "541134: lea rdx, [rsp + 0x68]",
+        "541139: mov r8, rdi",
+        "54113c: lea rcx, [rip + 0x1863325]",
+        "541143: call qword ptr [rip + 0x121b0af]"
       ]
     },
     "counterstrikesharp/NetworkStateChanged": {
       "matches": [
-        "0x139b960"
+        "0x139cbc0"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "139b960: mov r8, rdx",
-        "139b963: mov rdx, rcx",
-        "139b966: mov rcx, qword ptr [rcx]",
-        "139b969: test rcx, rcx",
-        "139b96c: je 0x139b9a3",
-        "139b96e: mov rax, qword ptr [rcx + 0x10]",
-        "139b972: test dword ptr [rax + 0x30], 0x400",
-        "139b979: jne 0x139b9a3",
-        "139b97b: mov eax, dword ptr [rdx + 0x20]",
-        "139b97e: mov edx, dword ptr [r8 + 0x38]"
+        "139cbc0: mov r8, rdx",
+        "139cbc3: mov rdx, rcx",
+        "139cbc6: mov rcx, qword ptr [rcx]",
+        "139cbc9: test rcx, rcx",
+        "139cbcc: je 0x139cc03",
+        "139cbce: mov rax, qword ptr [rcx + 0x10]",
+        "139cbd2: test dword ptr [rax + 0x30], 0x400",
+        "139cbd9: jne 0x139cc03",
+        "139cbdb: mov eax, dword ptr [rdx + 0x20]",
+        "139cbde: mov edx, dword ptr [r8 + 0x38]"
       ]
     },
     "counterstrikesharp/Host_Say": {
       "matches": [
-        "0xced2b0"
+        "0xcee590"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "ced2b0: mov dword ptr [rsp + 0x20], r9d",
-        "ced2b5: mov byte ptr [rsp + 0x18], r8b",
-        "ced2ba: push rbp",
-        "ced2bb: push rbx",
-        "ced2bc: push rsi",
-        "ced2bd: push rdi",
-        "ced2be: push r12",
-        "ced2c0: push r13",
-        "ced2c2: lea rbp, [rsp - 0x188]",
-        "ced2ca: sub rsp, 0x288"
+        "cee590: mov dword ptr [rsp + 0x20], r9d",
+        "cee595: mov byte ptr [rsp + 0x18], r8b",
+        "cee59a: push rbp",
+        "cee59b: push rbx",
+        "cee59c: push rsi",
+        "cee59d: push rdi",
+        "cee59e: push r12",
+        "cee5a0: push r13",
+        "cee5a2: lea rbp, [rsp - 0x188]",
+        "cee5aa: sub rsp, 0x288"
       ]
     },
     "counterstrikesharp/CCSNavArea_IsValidNavMesh": {
-      "matches": [],
-      "unique": false
-    },
-    "BotAI/HasVisitedEnemySpawn": {
       "matches": [
-        "0x2de7e9"
+        "0xdcbf70"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2de7e9: mov qword ptr [rdi + 0x228], r14",
-        "2de7f0: lea rcx, [rsp + 0x80]",
-        "2de7f8: mov byte ptr [rdi + 0x5fd], r14b",
-        "2de7ff: call 0x17c390",
-        "2de804: movss xmm0, dword ptr [rdi + 0x608]",
-        "2de80c: mov rsi, rax",
-        "2de80f: ucomiss xmm0, dword ptr [rax]",
-        "2de812: jp 0x2de816",
-        "2de814: je 0x2de839",
-        "2de816: mov edx, 0xffffffff"
+        "dcbf70: cmp qword ptr [rip + 0x15634d0], 0",
+        "dcbf78: setne al",
+        "dcbf7b: ret ",
+        "dcbf7c: int3 ",
+        "dcbf7d: int3 ",
+        "dcbf7e: int3 ",
+        "dcbf7f: int3 ",
+        "dcbf80: ret 0",
+        "dcbf83: int3 ",
+        "dcbf84: int3 "
+      ]
+    },
+    "BotAI/HasVisitedEnemySpawn": {
+      "matches": [
+        "0x2de869"
       ],
-      "address": "0x2de7f8",
+      "unique": true,
+      "unwindEntry": false,
+      "instructions": [
+        "2de869: mov qword ptr [rdi + 0x228], r14",
+        "2de870: lea rcx, [rsp + 0x80]",
+        "2de878: mov byte ptr [rdi + 0x5fd], r14b",
+        "2de87f: call 0x17c3b0",
+        "2de884: movss xmm0, dword ptr [rdi + 0x608]",
+        "2de88c: mov rsi, rax",
+        "2de88f: ucomiss xmm0, dword ptr [rax]",
+        "2de892: jp 0x2de896",
+        "2de894: je 0x2de8b9",
+        "2de896: mov edx, 0xffffffff"
+      ],
+      "address": "0x2de878",
       "original": "44 88 b7 fd 05 00 00",
       "replacement": "C6 87 FD 05 00 00 01",
       "expectedMatches": true,
@@ -1175,23 +1190,23 @@
     },
     "BotAI/GameState_Reset": {
       "matches": [
-        "0x2ddbfb"
+        "0x2ddc7b"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2ddbfb: lea rcx, [rsp + 0x40]",
-        "2ddc00: xor r14d, r14d",
-        "2ddc03: mov dword ptr [rdi + 0xc], r14d",
-        "2ddc07: call 0x17c390",
-        "2ddc0c: movss xmm0, dword ptr [rdi + 0x18]",
-        "2ddc11: mov rsi, rax",
-        "2ddc14: ucomiss xmm0, dword ptr [rax]",
-        "2ddc17: jp 0x2ddc1b",
-        "2ddc19: je 0x2ddc38",
-        "2ddc1b: mov edx, 0xffffffff"
+        "2ddc7b: lea rcx, [rsp + 0x40]",
+        "2ddc80: xor r14d, r14d",
+        "2ddc83: mov dword ptr [rdi + 0xc], r14d",
+        "2ddc87: call 0x17c3b0",
+        "2ddc8c: movss xmm0, dword ptr [rdi + 0x18]",
+        "2ddc91: mov rsi, rax",
+        "2ddc94: ucomiss xmm0, dword ptr [rax]",
+        "2ddc97: jp 0x2ddc9b",
+        "2ddc99: je 0x2ddcb8",
+        "2ddc9b: mov edx, 0xffffffff"
       ],
-      "address": "0x2ddc03",
+      "address": "0x2ddc83",
       "original": "44 89 77 0c",
       "replacement": "90 90 90 90",
       "expectedMatches": true,
@@ -1200,23 +1215,23 @@
     },
     "BotAI/Idle_IsSafeAlwaysFalse": {
       "matches": [
-        "0x33251d"
+        "0x33259d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "33251d: je 0x332547",
-        "33251f: xor edx, edx",
-        "332521: mov rcx, rsi",
-        "332524: call 0x2c1460",
-        "332529: test al, al",
-        "33252b: jne 0x332547",
-        "33252d: mov rax, qword ptr [rsi + 8]",
-        "332531: movss xmm0, dword ptr [rax + 0xc]",
-        "332536: comiss xmm0, dword ptr [rip + 0x146fe03]",
-        "33253d: jbe 0x332547"
+        "33259d: je 0x3325c7",
+        "33259f: xor edx, edx",
+        "3325a1: mov rcx, rsi",
+        "3325a4: call 0x2c14e0",
+        "3325a9: test al, al",
+        "3325ab: jne 0x3325c7",
+        "3325ad: mov rax, qword ptr [rsi + 8]",
+        "3325b1: movss xmm0, dword ptr [rax + 0xc]",
+        "3325b6: comiss xmm0, dword ptr [rip + 0x1470dc3]",
+        "3325bd: jbe 0x3325c7"
       ],
-      "address": "0x33251d",
+      "address": "0x33259d",
       "original": "74 28",
       "replacement": "EB 28",
       "expectedMatches": true,
@@ -1225,23 +1240,23 @@
     },
     "BotAI/EscapeFromBomb_OnEnter_NoEquipKnife": {
       "matches": [
-        "0x32d0bd"
+        "0x32d13d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32d0bd: mov byte ptr [rbx + 0x4f74], 0",
-        "32d0c4: mov byte ptr [rbx + 0x4f9c], 0",
-        "32d0cb: add rsp, 0x20",
-        "32d0cf: pop rbx",
-        "32d0d0: jmp 0x2c15c0",
-        "32d0d5: int3 ",
-        "32d0d6: int3 ",
-        "32d0d7: int3 ",
-        "32d0d8: int3 ",
-        "32d0d9: int3 "
+        "32d13d: mov byte ptr [rbx + 0x4f74], 0",
+        "32d144: mov byte ptr [rbx + 0x4f9c], 0",
+        "32d14b: add rsp, 0x20",
+        "32d14f: pop rbx",
+        "32d150: jmp 0x2c1640",
+        "32d155: int3 ",
+        "32d156: int3 ",
+        "32d157: int3 ",
+        "32d158: int3 ",
+        "32d159: int3 "
       ],
-      "address": "0x32d0d0",
+      "address": "0x32d150",
       "original": "e9 eb 44 f9 ff",
       "replacement": "C3 90 90 90 90",
       "expectedMatches": true,
@@ -1250,23 +1265,23 @@
     },
     "BotAI/EscapeFromBomb_OnUpdate_NoEquipKnife": {
       "matches": [
-        "0x32fde2"
+        "0x32fe62"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32fde2: jne 0x32fdf3",
-        "32fde4: mov rbx, qword ptr [rsp + 0x50]",
-        "32fde9: add rsp, 0x40",
-        "32fded: pop rdi",
-        "32fdee: jmp 0x2cb620",
-        "32fdf3: call 0x2c15c0",
-        "32fdf8: xor edx, edx",
-        "32fdfa: mov rcx, rdi",
-        "32fdfd: call 0x2e7a60",
-        "32fe02: movss xmm2, dword ptr [rip + 0x1444e46]"
+        "32fe62: jne 0x32fe73",
+        "32fe64: mov rbx, qword ptr [rsp + 0x50]",
+        "32fe69: add rsp, 0x40",
+        "32fe6d: pop rdi",
+        "32fe6e: jmp 0x2cb6a0",
+        "32fe73: call 0x2c1640",
+        "32fe78: xor edx, edx",
+        "32fe7a: mov rcx, rdi",
+        "32fe7d: call 0x2e7ae0",
+        "32fe82: movss xmm2, dword ptr [rip + 0x1445dc6]"
       ],
-      "address": "0x32fdf3",
+      "address": "0x32fe73",
       "original": "e8 c8 17 f9 ff",
       "replacement": "90 90 90 90 90",
       "expectedMatches": true,
@@ -1275,23 +1290,23 @@
     },
     "BotAI/EscapeFromFlames_OnEnter_NoEquipKnife": {
       "matches": [
-        "0x32d1a5"
+        "0x32d225"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32d1a5: mov rcx, rbx",
-        "32d1a8: mov byte ptr [rbx + 0x4f74], dil",
-        "32d1af: mov byte ptr [rbx + 0x4f9c], dil",
-        "32d1b6: call 0x2c15c0",
-        "32d1bb: movss xmm1, dword ptr [rip + 0x1447a8d]",
-        "32d1c3: lea rcx, [rsp + 0x30]",
-        "32d1c8: mov qword ptr [rsi + 0x20], rdi",
-        "32d1cc: call 0x17c390",
-        "32d1d1: movss xmm0, dword ptr [rsi + 0x14]",
-        "32d1d6: mov rdi, rax"
+        "32d225: mov rcx, rbx",
+        "32d228: mov byte ptr [rbx + 0x4f74], dil",
+        "32d22f: mov byte ptr [rbx + 0x4f9c], dil",
+        "32d236: call 0x2c1640",
+        "32d23b: movss xmm1, dword ptr [rip + 0x1448a0d]",
+        "32d243: lea rcx, [rsp + 0x30]",
+        "32d248: mov qword ptr [rsi + 0x20], rdi",
+        "32d24c: call 0x17c3b0",
+        "32d251: movss xmm0, dword ptr [rsi + 0x14]",
+        "32d256: mov rdi, rax"
       ],
-      "address": "0x32d1b6",
+      "address": "0x32d236",
       "original": "e8 05 44 f9 ff",
       "replacement": "90 90 90 90 90",
       "expectedMatches": true,
@@ -1300,23 +1315,23 @@
     },
     "BotAI/PlantBombLookAtPriorityLow": {
       "matches": [
-        "0x32dc2c"
+        "0x32dcac"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32dc2c: mov r9d, 2",
-        "32dc32: mov byte ptr [rsp + 0x38], 0",
-        "32dc37: movss xmm1, dword ptr [rip + 0x1447011]",
-        "32dc3f: mov rcx, rdi",
-        "32dc42: movss xmm2, dword ptr [rax + 8]",
-        "32dc47: addss xmm0, dword ptr [rsp + 0x40]",
-        "32dc4d: movss dword ptr [rsp + 0x58], xmm2",
-        "32dc53: movss dword ptr [rsp + 0x50], xmm0",
-        "32dc59: movss xmm0, dword ptr [rsp + 0x8c]",
-        "32dc62: mulss xmm0, dword ptr [rip + 0x1446fc2]"
+        "32dcac: mov r9d, 2",
+        "32dcb2: mov byte ptr [rsp + 0x38], 0",
+        "32dcb7: movss xmm1, dword ptr [rip + 0x1447f91]",
+        "32dcbf: mov rcx, rdi",
+        "32dcc2: movss xmm2, dword ptr [rax + 8]",
+        "32dcc7: addss xmm0, dword ptr [rsp + 0x40]",
+        "32dccd: movss dword ptr [rsp + 0x58], xmm2",
+        "32dcd3: movss dword ptr [rsp + 0x50], xmm0",
+        "32dcd9: movss xmm0, dword ptr [rsp + 0x8c]",
+        "32dce2: mulss xmm0, dword ptr [rip + 0x1447f42]"
       ],
-      "address": "0x32dc2c",
+      "address": "0x32dcac",
       "original": "41 b9 02 00 00 00",
       "replacement": "41 B9 00 00 00 00",
       "expectedMatches": true,
@@ -1325,23 +1340,23 @@
     },
     "BotAI/DefuseBombLookAtPriorityLow": {
       "matches": [
-        "0x32fc56"
+        "0x32fcd6"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32fc56: mov r9d, 2",
-        "32fc5c: mov byte ptr [rsp + 0x38], 0",
-        "32fc61: mov r8, rdi",
-        "32fc64: movss dword ptr [rsp + 0x30], xmm0",
-        "32fc6a: mov byte ptr [rsp + 0x28], 0",
-        "32fc6f: movss dword ptr [rsp + 0x20], xmm1",
-        "32fc75: call 0x2e0e10",
-        "32fc7a: mov rax, qword ptr [rbx]",
-        "32fc7d: mov rcx, rbx",
-        "32fc80: call qword ptr [rax + 0x80]"
+        "32fcd6: mov r9d, 2",
+        "32fcdc: mov byte ptr [rsp + 0x38], 0",
+        "32fce1: mov r8, rdi",
+        "32fce4: movss dword ptr [rsp + 0x30], xmm0",
+        "32fcea: mov byte ptr [rsp + 0x28], 0",
+        "32fcef: movss dword ptr [rsp + 0x20], xmm1",
+        "32fcf5: call 0x2e0e90",
+        "32fcfa: mov rax, qword ptr [rbx]",
+        "32fcfd: mov rcx, rbx",
+        "32fd00: call qword ptr [rax + 0x80]"
       ],
-      "address": "0x32fc56",
+      "address": "0x32fcd6",
       "original": "41 b9 02 00 00 00",
       "replacement": "41 B9 00 00 00 00",
       "expectedMatches": true,
@@ -1350,23 +1365,23 @@
     },
     "BotAI/SprayAllDistances_ForceHoldTrigger": {
       "matches": [
-        "0x302013"
+        "0x302093"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "302013: jbe 0x302027",
-        "302015: mov rax, qword ptr [rip + 0x1b1626c]",
-        "30201c: comiss xmm0, dword ptr [rax + 0x30]",
-        "302020: jbe 0x302027",
-        "302022: mov bpl, 1",
-        "302025: jmp 0x30202a",
-        "302027: xor bpl, bpl",
-        "30202a: mov rax, qword ptr [rdi + 0x98]",
-        "302031: test rax, rax",
-        "302034: je 0x3020a7"
+        "302093: jbe 0x3020a7",
+        "302095: mov rax, qword ptr [rip + 0x1b184f4]",
+        "30209c: comiss xmm0, dword ptr [rax + 0x30]",
+        "3020a0: jbe 0x3020a7",
+        "3020a2: mov bpl, 1",
+        "3020a5: jmp 0x3020aa",
+        "3020a7: xor bpl, bpl",
+        "3020aa: mov rax, qword ptr [rdi + 0x98]",
+        "3020b1: test rax, rax",
+        "3020b4: je 0x302127"
       ],
-      "address": "0x302022",
+      "address": "0x3020a2",
       "original": "40 b5 01",
       "replacement": "40 32 ED",
       "expectedMatches": true,
@@ -1375,23 +1390,23 @@
     },
     "BotAI/AttackState_SkipSteadyFireShortcut": {
       "matches": [
-        "0x302fd0"
+        "0x303050"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "302fd0: movzx esi, al",
-        "302fd3: test al, al",
-        "302fd5: je 0x303013",
-        "302fd7: mov rcx, qword ptr [rbx + 0x18]",
-        "302fdb: mov rdx, qword ptr [rcx]",
-        "302fde: call qword ptr [rdx + 0x90]",
-        "302fe4: comiss xmm0, dword ptr [rip + 0x146d441]",
-        "302feb: jae 0x302ffe",
-        "302fed: mov rcx, qword ptr [rbx + 0x18]",
-        "302ff1: mov rax, qword ptr [rcx]"
+        "303050: movzx esi, al",
+        "303053: test al, al",
+        "303055: je 0x303093",
+        "303057: mov rcx, qword ptr [rbx + 0x18]",
+        "30305b: mov rdx, qword ptr [rcx]",
+        "30305e: call qword ptr [rdx + 0x90]",
+        "303064: comiss xmm0, dword ptr [rip + 0x146e3c1]",
+        "30306b: jae 0x30307e",
+        "30306d: mov rcx, qword ptr [rbx + 0x18]",
+        "303071: mov rax, qword ptr [rcx]"
       ],
-      "address": "0x302fd5",
+      "address": "0x303055",
       "original": "74 3c",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1400,23 +1415,23 @@
     },
     "BotAI/AttackState_SkipZoomFireShortcut": {
       "matches": [
-        "0x302ff4"
+        "0x303074"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "302ff4: call qword ptr [rax + 0x2a0]",
-        "302ffa: test al, al",
-        "302ffc: je 0x303013",
-        "302ffe: lea rcx, [rbx + 0x88]",
-        "303005: mov qword ptr [rbx + 0xa4], rbp",
-        "30300c: call 0x27dbd0",
-        "303011: jmp 0x303022",
-        "303013: movzx r8d, sil",
-        "303017: mov rdx, rdi",
-        "30301a: mov rcx, rbx"
+        "303074: call qword ptr [rax + 0x2a0]",
+        "30307a: test al, al",
+        "30307c: je 0x303093",
+        "30307e: lea rcx, [rbx + 0x88]",
+        "303085: mov qword ptr [rbx + 0xa4], rbp",
+        "30308c: call 0x27dc50",
+        "303091: jmp 0x3030a2",
+        "303093: movzx r8d, sil",
+        "303097: mov rdx, rdi",
+        "30309a: mov rcx, rbx"
       ],
-      "address": "0x302ffc",
+      "address": "0x30307c",
       "original": "74 15",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1425,23 +1440,23 @@
     },
     "BotAI/AttackState_SkipSniperSpreadCheck": {
       "matches": [
-        "0x2c529d"
+        "0x2c531d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2c529d: test al, al",
-        "2c529f: je 0x2c52ab",
-        "2c52a1: movss xmm0, dword ptr [rip + 0x14dd117]",
-        "2c52a9: jmp 0x2c52b3",
-        "2c52ab: movss xmm0, dword ptr [rip + 0x14dd0f1]",
-        "2c52b3: comiss xmm8, xmm0",
-        "2c52b7: ja 0x2c54f1",
-        "2c52bd: mov rcx, rdi",
-        "2c52c0: call 0x2c9bf0",
-        "2c52c5: mov rcx, rdi"
+        "2c531d: test al, al",
+        "2c531f: je 0x2c532b",
+        "2c5321: movss xmm0, dword ptr [rip + 0x14de0d7]",
+        "2c5329: jmp 0x2c5333",
+        "2c532b: movss xmm0, dword ptr [rip + 0x14de0b1]",
+        "2c5333: comiss xmm8, xmm0",
+        "2c5337: ja 0x2c5571",
+        "2c533d: mov rcx, rdi",
+        "2c5340: call 0x2c9c70",
+        "2c5345: mov rcx, rdi"
       ],
-      "address": "0x2c52b7",
+      "address": "0x2c5337",
       "original": "0f 87 34 02 00 00",
       "replacement": "90 90 90 90 90 90",
       "expectedMatches": true,
@@ -1450,23 +1465,23 @@
     },
     "BotAI/AttackState_DodgeDuringReload": {
       "matches": [
-        "0x30382f"
+        "0x3038af"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "30382f: jmp 0x30391b",
-        "303834: comiss xmm7, dword ptr [rbx + 0xa4]",
-        "30383b: jbe 0x3038b1",
-        "30383d: mov rax, qword ptr [rbx + 0x80]",
-        "303844: mov sil, 1",
-        "303847: test rax, rax",
-        "30384a: je 0x3038ac",
-        "30384c: cmp byte ptr [rax], dil",
-        "30384f: je 0x3038ac",
-        "303851: mov rax, qword ptr [rbx + 0x10]"
+        "3038af: jmp 0x30399b",
+        "3038b4: comiss xmm7, dword ptr [rbx + 0xa4]",
+        "3038bb: jbe 0x303931",
+        "3038bd: mov rax, qword ptr [rbx + 0x80]",
+        "3038c4: mov sil, 1",
+        "3038c7: test rax, rax",
+        "3038ca: je 0x30392c",
+        "3038cc: cmp byte ptr [rax], dil",
+        "3038cf: je 0x30392c",
+        "3038d1: mov rax, qword ptr [rbx + 0x10]"
       ],
-      "address": "0x30383b",
+      "address": "0x3038bb",
       "original": "76 74",
       "replacement": "EB 74",
       "expectedMatches": true,
@@ -1475,23 +1490,23 @@
     },
     "BotAI/SniperCrouchDodge_jb": {
       "matches": [
-        "0x30391b"
+        "0x30399b"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "30391b: comiss xmm7, dword ptr [rbx + 0xa4]",
-        "303922: movaps xmm7, xmmword ptr [rsp + 0x30]",
-        "303927: jbe 0x30399d",
-        "303929: mov rax, qword ptr [rbx + 0x80]",
-        "303930: mov sil, 1",
-        "303933: test rax, rax",
-        "303936: je 0x303998",
-        "303938: cmp byte ptr [rax], dil",
-        "30393b: je 0x303998",
-        "30393d: mov rax, qword ptr [rbx + 0x10]"
+        "30399b: comiss xmm7, dword ptr [rbx + 0xa4]",
+        "3039a2: movaps xmm7, xmmword ptr [rsp + 0x30]",
+        "3039a7: jbe 0x303a1d",
+        "3039a9: mov rax, qword ptr [rbx + 0x80]",
+        "3039b0: mov sil, 1",
+        "3039b3: test rax, rax",
+        "3039b6: je 0x303a18",
+        "3039b8: cmp byte ptr [rax], dil",
+        "3039bb: je 0x303a18",
+        "3039bd: mov rax, qword ptr [rbx + 0x10]"
       ],
-      "address": "0x303927",
+      "address": "0x3039a7",
       "original": "76 74",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1500,23 +1515,23 @@
     },
     "BotAI/LowSKill_JumpChance0": {
       "matches": [
-        "0x32bc92"
+        "0x32bd12"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bc92: xorps xmm1, xmm1",
-        "32bc95: mov rcx, rdi",
-        "32bc98: call 0x2cf340",
-        "32bc9d: mov edx, 3",
-        "32bca2: test al, al",
-        "32bca4: je 0x32bcab",
-        "32bca6: mov edx, 2",
-        "32bcab: xor ecx, ecx",
-        "32bcad: call qword ptr [rip + 0x142f68d]",
-        "32bcb3: cmp byte ptr [rbp + 0x43], 0"
+        "32bd12: xorps xmm1, xmm1",
+        "32bd15: mov rcx, rdi",
+        "32bd18: call 0x2cf3c0",
+        "32bd1d: mov edx, 3",
+        "32bd22: test al, al",
+        "32bd24: je 0x32bd2b",
+        "32bd26: mov edx, 2",
+        "32bd2b: xor ecx, ecx",
+        "32bd2d: call qword ptr [rip + 0x143060d]",
+        "32bd33: cmp byte ptr [rbp + 0x43], 0"
       ],
-      "address": "0x32bc9d",
+      "address": "0x32bd1d",
       "original": "ba 03 00 00 00",
       "replacement": "BA 02 00 00 00",
       "expectedMatches": true,
@@ -1525,23 +1540,23 @@
     },
     "BotAI/AttackState_DodgeChance100_Always": {
       "matches": [
-        "0x32cc40"
+        "0x32ccc0"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32cc40: movaps xmm6, xmm0",
-        "32cc43: mulss xmm6, dword ptr [rip + 0x145eca5]",
-        "32cc4b: jbe 0x32cc61",
-        "32cc4d: mov rcx, rdi",
-        "32cc50: call 0x2cf770",
-        "32cc55: test al, al",
-        "32cc57: jne 0x32cc5e",
-        "32cc59: cmp byte ptr [r14], r12b",
-        "32cc5c: je 0x32cc61",
-        "32cc5e: movaps xmm6, xmm7"
+        "32ccc0: movaps xmm6, xmm0",
+        "32ccc3: mulss xmm6, dword ptr [rip + 0x145fc55]",
+        "32cccb: jbe 0x32cce1",
+        "32cccd: mov rcx, rdi",
+        "32ccd0: call 0x2cf7f0",
+        "32ccd5: test al, al",
+        "32ccd7: jne 0x32ccde",
+        "32ccd9: cmp byte ptr [r14], r12b",
+        "32ccdc: je 0x32cce1",
+        "32ccde: movaps xmm6, xmm7"
       ],
-      "address": "0x32cc4b",
+      "address": "0x32cccb",
       "original": "76 14",
       "replacement": "EB 11",
       "expectedMatches": true,
@@ -1550,23 +1565,23 @@
     },
     "BotAI/AttackState_RetreatOnSniper_Disable": {
       "matches": [
-        "0x32e358"
+        "0x32e3d8"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32e358: je 0x32e366",
-        "32e35a: mov rcx, rsi",
-        "32e35d: call 0x2cfe90",
-        "32e362: test al, al",
-        "32e364: je 0x32e39d",
-        "32e366: mov rcx, rsi",
-        "32e369: call 0x2cf770",
-        "32e36e: test al, al",
-        "32e370: je 0x32e379",
-        "32e372: cmp byte ptr [r14 + 0x44], 0"
+        "32e3d8: je 0x32e3e6",
+        "32e3da: mov rcx, rsi",
+        "32e3dd: call 0x2cff10",
+        "32e3e2: test al, al",
+        "32e3e4: je 0x32e41d",
+        "32e3e6: mov rcx, rsi",
+        "32e3e9: call 0x2cf7f0",
+        "32e3ee: test al, al",
+        "32e3f0: je 0x32e3f9",
+        "32e3f2: cmp byte ptr [r14 + 0x44], 0"
       ],
-      "address": "0x32e358",
+      "address": "0x32e3d8",
       "original": "74",
       "replacement": "EB",
       "expectedMatches": true,
@@ -1575,23 +1590,23 @@
     },
     "BotAI/AllSkill_KeepMoving_WhenSeeSniper": {
       "matches": [
-        "0x2dc8ff"
+        "0x2dc97f"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2dc8ff: comiss xmm0, dword ptr [rip + 0x1493b26]",
-        "2dc906: jbe 0x2dc915",
-        "2dc908: cmp byte ptr [rdi + 0x5cc], 0",
-        "2dc90f: jne 0x2dc85a",
-        "2dc915: mov ecx, dword ptr [rip + 0x20b2b75]",
-        "2dc91b: mov rax, qword ptr gs:[0x58]",
-        "2dc924: mov edx, 0x238",
-        "2dc929: mov rax, qword ptr [rax + rcx*8]",
-        "2dc92d: mov eax, dword ptr [rdx + rax]",
-        "2dc930: cmp dword ptr [rip + 0x1cacd2a], eax"
+        "2dc97f: comiss xmm0, dword ptr [rip + 0x1494aa6]",
+        "2dc986: jbe 0x2dc995",
+        "2dc988: cmp byte ptr [rdi + 0x5cc], 0",
+        "2dc98f: jne 0x2dc8da",
+        "2dc995: mov ecx, dword ptr [rip + 0x20b4c55]",
+        "2dc99b: mov rax, qword ptr gs:[0x58]",
+        "2dc9a4: mov edx, 0x238",
+        "2dc9a9: mov rax, qword ptr [rax + rcx*8]",
+        "2dc9ad: mov eax, dword ptr [rdx + rax]",
+        "2dc9b0: cmp dword ptr [rip + 0x1caed8a], eax"
       ],
-      "address": "0x2dc906",
+      "address": "0x2dc986",
       "original": "76 0d",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1600,23 +1615,23 @@
     },
     "BotAI/AttackState_CanStrafe_jne": {
       "matches": [
-        "0x3037a0"
+        "0x303820"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "3037a0: comiss xmm1, dword ptr [rbx + 0xac]",
-        "3037a7: jb 0x303834",
-        "3037ad: mov rcx, rbx",
-        "3037b0: call 0x3055b0",
-        "3037b5: test al, al",
-        "3037b7: je 0x303834",
-        "3037b9: mov rcx, qword ptr [rbx + 0x18]",
-        "3037bd: movaps xmmword ptr [rsp + 0x40], xmm6",
-        "3037c2: mov rax, qword ptr [rcx]",
-        "3037c5: call qword ptr [rax + 0x158]"
+        "303820: comiss xmm1, dword ptr [rbx + 0xac]",
+        "303827: jb 0x3038b4",
+        "30382d: mov rcx, rbx",
+        "303830: call 0x305630",
+        "303835: test al, al",
+        "303837: je 0x3038b4",
+        "303839: mov rcx, qword ptr [rbx + 0x18]",
+        "30383d: movaps xmmword ptr [rsp + 0x40], xmm6",
+        "303842: mov rax, qword ptr [rcx]",
+        "303845: call qword ptr [rax + 0x158]"
       ],
-      "address": "0x3037b7",
+      "address": "0x303837",
       "original": "74 7b",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1625,23 +1640,23 @@
     },
     "BotAI/SniperDodge_SkipIsSniper_DodgeA": {
       "matches": [
-        "0x3038ad"
+        "0x30392d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "3038ad: test dh, dh",
-        "3038af: jne 0x30391b",
-        "3038b1: mov rax, qword ptr [rip + 0x1b149d0]",
-        "3038b8: movss xmm0, dword ptr [rax + 0x30]",
-        "3038bd: comiss xmm0, dword ptr [rbx + 0xa4]",
-        "3038c4: jb 0x30391b",
-        "3038c6: mov rax, qword ptr [rbx + 0x98]",
-        "3038cd: test rax, rax",
-        "3038d0: je 0x30391b",
-        "3038d2: cmp byte ptr [rax], dil"
+        "30392d: test dh, dh",
+        "30392f: jne 0x30399b",
+        "303931: mov rax, qword ptr [rip + 0x1b16c58]",
+        "303938: movss xmm0, dword ptr [rax + 0x30]",
+        "30393d: comiss xmm0, dword ptr [rbx + 0xa4]",
+        "303944: jb 0x30399b",
+        "303946: mov rax, qword ptr [rbx + 0x98]",
+        "30394d: test rax, rax",
+        "303950: je 0x30399b",
+        "303952: cmp byte ptr [rax], dil"
       ],
-      "address": "0x3038af",
+      "address": "0x30392f",
       "original": "75 6a",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1650,23 +1665,23 @@
     },
     "BotAI/Vision_AlwaysWatchApproachPoints": {
       "matches": [
-        "0x32bbcd"
+        "0x32bc4d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bbcd: cmp byte ptr [rdi + 0x5cc1], 0",
-        "32bbd4: jne 0x32bbfb",
-        "32bbd6: comiss xmm6, dword ptr [rip + 0x145fd33]",
-        "32bbdd: ja 0x32bbee",
-        "32bbdf: mov rdx, r14",
-        "32bbe2: mov rcx, rdi",
-        "32bbe5: call 0x2cf7e0",
-        "32bbea: test al, al",
-        "32bbec: jne 0x32bbfb",
-        "32bbee: mov qword ptr [rbp + 8], 0"
+        "32bc4d: cmp byte ptr [rdi + 0x5cc1], 0",
+        "32bc54: jne 0x32bc7b",
+        "32bc56: comiss xmm6, dword ptr [rip + 0x1460ce3]",
+        "32bc5d: ja 0x32bc6e",
+        "32bc5f: mov rdx, r14",
+        "32bc62: mov rcx, rdi",
+        "32bc65: call 0x2cf860",
+        "32bc6a: test al, al",
+        "32bc6c: jne 0x32bc7b",
+        "32bc6e: mov qword ptr [rbp + 8], 0"
       ],
-      "address": "0x32bbd4",
+      "address": "0x32bc54",
       "original": "75 25",
       "replacement": "EB 25",
       "expectedMatches": true,
@@ -1675,23 +1690,23 @@
     },
     "BotAI/Vision_ApproachBody_SkipSkillCheck": {
       "matches": [
-        "0x32bc1d"
+        "0x32bc9d"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bc1d: movss xmm0, dword ptr [rax + 0xc]",
-        "32bc22: comiss xmm0, xmm6",
-        "32bc25: jbe 0x32bc5a",
-        "32bc27: cmp byte ptr [rdi + 0x5cc1], 0",
-        "32bc2e: je 0x32bc5a",
-        "32bc30: cmp byte ptr [rbp + 0x43], 0",
-        "32bc34: je 0x32bc4e",
-        "32bc36: mov edx, 0x64",
-        "32bc3b: xor ecx, ecx",
-        "32bc3d: call qword ptr [rip + 0x142f6fd]"
+        "32bc9d: movss xmm0, dword ptr [rax + 0xc]",
+        "32bca2: comiss xmm0, xmm6",
+        "32bca5: jbe 0x32bcda",
+        "32bca7: cmp byte ptr [rdi + 0x5cc1], 0",
+        "32bcae: je 0x32bcda",
+        "32bcb0: cmp byte ptr [rbp + 0x43], 0",
+        "32bcb4: je 0x32bcce",
+        "32bcb6: mov edx, 0x64",
+        "32bcbb: xor ecx, ecx",
+        "32bcbd: call qword ptr [rip + 0x143067d]"
       ],
-      "address": "0x32bc25",
+      "address": "0x32bca5",
       "original": "76 33",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1700,23 +1715,23 @@
     },
     "BotAI/Vision_ApproachBody_SkipHidingSpotCheck": {
       "matches": [
-        "0x32bc27"
+        "0x32bca7"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bc27: cmp byte ptr [rdi + 0x5cc1], 0",
-        "32bc2e: je 0x32bc5a",
-        "32bc30: cmp byte ptr [rbp + 0x43], 0",
-        "32bc34: je 0x32bc4e",
-        "32bc36: mov edx, 0x64",
-        "32bc3b: xor ecx, ecx",
-        "32bc3d: call qword ptr [rip + 0x142f6fd]",
-        "32bc43: cmp eax, 0x32",
-        "32bc46: setl sil",
-        "32bc4a: inc esi"
+        "32bca7: cmp byte ptr [rdi + 0x5cc1], 0",
+        "32bcae: je 0x32bcda",
+        "32bcb0: cmp byte ptr [rbp + 0x43], 0",
+        "32bcb4: je 0x32bcce",
+        "32bcb6: mov edx, 0x64",
+        "32bcbb: xor ecx, ecx",
+        "32bcbd: call qword ptr [rip + 0x143067d]",
+        "32bcc3: cmp eax, 0x32",
+        "32bcc6: setl sil",
+        "32bcca: inc esi"
       ],
-      "address": "0x32bc2e",
+      "address": "0x32bcae",
       "original": "74 2a",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1725,23 +1740,23 @@
     },
     "BotAI/Vision_SkipIsMovingGate": {
       "matches": [
-        "0x32bbd6"
+        "0x32bc56"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bbd6: comiss xmm6, dword ptr [rip + 0x145fd33]",
-        "32bbdd: ja 0x32bbee",
-        "32bbdf: mov rdx, r14",
-        "32bbe2: mov rcx, rdi",
-        "32bbe5: call 0x2cf7e0",
-        "32bbea: test al, al",
-        "32bbec: jne 0x32bbfb",
-        "32bbee: mov qword ptr [rbp + 8], 0",
-        "32bbf6: jmp 0x32bcee",
-        "32bbfb: mov rax, qword ptr [rip + 0x1aec686]"
+        "32bc56: comiss xmm6, dword ptr [rip + 0x1460ce3]",
+        "32bc5d: ja 0x32bc6e",
+        "32bc5f: mov rdx, r14",
+        "32bc62: mov rcx, rdi",
+        "32bc65: call 0x2cf860",
+        "32bc6a: test al, al",
+        "32bc6c: jne 0x32bc7b",
+        "32bc6e: mov qword ptr [rbp + 8], 0",
+        "32bc76: jmp 0x32bd6e",
+        "32bc7b: mov rax, qword ptr [rip + 0x1aee90e]"
       ],
-      "address": "0x32bbdd",
+      "address": "0x32bc5d",
       "original": "77 0f",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1750,23 +1765,23 @@
     },
     "BotAI/Vision_AlwaysEnterApproachBody": {
       "matches": [
-        "0x32bbea"
+        "0x32bc6a"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32bbea: test al, al",
-        "32bbec: jne 0x32bbfb",
-        "32bbee: mov qword ptr [rbp + 8], 0",
-        "32bbf6: jmp 0x32bcee",
-        "32bbfb: mov rax, qword ptr [rip + 0x1aec686]",
-        "32bc02: movss xmm0, dword ptr [rax + 0x30]",
-        "32bc07: comiss xmm0, dword ptr [rbp + 0xc]",
-        "32bc0b: jb 0x32bcee",
-        "32bc11: mov rax, qword ptr [rdi + 8]",
-        "32bc15: movss xmm6, dword ptr [rip + 0x144480f]"
+        "32bc6a: test al, al",
+        "32bc6c: jne 0x32bc7b",
+        "32bc6e: mov qword ptr [rbp + 8], 0",
+        "32bc76: jmp 0x32bd6e",
+        "32bc7b: mov rax, qword ptr [rip + 0x1aee90e]",
+        "32bc82: movss xmm0, dword ptr [rax + 0x30]",
+        "32bc87: comiss xmm0, dword ptr [rbp + 0xc]",
+        "32bc8b: jb 0x32bd6e",
+        "32bc91: mov rax, qword ptr [rdi + 8]",
+        "32bc95: movss xmm6, dword ptr [rip + 0x144578f]"
       ],
-      "address": "0x32bbec",
+      "address": "0x32bc6c",
       "original": "75",
       "replacement": "EB",
       "expectedMatches": true,
@@ -1775,22 +1790,22 @@
     },
     "BotAI/Upkeep_BotCOS_ZeroDrift": {
       "matches": [
-        "0x2ea5df"
+        "0x2ea65f"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2ea5df: movss xmm6, dword ptr [rip + 0x14a96d1]",
-        "2ea5e7: mov rax, qword ptr [rip + 0x1b2dc9a]",
-        "2ea5ee: movss xmm0, dword ptr [rax + 0x30]",
-        "2ea5f3: mulss xmm0, dword ptr [rip + 0x14b7db9]",
-        "2ea5fb: call 0x322a50",
-        "2ea600: mulss xmm0, xmm6",
-        "2ea604: addss xmm0, dword ptr [rdi + 0x598c]",
-        "2ea60c: movss dword ptr [rdi + 0x598c], xmm0",
-        "2ea614: mov rax, qword ptr [rip + 0x1b2dc6d]"
+        "2ea65f: movss xmm6, dword ptr [rip + 0x14aa681]",
+        "2ea667: mov rax, qword ptr [rip + 0x1b2ff22]",
+        "2ea66e: movss xmm0, dword ptr [rax + 0x30]",
+        "2ea673: mulss xmm0, dword ptr [rip + 0x14b8d79]",
+        "2ea67b: call 0x322ad0",
+        "2ea680: mulss xmm0, xmm6",
+        "2ea684: addss xmm0, dword ptr [rdi + 0x598c]",
+        "2ea68c: movss dword ptr [rdi + 0x598c], xmm0",
+        "2ea694: mov rax, qword ptr [rip + 0x1b2fef5]"
       ],
-      "address": "0x2ea5fb",
+      "address": "0x2ea67b",
       "original": "e8 50 84 03 00",
       "replacement": "0F 57 C0 90 90",
       "expectedMatches": true,
@@ -1799,23 +1814,23 @@
     },
     "BotAI/Upkeep_BotSIN_ZeroDrift": {
       "matches": [
-        "0x2ea60c"
+        "0x2ea68c"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2ea60c: movss dword ptr [rdi + 0x598c], xmm0",
-        "2ea614: mov rax, qword ptr [rip + 0x1b2dc6d]",
-        "2ea61b: movss xmm0, dword ptr [rax + 0x30]",
-        "2ea620: mulss xmm0, dword ptr [rip + 0x14b7d6c]",
-        "2ea628: call 0x322a90",
-        "2ea62d: mulss xmm0, xmm6",
-        "2ea631: addss xmm0, dword ptr [rdi + 0x5984]",
-        "2ea639: movss dword ptr [rdi + 0x5984], xmm0",
-        "2ea641: mov rcx, rdi",
-        "2ea644: call 0x2e7660"
+        "2ea68c: movss dword ptr [rdi + 0x598c], xmm0",
+        "2ea694: mov rax, qword ptr [rip + 0x1b2fef5]",
+        "2ea69b: movss xmm0, dword ptr [rax + 0x30]",
+        "2ea6a0: mulss xmm0, dword ptr [rip + 0x14b8d2c]",
+        "2ea6a8: call 0x322b10",
+        "2ea6ad: mulss xmm0, xmm6",
+        "2ea6b1: addss xmm0, dword ptr [rdi + 0x5984]",
+        "2ea6b9: movss dword ptr [rdi + 0x5984], xmm0",
+        "2ea6c1: mov rcx, rdi",
+        "2ea6c4: call 0x2e76e0"
       ],
-      "address": "0x2ea628",
+      "address": "0x2ea6a8",
       "original": "e8 63 84 03 00",
       "replacement": "0F 57 C0 90 90",
       "expectedMatches": true,
@@ -1824,23 +1839,23 @@
     },
     "BotAI/InvestigateNoise_SkipSelfDefenseCheck": {
       "matches": [
-        "0x32b8bf"
+        "0x32b93f"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32b8bf: cmp dword ptr [rbx + 0x5318], 2",
-        "32b8c6: je 0x32b8e6",
-        "32b8c8: movss xmm0, dword ptr [rbx + 0x5300]",
-        "32b8d0: mov rdx, r14",
-        "32b8d3: mov rcx, qword ptr [rbx + 0x5e28]",
-        "32b8da: comiss xmm0, xmm6",
-        "32b8dd: cmova rdx, rdi",
-        "32b8e1: call 0x2cabc0",
-        "32b8e6: lea rdx, [rip + 0x147fe13]",
-        "32b8ed: mov rcx, rbx"
+        "32b93f: cmp dword ptr [rbx + 0x5318], 2",
+        "32b946: je 0x32b966",
+        "32b948: movss xmm0, dword ptr [rbx + 0x5300]",
+        "32b950: mov rdx, r14",
+        "32b953: mov rcx, qword ptr [rbx + 0x5e28]",
+        "32b95a: comiss xmm0, xmm6",
+        "32b95d: cmova rdx, rdi",
+        "32b961: call 0x2cac40",
+        "32b966: lea rdx, [rip + 0x1480dd3]",
+        "32b96d: mov rcx, rbx"
       ],
-      "address": "0x32b8c6",
+      "address": "0x32b946",
       "original": "74 1e",
       "replacement": "90 90",
       "expectedMatches": true,
@@ -1849,23 +1864,23 @@
     },
     "BotAI/CT_Defuse_EngageAndInvestigate": {
       "matches": [
-        "0x333878"
+        "0x3338f8"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "333878: mov dword ptr [rsi + 0x5d0], 3",
-        "333882: mov edx, 2",
-        "333887: mov rcx, rsi",
-        "33388a: mov dword ptr [rsi + 0x5d4], 0xffffffff",
-        "333894: call 0x2e0c50",
-        "333899: mov r8d, 2",
-        "33389f: mov rdx, r14",
-        "3338a2: mov rcx, rsi",
-        "3338a5: call 0x2d32a0",
-        "3338aa: jmp 0x3332a8"
+        "3338f8: mov dword ptr [rsi + 0x5d0], 3",
+        "333902: mov edx, 2",
+        "333907: mov rcx, rsi",
+        "33390a: mov dword ptr [rsi + 0x5d4], 0xffffffff",
+        "333914: call 0x2e0cd0",
+        "333919: mov r8d, 2",
+        "33391f: mov rdx, r14",
+        "333922: mov rcx, rsi",
+        "333925: call 0x2d3320",
+        "33392a: jmp 0x333328"
       ],
-      "address": "0x333882",
+      "address": "0x333902",
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
@@ -1874,23 +1889,23 @@
     },
     "BotAI/DefuseBombState_OnUpdate_EngageAndInvestigate": {
       "matches": [
-        "0x32fbfa"
+        "0x32fc7a"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "32fbfa: lea rcx, [rdx + 0x5120]",
-        "32fc01: mov rbx, rdx",
-        "32fc04: call 0x2c6780",
-        "32fc09: mov edx, 2",
-        "32fc0e: mov rcx, rbx",
-        "32fc11: mov rdi, rax",
-        "32fc14: call 0x2e0c50",
-        "32fc19: mov rcx, rbx",
-        "32fc1c: test rdi, rdi",
-        "32fc1f: jne 0x32fc3f"
+        "32fc7a: lea rcx, [rdx + 0x5120]",
+        "32fc81: mov rbx, rdx",
+        "32fc84: call 0x2c6800",
+        "32fc89: mov edx, 2",
+        "32fc8e: mov rcx, rbx",
+        "32fc91: mov rdi, rax",
+        "32fc94: call 0x2e0cd0",
+        "32fc99: mov rcx, rbx",
+        "32fc9c: test rdi, rdi",
+        "32fc9f: jne 0x32fcbf"
       ],
-      "address": "0x32fc09",
+      "address": "0x32fc89",
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
@@ -1899,23 +1914,23 @@
     },
     "BotAI/DefuseBombState_OnEnter_EngageAndInvestigate": {
       "matches": [
-        "0x32cff0"
+        "0x32d070"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "32cff0: mov qword ptr [rsp + 8], rbx",
-        "32cff5: push rdi",
-        "32cff6: sub rsp, 0x20",
-        "32cffa: mov rbx, rdx",
-        "32cffd: mov edx, 2",
-        "32d002: mov rcx, rbx",
-        "32d005: call 0x2e0c50",
-        "32d00a: mov rdi, qword ptr [rbx + 0x5e28]",
-        "32d011: mov ecx, 0xa8",
-        "32d016: call 0xfe4340"
+        "32d070: mov qword ptr [rsp + 8], rbx",
+        "32d075: push rdi",
+        "32d076: sub rsp, 0x20",
+        "32d07a: mov rbx, rdx",
+        "32d07d: mov edx, 2",
+        "32d082: mov rcx, rbx",
+        "32d085: call 0x2e0cd0",
+        "32d08a: mov rdi, qword ptr [rbx + 0x5e28]",
+        "32d091: mov ecx, 0xa8",
+        "32d096: call 0xfe55a0"
       ],
-      "address": "0x32cffd",
+      "address": "0x32d07d",
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
@@ -1924,23 +1939,23 @@
     },
     "BotAI/FlashbangAvoidance_Disable": {
       "matches": [
-        "0x2b6be1"
+        "0x2b6c61"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2b6be1: call 0x2e0e10",
-        "2b6be6: mov rax, qword ptr [r14]",
-        "2b6be9: mov byte ptr [rax + 0x5c74], 0",
-        "2b6bf0: xor al, al",
-        "2b6bf2: jmp 0x2b6d97",
-        "2b6bf7: movaps xmmword ptr [rsp + 0xc0], xmm7",
-        "2b6bff: mov rcx, rsi",
-        "2b6c02: movaps xmmword ptr [rsp + 0xb0], xmm8",
-        "2b6c0b: call 0x325400",
-        "2b6c10: mov rcx, qword ptr [r14]"
+        "2b6c61: call 0x2e0e90",
+        "2b6c66: mov rax, qword ptr [r14]",
+        "2b6c69: mov byte ptr [rax + 0x5c74], 0",
+        "2b6c70: xor al, al",
+        "2b6c72: jmp 0x2b6e17",
+        "2b6c77: movaps xmmword ptr [rsp + 0xc0], xmm7",
+        "2b6c7f: mov rcx, rsi",
+        "2b6c82: movaps xmmword ptr [rsp + 0xb0], xmm8",
+        "2b6c8b: call 0x325480",
+        "2b6c90: mov rcx, qword ptr [r14]"
       ],
-      "address": "0x2b6be1",
+      "address": "0x2b6c61",
       "original": "e8 2a a2 02 00 49 8b 06 c6 80 74 5c 00 00 00",
       "replacement": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90",
       "expectedMatches": true,
@@ -1949,299 +1964,298 @@
     },
     "Aim/PickNewAimSpot": {
       "matches": [
-        "0x2db750"
+        "0x2db7d0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2db750: mov rax, rsp",
-        "2db753: push rbp",
-        "2db754: push rdi",
-        "2db755: lea rbp, [rax - 0x5f]",
-        "2db759: sub rsp, 0xa8",
-        "2db760: mov rdi, rcx",
-        "2db763: movaps xmmword ptr [rax - 0x28], xmm6",
-        "2db767: mov ecx, dword ptr [rcx + 0x5a00]",
-        "2db76d: cmp ecx, -1",
-        "2db770: je 0x2dbb88"
+        "2db7d0: mov rax, rsp",
+        "2db7d3: push rbp",
+        "2db7d4: push rdi",
+        "2db7d5: lea rbp, [rax - 0x5f]",
+        "2db7d9: sub rsp, 0xa8",
+        "2db7e0: mov rdi, rcx",
+        "2db7e3: movaps xmmword ptr [rax - 0x28], xmm6",
+        "2db7e7: mov ecx, dword ptr [rcx + 0x5a00]",
+        "2db7ed: cmp ecx, -1",
+        "2db7f0: je 0x2dbc08"
       ]
     },
     "Flash/PawnBlind": {
       "matches": [
-        "0x1fd470"
+        "0x1fd490"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "1fd470: push rbx",
-        "1fd472: sub rsp, 0x50",
-        "1fd476: cmp byte ptr [rcx + 0x1508], 0",
-        "1fd47d: mov rbx, rcx",
-        "1fd480: movaps xmmword ptr [rsp + 0x40], xmm6",
-        "1fd485: movaps xmm6, xmm3",
-        "1fd488: movaps xmmword ptr [rsp + 0x30], xmm7",
-        "1fd48d: movaps xmm7, xmm2",
-        "1fd490: movaps xmmword ptr [rsp + 0x20], xmm8",
-        "1fd496: movaps xmm8, xmm1"
+        "1fd490: push rbx",
+        "1fd492: sub rsp, 0x50",
+        "1fd496: cmp byte ptr [rcx + 0x1508], 0",
+        "1fd49d: mov rbx, rcx",
+        "1fd4a0: movaps xmmword ptr [rsp + 0x40], xmm6",
+        "1fd4a5: movaps xmm6, xmm3",
+        "1fd4a8: movaps xmmword ptr [rsp + 0x30], xmm7",
+        "1fd4ad: movaps xmm7, xmm2",
+        "1fd4b0: movaps xmmword ptr [rsp + 0x20], xmm8",
+        "1fd4b6: movaps xmm8, xmm1"
       ]
     },
     "BotState/FovPlayer": {
       "matches": [
-        "0x2d0a80"
+        "0x2d0b00"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2d0a80: mov qword ptr [rsp + 8], rbx",
-        "2d0a85: mov byte ptr [rsp + 0x18], r8b",
-        "2d0a8a: push rbp",
-        "2d0a8b: push rsi",
-        "2d0a8c: push rdi",
-        "2d0a8d: push r12",
-        "2d0a8f: push r13",
-        "2d0a91: push r14",
-        "2d0a93: push r15",
-        "2d0a95: lea rbp, [rsp - 0x27]"
+        "2d0b00: mov qword ptr [rsp + 8], rbx",
+        "2d0b05: mov byte ptr [rsp + 0x18], r8b",
+        "2d0b0a: push rbp",
+        "2d0b0b: push rsi",
+        "2d0b0c: push rdi",
+        "2d0b0d: push r12",
+        "2d0b0f: push r13",
+        "2d0b11: push r14",
+        "2d0b13: push r15",
+        "2d0b15: lea rbp, [rsp - 0x27]"
       ]
     },
     "BotState/FovPosition": {
       "matches": [
-        "0x2d07b0"
+        "0x2d0830"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "2d07b0: mov qword ptr [rsp + 0x10], rbx",
-        "2d07b5: mov qword ptr [rsp + 0x18], rsi",
-        "2d07ba: mov qword ptr [rsp + 0x20], rdi",
-        "2d07bf: push rbp",
-        "2d07c0: push r12",
-        "2d07c2: push r13",
-        "2d07c4: push r14",
-        "2d07c6: push r15",
-        "2d07c8: lea rbp, [rsp - 0xa0]",
-        "2d07d0: sub rsp, 0x1a0"
+        "2d0830: mov qword ptr [rsp + 0x10], rbx",
+        "2d0835: mov qword ptr [rsp + 0x18], rsi",
+        "2d083a: mov qword ptr [rsp + 0x20], rdi",
+        "2d083f: push rbp",
+        "2d0840: push r12",
+        "2d0842: push r13",
+        "2d0844: push r14",
+        "2d0846: push r15",
+        "2d0848: lea rbp, [rsp - 0xa0]",
+        "2d0850: sub rsp, 0x1a0"
       ]
     },
     "BotState/Defuse": {
       "matches": [
-        "0x2c0340"
+        "0x2c03c0"
       ],
       "unique": true,
       "unwindEntry": false,
       "instructions": [
-        "2c0340: lea rdx, [rcx + 0x408]",
-        "2c0347: jmp 0x2e13e0",
-        "2c034c: int3 ",
-        "2c034d: int3 ",
-        "2c034e: int3 ",
-        "2c034f: int3 ",
-        "2c0350: movss xmm0, dword ptr [rip + 0x14b00d8]",
-        "2c0358: comiss xmm0, dword ptr [rcx + 0xac]",
-        "2c035f: ja 0x2c036d",
-        "2c0361: cmp byte ptr [rcx + 0xbb], 0"
+        "2c03c0: lea rdx, [rcx + 0x408]",
+        "2c03c7: jmp 0x2e1460",
+        "2c03cc: int3 ",
+        "2c03cd: int3 ",
+        "2c03ce: int3 ",
+        "2c03cf: int3 ",
+        "2c03d0: movss xmm0, dword ptr [rip + 0x14b1058]",
+        "2c03d8: comiss xmm0, dword ptr [rcx + 0xac]",
+        "2c03df: ja 0x2c03ed",
+        "2c03e1: cmp byte ptr [rcx + 0xbb], 0"
       ],
-      "leafTarget": "0x2e13e0"
+      "leafTarget": "0x2e1460"
     },
     "NadeSystem/0": {
       "matches": [
-        "0x9b0070"
+        "0x9b1270"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "9b0070: mov qword ptr [rsp + 8], rbx",
-        "9b0075: mov qword ptr [rsp + 0x10], rbp",
-        "9b007a: mov qword ptr [rsp + 0x18], rsi",
-        "9b007f: push rdi",
-        "9b0080: push r14",
-        "9b0082: push r15",
-        "9b0084: sub rsp, 0x50",
-        "9b0088: mov rsi, qword ptr [rsp + 0x90]",
-        "9b0090: mov r15, r8",
-        "9b0093: mov r8, rdx"
+        "9b1270: mov qword ptr [rsp + 8], rbx",
+        "9b1275: mov qword ptr [rsp + 0x10], rbp",
+        "9b127a: mov qword ptr [rsp + 0x18], rsi",
+        "9b127f: push rdi",
+        "9b1280: push r14",
+        "9b1282: push r15",
+        "9b1284: sub rsp, 0x50",
+        "9b1288: mov rsi, qword ptr [rsp + 0x90]",
+        "9b1290: mov r15, r8",
+        "9b1293: mov r8, rdx"
       ]
     },
     "NadeSystem/1": {
       "matches": [
-        "0x3a13c0"
+        "0x3a1440"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "3a13c0: mov qword ptr [rsp + 8], rbx",
-        "3a13c5: mov qword ptr [rsp + 0x10], rbp",
-        "3a13ca: mov qword ptr [rsp + 0x18], rsi",
-        "3a13cf: push rdi",
-        "3a13d0: sub rsp, 0x50",
-        "3a13d4: mov rbp, qword ptr [rsp + 0x80]",
-        "3a13dc: mov rdi, r8",
-        "3a13df: mov r8, rdx",
-        "3a13e2: movaps xmmword ptr [rsp + 0x40], xmm6",
-        "3a13e7: mov rdx, rcx"
+        "3a1440: mov qword ptr [rsp + 8], rbx",
+        "3a1445: mov qword ptr [rsp + 0x10], rbp",
+        "3a144a: mov qword ptr [rsp + 0x18], rsi",
+        "3a144f: push rdi",
+        "3a1450: sub rsp, 0x50",
+        "3a1454: mov rbp, qword ptr [rsp + 0x80]",
+        "3a145c: mov rdi, r8",
+        "3a145f: mov r8, rdx",
+        "3a1462: movaps xmmword ptr [rsp + 0x40], xmm6",
+        "3a1467: mov rdx, rcx"
       ]
     },
     "NadeSystem/2": {
       "matches": [
-        "0x9af7a0"
+        "0x9b09a0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "9af7a0: mov rax, rsp",
-        "9af7a3: mov qword ptr [rax + 8], rbx",
-        "9af7a7: mov qword ptr [rax + 0x10], rsi",
-        "9af7ab: mov qword ptr [rax + 0x20], rdi",
-        "9af7af: mov qword ptr [rax + 0x18], r8",
-        "9af7b3: push rbp",
-        "9af7b4: push r12",
-        "9af7b6: push r13",
-        "9af7b8: push r14",
-        "9af7ba: push r15"
+        "9b09a0: mov rax, rsp",
+        "9b09a3: mov qword ptr [rax + 8], rbx",
+        "9b09a7: mov qword ptr [rax + 0x10], rsi",
+        "9b09ab: mov qword ptr [rax + 0x20], rdi",
+        "9b09af: mov qword ptr [rax + 0x18], r8",
+        "9b09b3: push rbp",
+        "9b09b4: push r12",
+        "9b09b6: push r13",
+        "9b09b8: push r14",
+        "9b09ba: push r15"
       ]
     },
     "NadeSystemPlugin.StockFactories/0": {
       "matches": [
-        "0x3a1310"
+        "0x3a1390"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "3a1310: mov qword ptr [rsp + 8], rbx",
-        "3a1315: mov qword ptr [rsp + 0x10], rbp",
-        "3a131a: mov qword ptr [rsp + 0x18], rsi",
-        "3a131f: push rdi",
-        "3a1320: sub rsp, 0x20",
-        "3a1324: mov rbp, qword ptr [rsp + 0x50]",
-        "3a1329: mov rdi, r8",
-        "3a132c: mov r8, rdx",
-        "3a132f: mov rbx, rcx",
-        "3a1332: mov rdx, rcx"
+        "3a1390: mov qword ptr [rsp + 8], rbx",
+        "3a1395: mov qword ptr [rsp + 0x10], rbp",
+        "3a139a: mov qword ptr [rsp + 0x18], rsi",
+        "3a139f: push rdi",
+        "3a13a0: sub rsp, 0x20",
+        "3a13a4: mov rbp, qword ptr [rsp + 0x50]",
+        "3a13a9: mov rdi, r8",
+        "3a13ac: mov r8, rdx",
+        "3a13af: mov rbx, rcx",
+        "3a13b2: mov rdx, rcx"
       ]
     },
     "NadeSystemPlugin.StockFactories/1": {
       "matches": [
-        "0x9af2e0"
+        "0x9b04e0"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "9af2e0: push rbp",
-        "9af2e2: push rsi",
-        "9af2e3: sub rsp, 0x58",
-        "9af2e7: mov qword ptr [rsp + 0x70], rbx",
-        "9af2ec: mov rbx, rcx",
-        "9af2ef: mov qword ptr [rsp + 0x78], rdi",
-        "9af2f4: mov rdi, r8",
-        "9af2f7: mov qword ptr [rsp + 0x50], r15",
-        "9af2fc: mov r8, rdx",
-        "9af2ff: mov r15, qword ptr [rsp + 0x90]"
+        "9b04e0: push rbp",
+        "9b04e2: push rsi",
+        "9b04e3: sub rsp, 0x58",
+        "9b04e7: mov qword ptr [rsp + 0x70], rbx",
+        "9b04ec: mov rbx, rcx",
+        "9b04ef: mov qword ptr [rsp + 0x78], rdi",
+        "9b04f4: mov rdi, r8",
+        "9b04f7: mov qword ptr [rsp + 0x50], r15",
+        "9b04fc: mov r8, rdx",
+        "9b04ff: mov r15, qword ptr [rsp + 0x90]"
       ]
     },
     "SmokeFairAim/0": {
       "matches": [
-        "0x9b8610"
+        "0x9b9810"
       ],
       "unique": true,
       "unwindEntry": true,
       "instructions": [
-        "9b8610: push rbp",
-        "9b8612: push rbx",
-        "9b8613: push rsi",
-        "9b8614: push r13",
-        "9b8616: push r15",
-        "9b8618: lea rbp, [rsp - 0x20]",
-        "9b861d: sub rsp, 0x120",
-        "9b8624: movaps xmmword ptr [rsp + 0xf0], xmm7",
-        "9b862c: xorps xmm7, xmm7",
-        "9b862f: mov rsi, r8"
+        "9b9810: push rbp",
+        "9b9812: push rbx",
+        "9b9813: push rsi",
+        "9b9814: push r13",
+        "9b9816: push r15",
+        "9b9818: lea rbp, [rsp - 0x20]",
+        "9b981d: sub rsp, 0x120",
+        "9b9824: movaps xmmword ptr [rsp + 0xf0], xmm7",
+        "9b982c: xorps xmm7, xmm7",
+        "9b982f: mov rsi, r8"
       ]
     }
   },
   "StateFieldEvidence": {
     "gameStateAddress": [
-      "0x2cee00",
-      "0x2d4c64",
-      "0x2d55dc",
-      "0x2d74f4",
-      "0x2de061",
-      "0x3310cf",
-      "0x3310e3",
-      "0x33111d",
-      "0x33129c",
-      "0x33172a",
-      "0x331e6e",
-      "0x332086"
+      "0x2cee80",
+      "0x2d4ce4",
+      "0x2d565c",
+      "0x2d7574",
+      "0x2de0e1",
+      "0x33114f",
+      "0x331163",
+      "0x33119d",
+      "0x33131c",
+      "0x3317aa",
+      "0x331eee",
+      "0x332106"
     ],
     "roundOverField": [
-      "0x1bc6ba",
-      "0x29c306",
-      "0x29ca8a",
-      "0x2b6eea",
-      "0x2b6f4a",
-      "0x2b6faa",
-      "0x2b700a",
-      "0x2b706a",
-      "0x2b70ca",
-      "0x2b712a",
-      "0x2b74ea",
-      "0x2b754a",
-      "0x2b75aa",
-      "0x2b7aea",
-      "0x2b7b4a",
-      "0x2b7baa",
-      "0x2b7c0a",
-      "0x2b7c6a",
-      "0x2b7cca",
-      "0x2b7d2a",
-      "0x2b7d8a",
-      "0x2b7e1a",
-      "0x2b7e7a",
-      "0x2b7f6a",
-      "0x2b7fca",
-      "0x2b802a",
-      "0x2b808a",
-      "0x2b80ea",
-      "0x2b814a",
-      "0x2b81aa",
-      "0x2b820a",
-      "0x2b826a",
-      "0x2b82ca",
-      "0x2b832a",
-      "0x2b838a",
-      "0x2b83ea",
-      "0x32ecd7",
-      "0x9c9089",
-      "0xa25cca",
-      "0xb20d63",
-      "0xbc0d3a",
-      "0xe2b57a",
-      "0xe89847",
-      "0x106c4ea",
-      "0x1084936",
-      "0x1084976",
-      "0x136af94",
-      "0x136b258",
-      "0x136b48c",
-      "0x154998e",
-      "0x1549e9c",
-      "0x162a985",
-      "0x163194c",
-      "0x16a6dc5",
-      "0x16a6e46",
-      "0x16bef24",
-      "0x16bef60"
+      "0x1bc6da",
+      "0x29c386",
+      "0x29cb0a",
+      "0x2b6f6a",
+      "0x2b6fca",
+      "0x2b702a",
+      "0x2b708a",
+      "0x2b70ea",
+      "0x2b714a",
+      "0x2b71aa",
+      "0x2b756a",
+      "0x2b75ca",
+      "0x2b762a",
+      "0x2b7b6a",
+      "0x2b7bca",
+      "0x2b7c2a",
+      "0x2b7c8a",
+      "0x2b7cea",
+      "0x2b7d4a",
+      "0x2b7daa",
+      "0x2b7e0a",
+      "0x2b7e9a",
+      "0x2b7efa",
+      "0x2b7fea",
+      "0x2b804a",
+      "0x2b80aa",
+      "0x2b810a",
+      "0x2b816a",
+      "0x2b81ca",
+      "0x2b822a",
+      "0x2b828a",
+      "0x2b82ea",
+      "0x2b834a",
+      "0x2b83aa",
+      "0x2b840a",
+      "0x2b846a",
+      "0x32ed57",
+      "0x9ca289",
+      "0xa26eca",
+      "0xb21fd3",
+      "0xbc34da",
+      "0xe2c85a",
+      "0xe8ab27",
+      "0x106d74a",
+      "0x1085b96",
+      "0x1085bd6",
+      "0x136c1f4",
+      "0x136c4b8",
+      "0x136c6ec",
+      "0x154abee",
+      "0x154b0fc",
+      "0x162bbe5",
+      "0x1632bac",
+      "0x16a8025",
+      "0x16a80a6",
+      "0x16c0184",
+      "0x16c01c0"
     ],
     "plantedGetter": []
   },
-  "OptionalUnavailable": [
-    "counterstrikesharp/CCSNavArea_IsValidNavMesh: unavailable; no installed plugin assembly references CCSNavArea"
-  ],
+  "OptionalUnavailable": [],
   "NavAssemblyReferences": [],
   "Errors": [],
   "Warnings": [],
   "Passed": true,
   "Limitations": [
     "Static matching does not prove all native ABIs, schema or vtable compatibility; startup/gameplay still required."
-  ]
+  ],
+  "ClientVersion": "2000948"
 }

@@ -1,23 +1,21 @@
 # CS2 Bot Improver - Windows Fairplay Edition
 
-**v1.4.9-fairplay.1 (stable), 2026-11-14.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.9](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.9), for local Windows bot matches.
+**v1.4.9-fairplay.2 (stable), 2026-11-20.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.9](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.9), for local Windows bot matches.
 
 The original pack supplies the panel, cosmetics, native modules and runtime. This fork adds fair smoke/flash handling, real grenade inventory, realistic scripted throws, approximate sound awareness, teammate spacing, humanized reactions and guarded stuck recovery. Upstream Rush, radio commands, FOV, post-plant behavior and cosmetics remain available through the separately installed original pack.
 
 ## Latest update
 
-The release follows [upstream v1.4.9](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.9): official CSS 380 replaces our CSS 379 adapter; updated Metamod, panel and BotHider fix compatibility including demotracer. New retake trees/reload behavior are retained, with humanized Medium/High reactions layered onto the seven-entry profiles.
-
-The unchanged BotController still requires its voice-message descriptor adapter. It is applied locally to an exact upstream DLL with verified output hashes and backups; native binaries are not bundled. Eight managed modules are built from the pinned/maintained sources, including BotBuy 1.0.16 and BotRandomizer 1.3.5. See [native compatibility](docs/NATIVE-COMPATIBILITY.md).
+CS2 1.42.0.0 / ClientVersion 2000948 is now supported. The November 19 game update caused five maintained modules to stop at their exact-build guards, including all NadeSystem purchasing/inventory/replay activity. This release revalidates the native signatures/interfaces, updates the guards and pins the new game binaries. The official v1.4.9/CSS 380 base and all existing Fairplay behavior are retained. The unchanged BotController voice adapter is still applied locally; native DLLs are not redistributed.
 
 ## Install
 
 1. Install the **original v1.4.9 Windows pack with its bundled CounterStrikeSharp 380**. Older v1.4.5/v1.4.8 bases must first be upgraded to original v1.4.9, including the runtime and panel.
-2. Download **CS2-Bot-Improver-Fairplay-Update-v1.4.9-fairplay.1-2026-11-14.zip** from Releases and extract outside the game folder.
+2. Download **CS2-Bot-Improver-Fairplay-Update-v1.4.9-fairplay.2-2026-11-20.zip** from Releases and extract outside the game folder.
 3. Close CS2 and the panel. Run **Install.cmd** and select **game\csgo**.
 4. Start the installed **Start-CompatiblePanel.cmd**. Use Bot Mode for local matches. The default is **8v8 including human players**.
 
-Supported target: Windows x64, **ClientVersion 2000943 / patch 1.41.9.7**, SDK **1.0.380** and exact audited dependencies. The original or exact already-adapted BotController DLL is accepted; unknown binaries are rejected. Replaced files are backed up, active difficulty and current gameinfo/layer paths are preserved, and reinstall/restore is supported. Do not bypass guards after a future game update. See [installation](docs/INSTALLATION.md).
+Supported target: Windows x64, **ClientVersion 2000948 / patch 1.42.0.0**, SDK **1.0.380** and exact audited dependencies. The original or exact already-adapted BotController DLL is accepted; unknown binaries are rejected. Replaced files are backed up, active difficulty and current gameinfo/layer paths are preserved, and reinstall/restore is supported. Do not bypass guards after a future game update. See [installation](docs/INSTALLATION.md).
 
 ## Fairplay behavior
 
@@ -33,7 +31,9 @@ Detailed diagnostics are **off by default**. Status counters remain available. T
 
 ## Stable release and validation scope
 
-The local v1.4.9 integration was reported working correctly. Longer local play, including High/Hard, validated the preceding Fairplay base; no equivalent extended v1.4.9 session is claimed. The clean public build has automated validation and disabled diagnostic defaults, with no separate live acceptance. Some navigation stalls, chance hits and unrelated crashes remain possible. Linux, dedicated/public servers, another PC and every map are not validated. Smoke-bomb search behavior is unchanged by this rebase.
+The local 2000948 compatibility build was reported working correctly after the repair. The clean public build is automatically checked with detailed diagnostics off, and has no separate live acceptance. Some navigation stalls, chance hits and unrelated crashes remain possible. Linux, dedicated/public servers, another PC and every map are not validated. Smoke-bomb search behavior is unchanged by this update.
+
+Cobblestone (`de_cbble`) already ships with bot navigation. Start it from practice or with `map de_cbble`; no separate NAV download is needed. Recorded NadeSystem grenade lineups for Cobblestone are not included yet.
 
 Grenade choices depend on stock, money, useful map lineups and safety checks. Some maps have no decoy lineups. Bot Mode uses `-insecure`; switch to Online mode for ordinary online play.
 

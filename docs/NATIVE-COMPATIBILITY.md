@@ -9,3 +9,7 @@ The updater accepts only the original or exact previously adapted BotController.
 The upstream-updated BotAI bomb-search replacement remains excluded on Windows build 2000943: expected bytes mismatch and its computed target is not the intended function entry. See data/bomb-call-audit.json. Other intentional fairness exclusions remain. This does not claim that every native ABI or future update is compatible.
 
 Sources: https://github.com/roflmuffin/CounterStrikeSharp/tree/v1.0.380 and the original v1.4.9 pinned component commits in UPSTREAM-SOURCES.json. The earlier CSS 376 engine-slot adapter is also not used.
+
+## November 20 compatibility revalidation
+
+Target: 2000948 / 1.42.0.0. Current evidence is in data/native-audit.json, data/abi-audit.json and data/abi-checks.json. Engine slots and network descriptor layout remain compatible; the existing Controller transform is unchanged. data/NATIVE-ABI-AUDIT.json and data/bomb-call-audit.json retain their historical derivation build labels. The bomb-search replacement stays excluded; no new bomb-call displacement is enabled.

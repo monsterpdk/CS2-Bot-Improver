@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4.9-fairplay.2 - 2026-11-20 (stable)
+
+- Restore five maintained modules on Windows CS2 2000948 / 1.42.0.0 after the November 19 update, including grenade inventory/replay activity.
+- Revalidate native signatures/interfaces and update exact game hashes and build/installer gates together. Keep original v1.4.9 and official CSS 380 dependencies.
+- Preserve existing grenade stock/throw limits, humanized reactions, smoke/flash fairness and recovery. Detailed public diagnostics stay disabled and bounded.
+- Document Cobblestone navigation availability and the absence of recorded map-specific lineups. Local compatibility build accepted; no separate live public-build or every-map acceptance claimed.
+
+
 ## v1.4.9-fairplay.1 - upstream v1.4.9 integration (stable)
 
 Rebase the accepted Fairplay improvements onto original **CS2-Bot-Improver v1.4.9**, for Windows CS2 **2000943 / 1.41.9.7**.

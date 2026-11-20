@@ -67,7 +67,7 @@ if ($manifest.MergePopulationSettings) {
     if ([regex]::Matches($text,$pattern).Count -ne 1) { throw 'Expected exactly one panel bot_quota setting.' }
     $merged[$path] = [regex]::Replace($text,$pattern,'"bot_quota" "16"')
 }
-$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.9-fairplay.1-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
+$backup = Join-Path $Csgo ('_botimprover_backups\v1.4.9-fairplay.2-' + [DateTime]::Now.ToString('yyyyMMdd-HHmmss-fff'))
 $paths = @($manifest.Files.Path) + @($merged.Keys) + @($binaryMerged.Keys) + @('gameinfo.gi','backup\Online\gameinfo.gi','backup\WithBots\gameinfo.gi')
 if (@($paths | Select-Object -Unique).Count -ne $paths.Count) { throw 'Duplicate installer destination.' }
 $records = @()
@@ -130,5 +130,5 @@ try {
     foreach ($record in $moved) { Move-Item -LiteralPath (Join-Path $backup ('parked\' + $record.Path)) -Destination (Join-Path $Csgo $record.Path) }
     throw
 }
-Write-Output ('Installed v1.4.9-fairplay.1 successfully. Backup: ' + $backup)
+Write-Output ('Installed v1.4.9-fairplay.2 successfully. Backup: ' + $backup)
 Write-Output ('Start the panel with: ' + (Join-Path $Csgo 'Start-CompatiblePanel.cmd'))

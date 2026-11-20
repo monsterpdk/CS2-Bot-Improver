@@ -114,5 +114,12 @@
   "apiSHA256": "652AC51D86A963D3CF795BAD9271F821579A3BB65BC871313B900BA834F9D1EC",
   "LocalTrialAccepted": true,
   "OfficialCounterStrikeSharp": "1.0.380",
-  "RetiredAdapter": "CSS 379 network descriptor adapter replaced by official 380"
+  "RetiredAdapter": "CSS 379 network descriptor adapter replaced by official 380",
+  "HistoricalDerivationBuild": "2000943",
+  "RevalidatedClientVersion": "2000948",
+  "RevalidationEvidence": [
+    "abi-audit.json",
+    "abi-checks.json",
+    "native-audit.json"
+  ]
 }
