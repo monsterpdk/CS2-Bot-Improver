@@ -1,5 +1,5 @@
 {
-  "networkTableUnchanged": true,
+  "networkTableLocatedByRTTI": true,
   "descriptorPassthrough": true,
   "callbackAt8": true,
   "idAt18": true,
@@ -10,5 +10,5 @@
   "engine-slot75": true,
   "engine-slot77": true,
   "protobufSubobject30": true,
-  "controllerAdapterUnchanged": true
+  "controllerAdapterUnchangedBeforeInstall": true
 }

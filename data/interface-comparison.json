@@ -1,0 +1,259 @@
+{
+  "CSource2GameClients": {
+    "rows": [
+      {
+        "slot": 11,
+        "old": "0xde2250",
+        "current": "0xde6740",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 12,
+        "old": "0xdd7f60",
+        "current": "0xddc450",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 13,
+        "old": "0xdd8ee0",
+        "current": "0xddd3d0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 14,
+        "old": "0xdd7970",
+        "current": "0xddbe60",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 15,
+        "old": "0xdd8b10",
+        "current": "0xddd000",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 16,
+        "old": "0xdd8780",
+        "current": "0xddcc70",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 17,
+        "old": "0xdd7de0",
+        "current": "0xddc2d0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 18,
+        "old": "0xdd9530",
+        "current": "0xddda20",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 19,
+        "old": "0xdd9270",
+        "current": "0xddd760",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 20,
+        "old": "0xdd92a0",
+        "current": "0xddd790",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 21,
+        "old": "0xde2c50",
+        "current": "0xde7140",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 22,
+        "old": "0xdde730",
+        "current": "0xde2c20",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 23,
+        "old": "0xdde7c0",
+        "current": "0xde2cb0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 24,
+        "old": "0xddc760",
+        "current": "0xde0c50",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 25,
+        "old": "0xdd8ab0",
+        "current": "0xddcfa0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 26,
+        "old": "0xddb940",
+        "current": "0xddfe30",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 27,
+        "old": "0xdd9540",
+        "current": "0xddda30",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 28,
+        "old": "0xdd7f20",
+        "current": "0xddc410",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 29,
+        "old": "0xdd8020",
+        "current": "0xddc510",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 30,
+        "old": "0x1ae3b0",
+        "current": "0x1ae990",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 31,
+        "old": "0x1b0850",
+        "current": "0x1b0e30",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 32,
+        "old": "0x1ae310",
+        "current": "0x1ae8f0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 33,
+        "old": "0xde7ac0",
+        "current": "0xdebfb0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 34,
+        "old": "0xde5020",
+        "current": "0xde9510",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 35,
+        "old": "0xddbd30",
+        "current": "0xde0220",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 36,
+        "old": "0xdd8d80",
+        "current": "0xddd270",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 37,
+        "old": "0xdd8d10",
+        "current": "0xddd200",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 38,
+        "old": "0xdd93f0",
+        "current": "0xddd8e0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 39,
+        "old": "0xddbe40",
+        "current": "0xde0330",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 40,
+        "old": "0xdd8db0",
+        "current": "0xddd2a0",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 41,
+        "old": "0x1ae320",
+        "current": "0x1ae900",
+        "samePrefixSemantics": true
+      },
+      {
+        "slot": 42,
+        "old": "0xde6230",
+        "current": "0xdea720",
+        "samePrefixSemantics": false
+      }
+    ],
+    "allSamePrefix": false
+  },
+  "ISource2ServerConfig": {
+    "unavailable": true
+  },
+  "CSource2ServerShift": [
+    {
+      "oldSlot": 15,
+      "newSlot": 16,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 17,
+      "newSlot": 18,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 19,
+      "newSlot": 20,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 22,
+      "newSlot": 23,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 31,
+      "newSlot": 32,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 41,
+      "newSlot": 42,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 42,
+      "newSlot": 43,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 43,
+      "newSlot": 44,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 44,
+      "newSlot": 45,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 45,
+      "newSlot": 46,
+      "samePrefixSemantics": true
+    },
+    {
+      "oldSlot": 46,
+      "newSlot": 47,
+      "samePrefixSemantics": true
+    }
+  ]
+}

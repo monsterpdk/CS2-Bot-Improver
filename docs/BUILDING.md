@@ -13,4 +13,6 @@ Run policy/diagnostic tests from tests/*/*.csproj. CompiledChecks additionally t
 
 Full builds retain upstream obsolete ConVar warnings; passing automated tests does not prove collision geometry or stability on every map. Public opt-in logging differs from the local test defaults. The local compatibility build received positive gameplay feedback; no separate live test of the clean public build is claimed.
 
-Run `packaging/Test-NativeCompatibility.ps1` for synthetic native transformation guards, or add `-Baseline <original-v1.4.9-folder>` to verify the real upstream BotController DLL against the published output hashes without modifying that baseline. The native DLLs are generated locally during installation, not included in the update payload.
+Run `packaging/Test-NativeCompatibility.ps1` for synthetic native transformation guards, or add `-Baseline <original-v1.4.9-folder>` to verify the real upstream CSS/Hider/Controller DLLs and gamedata against the published output hashes without modifying that baseline. The native DLLs are generated locally during installation, not included in the update payload.
+
+Add `-CompatibleBaseline <accepted-repaired-game-csgo>` to Test-NativeCompatibility.ps1 for the accepted alternate gamedata/no-op state. Both paths are read-only sources for disposable fixtures. Native settings also exercise the prior voice-only Controller upgrade.

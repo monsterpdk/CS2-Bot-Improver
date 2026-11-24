@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot -Parent
 $Output = [IO.Path]::GetFullPath($Output)
 if (Test-Path -LiteralPath $Output) { throw 'Choose a new output folder.' }
-if ((Get-Content -LiteralPath (Join-Path $Csgo 'steam.inf') -Raw) -notmatch '(?m)^ClientVersion=2000948\s*$') { throw 'Build only from the tested ClientVersion 2000948 installation.' }
+if ((Get-Content -LiteralPath (Join-Path $Csgo 'steam.inf') -Raw) -notmatch '(?m)^ClientVersion=2000950\s*$') { throw 'Build only from the tested ClientVersion 2000950 installation.' }
 $dependencies = Get-Content -LiteralPath (Join-Path $root 'data\UPSTREAM-DEPENDENCIES.json') -Raw | ConvertFrom-Json
 $dependencies = @($dependencies | ForEach-Object { [PSCustomObject]@{ Path=$_.Path; SHA256=$_.SHA256 } })
 Import-Module (Join-Path $root 'compatibility/NativeCompatibility.psm1') -Force
@@ -46,7 +46,7 @@ foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -File -Force) {
 }
 $files = @(Get-ChildItem -LiteralPath $payload -Recurse -File | ForEach-Object { [PSCustomObject]@{ Path=$_.FullName.Substring($payload.Length + 1); SHA256=(Get-FileHash -LiteralPath $_.FullName).Hash } })
 [PSCustomObject]@{
-    Version='1.4.9-fairplay.2'; Prerelease=$false; ReleaseDate='2026-11-20'; ClientVersion='2000948'; PatchVersion='1.42.0.0'; Platform='Windows x64'; UpstreamBaseline='v1.4.9'; CounterStrikeSharp='1.0.380'
+    Version='1.4.9-fairplay.3'; Prerelease=$false; ReleaseDate='2026-11-24'; ClientVersion='2000950'; PatchVersion='1.42.0.1'; Platform='Windows x64'; UpstreamBaseline='v1.4.9'; CounterStrikeSharp='1.0.380'
     Plugins=@('BotAI','BotAimImprover','BotBuy','BotControllerImpl','BotHiderImpl','BotRandomizer','BotState','BotStuckDiagnostics','BotVisionCompatibility','NadeSystem','RoundDamageRecap')
     Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf','addons\BotHider\map_whitelist.json'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $Output 'manifest.json') -Encoding UTF8

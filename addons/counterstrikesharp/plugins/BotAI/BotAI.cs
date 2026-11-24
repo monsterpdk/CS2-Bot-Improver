@@ -28,7 +28,7 @@ public static class BotOffsets
 public class BotAI : BasePlugin
 {
     public override string ModuleName => "Bot AI - Patches";
-    public override string ModuleVersion => "1.8.14-fairplay149.2";
+    public override string ModuleVersion => "1.8.14-fairplay149.3";
     public override string ModuleAuthor => "K4ryuu & Austin (updated by ed0ard & XBribo & unicbm & Misaka17032 & AmagiReina)";
     public override string ModuleDescription =>
         "Improve and fix bots' behavior comprehensively";
@@ -41,7 +41,7 @@ public class BotAI : BasePlugin
     public override void Load(bool hotReload)
     {
         var steam=Path.GetFullPath(Path.Combine(ModuleDirectory,"..","..","..","..","steam.inf"));
-        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000948")) { Logger.LogError("[Fairplay] Unsupported build; native patches inactive");return; }
+        if(!OperatingSystem.IsWindows() || !File.Exists(steam) || !File.ReadLines(steam).Any(x=>x.Trim()=="ClientVersion=2000950")) { Logger.LogError("[Fairplay] Unsupported build; native patches inactive");return; }
         Logger.LogInformation("Bot AI Patches loading...");
         var patchDefinitions=(_isLinux?LinuxPatchDefinitions.All:WindowsPatchDefinitions.All).Where(x=>FairplayPatchPolicy.IsEnabled(x.Key)).ToDictionary(x=>x.Key,x=>x.Value);
 

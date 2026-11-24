@@ -1,4 +1,4 @@
-﻿# Testing
+# Testing
 
 Run the self-contained policy projects under tests with dotnet run --project <project>. They cover inventory transactions, flash, smoke aim, throw safety, awareness, idle tracking, bounded diagnostics and crouch/detour geometry.
 

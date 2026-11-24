@@ -1,0 +1,11 @@
+{
+  "OldRVA": "0xafe3c0",
+  "NewRVA": "0xb01cf0",
+  "BroadMatches": [
+    "0xb01cf0",
+    "0xceb370"
+  ],
+  "NewSignature": "48 85 D2 0F 84 ? ? ? ? 48 89 5C 24 ? 57 48 83 EC ? 48 8B DA 48 8B F9 E8 ? ? ? ? 48 3B C3 75 46 48 8B 03 33 D2 48 8B CB FF 90 20 0A 00 00 F3 0F 10 0D 57",
+  "FullBodyNormalizedEqual": true,
+  "Receiver": "WeaponServices; preserved"
+}

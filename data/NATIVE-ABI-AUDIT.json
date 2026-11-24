@@ -1,4 +1,4 @@
-{
+﻿{
   "trial": "cs2-2000943-network-descriptor.1",
   "clientVersion": "2000943",
   "serverSHA256": "84D596644AD574AC70F427777C89F9006A8023F493C46F4C215F40BCEEF13CBB",
@@ -116,10 +116,19 @@
   "OfficialCounterStrikeSharp": "1.0.380",
   "RetiredAdapter": "CSS 379 network descriptor adapter replaced by official 380",
   "HistoricalDerivationBuild": "2000943",
-  "RevalidatedClientVersion": "2000948",
+  "RevalidatedClientVersion": "2000950",
   "RevalidationEvidence": [
     "abi-audit.json",
     "abi-checks.json",
     "native-audit.json"
+  ],
+  "CurrentNativeTransforms": "compatibility/NativeCompatibilitySettings.json",
+  "CurrentEvidence": [
+    "native-audit.json",
+    "abi-audit.json",
+    "abi-checks.json",
+    "interface-comparison.json",
+    "CURRENT-NATIVE-FIXTURE-RESULTS.json",
+    "weapon-remove-evidence.json"
   ]
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.4.9-fairplay.3 - 2026-11-24 (stable)
+
+- Fix the pre-menu crash on CS2 2000950 / 1.42.0.1 after a Source2Server method insertion shifted native calls.
+- Adapt CSS380, Hider and Controller locally with pinned before/after hashes; retain voice correction and support the prior voice-only Controller as an upgrade input.
+- Narrow the ambiguous RemovePlayerItem signature; preserve real inventory and all existing Fairplay behavior. Update five managed guards.
+- Retain disabled/bounded public diagnostics, exact game/dependency guards, backups and restore. Local repair completed a full Vertigo match; no separate public-managed-build or every-map acceptance claimed.
+
+
 ## v1.4.9-fairplay.2 - 2026-11-20 (stable)
 
 - Restore five maintained modules on Windows CS2 2000948 / 1.42.0.0 after the November 19 update, including grenade inventory/replay activity.

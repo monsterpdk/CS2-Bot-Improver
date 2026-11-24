@@ -1,5 +1,5 @@
-# Release validation scope
+﻿# Release validation scope
 
-The local v1.4.9/CSS 380 integration received positive gameplay feedback. All eight public managed DLLs are rebuilt, diagnostic defaults stay disabled/bounded, and automated checks cover fairness/recovery policies, the remaining Controller adapter, seven-entry profile generation and full transactional install/reinstall/restore. See publication TEST-RESULTS.md.
+The local 2000950 startup repair completed one full match on Vertigo. Public CSS/Hider/Controller outputs match those accepted local native outputs exactly. Eight public managed modules are rebuilt with diagnostic defaults disabled/bounded; their exact binaries have no separate live acceptance.
 
-No separate clean-public-build, extended v1.4.9 High/Hard, second-PC, every-map, Linux or dedicated/public-server acceptance is claimed. Earlier extended High/Hard feedback concerned the preceding Fairplay base. Navigation stalls and unrelated crash causes remain possible.
+Automated checks cover fairness/recovery policies, actual compiled SDK/observer lifecycle, original/previous/repaired native/data states, signature narrowing, reaction profiles and transactional install/reinstall/restore. One full match does not validate every map, second PCs, Linux or dedicated/public servers. Unrelated navigation/crash causes remain possible. See [test results](TEST-RESULTS.md); the test scripts and native evidence are included in this source tree.

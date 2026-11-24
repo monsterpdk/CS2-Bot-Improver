@@ -115,6 +115,7 @@ if ($manifest.MergeCoreSettings) {
 }
 if($manifest.ApplyNativeCompatibility) {
     foreach($native in $nativeSettings.Files){Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $native.Path)).Hash -eq $native.OutputSHA256) ('Native adapter output mismatch: '+$native.Path)}
+    foreach($data in @($nativeSettings.DataFiles | Where-Object {$_})){Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $data.Path)).Hash -eq $data.OutputSHA256) ('Data adapter output mismatch: '+$data.Path)}
 }
 if($manifest.ApplyBotStateCompatibility) {
     $botStateSettings=Get-Content -LiteralPath (Join-Path $Package 'payload\BotStateCompatibilitySettings.json') -Raw | ConvertFrom-Json

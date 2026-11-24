@@ -19,7 +19,11 @@ function Assert-TestedGame {
 function Test-NativeCompatibilityHash {
  param([string]$Relative,[string]$Hash,[string]$Expected,[string]$SettingsPath)
  $s=Get-Content -LiteralPath $SettingsPath -Raw -Encoding UTF8 | ConvertFrom-Json
- foreach($f in $s.Files){if($f.Path -eq $Relative -and $f.InputSHA256 -eq $Expected -and $f.OutputSHA256 -eq $Hash){return $true}}
+ foreach($f in @($s.Files)+@($s.DataFiles | Where-Object {$_})){
+  if($f.Path -ne $Relative -or $f.InputSHA256 -ne $Expected){continue}
+  $known=@($f.OutputSHA256)+@($f.InputVariants | ForEach-Object {$_.SHA256})+@($f.AcceptedOutputSHA256)
+  if($Hash -in $known){return $true}
+ }
  return $false
 }
 function Get-NativeCompatibilityUpdates {
@@ -33,9 +37,14 @@ function Get-NativeCompatibilityUpdates {
   [byte[]]$bytes=[IO.File]::ReadAllBytes((Join-Path $Csgo $f.Path))
   $hash=Get-BytesSHA256 $bytes
   if($hash -eq $f.OutputSHA256){$updates[$f.Path]=$bytes;continue}
-  if($hash -ne $f.InputSHA256){throw ('Unknown native baseline: '+$f.Path)}
+  $edits=$f.Edits
+  if($hash -ne $f.InputSHA256){
+   $variants=@($f.InputVariants | Where-Object {$_.SHA256 -eq $hash})
+   if($variants.Count -ne 1){throw ('Unknown native baseline: '+$f.Path)}
+   $edits=$variants[0].Edits
+  }
   $claimed=New-Object 'Collections.Generic.HashSet[int]'
-  foreach($edit in $f.Edits){
+  foreach($edit in $edits){
    [byte[]]$before=Convert-NativeHex $edit.Before
    [byte[]]$after=Convert-NativeHex $edit.After
    $offset=[int]$edit.FileOffset
@@ -47,6 +56,25 @@ function Get-NativeCompatibilityUpdates {
   }
   if((Get-BytesSHA256 $bytes) -ne $f.OutputSHA256){throw ('Native adapter output mismatch: '+$f.Path)}
   $updates[$f.Path]=$bytes
+ }
+ foreach($f in @($s.DataFiles | Where-Object {$_})){
+  if(!$f.Path -or [IO.Path]::IsPathRooted($f.Path) -or $f.Path -match ':|(^|[/\\])\.\.([/\\]|$)'){throw 'Unsafe data adapter path.'}
+  if($updates.ContainsKey($f.Path)){throw 'Duplicate adapter destination.'}
+  [byte[]]$bytes=[IO.File]::ReadAllBytes((Join-Path $Csgo $f.Path))
+  $hash=Get-BytesSHA256 $bytes
+  $encoding=[Text.UTF8Encoding]::new($false,$true)
+  $text=$encoding.GetString($bytes)
+  $data=$text.TrimStart([char]0xFEFF) | ConvertFrom-Json
+  $signature=$data.($f.SignatureKey).signatures.windows
+  if($hash -eq $f.OutputSHA256 -or $hash -in @($f.AcceptedOutputSHA256)){
+   if($signature -cne $f.AfterSignature){throw 'Corrected data signature differs.'}
+   $updates[$f.Path]=$bytes;continue
+  }
+  if($hash -ne $f.InputSHA256){throw ('Unknown data baseline: '+$f.Path)}
+  if($signature -cne $f.BeforeSignature -or [regex]::Matches($text,[regex]::Escape($f.BeforeSignature)).Count -ne 1){throw 'Data signature mismatch.'}
+  [byte[]]$changed=$encoding.GetBytes($text.Replace($f.BeforeSignature,$f.AfterSignature))
+  if((Get-BytesSHA256 $changed) -ne $f.OutputSHA256){throw 'Data adapter output mismatch.'}
+  $updates[$f.Path]=$changed
  }
  return $updates
 }
