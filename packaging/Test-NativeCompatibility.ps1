@@ -1,4 +1,5 @@
-param([Parameter(Mandatory)][string]$Baseline,[string]$CompatibleBaseline)
+param([string]$Baseline,[string]$CompatibleBaseline)
+if($CompatibleBaseline -and !$Baseline){throw "CompatibleBaseline requires an original Baseline."}
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 Import-Module (Join-Path $root 'compatibility/NativeCompatibility.psm1') -Force
@@ -16,6 +17,24 @@ foreach($pair in @(@('bin/win64/server.dll','ServerSHA256'),@('../bin/win64/engi
 $config=Join-Path $dir 'settings.json'
 function Save{$settings | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath $config -Encoding UTF8}
 function Reject([string]$message){$rejected=$false;try{$null=Get-NativeCompatibilityUpdates -Csgo $csgo -SettingsPath $config}catch{$rejected=$_.Exception.Message.Contains($message)};Assert $rejected ('Expected rejection: '+$message)}
+# CI has no licensed upstream pack. Build a disposable minimal source only when
+# no baseline was requested; explicit baselines retain the exact published pins.
+if(!$Baseline){
+ $Baseline=Join-Path $dir 'synthetic-source'
+ $relative='addons/counterstrikesharp/gamedata/gamedata.json'
+ $path=Join-Path $Baseline $relative
+ New-Item -ItemType Directory -Path (Split-Path $path -Parent) -Force | Out-Null
+ $sourceText="{`r`n  `"Fixture`": { `"signatures`": { `"windows`": `"BEFORE_SIGNATURE`", `"linux`": `"preserve_linux`" } },`r`n  `"OtherField`": `"preserve me`"`r`n}`r`n"
+ [byte[]]$original=$encoding.GetBytes($sourceText)
+ [byte[]]$corrected=$encoding.GetBytes($sourceText.Replace('BEFORE_SIGNATURE','AFTER_SIGNATURE'))
+ function FixtureHash([byte[]]$Bytes){$a=[Security.Cryptography.SHA256]::Create();try{return ([BitConverter]::ToString($a.ComputeHash($Bytes))).Replace('-','')}finally{$a.Dispose()}}
+ [IO.File]::WriteAllBytes($path,$original)
+ $settings.DataFiles=@([PSCustomObject]@{
+  Path=$relative;InputSHA256=(FixtureHash $original);OutputSHA256=(FixtureHash $corrected)
+  AcceptedOutputSHA256=@();SignatureKey='Fixture';BeforeSignature='BEFORE_SIGNATURE';AfterSignature='AFTER_SIGNATURE'
+ })
+ Write-Output 'Using self-contained synthetic gamedata fixture; real upstream hash verification requires -Baseline.'
+}
 $before=@{}
 foreach($f in $settings.DataFiles){
  $target=Join-Path $csgo $f.Path;New-Item -ItemType Directory -Path (Split-Path $target -Parent) -Force | Out-Null
