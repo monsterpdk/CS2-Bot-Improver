@@ -1,14 +1,9 @@
-# Known issues and validation limits
+# Known issues and scope
 
-- Some Office windows, ladder approaches, boxes and other obstacles can still trap bots. Two bots may overlap. Local recovery makes bounded attempts; it does not validate or rebuild the navigation mesh. No all-map navigation fix is claimed.
-- Repeated Train/Inferno server.dll crashes match a wrong-target bomb-search call replacement. The replacement remains disabled, and subsequent extended local gameplay was reported stable. The former 2000943 network-message issue is handled by official CSS380. The new2000950 Source2Server startup issue is handled by this release's separate CSS/Hider/Controller adapters. A distinct earlier exit-time CSS fast-fail remains unresolved. No general crash-free guarantee is made.
-- Medium humanized reactions received positive gameplay feedback; extended play on the preceding Fairplay base also confirmed the High (Hard) profile; the current startup repair completed a full Vertigo match. ReactionTime is an engine parameter, not a hard minimum notice-to-shot guarantee.
-- Public diagnostics are off by default and differ from private trial logging; automated build/logging checks do not replace a separate live test of the exact release build.
-- Only Windows local bot matches and the pinned game/runtime build are targeted. Linux, public/dedicated servers, a second PC, all maps/modes and future game versions are not validated.
-- Grenade lineups vary by map. Inventory and a recorded lineup do not guarantee every grenade type will be used. Blind fire, chance hits and penetration remain possible.
-
-Report reproducible details rather than assuming every still bot is stuck. Keep licensed upstream dependencies and game files current only after compatibility review. Do not bypass package guards.
-
-
-- Cobblestone (de_cbble) ships with navigation but has no recorded NadeSystem lineups in this release.
-- A future CS2 update can disable the guarded Fairplay modules even when CSS lists them as loaded; check startup logs for inactive/unsupported-build messages.
+- The private v1.4.10 integration completed one full Inferno match (about 15 rounds). Every map/mode, second PCs, Linux and dedicated/public servers are not validated. The clean public managed build has separate labels/disabled diagnostics and no separate live acceptance.
+- Some windows/desks/ladders/boxes can still trap bots; recovery makes bounded checked attempts and does not rebuild navigation. Bots may overlap; chance hits/penetration/unrelated crashes can remain.
+- Humanized reaction profiles/native timer preservation received positive feedback; ReactionTime is an engine parameter, not a hard minimum notice-to-shot guarantee.
+- Original CSS 381/Hider/Controller supersede local interface/voice fixes. The corrected official bomb-search call is restored. The unrelated earlier exit-time CSS fast-fail is not claimed fixed by this rebase.
+- Only the narrow weapon-removal signature field remains custom. An optional unused nav signature still does not match; gameplay plugins do not depend on it. Extra plugins are unsupported.
+- Grenade lineups/stock/money/safety vary by map; de_cbble has navigation but no recorded lineups in this release. Existing smoke-bomb knowledge handling is not a full human search model.
+- Future game versions can deactivate exact-build guarded modules even if CSS lists them as loaded. Check inactive/unsupported startup messages and do not bypass guards.

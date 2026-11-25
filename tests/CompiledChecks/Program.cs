@@ -22,7 +22,7 @@ static void Run(string[] args){
  if(tick.IndexOf("UpdateLadderProtection")<0||tick.IndexOf("UpdateLadderProtection")>tick.IndexOf("UpdateFairCrouchRecovery")||!tick.Contains("CancelRecovery"))throw new Exception("Ladder guard/cancellation not in traversal");
  Console.WriteLine("PASS ladder policy protects climb and bounded exit, expires safely, and tick checks it before recovery with owned-input cancellation");
  var contract=Assembly.LoadFrom(shared).GetType("BotControllerApi.IBotControllerApi",true)!;
- foreach(var name in new[]{"InjectUsercmd","CancelUsercmdInjection","StartUsercmdMovement","UpdateUsercmdMovement","CancelUsercmdMovement","IsReplaying","IsLocked","GetWeaponLock"})if(contract.GetMethods().All(m=>m.Name!=name))throw new Exception("Missing controller contract "+name);
+ foreach(var name in new[]{"InjectUsercmd","CancelUsercmdInjection","StartUsercmdMovement","UpdateUsercmdMovement","CancelUsercmdMovement","IsReplaying","IsLocked","GetWeaponLock","GetBotProfileName","SetBotProfile","SetRoundBuyPlan"})if(contract.GetMethods().All(m=>m.Name!=name))throw new Exception("Missing controller contract "+name);
  Console.WriteLine("PASS actual latest shared API exposes bounded-input and lock contracts");
  var proxy=DispatchProxy.Create(contract,typeof(ControllerProbe));var entryType=t.GetNestedType("RecoveryEntry",BindingFlags.NonPublic)!;
  var cancel=t.GetMethod("CancelRecovery",BindingFlags.Static|BindingFlags.NonPublic)!;
@@ -44,12 +44,14 @@ static void Run(string[] args){
  if(args.Length>3){
   var ai=Assembly.LoadFrom(Path.GetFullPath(args[3]));var policy=ai.GetType("BotAI.FairplayPatchPolicy",true)!;
   var enabled=policy.GetMethod("IsEnabled",BindingFlags.NonPublic|BindingFlags.Static)!;
-  var defs=(System.Collections.IEnumerable)ai.GetType("BotAI.WindowsPatchDefinitions",true)!.GetProperty("All",BindingFlags.NonPublic|BindingFlags.Static)!.GetValue(null)!;
-  var keys=defs.Cast<object>().Select(x=>(string)x.GetType().GetProperty("Key")!.GetValue(x)!).ToHashSet();
-  foreach(string key in new[]{"AttackState_SkipFireRateCheck","IsNoticable_AlwaysTrue","DefuseBomb_SkipIsVisibleCheck","BombBeep_CT_GlobalHearRange","OnBombPlanted_AllBotsLearnSite","OnAudibleEvent_GlobalHearRange","BombPickup_CT_GlobalHearRange","TBot_BombsiteSearch_UseKnownPlantedSite"})
+  var loaded=ai.GetType("BotAI.Gamedata",true)!.GetMethod("Load",BindingFlags.Public|BindingFlags.Static)!.Invoke(null,new object[]{args[5],"windows"})!;
+  var defs=(System.Collections.IEnumerable)loaded.GetType().GetProperty("Patches")!.GetValue(loaded)!;
+  var keys=defs.Cast<object>().Select(x=>(string)x.GetType().GetProperty("Name")!.GetValue(x)!).ToHashSet();
+  foreach(string key in new[]{"AttackState_SkipFireRateCheck","IsNoticable_AlwaysTrue","DefuseBomb_SkipIsVisibleCheck","BombBeep_CT_GlobalHearRange","OnBombPlanted_AllBotsLearnSite","OnAudibleEvent_GlobalHearRange","BombPickup_CT_GlobalHearRange"})
    if(!keys.Contains(key)||(bool)enabled.Invoke(null,new object[]{key})!)throw new Exception("Unfair patch enabled/missing: "+key);
+  if(!keys.Contains("TBot_BombsiteSearch_UseKnownPlantedSite") || !(bool)enabled.Invoke(null,new object[]{"TBot_BombsiteSearch_UseKnownPlantedSite"})!)throw new Exception("Corrected upstream bomb-search call was not restored");
   if(!(bool)enabled.Invoke(null,new object[]{"GameState_Reset"})!)throw new Exception("Unrelated compatibility patch disabled");
-  Console.WriteLine("PASS actual BotAI disables native fire-rate/notice bypasses and retains existing fairness exclusions plus compatibility patch");
+  Console.WriteLine("PASS actual BotAI disables native fire-rate/notice bypasses and retains seven fairness exclusions plus corrected official bomb search");
  }
  if(args.Length>4){
   var observer=Assembly.LoadFrom(Path.GetFullPath(args[4])).GetType("BotStuckDiagnostics.Plugin",true)!;

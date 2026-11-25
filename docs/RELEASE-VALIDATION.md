@@ -1,5 +1,5 @@
-﻿# Release validation scope
+# Release validation
 
-The local 2000950 startup repair completed one full match on Vertigo. Public CSS/Hider/Controller outputs match those accepted local native outputs exactly. Eight public managed modules are rebuilt with diagnostic defaults disabled/bounded; their exact binaries have no separate live acceptance.
+The private v1.4.10/CSS 381 integration completed one full de_inferno match, about 15 rounds, with positive feedback. Public native files are untouched official dependencies; public managed binaries have different version/logging defaults and no separate live acceptance.
 
-Automated checks cover fairness/recovery policies, actual compiled SDK/observer lifecycle, original/previous/repaired native/data states, signature narrowing, reaction profiles and transactional install/reinstall/restore. One full match does not validate every map, second PCs, Linux or dedicated/public servers. Unrelated navigation/crash causes remain possible. See [test results](TEST-RESULTS.md); the test scripts and native evidence are included in this source tree.
+Automated checks cover all eight rebuilt modules, seven fairness exclusions/restored official bomb getter, actual JSON parser/memory protections, new shared API contracts, bounded disabled logging, data-only signature preparation, reaction profiles and transactional install/reinstall/restore. See [test results](TEST-RESULTS.md). Every map/mode, second PCs, Linux and dedicated/public servers are not validated.

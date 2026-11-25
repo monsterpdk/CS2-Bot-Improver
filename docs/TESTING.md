@@ -7,8 +7,8 @@ CompiledChecks loads built BotState/BotAI and the real SDK/shared API to validat
 Installer fixtures:
 
 ```powershell
-.\packaging\Test-Package.ps1 -Package "STAGED_UPDATE_FOLDER" -Baseline "EXTRACTED_ORIGINAL_V149_FOLDER"
-.\packaging\Test-ReactionProfiles.ps1 -Baseline "EXTRACTED_ORIGINAL_V149_FOLDER"
+.\packaging\Test-Package.ps1 -Package "STAGED_UPDATE_FOLDER" -Baseline "EXTRACTED_ORIGINAL_V1410_FOLDER"
+.\packaging\Test-ReactionProfiles.ps1 -Baseline "EXTRACTED_ORIGINAL_V1410_FOLDER"
 ```
 
 Tests operate on disposable copies, with synthetic game binary hashes only in the fixture. Do not use the live game as a fixture output. Cover exact version/dependency guards, damaged payload, extra plugins, injected copy failure rollback, settings/profile selection preservation, install/reinstall and restore. Policy passes do not prove every map collision or crash cause.

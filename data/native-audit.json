@@ -23,6 +23,7 @@
     "EscapeFromBomb_OnEnter_NoEquipKnife",
     "EscapeFromBomb_OnUpdate_NoEquipKnife",
     "EscapeFromFlames_OnEnter_NoEquipKnife",
+    "ReloadCheck_LowerAmmoThreshold",
     "PlantBombLookAtPriorityLow",
     "DefuseBombLookAtPriorityLow",
     "SprayAllDistances_ForceHoldTrigger",
@@ -45,6 +46,7 @@
     "Upkeep_BotCOS_ZeroDrift",
     "Upkeep_BotSIN_ZeroDrift",
     "InvestigateNoise_SkipSelfDefenseCheck",
+    "TBot_BombsiteSearch_UseKnownPlantedSite",
     "CT_Defuse_EngageAndInvestigate",
     "DefuseBombState_OnUpdate_EngageAndInvestigate",
     "DefuseBombState_OnEnter_EngageAndInvestigate",
@@ -57,8 +59,7 @@
     "DefuseBomb_SkipIsVisibleCheck",
     "IsNoticable_AlwaysTrue",
     "OnAudibleEvent_GlobalHearRange",
-    "OnBombPlanted_AllBotsLearnSite",
-    "TBot_BombsiteSearch_UseKnownPlantedSite"
+    "OnBombPlanted_AllBotsLearnSite"
   ],
   "Checks": {
     "BotController/CCSBot::EquipBestWeapon": {
@@ -1145,23 +1146,8 @@
       ]
     },
     "counterstrikesharp/CCSNavArea_IsValidNavMesh": {
-      "matches": [
-        "0xdd0460"
-      ],
-      "unique": true,
-      "unwindEntry": false,
-      "instructions": [
-        "dd0460: cmp qword ptr [rip + 0x1564fe0], 0",
-        "dd0468: setne al",
-        "dd046b: ret ",
-        "dd046c: int3 ",
-        "dd046d: int3 ",
-        "dd046e: int3 ",
-        "dd046f: int3 ",
-        "dd0470: ret 0",
-        "dd0473: int3 ",
-        "dd0474: int3 "
-      ]
+      "matches": [],
+      "unique": false
     },
     "BotAI/HasVisitedEnemySpawn": {
       "matches": [
@@ -1185,8 +1171,7 @@
       "original": "44 88 b7 fd 05 00 00",
       "replacement": "C6 87 FD 05 00 00 01",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/GameState_Reset": {
       "matches": [
@@ -1210,8 +1195,7 @@
       "original": "44 89 77 0c",
       "replacement": "90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Idle_IsSafeAlwaysFalse": {
       "matches": [
@@ -1235,8 +1219,7 @@
       "original": "74 28",
       "replacement": "EB 28",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/EscapeFromBomb_OnEnter_NoEquipKnife": {
       "matches": [
@@ -1260,8 +1243,7 @@
       "original": "e9 eb 44 f9 ff",
       "replacement": "C3 90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/EscapeFromBomb_OnUpdate_NoEquipKnife": {
       "matches": [
@@ -1285,8 +1267,7 @@
       "original": "e8 c8 17 f9 ff",
       "replacement": "90 90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/EscapeFromFlames_OnEnter_NoEquipKnife": {
       "matches": [
@@ -1310,8 +1291,31 @@
       "original": "e8 05 44 f9 ff",
       "replacement": "90 90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
+    },
+    "BotAI/ReloadCheck_LowerAmmoThreshold": {
+      "matches": [
+        "0x2dd12a"
+      ],
+      "unique": true,
+      "unwindEntry": false,
+      "instructions": [
+        "2dd12a: movd xmm0, eax",
+        "2dd12e: cvtdq2ps xmm0, xmm0",
+        "2dd131: divss xmm6, xmm0",
+        "2dd135: movss xmm0, dword ptr [rip + 0x14cb293]",
+        "2dd13d: comiss xmm0, xmm6",
+        "2dd140: jb 0x2dd0aa",
+        "2dd146: mov rax, qword ptr [rdi + 8]",
+        "2dd14a: movss xmm0, dword ptr [rax + 0xc]",
+        "2dd14f: comiss xmm0, dword ptr [rip + 0x1499306]",
+        "2dd156: jbe 0x2dd165"
+      ],
+      "address": "0x2dd12a",
+      "original": "66 0f 6e c0 0f 5b c0 f3 0f 5e f0 f3 0f 10 05 93 b2 4c 01",
+      "replacement": "F3 0F 2A C0 F3 0F 5E F0 B8 CD CC 4C 3E 66 0F 6E C0 66 90",
+      "expectedMatches": true,
+      "instructionBoundary": true
     },
     "BotAI/PlantBombLookAtPriorityLow": {
       "matches": [
@@ -1335,8 +1339,7 @@
       "original": "41 b9 02 00 00 00",
       "replacement": "41 B9 00 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/DefuseBombLookAtPriorityLow": {
       "matches": [
@@ -1360,8 +1363,7 @@
       "original": "41 b9 02 00 00 00",
       "replacement": "41 B9 00 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/SprayAllDistances_ForceHoldTrigger": {
       "matches": [
@@ -1385,8 +1387,7 @@
       "original": "40 b5 01",
       "replacement": "40 32 ED",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_SkipSteadyFireShortcut": {
       "matches": [
@@ -1410,8 +1411,7 @@
       "original": "74 3c",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_SkipZoomFireShortcut": {
       "matches": [
@@ -1435,8 +1435,7 @@
       "original": "74 15",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_SkipSniperSpreadCheck": {
       "matches": [
@@ -1460,8 +1459,7 @@
       "original": "0f 87 34 02 00 00",
       "replacement": "90 90 90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_DodgeDuringReload": {
       "matches": [
@@ -1485,8 +1483,7 @@
       "original": "76 74",
       "replacement": "EB 74",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/SniperCrouchDodge_jb": {
       "matches": [
@@ -1510,8 +1507,7 @@
       "original": "76 74",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/LowSKill_JumpChance0": {
       "matches": [
@@ -1535,8 +1531,7 @@
       "original": "ba 03 00 00 00",
       "replacement": "BA 02 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_DodgeChance100_Always": {
       "matches": [
@@ -1560,8 +1555,7 @@
       "original": "76 14",
       "replacement": "EB 11",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_RetreatOnSniper_Disable": {
       "matches": [
@@ -1585,8 +1579,7 @@
       "original": "74",
       "replacement": "EB",
       "expectedMatches": true,
-      "instructionBoundary": false,
-      "shortBranchOpcodeOnly": true
+      "instructionBoundary": false
     },
     "BotAI/AllSkill_KeepMoving_WhenSeeSniper": {
       "matches": [
@@ -1610,8 +1603,7 @@
       "original": "76 0d",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/AttackState_CanStrafe_jne": {
       "matches": [
@@ -1635,8 +1627,7 @@
       "original": "74 7b",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/SniperDodge_SkipIsSniper_DodgeA": {
       "matches": [
@@ -1660,8 +1651,7 @@
       "original": "75 6a",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Vision_AlwaysWatchApproachPoints": {
       "matches": [
@@ -1685,8 +1675,7 @@
       "original": "75 25",
       "replacement": "EB 25",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Vision_ApproachBody_SkipSkillCheck": {
       "matches": [
@@ -1710,8 +1699,7 @@
       "original": "76 33",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Vision_ApproachBody_SkipHidingSpotCheck": {
       "matches": [
@@ -1735,8 +1723,7 @@
       "original": "74 2a",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Vision_SkipIsMovingGate": {
       "matches": [
@@ -1760,8 +1747,7 @@
       "original": "77 0f",
       "replacement": "90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Vision_AlwaysEnterApproachBody": {
       "matches": [
@@ -1785,8 +1771,7 @@
       "original": "75",
       "replacement": "EB",
       "expectedMatches": true,
-      "instructionBoundary": false,
-      "shortBranchOpcodeOnly": true
+      "instructionBoundary": false
     },
     "BotAI/Upkeep_BotCOS_ZeroDrift": {
       "matches": [
@@ -1809,8 +1794,7 @@
       "original": "e8 50 84 03 00",
       "replacement": "0F 57 C0 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/Upkeep_BotSIN_ZeroDrift": {
       "matches": [
@@ -1834,8 +1818,7 @@
       "original": "e8 63 84 03 00",
       "replacement": "0F 57 C0 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/InvestigateNoise_SkipSelfDefenseCheck": {
       "matches": [
@@ -1859,8 +1842,34 @@
       "original": "74 1e",
       "replacement": "90 90",
       "expectedMatches": true,
+      "instructionBoundary": true
+    },
+    "BotAI/TBot_BombsiteSearch_UseKnownPlantedSite": {
+      "matches": [
+        "0x333d4c"
+      ],
+      "unique": true,
+      "unwindEntry": false,
+      "instructions": [
+        "333d4c: mov rcx, qword ptr [rsi + 0x5e28]",
+        "333d53: call 0x2dddd0",
+        "333d58: mov rcx, rbx",
+        "333d5b: call 0x2c8ed0",
+        "333d60: mov r8, qword ptr [rip + 0x1c5c3f9]",
+        "333d67: test eax, eax",
+        "333d69: js 0x333d8a",
+        "333d6b: cmp eax, dword ptr [r8 + 0x21a0]",
+        "333d72: jge 0x333d8a",
+        "333d74: cdqe "
+      ],
+      "address": "0x333d5b",
+      "original": "e8 70 51 f9 ff",
+      "replacement": "E8 60 57 F9 FF",
+      "expectedMatches": true,
       "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "replacementTarget": "0x2c94c0",
+      "targetEntry": false,
+      "validatedOneArgumentLeafGetter": true
     },
     "BotAI/CT_Defuse_EngageAndInvestigate": {
       "matches": [
@@ -1884,8 +1893,7 @@
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/DefuseBombState_OnUpdate_EngageAndInvestigate": {
       "matches": [
@@ -1909,8 +1917,7 @@
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/DefuseBombState_OnEnter_EngageAndInvestigate": {
       "matches": [
@@ -1934,8 +1941,7 @@
       "original": "ba 02 00 00 00",
       "replacement": "BA 00 00 00 00",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "BotAI/FlashbangAvoidance_Disable": {
       "matches": [
@@ -1959,8 +1965,7 @@
       "original": "e8 2a a2 02 00 49 8b 06 c6 80 74 5c 00 00 00",
       "replacement": "90 90 90 90 90 90 90 90 90 90 90 90 90 90 90",
       "expectedMatches": true,
-      "instructionBoundary": true,
-      "shortBranchOpcodeOnly": false
+      "instructionBoundary": true
     },
     "Aim/PickNewAimSpot": {
       "matches": [
@@ -2249,7 +2254,9 @@
     ],
     "plantedGetter": []
   },
-  "OptionalUnavailable": [],
+  "OptionalUnavailable": [
+    "counterstrikesharp/CCSNavArea_IsValidNavMesh: unavailable; no installed plugin assembly references CCSNavArea"
+  ],
   "NavAssemblyReferences": [],
   "Errors": [],
   "Warnings": [],

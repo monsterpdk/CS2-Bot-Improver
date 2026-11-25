@@ -1,17 +1,15 @@
 # Installation and restore
 
-Prerequisite: install original **v1.4.9 Windows**, including bundled CSS 380 and updated Metamod/Panel/BotHider. A v1.4.8 Fairplay installation must be upgraded to that original baseline first. Target: CS2 ClientVersion 2000950 / patch 1.42.0.1, exact pinned dependencies.
+Prerequisite: **original v1.4.10 Windows, bundled CSS 381, new native/shared/implementation modules and panel**. A v1.4.9 Fairplay installation must first upgrade to that original baseline. The accepted local v1.4.10 integration already satisfies it. Target: Windows CS2 2000950 / 1.42.0.1, exact dependency hashes.
 
-Extract this release outside game/csgo, close CS2 and panel, run Install.cmd and select game/csgo. The updater rejects unknown binaries/profiles/plugins, merges current gameinfo/layer paths, preserves difficulty selection and preferences, generates humanized seven-entry Medium/High VPKs including retake reactions, and sets fill quota 16 (8v8 including players). Low stays original upstream. It locally adapts CSS 380, BotHider and BotController and narrows the weapon-removal signature, accepting only known original/previous/repaired hashes. Obsolete RayTrace and BotHider whitelist paths are parked when present.
+Extract the Update ZIP outside game/csgo. Close CS2/panel, run Install.cmd and select game/csgo. Start Start-CompatiblePanel.cmd in Bot Mode. The installer verifies payload/game/dependencies/plugins, prepares only one narrow gamedata edit, generates current gameinfo mode templates and humanized profiles, preserves selected difficulty/preferences and sets fill quota 16 (8v8 including humans). Low and non-reaction profile contents remain upstream. No native DLL is transformed.
 
-Eight managed plugins and their source/data/configs are included. The original runtime/native/shared libraries, panel and VPK assets are obtained separately. All changes are backed up under game/csgo/_botimprover_backups/v1.4.9-fairplay.3-TIMESTAMP. Copy failures roll back. Reinstall is supported.
+All replacements are backed up under game/csgo/_botimprover_backups/v1.4.10-fairplay.1-TIMESTAMP; partial failures roll back. Reinstall is supported. Detailed logs stay disabled/bounded; personal old logs are preserved. Source ZIPs are developer artifacts, not installers.
 
-With game and panel closed, use this update's Restore.ps1:
+With game/panel closed:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Restore.ps1 -Backup "FULL_BACKUP_FOLDER"
 ```
 
-Restore returns to the state immediately before this update, not before an earlier original-pack upgrade or Steam update. Future builds need review; do not bypass hash/version guards.
-
-Existing v1.4.9-fairplay.1/.2 and the accepted local 2000950 repair can upgrade directly. The previous voice-only Controller is transformed without applying its voice edits twice. The native/data checks also accept already-final inputs for reinstall. Unknown/custom gamedata is rejected.
+Restore returns to immediately before this update, not before the separately installed original upgrade. Retired old native adapters or other unknown dependencies/gamedata are rejected. Do not bypass future build/hash guards.

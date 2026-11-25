@@ -1,40 +1,38 @@
 # CS2 Bot Improver - Windows Fairplay Edition
 
-**v1.4.9-fairplay.3 (stable), 2026-11-24.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.9](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.9), for local Windows bot matches.
+**v1.4.10-fairplay.1 (stable), 2026-11-25.** Independent maintenance of [ed0ard/CS2-Bot-Improver v1.4.10](https://github.com/ed0ard/CS2-Bot-Improver/releases/tag/v1.4.10), for local Windows bot matches.
 
-The original pack supplies the panel, cosmetics, native modules and runtime. This fork adds fair smoke/flash handling, real grenade inventory, realistic scripted throws, approximate sound awareness, teammate spacing, humanized reactions and guarded stuck recovery. Upstream Rush, radio commands, FOV, post-plant behavior and cosmetics remain available through the separately installed original pack.
+The original pack provides the panel, runtime, native modules and cosmetics. This fork adds fair smoke/flash handling, actual grenade inventory and realistic throws, approximate hearing/spacing, humanized reactions and checked stuck recovery. Upstream game-mode behavior and improvements are retained.
 
 ## Latest update
 
-Fix the pre-menu crash after the November 23 CS2 update on **1.42.0.1 / ClientVersion 2000950**. The server interface gained a method, shifting old frame and other server calls. The updater now adapts **CSS380, BotHider and BotController** locally, preserves the Controller voice fix, and narrows the ambiguous weapon-removal signature. Five managed build guards target the checked client. Existing Fairplay behavior is preserved; native binaries are not bundled.
+Official **CSS 381, BotHider and BotController** supersede all our local native DLL adapters, including the voice-message fix. They are used unmodified. BotAI now uses official 1.9.1's JSON/overlap/memory-protection implementation. Its corrected planted-site getter is enabled; the old crash-safety exclusion is removed. Seven deliberate notice/fire/knowledge fairness exclusions remain. Only one data-only weapon-removal signature narrowing is still needed.
+
+The new original mode cfgs and source-pinned catalog are included: 773 new stickers and 8 music kits. The accepted local rebase completed one full Inferno match, about 15 rounds.
 
 ## Install
 
-1. Install the **original v1.4.9 Windows pack with its bundled CounterStrikeSharp 380**. Older v1.4.5/v1.4.8 bases must first be upgraded to original v1.4.9, including the runtime and panel.
-2. Download **CS2-Bot-Improver-Fairplay-Update-v1.4.9-fairplay.3-2026-11-24.zip** from Releases and extract outside the game folder.
-3. Close CS2 and the panel. Run **Install.cmd** and select **game\csgo**.
-4. Start the installed **Start-CompatiblePanel.cmd**. Use Bot Mode for local matches. The default is **8v8 including human players**.
+1. Install **original v1.4.10 Windows with bundled CSS 381** first. Existing v1.4.9 Fairplay users must upgrade that original base, including native/API/shared/implementation files. The accepted local v1.4.10 integration already has them.
+2. Extract **CS2-Bot-Improver-Fairplay-Update-v1.4.10-fairplay.1-2026-11-25.zip** outside the game.
+3. Close CS2/panel, run **Install.cmd** and select **game\csgo**.
+4. Start the installed **Start-CompatiblePanel.cmd**, choose Bot Mode. Default population is 8v8 including humans.
 
-Supported target: Windows x64, **ClientVersion 2000950 / patch 1.42.0.1**, SDK **1.0.380** and exact audited dependencies. Original v1.4.9 dependencies, the exact previous voice-only Controller and the accepted current repair are supported; unknown binaries/data are rejected. Replaced files are backed up, active difficulty and current gameinfo/layer paths are preserved, and reinstall/restore is supported. Do not bypass guards after a future game update. See [installation](docs/INSTALLATION.md).
+Target: **Windows x64, ClientVersion 2000950 / 1.42.0.1, API 381** with exact dependencies. Native DLLs must match original v1.4.10; this release neither edits nor accepts the retired old adapters. A narrow gamedata text update accepts the original or exact corrected known data. Backups, settings/difficulty preservation, reinstall and restore are supported. See [installation](docs/INSTALLATION.md).
 
 ## Fairplay behavior
 
-- Medium/High profile reaction times are humanized. Selected plugins no longer erase native perception/fire/surprise delays. Profile values are not a guaranteed minimum sight-to-shot interval.
-- Scripted grenades consume real purchased or picked-up inventory. Geometry, range, speed, heading, pitch and obstruction checks limit implausible throws.
-- Native flash blindness is retained. Blind aim does not follow live target updates. Smoke concealment reduces precise tracking while allowing blind fire; hearing uses limited, delayed and approximate information.
-- Recovery checks player-width clearance and ground support, measures progress, avoids repeating failed directions, handles close raised waypoints and yields to native ladder movement. Input leases are bounded and only owned controls are cancelled.
-- The wrong-target bomb-search call replacement remains disabled, retaining native bombsite search.
+- Medium/High reaction profiles are humanized; our behavior no longer erases native perception/fire/surprise timers. Profile reaction values are not a guaranteed minimum notice-to-shot interval.
+- Scripted grenades consume actually owned purchased/picked-up inventory, with release geometry/range/speed/heading/pitch/obstruction checks.
+- Native flash blindness remains active; blind aim does not track live targets. Smoke concealment permits blind fire toward limited remembered/approximate information.
+- Sound/movement/spacing assistance is bounded. Recovery checks clearance/ground, measures progress, avoids repeated failed directions, yields to native ladders and cancels only its own bounded input leases.
+- Official corrected T bomb-site getter is restored. Five CT/global knowledge shortcuts remain excluded; this is not a complete human bomb-search model.
 
-## Logging
+## Diagnostics and validation
 
-Detailed diagnostics are **off by default**. Status counters remain available. Temporarily enable `bot_nades_diagnostics on`, `bot_flash_diagnostics on`, `bot_stuck_diagnostics on` or `bot_crouch_diagnostics on`; disable them afterward. The observer does not sample entities while disabled. Four maintenance loggers together retain at most **8 MiB detail + 1 MiB own errors**, with fixed rotating filenames. Valve/Windows/CSS/upstream logs have separate policies. No personal logs or dumps are included. See [diagnostics](docs/DIAGNOSTICS.md).
+Detailed diagnostics are **off by default** and bounded. Counters remain available. Four loggers retain at most 8 MiB detail plus 1 MiB own errors when enabled; other software's logs have separate policies. No personal logs/dumps are included. See [diagnostics](docs/DIAGNOSTICS.md).
 
-## Stable release and validation scope
+The private integration completed one full de_inferno match (about 15 rounds). Public managed modules have automated validation and disabled logging defaults, without a separate live acceptance. Every map/mode, another PC, Linux and dedicated/public servers are not validated. Navigation stalls/chance hits/unrelated crashes can remain. See [test results](docs/TEST-RESULTS.md) and [known issues](docs/KNOWN-ISSUES.md).
 
-The accepted local startup repair completed one full match on Vertigo. Public native output hashes match that repair exactly; the clean public managed build is automatically checked with detailed diagnostics off and has no separate live acceptance. Some navigation stalls, chance hits and unrelated crashes remain possible. Linux, dedicated/public servers, another PC and every map are not validated. Smoke-bomb search behavior is unchanged.
+Cobblestone (`de_cbble`) ships with navigation, but this release does not add recorded grenade lineups for it. Grenade use also depends on stock, money, lineups and safety checks. Bot Mode uses -insecure; use Online mode for ordinary online play.
 
-Cobblestone (`de_cbble`) already ships with bot navigation. Start it from practice or with `map de_cbble`; no separate NAV download is needed. Recorded NadeSystem grenade lineups for Cobblestone are not included yet.
-
-Grenade choices depend on stock, money, useful map lineups and safety checks. Some maps have no decoy lineups. Bot Mode uses `-insecure`; switch to Online mode for ordinary online play.
-
-See [changes](CHANGELOG.md), [building](docs/BUILDING.md), [profiles](docs/REACTION-PROFILES.md), [behavior](docs/FAIR-AWARENESS.md), [known issues](docs/KNOWN-ISSUES.md) and [attribution](NOTICE.md). Game/runtime/native/shared DLLs, the original panel and VPK assets are not redistributed. This is not an official Valve or upstream release.
+See [changes](CHANGELOG.md), [building](docs/BUILDING.md), [profiles](docs/REACTION-PROFILES.md), [behavior](docs/FAIR-AWARENESS.md), [compatibility](docs/NATIVE-COMPATIBILITY.md) and [attribution](NOTICE.md). Native/game/runtime/shared DLLs, the original panel and VPK assets are obtained separately. This is not an official Valve/upstream release.

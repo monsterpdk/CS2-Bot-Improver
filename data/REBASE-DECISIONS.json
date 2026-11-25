@@ -1,0 +1,28 @@
+{
+  "Upstream": "v1.4.10",
+  "CounterStrikeSharp": "1.0.381",
+  "ClientVersion": "2000950",
+  "NativeBinaryAdapters": 0,
+  "OfficialNativeBinariesUnmodified": true,
+  "Retired": [
+    "CSS380 server-interface adapter",
+    "Hider server-interface adapter",
+    "Controller server-interface/voice adapters",
+    "wrong-target bomb-search safety exclusion",
+    "legacy BotAI patch implementation"
+  ],
+  "Retained": [
+    "seven intentional fairness exclusions",
+    "humanized reactions and 8v8",
+    "real grenade inventory and throw safety",
+    "smoke/flash fairness",
+    "awareness/spacing/recovery",
+    "one narrow gamedata signature field"
+  ],
+  "LocalGameplay": {
+    "Map": "de_inferno",
+    "Scope": "One full match, about15 rounds",
+    "Result": "User reports everything appeared correct"
+  },
+  "PublicManagedBuildLiveAccepted": false
+}

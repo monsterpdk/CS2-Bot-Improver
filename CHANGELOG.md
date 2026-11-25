@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.4.10-fairplay.1 - 2026-11-25 (stable)
+
+- Rebase onto original v1.4.10/CSS381; retire all local native interface/voice adapters and use new official native/API/shared/implementation files together.
+- Adopt official BotAI1.9.1 JSON/memory engine and corrected bomb getter, removing its extra safety exclusion. Keep seven intentional fairness exclusions.
+- Preserve accepted own grenade/smoke/flash/awareness/recovery behavior, humanized reactions,8v8, preferences and bounded disabled public diagnostics.
+- Keep only the still-needed narrow weapon-removal gamedata signature edit. Include new mode cfgs,773 stickers and8 music kits.
+- Accepted private integration completed a full Inferno match, about15 rounds; no separate public-managed-build or every-map acceptance claimed.
+
+
 ## v1.4.9-fairplay.3 - 2026-11-24 (stable)
 
 - Fix the pre-menu crash on CS2 2000950 / 1.42.0.1 after a Source2Server method insertion shifted native calls.

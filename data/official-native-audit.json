@@ -1,0 +1,32 @@
+{
+  "CSS": {
+    "Path": "addons/counterstrikesharp/bin/win64/counterstrikesharp.dll",
+    "SHA256": "DBA4FF1AC77816873DFF4A17C9F1C4FD35CF08C9DF4104CD3E7C73208BC12BB8",
+    "UseUnmodifiedOfficialBinary": true,
+    "Slot20ThunkCandidates": [
+      "0x2cd28"
+    ],
+    "CommitMarkerPresent": null,
+    "EconSlot47Wrappers": [
+      "0xadda0"
+    ],
+    "Source2ServerGlobal": "0x349288",
+    "PausedWrapper32": "48 8b 0d c1 b4 29 00 48 8b 01 48 ff a0 00 01 00 00"
+  },
+  "Hider": {
+    "Path": "addons/BotHider/bin/win64/BotHider.dll",
+    "SHA256": "8A56C9C47E5DEFB12CBCDE74966AFAA6C48E4209D2EC3E682AC903B897694938",
+    "UseUnmodifiedOfficialBinary": true,
+    "Slot20ThunkCandidates": [
+      "0x6e7c"
+    ],
+    "CommitMarkerPresent": true
+  },
+  "Controller": {
+    "Path": "addons/BotController/bin/win64/BotController.dll",
+    "SHA256": "E6AE3152A6FD50EB1CB336A438653F1D5CF2C73D873ABDA74798499E3167CF67",
+    "UseUnmodifiedOfficialBinary": true,
+    "Slot20ThunkCandidates": [],
+    "CommitMarkerPresent": true
+  }
+}

@@ -46,8 +46,8 @@ foreach ($file in Get-ChildItem -LiteralPath $root -Recurse -File -Force) {
 }
 $files = @(Get-ChildItem -LiteralPath $payload -Recurse -File | ForEach-Object { [PSCustomObject]@{ Path=$_.FullName.Substring($payload.Length + 1); SHA256=(Get-FileHash -LiteralPath $_.FullName).Hash } })
 [PSCustomObject]@{
-    Version='1.4.9-fairplay.3'; Prerelease=$false; ReleaseDate='2026-11-24'; ClientVersion='2000950'; PatchVersion='1.42.0.1'; Platform='Windows x64'; UpstreamBaseline='v1.4.9'; CounterStrikeSharp='1.0.380'
+    Version='1.4.10-fairplay.1'; Prerelease=$false; ReleaseDate='2026-11-25'; ClientVersion='2000950'; PatchVersion='1.42.0.1'; Platform='Windows x64'; UpstreamBaseline='v1.4.10'; CounterStrikeSharp='1.0.381'
     Plugins=@('BotAI','BotAimImprover','BotBuy','BotControllerImpl','BotHiderImpl','BotRandomizer','BotState','BotStuckDiagnostics','BotVisionCompatibility','NadeSystem','RoundDamageRecap')
     Files=$files; Dependencies=$dependencies; ParkPaths=@('addons\metamod\RayTrace.vdf','addons\BotHider\map_whitelist.json'); ApplyNativeCompatibility=$true; ApplyBotStateCompatibility=$false; MergeCoreSettings=$true; GenerateReactionProfiles=$true; MergePopulationSettings=$true
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $Output 'manifest.json') -Encoding UTF8
-Write-Output ('Public v1.4.9 update staged: ' + $files.Count + ' payload files.')
+Write-Output ('Public v1.4.10 update staged: ' + $files.Count + ' payload files.')

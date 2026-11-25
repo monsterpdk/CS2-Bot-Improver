@@ -13,4 +13,4 @@ foreach ($name in @('BotAI','BotAimImprover','NadeSystem','BotVisionCompatibilit
     & dotnet build $project -c Release -o (Join-Path $root ('build\' + $name))
     if ($LASTEXITCODE -ne 0) { throw ('Build failed: ' + $name) }
 }
-Write-Output 'Eight managed plugins built for API 380. Nothing installed into the game.'
+Write-Output 'Eight managed plugins built for API 381. Nothing installed into the game.'

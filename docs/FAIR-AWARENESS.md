@@ -8,4 +8,4 @@ Awareness waits for round freeze end before any periodic entity lookup and stops
 
 `bot_nades_status` prints map-local grenade counters. `selection: skipped` counts repeated scans of unsuitable records, not unique planned grenades. Reasons include remote release, excess velocity/range, wrong heading/pitch. `created` is successful creation and `detonated` counts smoke/HE/flash events; Molotov detonation is not tracked. No background diagnostic sampling/file writing is enabled. Counters reset at map start.
 
-Current maintained versions: BotAI 1.8.14-fairplay149.3, BotAimImprover 2.1.8-fairplay149.3, NadeSystem 1.2.3-fairplay149.3, BotState 1.10.6-fairplay149.3, BotStuckDiagnostics 0.1.0-fairplay149.3 and BotVisionCompatibility 0.1.4-fairplay149.3. Detailed diagnostics are opt-in; normal counters remain available.
+Current maintained versions: BotAI 1.9.1-fairplay1410.1, BotAimImprover 2.1.8-fairplay1410.1, NadeSystem 1.2.3-fairplay1410.1, BotState 1.10.6-fairplay1410.1, BotStuckDiagnostics 0.1.0-fairplay1410.1 and BotVisionCompatibility 0.1.4-fairplay1410.1. Detailed diagnostics are opt-in; normal counters remain available.

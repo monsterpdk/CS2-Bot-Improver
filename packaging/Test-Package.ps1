@@ -115,7 +115,15 @@ if ($manifest.MergeCoreSettings) {
 }
 if($manifest.ApplyNativeCompatibility) {
     foreach($native in $nativeSettings.Files){Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $native.Path)).Hash -eq $native.OutputSHA256) ('Native adapter output mismatch: '+$native.Path)}
-    foreach($data in @($nativeSettings.DataFiles | Where-Object {$_})){Assert ((Get-FileHash -LiteralPath (Join-Path $fixture $data.Path)).Hash -eq $data.OutputSHA256) ('Data adapter output mismatch: '+$data.Path)}
+    foreach($data in @($nativeSettings.DataFiles | Where-Object {$_})){
+        $dataHash=(Get-FileHash -LiteralPath (Join-Path $fixture $data.Path)).Hash
+        Assert ($dataHash -eq $data.OutputSHA256 -or $dataHash -in @($data.AcceptedOutputSHA256)) ('Data adapter output mismatch: '+$data.Path)
+    }
+    Assert (@($nativeSettings.Files).Count -eq 0) 'Retired native adapters reappeared.'
+    foreach($path in @('addons\counterstrikesharp\bin\win64\counterstrikesharp.dll','addons\BotHider\bin\win64\BotHider.dll','addons\BotController\bin\win64\BotController.dll')) {
+        $pin=($manifest.Dependencies | Where-Object Path -eq $path).SHA256
+        Assert ($pin -and (Get-FileHash -LiteralPath (Join-Path $fixture $path)).Hash -eq $pin) ('Original native dependency was changed: '+$path)
+    }
 }
 if($manifest.ApplyBotStateCompatibility) {
     $botStateSettings=Get-Content -LiteralPath (Join-Path $Package 'payload\BotStateCompatibilitySettings.json') -Raw | ConvertFrom-Json
